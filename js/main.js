@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
         once: true,
         mirror: false
     });
+    
+    // 実績カードの画像処理とリンク表示制御
+    handleAchievementCards();
     // ハンバーガーメニュー制御
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
@@ -106,4 +109,42 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 初期ロード時にアニメーション実行
     fadeInOnScroll();
+    
+    // 実績カードの画像とリンク処理関数
+    function handleAchievementCards() {
+        const achievementCards = document.querySelectorAll('.achievement-card');
+        
+        achievementCards.forEach(card => {
+            // 画像処理 - 画像がない場合はトロフィーアイコンを表示
+            const mediaContainer = card.querySelector('.achievement-card-media');
+            const img = mediaContainer.querySelector('img');
+            
+            if (img) {
+                // 画像の読み込みエラー時の処理
+                img.onerror = function() {
+                    // カードに no-image クラスを追加
+                    card.classList.add('no-image');
+                    
+                    // 画像要素を削除
+                    img.remove();
+                    
+                    // トロフィーアイコンを作成・追加
+                    const iconContainer = document.createElement('div');
+                    iconContainer.className = 'achievement-card-icon';
+                    
+                    const icon = document.createElement('i');
+                    icon.className = 'fas fa-trophy';
+                    iconContainer.appendChild(icon);
+                    
+                    mediaContainer.appendChild(iconContainer);
+                };
+            }
+            
+            // リンク処理 - href属性が #（空リンク）の場合は非表示
+            const link = card.querySelector('.achievement-link');
+            if (link && (link.getAttribute('href') === '#' || link.getAttribute('href') === '')) {
+                link.style.display = 'none';
+            }
+        });
+    }
 });
