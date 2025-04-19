@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/regular.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- AOS Animation Library -->
@@ -326,73 +327,97 @@
                 </div>
             </div>
             
-            <div class="timeline achievements">
-                <h3>主要な実績ハイライト</h3>
-                <div class="timeline-items">
-                    <div class="timeline-item achievement" data-aos="zoom-in" data-aos-delay="50">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">2017年4月</div>
-                        <div class="timeline-content">
-                            <span class="timeline-category">実績</span>
-                            <h4>ミスタードーナツ グッズ販売インセンティブ 全国4位</h4>
-                            <div class="timeline-image">
-                                <img src="assets/images/achievement-misdo-2017.jpg" alt="ミスタードーナツ インセンティブ">
-                            </div>
+            <div class="achievements-section">
+                <h3 class="achievements-title" data-aos="fade-up">主要な実績ハイライト</h3>
+                
+                <div class="achievements-grid">
+                    <!-- IGVC国際大会 実績 -->
+                    <div class="achievement-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="achievement-card-media">
+                            <img src="assets/images/achievement-igvc-2018.jpg" alt="IGVC2018 優勝">
+                            <div class="achievement-badge">国際大会</div>
+                        </div>
+                        <div class="achievement-card-content">
+                            <div class="achievement-date"><i class="far fa-calendar-alt"></i> 2018年6月</div>
+                            <h4 class="achievement-title">IGVC2018 総合優勝（ロボット国際大会）</h4>
+                            <p class="achievement-description">自律走行ロボットの国際大会で日本代表として優勝。25カ国以上が参加する競技で技術力が評価。</p>
+                            <a href="#" class="achievement-link">詳細を見る <i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
-                    <div class="timeline-item achievement" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">2017年7月</div>
-                        <div class="timeline-content">
-                            <span class="timeline-category">実績</span>
-                            <h4>ミスタードーナツ チームミーティング 東京地区 3位</h4>
-                            <div class="timeline-image">
-                                <img src="assets/images/achievement-misdo-meeting-2017.jpg" alt="ミスタードーナツ チームミーティング">
-                            </div>
+                    
+                    <!-- AIハッカソン実績 -->
+                    <div class="achievement-card" data-aos="fade-up" data-aos-delay="150">
+                        <div class="achievement-card-media">
+                            <img src="assets/images/achievement-ai-hackathon-2025.jpg" alt="AI Agent Hackathon 受賞">
+                            <div class="achievement-badge">ハッカソン</div>
+                        </div>
+                        <div class="achievement-card-content">
+                            <div class="achievement-date"><i class="far fa-calendar-alt"></i> 2025年2月</div>
+                            <h4 class="achievement-title">AI Agent Hackathon with Google Cloud 総合2位</h4>
+                            <p class="achievement-description">最先端のAIエージェント技術を活用したソリューション開発で高評価を獲得。</p>
+                            <a href="#" class="achievement-link">詳細を見る <i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
-                    <div class="timeline-item achievement" data-aos="zoom-in" data-aos-delay="150">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">2018年6月</div>
-                        <div class="timeline-content">
-                            <span class="timeline-category">実績</span>
-                            <h4>IGVC2018 総合優勝（ロボット国際大会）</h4>
-                            <div class="timeline-image">
-                                <img src="assets/images/achievement-igvc-2018.jpg" alt="IGVC2018 優勝">
-                            </div>
+                    
+                    <!-- enXross関連実績 -->
+                    <div class="achievement-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="achievement-card-media">
+                            <img src="assets/images/achievement-enxross-2024.jpg" alt="enXross Hackathon 受賞">
+                            <div class="achievement-badge">ハッカソン</div>
+                        </div>
+                        <div class="achievement-card-content">
+                            <div class="achievement-date"><i class="far fa-calendar-alt"></i> 2024年7月</div>
+                            <h4 class="achievement-title">enXross Hackathon 2nd パートナー特別賞</h4>
+                            <p class="achievement-description">XR技術を活用したビジネスソリューション提案が社内外の専門家から高評価。</p>
+                            <a href="#" class="achievement-link">詳細を見る <i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
-                    <div class="timeline-item achievement" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">2018年12月</div>
-                        <div class="timeline-content">
-                            <span class="timeline-category">実績</span>
-                            <h4>KDG HACKS 優秀賞</h4>
-                            <div class="timeline-image">
-                                <img src="assets/images/achievement-kdg-hacks-2018.jpg" alt="KDG HACKS 優秀賞">
+                    
+                    <!-- ハッカソン関連実績 (画像なし) -->
+                    <div class="achievement-card no-image" data-aos="fade-up" data-aos-delay="250">
+                        <div class="achievement-card-media">
+                            <div class="achievement-card-icon">
+                                <i class="fas fa-trophy"></i>
                             </div>
+                            <div class="achievement-badge">ハッカソン</div>
+                        </div>
+                        <div class="achievement-card-content">
+                            <div class="achievement-date"><i class="far fa-calendar-alt"></i> 2018年12月</div>
+                            <h4 class="achievement-title">KDG HACKS 優秀賞</h4>
+                            <p class="achievement-description">48時間のハッカソンで革新的なIoTソリューションを開発。ビジネス価値が評価。</p>
+                            <a href="#" class="achievement-link">詳細を見る <i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
-                    <div class="timeline-item achievement" data-aos="zoom-in" data-aos-delay="250">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">2024年7月</div>
-                        <div class="timeline-content">
-                            <span class="timeline-category">実績</span>
-                            <h4>enXross Hackathon 2nd パートナー特別賞</h4>
-                            <div class="timeline-image">
-                                <img src="assets/images/achievement-enxross-2024.jpg" alt="enXross Hackathon 受賞">
+                    
+                    <!-- ミスタードーナツ関連実績 (画像なし) -->
+                    <div class="achievement-card no-image" data-aos="fade-up" data-aos-delay="300">
+                        <div class="achievement-card-media">
+                            <div class="achievement-card-icon">
+                                <i class="fas fa-award"></i>
                             </div>
+                            <div class="achievement-badge">販売</div>
+                        </div>
+                        <div class="achievement-card-content">
+                            <div class="achievement-date"><i class="far fa-calendar-alt"></i> 2017年4月</div>
+                            <h4 class="achievement-title">ミスタードーナツ グッズ販売インセンティブ 全国4位</h4>
+                            <p class="achievement-description">全国展開チェーンでの販売コンテストで優秀な成績を収め表彰。</p>
+                            <a href="#" class="achievement-link">詳細を見る <i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
-                    <div class="timeline-item achievement" data-aos="zoom-in" data-aos-delay="300">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">2025年2月</div>
-                        <div class="timeline-content">
-                            <span class="timeline-category">実績</span>
-                            <h4>AI Agent Hackathon with Google Cloud 総合2位</h4>
-                            <div class="timeline-image">
-                                <img src="assets/images/achievement-ai-hackathon-2025.jpg" alt="AI Agent Hackathon 受賞">
+                    
+                    <!-- ミスタードーナツチーム関連実績 (画像なし) -->
+                    <div class="achievement-card no-image" data-aos="fade-up" data-aos-delay="350">
+                        <div class="achievement-card-media">
+                            <div class="achievement-card-icon">
+                                <i class="fas fa-users"></i>
                             </div>
+                            <div class="achievement-badge">チーム</div>
+                        </div>
+                        <div class="achievement-card-content">
+                            <div class="achievement-date"><i class="far fa-calendar-alt"></i> 2017年7月</div>
+                            <h4 class="achievement-title">ミスタードーナツ チームミーティング 東京地区 3位</h4>
+                            <p class="achievement-description">東京地区の店舗間コンペティションでチームリーダーとして3位入賞。</p>
+                            <a href="#" class="achievement-link">詳細を見る <i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -406,7 +431,7 @@
             <div class="project-items" data-aos="fade-up" data-aos-duration="800">
                 <div class="project-item" data-aos="fade-up" data-aos-delay="100">
                     <div class="project-image" data-aos="zoom-in" data-aos-delay="100">
-                        <img src="assets/images/project-axross.jpg" alt="AxrossRecipe">
+                        <img src="assets/images/project-axross.png" alt="AxrossRecipe">
                     </div>
                     <div class="project-content">
                         <h3 data-aos="fade-right" data-aos-delay="200">AxrossRecipe</h3>

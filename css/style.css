@@ -719,6 +719,189 @@ nav {
     transform: translateY(-5px);
 }
 
+/* 実績セクション - 統一カードデザイン */
+.achievements-section {
+    margin: 50px 0;
+}
+
+.achievements-title {
+    color: var(--primary-color);
+    margin-bottom: 40px;
+    font-size: 1.5rem;
+    text-align: center;
+    position: relative;
+}
+
+.achievements-title::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background-color: var(--highlight-color);
+}
+
+/* 統一カードグリッドレイアウト */
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+/* 実績カードスタイル */
+.achievement-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: var(--transition);
+    height: 100%;
+}
+
+.achievement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* カードメディア領域 */
+.achievement-card-media {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+}
+
+.achievement-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.achievement-card:hover .achievement-card-media img {
+    transform: scale(1.05);
+}
+
+/* 画像なしカードのアイコン表示 */
+.achievement-card.no-image .achievement-card-media {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--light-gray);
+}
+
+.achievement-card-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--white);
+    border-radius: 50%;
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    box-shadow: var(--shadow);
+}
+
+/* バッジ表示 */
+.achievement-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 5px 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 30px;
+    color: var(--white);
+    background-color: var(--highlight-color);
+    z-index: 2;
+}
+
+/* カードコンテンツ領域 */
+.achievement-card-content {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.achievement-date {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+.achievement-date i {
+    margin-right: 5px;
+    color: var(--highlight-color);
+}
+
+.achievement-title {
+    font-size: 1.15rem;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.achievement-description {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.achievement-link {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 5px 0;
+}
+
+.achievement-link i {
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+.achievement-link:hover {
+    color: var(--highlight-color);
+}
+
+.achievement-link:hover i {
+    transform: translateX(3px);
+}
+
+/* レスポンシブデザイン */
+@media screen and (max-width: 992px) {
+    .achievements-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .achievement-card-media {
+        height: 160px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .achievement-card-media {
+        height: 200px;
+    }
+}
+
 /* プロジェクトセクション */
 .project-items {
     display: grid;
