@@ -208,9 +208,19 @@ nav {
     height: 100vh;
     display: flex;
     align-items: center;
-    background-color: var(--light-gray);
     position: relative;
     overflow: hidden;
+    background-color: var(--primary-color);
+}
+
+/* ヒーローセクションのキャンバス背景 */
+#hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
 
 .hero::before {
@@ -220,39 +230,72 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(10,28,46,0.1) 100%);
+    background: linear-gradient(135deg, rgba(10,28,46,0.92) 0%, rgba(10,28,46,0.8) 100%);
     z-index: 1;
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 800px;
+    max-width: 900px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .hero h1 {
-    font-size: 4rem;
-    margin-bottom: 10px;
-    color: var(--primary-color);
+    font-size: 3.5rem;
+    color: var(--white);
     font-weight: 700;
+    margin-bottom: 10px;
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .hero h2 {
     font-size: 2rem;
-    margin-bottom: 20px;
-    color: var(--secondary-color);
-    font-weight: 500;
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 25px;
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .hero .lead {
-    font-size: 1.4rem;
-    margin-bottom: 30px;
-    color: var(--dark-gray);
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+    color: var(--white);
+    line-height: 1.4;
+    font-weight: 300;
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero-message {
+    position: relative;
+    display: inline-block;
+}
+
+.hero-message::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background-color: var(--white);
+    opacity: 0.7;
 }
 
 .hero-cta {
     display: flex;
     gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
 }
 
 /* アバウトセクション */
