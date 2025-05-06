@@ -1693,7 +1693,14 @@ footer {
 .footer-content {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+}
+
+/* 左側のコンテンツ */
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .footer-logo a {
@@ -1713,6 +1720,54 @@ footer {
 .copyright {
     font-size: 0.9rem;
     color: var(--gray);
+    margin-top: 10px;
+}
+
+/* コンタクト部分 */
+.footer-contact {
+    text-align: right;
+}
+
+.footer-contact h3 {
+    font-size: 1.1rem;
+    color: var(--white);
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-contact h3::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--highlight-color);
+}
+
+.footer-social {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+}
+
+.footer-social a {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.footer-social a:hover {
+    background-color: var(--highlight-color);
+    transform: translateY(-3px);
 }
 
 /* レスポンシブデザイン */
