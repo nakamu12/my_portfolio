@@ -181,8 +181,8 @@ class LinkPreviewGenerator {
     }
 }
 
-// DOMコンテンツロード時にリンクプレビューを初期化
-document.addEventListener('DOMContentLoaded', () => {
+// グローバル関数として定義（components-loader.jsから呼び出せるようにする）
+window.initLinkPreviews = function() {
     const previewGenerator = new LinkPreviewGenerator();
     
     // メディアセクションのアイテムにプレビューを適用
@@ -190,4 +190,12 @@ document.addEventListener('DOMContentLoaded', () => {
     mediaItems.forEach(item => {
         previewGenerator.generatePreview(item);
     });
+};
+
+// DOMコンテンツロード時にリンクプレビューを初期化
+document.addEventListener('DOMContentLoaded', function() {
+    // メディアアイテムが既にDOMにある場合は初期化を実行
+    if (document.querySelectorAll('.media-item').length > 0) {
+        window.initLinkPreviews();
+    }
 });

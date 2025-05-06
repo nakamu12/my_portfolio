@@ -1,6 +1,7 @@
 // ポートフォリオサイト メインJavaScript
 
-document.addEventListener('DOMContentLoaded', () => {
+// グローバルな初期化関数として定義（components-loader.jsから呼び出せるようにする）
+window.init = function() {
     // AOSアニメーションライブラリの初期化
     AOS.init({
         duration: 800,
@@ -147,4 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-});
+};
+
+// DOMContentLoaded時にも初期化を実行
+document.addEventListener('DOMContentLoaded', window.init);

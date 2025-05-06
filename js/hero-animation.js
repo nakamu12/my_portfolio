@@ -1,6 +1,7 @@
 // ヒーローセクションのインタラクティブな背景アニメーション
 
-document.addEventListener('DOMContentLoaded', () => {
+// グローバルな関数として定義（components-loader.jsから呼び出せるようにする）
+window.initHeroAnimation = function() {
   // Canvas要素の設定
   const canvas = document.getElementById('hero-canvas');
   const ctx = canvas.getContext('2d');
@@ -157,4 +158,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // アニメーションの開始
   initParticles();
   animate();
+};
+
+// DOMContentLoaded時にも初期化を実行（コンポーネントが既にロードされている場合）
+document.addEventListener('DOMContentLoaded', function() {
+  // ヒーローセクションが既にDOMにある場合は初期化を実行
+  if (document.getElementById('hero-canvas')) {
+    window.initHeroAnimation();
+  }
 });
