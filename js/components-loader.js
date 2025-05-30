@@ -1,5 +1,5 @@
-// コンポーネントの読み込み（XMLHttpRequestバージョン - CORSエラーを回避）
-document.addEventListener('DOMContentLoaded', function() {
+// コンポーネントの読み込み（モダンfetch APIバージョン）
+document.addEventListener('DOMContentLoaded', async function() {
     const components = [
         { file: 'header.html', placeholder: 'header-placeholder' },
         { file: 'hero.html', placeholder: 'hero-placeholder' },
@@ -12,32 +12,39 @@ document.addEventListener('DOMContentLoaded', function() {
         { file: 'footer.html', placeholder: 'footer-placeholder' }
     ];
 
-    // すべてのコンポーネントを同期的に読み込む（XHRを使用）
-    components.forEach(component => {
-        loadComponentSync(component);
-    });
+    // すべてのコンポーネントを並列で読み込む
+    await loadAllComponents(components);
 
     // コンポーネントの読み込みが完了したので初期化処理を実行
     initializePage();
 
-    // コンポーネントを同期的に読み込む関数（XHRを使用）
-    function loadComponentSync(component) {
+    // すべてのコンポーネントを並列で読み込む関数
+    async function loadAllComponents(components) {
+        const promises = components.map(component => loadComponent(component));
+        await Promise.all(promises);
+    }
+
+    // 単一のコンポーネントを読み込む関数
+    async function loadComponent(component) {
         try {
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', `components/${component.file}`, false); // 同期リクエスト
-            xhr.send();
+            const response = await fetch(`components/${component.file}`);
             
-            if (xhr.status === 200) {
-                const html = xhr.responseText;
+            if (response.ok) {
+                const html = await response.text();
                 const placeholder = document.getElementById(component.placeholder);
                 if (placeholder) {
                     placeholder.outerHTML = html;
                 }
             } else {
-                console.error(`Failed to load component ${component.file}: ${xhr.status}`);
+                console.error(`Failed to load component ${component.file}: ${response.status}`);
             }
         } catch (error) {
             console.error(`Error loading component ${component.file}:`, error);
+            // フォールバックUIを表示
+            const placeholder = document.getElementById(component.placeholder);
+            if (placeholder) {
+                placeholder.innerHTML = `<div class="error-message">コンポーネントの読み込みに失敗しました: ${component.file}</div>`;
+            }
         }
     }
 
@@ -48,15 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.init();
         }
         
-        // AOSアニメーションを初期化
-        if (typeof AOS !== 'undefined') {
-            AOS.init({
-                duration: 800,
-                easing: 'ease-in-out',
-                once: true,
-                mirror: false
-            });
-        }
+        // AOSアニメーションの初期化はmain.jsに一元化済み
         
         // Hero Animation を初期化
         if (typeof window.initHeroAnimation === 'function') {
@@ -72,56 +71,21 @@ document.addEventListener('DOMContentLoaded', function() {
         setupEventListeners();
     }
 
-    // イベントリスナーのセットアップ
+    // イベントリスナーのセットアップ（重複するコードはmain.jsに統合）
     function setupEventListeners() {
-        // ナビゲーションリンクのスムーススクロール
+        // URLハッシュ更新時のスムーススクロール設定のみここで行う
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                e.preventDefault();
+                // デフォルトの動作は阻止しない（main.jsのスムーススクロールが処理）
+                // URLハッシュの更新のみ行う
                 const targetID = this.getAttribute('href');
-                const targetElement = document.querySelector(targetID);
-                
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                    
-                    // URLハッシュを更新（ブラウザ履歴に残す）
-                    history.pushState(null, null, targetID);
+                if (targetID && targetID !== '#') {
+                    setTimeout(() => {
+                        history.pushState(null, null, targetID);
+                    }, 100);
                 }
             });
         });
-
-        // ハンバーガーメニューの制御
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        
-        if (hamburger && navLinks) {
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navLinks.classList.toggle('active');
-            });
-            
-            // ナビリンクをクリックしたらメニューを閉じる
-            document.querySelectorAll('.nav-links a').forEach(item => {
-                item.addEventListener('click', () => {
-                    hamburger.classList.remove('active');
-                    navLinks.classList.remove('active');
-                });
-            });
-        }
-
-        // スクロール時のヘッダースタイル変更
-        const header = document.getElementById('header');
-        if (header) {
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-        }
     }
 });
 

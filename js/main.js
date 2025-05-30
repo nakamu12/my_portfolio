@@ -33,16 +33,24 @@ window.init = function() {
         });
     });
 
-    // スクロール時のヘッダースタイル変更
+    // スクロール時のヘッダースタイル変更（スロットリング付き）
     const header = document.getElementById('header');
+    let scrollTimeout = null;
     
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+    function handleScroll() {
+        if (!scrollTimeout) {
+            scrollTimeout = setTimeout(() => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                scrollTimeout = null;
+            }, 16); // 約60fps
         }
-    });
+    }
+    
+    window.addEventListener('scroll', handleScroll);
 
     // スムーススクロール
     const smoothScroll = (target, duration) => {
@@ -85,17 +93,24 @@ window.init = function() {
     // アニメーション（スクロール時の要素表示）
     const fadeInElements = document.querySelectorAll('.about-content, .skill-item, .certification-item, .timeline-item, .project-item, .media-item');
     
+    let fadeInScrollTimeout = null;
+    
     const fadeInOnScroll = () => {
-        const triggerBottom = window.innerHeight * 0.8;
-        
-        fadeInElements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            
-            if (elementTop < triggerBottom) {
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-            }
-        });
+        if (!fadeInScrollTimeout) {
+            fadeInScrollTimeout = setTimeout(() => {
+                const triggerBottom = window.innerHeight * 0.8;
+                
+                fadeInElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    
+                    if (elementTop < triggerBottom) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+                fadeInScrollTimeout = null;
+            }, 16); // 約60fps
+        }
     };
     
     // 初期スタイル設定
@@ -149,6 +164,3 @@ window.init = function() {
         });
     }
 };
-
-// DOMContentLoaded時にも初期化を実行
-document.addEventListener('DOMContentLoaded', window.init);

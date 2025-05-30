@@ -18,6 +18,28 @@
     --timeline-color: #eaeaea;
     --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
+    
+    /* 間隔システム */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+    --spacing-xl: 30px;
+    --spacing-xxl: 50px;
+    
+    /* ボーダー半径システム */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-full: 50%;
+    
+    /* フォントサイズ */
+    --font-xs: 0.75rem;
+    --font-sm: 0.9rem;
+    --font-md: 1rem;
+    --font-lg: 1.1rem;
+    --font-xl: 1.5rem;
+    --font-xxl: 2rem;
 }
 
 * {
@@ -1963,4 +1985,47 @@ footer {
         gap: 15px;
         text-align: center;
     }
+}
+
+/* ユーティリティクラス */
+/* Flexboxユーティリティ */
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 間隔ユーティリティ */
+.mb-xs { margin-bottom: var(--spacing-xs); }
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+.mb-xl { margin-bottom: var(--spacing-xl); }
+
+/* シャドウユーティリティ */
+.shadow { box-shadow: var(--shadow); }
+.shadow-hover:hover { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+
+/* トランジションユーティリティ */
+.transition { transition: var(--transition); }
+
+/* ボーダー半径ユーティリティ */
+.rounded-sm { border-radius: var(--radius-sm); }
+.rounded-md { border-radius: var(--radius-md); }
+.rounded-lg { border-radius: var(--radius-lg); }
+.rounded-full { border-radius: var(--radius-full); }
+
+/* エラーメッセージスタイル */
+.error-message {
+    padding: var(--spacing-lg);
+    background-color: var(--light-gray);
+    color: var(--text-color);
+    text-align: center;
+    border-radius: var(--radius-md);
+    margin: var(--spacing-lg) 0;
 }

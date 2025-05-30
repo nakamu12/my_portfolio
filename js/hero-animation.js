@@ -6,6 +6,10 @@ window.initHeroAnimation = function() {
   const canvas = document.getElementById('hero-canvas');
   const ctx = canvas.getContext('2d');
   
+  // クリーンアップ用の参照を保持
+  let animationId = null;
+  let resizeTimeout = null;
+  
   // キャンバスを画面サイズに合わせる
   function resizeCanvas() {
     const heroSection = document.querySelector('.hero');
@@ -13,9 +17,15 @@ window.initHeroAnimation = function() {
     canvas.height = heroSection.offsetHeight;
   }
   
+  // リサイズイベントのスロットリング
+  function handleResize() {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(resizeCanvas, 250);
+  }
+  
   // 初期化時とリサイズ時にキャンバスサイズを調整
   resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
+  window.addEventListener('resize', handleResize);
   
   // パーティクルの設定
   const particlesArray = [];
@@ -28,19 +38,30 @@ window.initHeroAnimation = function() {
     radius: 150
   };
   
-  // マウス位置の更新
-  window.addEventListener('mousemove', (event) => {
-    // キャンバス内の相対位置を計算
-    const rect = canvas.getBoundingClientRect();
-    mouse.x = event.clientX - rect.left;
-    mouse.y = event.clientY - rect.top;
-  });
+  // マウスムーブのスロットリング用
+  let mouseMoveTimeout = null;
+  
+  // マウス位置の更新（スロットリング付き）
+  function handleMouseMove(event) {
+    if (!mouseMoveTimeout) {
+      mouseMoveTimeout = setTimeout(() => {
+        // キャンバス内の相対位置を計算
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = event.clientX - rect.left;
+        mouse.y = event.clientY - rect.top;
+        mouseMoveTimeout = null;
+      }, 16); // 約60fps
+    }
+  }
   
   // マウスがキャンバス外に出た時の処理
-  window.addEventListener('mouseout', () => {
+  function handleMouseOut() {
     mouse.x = undefined;
     mouse.y = undefined;
-  });
+  }
+  
+  window.addEventListener('mousemove', handleMouseMove);
+  window.addEventListener('mouseout', handleMouseOut);
   
   // Particle クラス
   class Particle {
@@ -152,12 +173,29 @@ window.initHeroAnimation = function() {
     // パーティクル間の線を描画
     drawLines();
     
-    requestAnimationFrame(animate);
+    animationId = requestAnimationFrame(animate);
   }
   
   // アニメーションの開始
   initParticles();
   animate();
+  
+  // クリーンアップ関数を返す
+  return function cleanup() {
+    // アニメーションの停止
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+    }
+    
+    // イベントリスナーの削除
+    window.removeEventListener('resize', handleResize);
+    window.removeEventListener('mousemove', handleMouseMove);
+    window.removeEventListener('mouseout', handleMouseOut);
+    
+    // タイムアウトのクリア
+    clearTimeout(resizeTimeout);
+    clearTimeout(mouseMoveTimeout);
+  };
 };
 
 // DOMContentLoaded時にも初期化を実行（コンポーネントが既にロードされている場合）
