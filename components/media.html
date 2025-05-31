@@ -1,133 +1,450 @@
 <section id="media" class="media">
     <div class="container">
         <h2 class="section-title">Media & Publications</h2>
+        <p class="section-subtitle">技術発信とコンテンツクリエイターとしての活動実績</p>
         
-        <div class="media-categories">
-            <div class="media-category">
-                <h3><i class="fab fa-youtube"></i> YouTube</h3>
-                <div class="media-items">
-                    <div class="media-item youtube">
-                        <a href="https://www.youtube.com/playlist?list=PLuiKmtQJC8Im8VYeL4CeuX4VDap0ZahxO" target="_blank" rel="noopener noreferrer">
-                            <div class="media-thumbnail">
-                                <img src="assets/images/youtube-tech-channel.jpg" alt="ソフトバンクビジネスチャンネル">
-                                <div class="play-icon"><i class="fas fa-play"></i></div>
-                            </div>
-                            <div class="media-info">
-                                <h4>ソフトバンクビジネスチャンネル</h4>
-                                <p>AIエンジニアによる最先端テクノロジー解説</p>
-                            </div>
+        <!-- フィーチャーコンテンツ -->
+        <div class="featured-media">
+            <div class="featured-card">
+                <div class="featured-badge">
+                    <i class="fas fa-star"></i>
+                    <span>Featured</span>
+                </div>
+                <div class="featured-content">
+                    <div class="featured-thumbnail">
+                        <img src="assets/images/youtube-tech-channel.jpg" alt="ソフトバンクビジネスチャンネル">
+                        <div class="featured-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="featured-info">
+                        <span class="featured-category">
+                            <i class="fab fa-youtube"></i> YouTube
+                        </span>
+                        <h3>ソフトバンクビジネスチャンネル</h3>
+                        <p>AIエンジニアによる最先端テクノロジーの解説動画シリーズ。生成AI、機械学習、データサイエンスなど、ビジネスに活用できる技術を分かりやすく解説しています。</p>
+                        <a href="https://www.youtube.com/playlist?list=PLuiKmtQJC8Im8VYeL4CeuX4VDap0ZahxO" target="_blank" rel="noopener noreferrer" class="featured-link">
+                            <span>動画を見る</span>
+                            <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
-                    <div class="media-item youtube">
-                        <a href="https://www.youtube.com/watch?v=7zVhl7wIC3M&list=PLdWTmEF6jFdYNfb8YPgt35pH58zKQjFzT" target="_blank" rel="noopener noreferrer">
-                            <div class="media-thumbnail">
-                                <img src="assets/images/youtube-tech-world.jpg" alt="TECH WORLD">
-                                <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- メディアカテゴリータブ -->
+        <div class="media-categories">
+            <button class="category-tab active" data-category="all">
+                <i class="fas fa-globe"></i>
+                <span>すべて</span>
+                <span class="count">9</span>
+            </button>
+            <button class="category-tab" data-category="youtube">
+                <i class="fab fa-youtube"></i>
+                <span>YouTube</span>
+                <span class="count">2</span>
+            </button>
+            <button class="category-tab" data-category="article">
+                <i class="fas fa-newspaper"></i>
+                <span>記事</span>
+                <span class="count">4</span>
+            </button>
+            <button class="category-tab" data-category="podcast">
+                <i class="fas fa-podcast"></i>
+                <span>Podcast</span>
+                <span class="count">1</span>
+            </button>
+            <button class="category-tab" data-category="presentation">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <span>登壇</span>
+                <span class="count">1</span>
+            </button>
+        </div>
+        
+        <!-- 横スクロールギャラリー -->
+        <div class="media-gallery-wrapper">
+            <button class="gallery-nav gallery-nav-prev" aria-label="前へ">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            
+            <div class="media-gallery">
+                <!-- YouTubeカード -->
+                <div class="media-card youtube-card" data-category="youtube">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-header">
+                                <i class="fab fa-youtube"></i>
+                                <span>YouTube</span>
                             </div>
-                            <div class="media-info">
+                            <div class="card-thumbnail">
+                                <img src="assets/images/youtube-tech-world.jpg" alt="TECH WORLD">
+                                <div class="overlay-icon"><i class="fas fa-play"></i></div>
+                            </div>
+                            <div class="card-content">
                                 <h4>TECH WORLD</h4>
                                 <p>ソフトバンクエンジニアって実際どうなの？</p>
                             </div>
-                        </a>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-back-content">
+                                <h4>TECH WORLD</h4>
+                                <p>ソフトバンクのエンジニアリング文化や働き方について、現役エンジニアが本音で語るインタビューシリーズです。</p>
+                                <div class="card-stats">
+                                    <div class="stat">
+                                        <i class="fas fa-eye"></i>
+                                        <span>10K+ 視聴</span>
+                                    </div>
+                                    <div class="stat">
+                                        <i class="fas fa-clock"></i>
+                                        <span>15分</span>
+                                    </div>
+                                </div>
+                                <a href="https://www.youtube.com/watch?v=7zVhl7wIC3M&list=PLdWTmEF6jFdYNfb8YPgt35pH58zKQjFzT" target="_blank" rel="noopener noreferrer" class="card-action">
+                                    <span>視聴する</span>
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="media-item youtube">
-                        <a href="https://youtu.be/70QUKzJ-ciQ?si=x5_gNFDugCKbLJAj&t=7553" target="_blank" rel="noopener noreferrer">
-                            <div class="media-thumbnail">
+                </div>
+
+                <div class="media-card youtube-card" data-category="youtube">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-header">
+                                <i class="fab fa-youtube"></i>
+                                <span>YouTube</span>
+                            </div>
+                            <div class="card-thumbnail">
                                 <img src="assets/images/youtube-enxross.jpg" alt="enXross Hackathon">
-                                <div class="play-icon"><i class="fas fa-play"></i></div>
+                                <div class="overlay-icon"><i class="fas fa-play"></i></div>
                             </div>
-                            <div class="media-info">
+                            <div class="card-content">
                                 <h4>enXross Hackathon 2nd</h4>
-                                <p>最終プレゼン</p>
+                                <p>最終プレゼンテーション</p>
                             </div>
-                        </a>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-back-content">
+                                <h4>enXross Hackathon 2nd</h4>
+                                <p>XR技術を活用したハッカソンでのファイナリストプレゼンテーション。React × 8th Wallで実現したWebARアプリケーションの開発過程を紹介。</p>
+                                <div class="card-stats">
+                                    <div class="stat">
+                                        <i class="fas fa-trophy"></i>
+                                        <span>Finalist</span>
+                                    </div>
+                                    <div class="stat">
+                                        <i class="fas fa-users"></i>
+                                        <span>300+ 参加者</span>
+                                    </div>
+                                </div>
+                                <a href="https://youtu.be/70QUKzJ-ciQ?si=x5_gNFDugCKbLJAj&t=7553" target="_blank" rel="noopener noreferrer" class="card-action">
+                                    <span>視聴する</span>
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="media-category">
-                <h3><i class="fas fa-podcast"></i> Podcast</h3>
-                <div class="media-items">
-                    <div class="media-item podcast">
-                        <a href="https://open.spotify.com/episode/07Im8f3x9q1Bfek0coKcVM" target="_blank" rel="noopener noreferrer">
-                            <div class="media-thumbnail">
+
+                <!-- Podcastカード -->
+                <div class="media-card podcast-card" data-category="podcast">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-header">
+                                <i class="fas fa-podcast"></i>
+                                <span>Podcast</span>
+                            </div>
+                            <div class="card-thumbnail">
                                 <img src="assets/images/podcast-spotify.jpg" alt="となりのデータ分析屋さん">
-                                <div class="play-icon"><i class="fas fa-podcast"></i></div>
+                                <div class="overlay-icon"><i class="fas fa-podcast"></i></div>
                             </div>
-                            <div class="media-info">
+                            <div class="card-content">
                                 <h4>となりのデータ分析屋さん</h4>
-                                <p>76.AIの知識は正しくつけろ！XRにも挑むSoftBankエンジニア【Axross Recipe】</p>
+                                <p>AIとXRに挑むSoftBankエンジニア</p>
                             </div>
-                        </a>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-back-content">
+                                <h4>となりのデータ分析屋さん #76</h4>
+                                <p>AIエンジニアとしてのキャリアパスやXR技術への挑戦、技術者としての成長戦略について語った1時間のトークセッション。</p>
+                                <div class="card-stats">
+                                    <div class="stat">
+                                        <i class="fas fa-headphones"></i>
+                                        <span>5K+ 再生</span>
+                                    </div>
+                                    <div class="stat">
+                                        <i class="fas fa-clock"></i>
+                                        <span>60分</span>
+                                    </div>
+                                </div>
+                                <a href="https://open.spotify.com/episode/07Im8f3x9q1Bfek0coKcVM" target="_blank" rel="noopener noreferrer" class="card-action">
+                                    <span>聴く</span>
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="media-category">
-                <h3><i class="fas fa-chalkboard-teacher"></i> 登壇実績</h3>
-                <div class="media-items">
-                    <div class="media-item presentation">
-                        <a href="https://biz.tm.softbank.jp/me16947-wbn-entry-axross.html" target="_blank" rel="noopener noreferrer">
-                            <div class="media-thumbnail">
+
+                <!-- 登壇実績カード -->
+                <div class="media-card presentation-card" data-category="presentation">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-header">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span>登壇実績</span>
+                            </div>
+                            <div class="card-thumbnail">
                                 <img src="assets/images/presentation-webinar.jpg" alt="SoftBank ウェビナー">
+                                <div class="overlay-icon"><i class="fas fa-microphone"></i></div>
                             </div>
-                            <div class="media-info">
+                            <div class="card-content">
                                 <h4>SoftBank ウェビナー</h4>
-                                <p>生成AI活用の第一歩！業務効率化に向けた活用事例</p>
+                                <p>生成AI活用の第一歩</p>
                             </div>
-                        </a>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-back-content">
+                                <h4>生成AI活用ウェビナー</h4>
+                                <p>企業における生成AI活用の実践事例と導入戦略について、実際のプロジェクト経験を基に解説したウェビナー登壇。</p>
+                                <div class="card-stats">
+                                    <div class="stat">
+                                        <i class="fas fa-users"></i>
+                                        <span>500+ 参加者</span>
+                                    </div>
+                                    <div class="stat">
+                                        <i class="fas fa-building"></i>
+                                        <span>企業向け</span>
+                                    </div>
+                                </div>
+                                <a href="https://biz.tm.softbank.jp/me16947-wbn-entry-axross.html" target="_blank" rel="noopener noreferrer" class="card-action">
+                                    <span>詳細を見る</span>
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- 記事カード -->
+                <div class="media-card article-card" data-category="article">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-header">
+                                <i class="fas fa-newspaper"></i>
+                                <span>記事</span>
+                            </div>
+                            <div class="card-thumbnail">
+                                <img src="assets/images/article-crosstalk.jpg" alt="エンジニア社員座談会">
+                                <div class="overlay-icon"><i class="fas fa-external-link-alt"></i></div>
+                            </div>
+                            <div class="card-content">
+                                <h4>3年目エンジニア座談会</h4>
+                                <p>エンジニア視点のソフトバンク</p>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-back-content">
+                                <h4>3年目エンジニア座談会</h4>
+                                <p>ソフトバンクで働く若手エンジニアの本音トーク。技術的なチャレンジ、キャリア成長、社内文化について語り合いました。</p>
+                                <div class="card-stats">
+                                    <div class="stat">
+                                        <i class="fas fa-eye"></i>
+                                        <span>採用サイト</span>
+                                    </div>
+                                    <div class="stat">
+                                        <i class="fas fa-comment"></i>
+                                        <span>座談会形式</span>
+                                    </div>
+                                </div>
+                                <a href="https://www.softbank.jp/recruit/graduate/crosstalk/engineer/" target="_blank" rel="noopener noreferrer" class="card-action">
+                                    <span>読む</span>
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="media-card article-card" data-category="article">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-header">
+                                <i class="fas fa-newspaper"></i>
+                                <span>記事</span>
+                            </div>
+                            <div class="card-thumbnail">
+                                <img src="assets/images/article-enxross-interview.jpg" alt="enXross インタビュー">
+                                <div class="overlay-icon"><i class="fas fa-external-link-alt"></i></div>
+                            </div>
+                            <div class="card-content">
+                                <h4>XR初挑戦で激戦を突破</h4>
+                                <p>enXross HACKATHON体験記</p>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-back-content">
+                                <h4>enXross HACKATHON体験記</h4>
+                                <p>XR技術未経験から2ヶ月でファイナリストに。戦略的な学習方法と技術選定、チーム開発のノウハウを詳しく解説。</p>
+                                <div class="card-stats">
+                                    <div class="stat">
+                                        <i class="fas fa-fire"></i>
+                                        <span>話題記事</span>
+                                    </div>
+                                    <div class="stat">
+                                        <i class="fas fa-book-open"></i>
+                                        <span>技術解説</span>
+                                    </div>
+                                </div>
+                                <a href="https://note.com/enxross/n/n8faf0b017d92" target="_blank" rel="noopener noreferrer" class="card-action">
+                                    <span>読む</span>
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="media-card article-card" data-category="article">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-header">
+                                <i class="fas fa-newspaper"></i>
+                                <span>記事</span>
+                            </div>
+                            <div class="card-thumbnail">
+                                <img src="assets/images/article-react-8thwall.jpg" alt="React 8thWall実践術">
+                                <div class="overlay-icon"><i class="fas fa-external-link-alt"></i></div>
+                            </div>
+                            <div class="card-content">
+                                <h4>初心者からFinalistへ！</h4>
+                                <p>8th Wall × React実践術</p>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-back-content">
+                                <h4>8th Wall × React実践術</h4>
+                                <p>WebARアプリケーション開発の実践的なTipsとベストプラクティス。実際のプロジェクトで得た知見を体系的にまとめました。</p>
+                                <div class="card-stats">
+                                    <div class="stat">
+                                        <i class="fas fa-code"></i>
+                                        <span>技術記事</span>
+                                    </div>
+                                    <div class="stat">
+                                        <i class="fas fa-star"></i>
+                                        <span>実践的</span>
+                                    </div>
+                                </div>
+                                <a href="https://www.softbank.jp/biz/blog/cloud-technology/articles/202412/enxross-finalist-react-8thwall/" target="_blank" rel="noopener noreferrer" class="card-action">
+                                    <span>読む</span>
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="media-card article-card" data-category="article">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-header">
+                                <i class="fas fa-newspaper"></i>
+                                <span>記事</span>
+                            </div>
+                            <div class="card-thumbnail">
+                                <img src="assets/images/article-o3.jpg" alt="o3解説">
+                                <div class="overlay-icon"><i class="fas fa-external-link-alt"></i></div>
+                            </div>
+                            <div class="card-content">
+                                <h4>o3とは？</h4>
+                                <p>最新AI技術をかんたん解説</p>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-back-content">
+                                <h4>o3技術解説</h4>
+                                <p>OpenAIの最新モデルo3について、その特徴と活用方法を初心者にも分かりやすく解説。o3-miniやdeep researchの違いも詳しく説明。</p>
+                                <div class="card-stats">
+                                    <div class="stat">
+                                        <i class="fas fa-trending-up"></i>
+                                        <span>最新技術</span>
+                                    </div>
+                                    <div class="stat">
+                                        <i class="fas fa-brain"></i>
+                                        <span>AI解説</span>
+                                    </div>
+                                </div>
+                                <a href="https://www.softbank.jp/biz/blog/business/articles/202503/o3/" target="_blank" rel="noopener noreferrer" class="card-action">
+                                    <span>読む</span>
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             
-            <div class="media-category">
-                <h3><i class="fas fa-newspaper"></i> 記事</h3>
-                <div class="media-items">
-                    <div class="media-item article">
-                        <a href="https://www.softbank.jp/recruit/graduate/crosstalk/engineer/" target="_blank" rel="noopener noreferrer">
-                            <div class="media-thumbnail">
-                                <img src="assets/images/article-crosstalk.jpg" alt="エンジニア社員座談会">
-                            </div>
-                            <div class="media-info">
-                                <h4>3年目エンジニア社員座談会</h4>
-                                <p>エンジニア視点で見たソフトバンクの魅力とは？</p>
-                            </div>
-                        </a>
+            <button class="gallery-nav gallery-nav-next" aria-label="次へ">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        
+        <!-- スクロールインジケーター -->
+        <div class="scroll-indicator">
+            <div class="scroll-track">
+                <div class="scroll-thumb"></div>
+            </div>
+        </div>
+        
+        <!-- Follow Me セクション -->
+        <div class="follow-me-section">
+            <h3 class="follow-title">Follow Me</h3>
+            <p class="follow-subtitle">技術記事やプログラミングTipsを定期的に発信しています</p>
+            
+            <div class="social-platforms">
+                <a href="https://note.com/nakamura_r/" target="_blank" rel="noopener noreferrer" class="social-platform note-platform">
+                    <div class="platform-icon">
+                        <i class="fas fa-pen-nib"></i>
                     </div>
-                    <div class="media-item article">
-                        <a href="https://note.com/enxross/n/n8faf0b017d92" target="_blank" rel="noopener noreferrer">
-                            <div class="media-thumbnail">
-                                <img src="assets/images/article-enxross-interview.jpg" alt="enXross インタビュー">
-                            </div>
-                            <div class="media-info">
-                                <h4>XR初挑戦でいかにして激戦のソフトバンク内予選を突破したのか</h4>
-                                <p>裏側にあった戦略と入念な準備とは。【enXross HACKATHON 参加者インタビュー】</p>
-                            </div>
-                        </a>
+                    <div class="platform-info">
+                        <h4>note</h4>
+                        <p>技術記事・知見の共有</p>
+                        <span class="platform-stats">定期更新中</span>
                     </div>
-                    <div class="media-item article">
-                        <a href="https://www.softbank.jp/biz/blog/cloud-technology/articles/202412/enxross-finalist-react-8thwall/" target="_blank" rel="noopener noreferrer">
-                            <div class="media-thumbnail">
-                                <img src="assets/images/article-react-8thwall.jpg" alt="React 8thWall実践術">
-                            </div>
-                            <div class="media-info">
-                                <h4>初心者からenXross Hackathon Finalistへ！</h4>
-                                <p>ゼロからの8th Wall × React実践術</p>
-                            </div>
-                        </a>
+                    <div class="platform-arrow">
+                        <i class="fas fa-external-link-alt"></i>
                     </div>
-                    <div class="media-item article">
-                        <a href="https://www.softbank.jp/biz/blog/business/articles/202503/o3/" target="_blank" rel="noopener noreferrer">
-                            <div class="media-thumbnail">
-                                <img src="assets/images/article-o3.jpg" alt="o3解説">
-                            </div>
-                            <div class="media-info">
-                                <h4>o3とは？</h4>
-                                <p>o3-miniやdeep researchもかんたん解説</p>
-                            </div>
-                        </a>
+                </a>
+                
+                <a href="https://zenn.dev/nakamura_r" target="_blank" rel="noopener noreferrer" class="social-platform zenn-platform">
+                    <div class="platform-icon">
+                        <i class="fas fa-book-open"></i>
                     </div>
-                </div>
+                    <div class="platform-info">
+                        <h4>Zenn</h4>
+                        <p>実践的なプログラミングTips</p>
+                        <span class="platform-stats">技術記事投稿中</span>
+                    </div>
+                    <div class="platform-arrow">
+                        <i class="fas fa-external-link-alt"></i>
+                    </div>
+                </a>
+                
+                <a href="https://qiita.com/nakamura_r" target="_blank" rel="noopener noreferrer" class="social-platform qiita-platform">
+                    <div class="platform-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="platform-info">
+                        <h4>Qiita</h4>
+                        <p>プログラミング知識の共有</p>
+                        <span class="platform-stats">初心者向け解説</span>
+                    </div>
+                    <div class="platform-arrow">
+                        <i class="fas fa-external-link-alt"></i>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
