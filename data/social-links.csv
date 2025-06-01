@@ -1,0 +1,7 @@
+platform,url,icon_class,title
+GitHub,https://github.com/nakamu12,fab fa-github,GitHub
+LinkedIn,https://linkedin.com/,fab fa-linkedin,LinkedIn
+Twitter,https://x.com/NakamuR_general,fab fa-twitter,X (Twitter)
+note,https://note.com/nakamura_r/,fas fa-pen-nib,note
+Zenn,https://zenn.dev/nakamura_r,fas fa-book-open,Zenn
+Qiita,https://qiita.com/nakamura_r,fas fa-code,Qiita

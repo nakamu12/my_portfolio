@@ -1,0 +1,19 @@
+category,name,icon_type,icon_class,custom_class,delay
+フロントエンド,HTML,fontawesome,fab fa-html5,html-icon,100
+フロントエンド,CSS,fontawesome,fab fa-css3-alt,css-icon,150
+フロントエンド,JavaScript,fontawesome,fab fa-js,js-icon,200
+フロントエンド,React,fontawesome,fab fa-react,react-icon,250
+フロントエンド,TypeScript,text,TS,ts-icon,300
+バックエンド,Ruby,fontawesome,fas fa-gem,ruby-icon,
+バックエンド,Python,fontawesome,fab fa-python,python-icon,
+バックエンド,Node.js,fontawesome,fab fa-node-js,node-icon,
+バックエンド,Rails,fontawesome,fas fa-train,rails-icon,
+バックエンド,Django,fontawesome,fab fa-python,django-icon,
+システム/DevOps,AWS,fontawesome,fab fa-aws,aws-icon,
+システム/DevOps,GCP,fontawesome,fab fa-google,gcp-icon,
+システム/DevOps,Kubernetes,fontawesome,fas fa-dharmachakra,k8s-icon,
+システム/DevOps,Docker,fontawesome,fab fa-docker,docker-icon,
+システム/DevOps,CI/CD,fontawesome,fas fa-sync,cicd-icon,
+言語/ツール,C++,fontawesome,fab fa-cuttlefish,cpp-icon,
+言語/ツール,GAS,fontawesome,fab fa-google,gas-icon,
+言語/ツール,ROS,fontawesome,fas fa-robot,ros-icon,

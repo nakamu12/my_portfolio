@@ -1,0 +1,9 @@
+category,title,description,type,url,image_path,stats_1_icon,stats_1_text,stats_2_icon,stats_2_text,overlay_icon,header_icon
+youtube,TECH WORLD,ソフトバンクエンジニアって実際どうなの？,YouTube,https://www.youtube.com/watch?v=7zVhl7wIC3M&list=PLdWTmEF6jFdYNfb8YPgt35pH58zKQjFzT,assets/images/youtube-tech-world.jpg,fas fa-eye,10K+ 視聴,fas fa-clock,15分,fas fa-play,fab fa-youtube
+youtube,enXross Hackathon 2nd,最終プレゼンテーション,YouTube,https://youtu.be/70QUKzJ-ciQ?si=x5_gNFDugCKbLJAj&t=7553,assets/images/youtube-enxross.jpg,fas fa-trophy,Finalist,fas fa-users,300+ 参加者,fas fa-play,fab fa-youtube
+podcast,となりのデータ分析屋さん,AIとXRに挑むSoftBankエンジニア,Podcast,https://open.spotify.com/episode/07Im8f3x9q1Bfek0coKcVM,assets/images/podcast-spotify.jpg,fas fa-headphones,5K+ 再生,fas fa-clock,60分,fas fa-podcast,fas fa-podcast
+presentation,SoftBank ウェビナー,生成AI活用の第一歩,登壇実績,https://biz.tm.softbank.jp/me16947-wbn-entry-axross.html,assets/images/presentation-webinar.jpg,fas fa-users,500+ 参加者,fas fa-building,企業向け,fas fa-microphone,fas fa-chalkboard-teacher
+article,3年目エンジニア座談会,エンジニア視点のソフトバンク,記事,https://www.softbank.jp/recruit/graduate/crosstalk/engineer/,assets/images/article-crosstalk.jpg,fas fa-eye,採用サイト,fas fa-comment,座談会形式,fas fa-external-link-alt,fas fa-newspaper
+article,XR初挑戦で激戦を突破,enXross HACKATHON体験記,記事,https://note.com/enxross/n/n8faf0b017d92,assets/images/article-enxross-interview.jpg,fas fa-fire,話題記事,fas fa-book-open,技術解説,fas fa-external-link-alt,fas fa-newspaper
+article,初心者からFinalistへ！,8th Wall × React実践術,記事,https://www.softbank.jp/biz/blog/cloud-technology/articles/202412/enxross-finalist-react-8thwall/,assets/images/article-react-8thwall.jpg,fas fa-code,技術記事,fas fa-star,実践的,fas fa-external-link-alt,fas fa-newspaper
+article,o3とは？,最新AI技術をかんたん解説,記事,https://www.softbank.jp/biz/blog/business/articles/202503/o3/,assets/images/article-o3.jpg,fas fa-trending-up,最新技術,fas fa-brain,AI解説,fas fa-external-link-alt,fas fa-newspaper

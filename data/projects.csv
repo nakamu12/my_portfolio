@@ -1,0 +1,3 @@
+title,description,technologies,website_url,image_path,delay
+AxrossRecipe,AI/DXのオンライン学習プラットフォーム。学習だけでなく、本気の「できる」を実現する最先端の人材育成のカタチ,"React,Ruby",https://axross-recipe.com/,assets/images/project-axross.png,100
+magicss,キーワードを入力するだけで、解像度の高い分析データ、構成案、そしてSEO記事が自動生成されます。,"React,Python",https://magicss.ai/,assets/images/project-magicss.png,400

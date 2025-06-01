@@ -1,0 +1,4 @@
+platform,url,description,stats,icon_class
+note,https://note.com/nakamura_r/,技術記事・知見の共有,定期更新中,fas fa-pen-nib
+Zenn,https://zenn.dev/nakamura_r,実践的なプログラミングTips,技術記事投稿中,fas fa-book-open
+Qiita,https://qiita.com/nakamura_r,プログラミング知識の共有,初心者向け解説,fas fa-code
