@@ -14,11 +14,9 @@ jobs:
   claude-code-action:
     if: |
       (
-        (
-          github.event.comment.author_association ||
-          github.event.review.author_association  ||
-          github.event.issue.author_association
-        ) in ['OWNER', 'COLLABORATOR', 'MEMBER']
+        contains(fromJson('["OWNER","COLLABORATOR","MEMBER"]'), github.event.comment.author_association) ||
+        contains(fromJson('["OWNER","COLLABORATOR","MEMBER"]'), github.event.review.author_association)  ||
+        contains(fromJson('["OWNER","COLLABORATOR","MEMBER"]'), github.event.issue.author_association)
       )
       &&
       (
@@ -46,10 +44,10 @@ jobs:
           fetch-depth: 1
 
       - name: Run Claude PR Action
-        uses: nakamu12/claude-code-action@main   # 固定タグや SHA に差し替えても OK
+        uses: nakamu12/claude-code-action@main
         with:
           use_oauth: true
-          claude_access_token: ${{ secrets.CLAUDE_ACCESS_TOKEN }}
+          claude_access_token:  ${{ secrets.CLAUDE_ACCESS_TOKEN }}
           claude_refresh_token: ${{ secrets.CLAUDE_REFRESH_TOKEN }}
-          claude_expires_at:  ${{ secrets.CLAUDE_EXPIRES_AT }}
+          claude_expires_at:    ${{ secrets.CLAUDE_EXPIRES_AT }}
           timeout_minutes: "60"
