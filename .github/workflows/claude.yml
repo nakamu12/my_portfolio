@@ -12,19 +12,20 @@ on:
 
 jobs:
   claude-code-action:
-    if: |
+   if: |
       (
-        github.repository_owner == github.actor
-        || contains(fromJson('["nakamu12"]'), github.actor)
-      ) && (
-        (github.event_name == 'issue_comment' &&
-         contains(github.event.comment.body, '@claude')) ||
-        (github.event_name == 'pull_request_review_comment' &&
-         contains(github.event.comment.body, '@claude')) ||
-        (github.event_name == 'pull_request_review' &&
-         contains(github.event.review.body, '@claude')) ||
-        (github.event_name == 'issues' &&
-         contains(github.event.issue.body, '@claude'))
+        (
+          github.event.comment.author_association ||
+          github.event.review.author_association  ||
+          github.event.issue.author_association
+        ) in ['OWNER', 'COLLABORATOR']
+      )
+      &&
+      contains(
+        github.event.comment?.body ||
+        github.event.review?.body  ||
+        github.event.issue?.body,
+        '@claude'
       )
     runs-on: ubuntu-latest
     permissions:
