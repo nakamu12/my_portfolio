@@ -14,8 +14,8 @@ jobs:
   claude-code-action:
     if: |
       (
-        github.repository_owner == github.actor                              # オーナー本人
-        || contains(fromJson('["nakamu12"]'), github.actor)     # 許可リスト
+        github.repository_owner == github.actor
+        || contains(fromJson('["nakamu12"]'), github.actor)
       ) && (
         (github.event_name == 'issue_comment' &&
          contains(github.event.comment.body, '@claude')) ||
