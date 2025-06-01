@@ -12,7 +12,7 @@ on:
 
 jobs:
   claude-code-action:
-   if: |
+    if: |
       (
         (
           github.event.comment.author_association ||
@@ -21,18 +21,24 @@ jobs:
         ) in ['OWNER', 'COLLABORATOR', 'MEMBER']
       )
       &&
-      contains(
-        github.event.comment?.body ||
-        github.event.review?.body  ||
-        github.event.issue?.body,
-        '@claude'
+      (
+        (github.event_name == 'issue_comment' &&
+         contains(github.event.comment.body, '@claude')) ||
+        (github.event_name == 'pull_request_review_comment' &&
+         contains(github.event.comment.body, '@claude')) ||
+        (github.event_name == 'pull_request_review' &&
+         contains(github.event.review.body, '@claude')) ||
+        (github.event_name == 'issues' &&
+         contains(github.event.issue.body, '@claude'))
       )
+
     runs-on: ubuntu-latest
     permissions:
       contents: read
       pull-requests: read
       issues: read
       id-token: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -40,11 +46,10 @@ jobs:
           fetch-depth: 1
 
       - name: Run Claude PR Action
-        uses: nakamu12/claude-code-action@main
+        uses: nakamu12/claude-code-action@main   # 固定タグや SHA に差し替えても OK
         with:
           use_oauth: true
           claude_access_token: ${{ secrets.CLAUDE_ACCESS_TOKEN }}
           claude_refresh_token: ${{ secrets.CLAUDE_REFRESH_TOKEN }}
-          claude_expires_at: ${{ secrets.CLAUDE_EXPIRES_AT }}
-          
+          claude_expires_at:  ${{ secrets.CLAUDE_EXPIRES_AT }}
           timeout_minutes: "60"
