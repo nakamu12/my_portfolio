@@ -18,7 +18,7 @@ jobs:
           github.event.comment.author_association ||
           github.event.review.author_association  ||
           github.event.issue.author_association
-        ) in ['OWNER', 'COLLABORATOR']
+        ) in ['OWNER', 'COLLABORATOR', 'MEMBER']
       )
       &&
       contains(
