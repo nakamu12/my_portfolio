@@ -36,13 +36,15 @@ window.init = function() {
     // スクロール時のヘッダースタイル変更
     const header = document.getElementById('header');
     
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    }
 
     // スムーススクロール
     const smoothScroll = (target, duration) => {
