@@ -1,10 +1,53 @@
 ---
-// Header: Nav + Language Switcher + Dark Mode Toggle
+import DockNav from './DockNav';
+import MobileNav from './MobileNav';
+import { getLangFromUrl, getTranslations } from '@/i18n/utils';
+import socialData from '@/data/social.json';
+
+const lang = getLangFromUrl(Astro.url);
+const t = await getTranslations(lang);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const navItems = [
+  { label: t('nav.about'), href: '#about' },
+  { label: t('nav.certifications'), href: '#certifications' },
+  { label: t('nav.skills'), href: '#skills' },
+  { label: t('nav.experience'), href: '#experience' },
+  { label: t('nav.projects'), href: '#projects' },
+  { label: t('nav.contact'), href: '#contact' },
+];
 ---
 
-<header class="fixed top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-sm">
-  <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-    <span class="text-lg font-bold">RN</span>
-    <div class="text-sm text-muted-foreground">[ Nav | Lang | Theme ]</div>
-  </nav>
+<!-- Top: Logo only (minimal) -->
+<header class="fixed top-0 z-50 w-full">
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+    <a href={`${base}/${lang}/`} class="text-lg font-bold tracking-tight">
+      <span class="bg-gradient-to-r from-[#686dff] to-[#b66fff] bg-clip-text text-transparent">
+        RN
+      </span>
+    </a>
+    <!-- Mobile: hamburger (Dock is hidden on mobile) -->
+    <div class="md:hidden">
+      <MobileNav
+        client:load
+        items={navItems}
+        menuLabel={t('header.menu')}
+        lang={lang}
+        base={base}
+      />
+    </div>
+  </div>
 </header>
+
+<!-- Bottom: Magic UI Dock (desktop only) -->
+<div class="hidden md:block">
+  <DockNav
+    client:load
+    lang={lang}
+    base={base}
+    navItems={navItems}
+    langLabel={t('header.lang')}
+    currentLang={lang}
+    socialLinks={socialData.links}
+  />
+</div>
