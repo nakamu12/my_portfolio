@@ -34,7 +34,7 @@ const summary: { label: string; value: string }[] =
         >
           <Image
             src={profileImage}
-            alt="Ryota Nakamura"
+            alt={t('about.profileAlt')}
             width={320}
             height={320}
             class="h-full w-full object-cover"
@@ -70,11 +70,7 @@ const summary: { label: string; value: string }[] =
         <div class="border-border mt-8 border-t pt-8">
           <p class="text-foreground text-sm font-medium">
             <span class="text-[#686dff]">→</span>
-            {
-              lang === 'ja'
-                ? ' より詳しくは、各セクションをご覧ください。'
-                : ' Explore the sections below to learn more about my work and expertise.'
-            }
+            {t('about.cta')}
           </p>
         </div>
       </div>
