@@ -17,6 +17,7 @@
         { "name": "FastAPI", "icon": "fastapi" },
         { "name": "Node.js", "icon": "nodejs" },
         { "name": "Ruby on Rails", "icon": "rails" },
+        { "name": "Java", "icon": "java" },
         { "name": "MongoDB", "icon": "mongodb" }
       ]
     },

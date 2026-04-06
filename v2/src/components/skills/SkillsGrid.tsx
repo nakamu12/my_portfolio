@@ -29,6 +29,7 @@ const DEVICON_MAP: Record<string, string> = {
   fastapi: 'fastapi/fastapi-original.svg',
   nodejs: 'nodejs/nodejs-original.svg',
   rails: 'rails/rails-plain-wordmark.svg',
+  java: 'java/java-original.svg',
   mongodb: 'mongodb/mongodb-original.svg',
   scala: 'scala/scala-original.svg',
   apachespark: 'apachespark/apachespark-original.svg',
