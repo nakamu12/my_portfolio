@@ -3,8 +3,20 @@
   "site.description": "AI & Robotics Engineer showcasing skills, projects, and achievements",
   "nav.about": "About",
   "nav.certifications": "Certifications",
+  "nav.aiToolkit": "AI Toolkit",
   "nav.skills": "Skills",
   "nav.experience": "Experience",
   "nav.projects": "Projects",
-  "nav.contact": "Contact"
+  "nav.media": "Media",
+  "nav.contact": "Contact",
+  "hero.greeting": "Hi, I'm",
+  "hero.name": "Ryota Nakamura",
+  "hero.title": "AI & Robotics Engineer",
+  "hero.subtitle": "Building intelligent systems that bridge the gap between AI and the real world.",
+  "hero.cta.projects": "View Projects",
+  "hero.cta.contact": "Contact Me",
+  "header.theme.light": "Light",
+  "header.theme.dark": "Dark",
+  "header.lang": "日本語",
+  "header.menu": "Menu"
 }

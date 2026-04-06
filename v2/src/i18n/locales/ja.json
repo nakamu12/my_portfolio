@@ -3,8 +3,20 @@
   "site.description": "AI・ロボティクスエンジニアのスキル、プロジェクト、実績を紹介するポートフォリオサイト",
   "nav.about": "自己紹介",
   "nav.certifications": "資格・実績",
+  "nav.aiToolkit": "AIツール",
   "nav.skills": "スキル",
   "nav.experience": "経歴",
   "nav.projects": "プロジェクト",
-  "nav.contact": "お問い合わせ"
+  "nav.media": "メディア",
+  "nav.contact": "お問い合わせ",
+  "hero.greeting": "こんにちは、",
+  "hero.name": "中村 亮太",
+  "hero.title": "AI・ロボティクスエンジニア",
+  "hero.subtitle": "AIと実世界をつなぐインテリジェントシステムを構築しています。",
+  "hero.cta.projects": "プロジェクトを見る",
+  "hero.cta.contact": "お問い合わせ",
+  "header.theme.light": "ライト",
+  "header.theme.dark": "ダーク",
+  "header.lang": "English",
+  "header.menu": "メニュー"
 }
