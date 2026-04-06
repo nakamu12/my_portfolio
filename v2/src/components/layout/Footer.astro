@@ -13,8 +13,10 @@ const socialIcons: Record<string, string> = {
 };
 ---
 
-<footer class="border-border border-t pt-12 pb-12 md:pb-28">
-  <div class="mx-auto max-w-6xl px-6">
+<footer class="pb-12 md:pb-24">
+  <!-- Gradient border top -->
+  <div class="h-px w-full bg-gradient-to-r from-[#686dff] to-[#b66fff]"></div>
+  <div class="mx-auto max-w-6xl px-6 pt-12">
     <!-- SNS Links -->
     <div class="mb-8 flex justify-center gap-6">
       {
@@ -32,32 +34,9 @@ const socialIcons: Record<string, string> = {
       }
     </div>
 
-    <!-- Bottom row: copyright / resume / back to top -->
-    <div
-      class="text-muted-foreground flex flex-col items-center gap-4 text-sm sm:flex-row sm:justify-between"
-    >
+    <!-- Bottom row: copyright / back to top -->
+    <div class="text-muted-foreground flex items-center justify-between text-sm">
       <p>© {currentYear} Ryota Nakamura</p>
-
-      <a
-        href="/resume.pdf"
-        download
-        class="hover:text-foreground flex items-center gap-1.5 transition-colors"
-      >
-        <svg
-          class="h-4 w-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M12 10v6m0 0-3-3m3 3 3-3M3 17v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2"></path>
-        </svg>
-        {t('footer.resume')}
-      </a>
 
       <a href="#hero" class="hover:text-foreground flex items-center gap-1.5 transition-colors">
         {t('footer.backToTop')}
