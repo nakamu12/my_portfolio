@@ -16,7 +16,7 @@ export default function LanguageSwitcher({ currentLang, label, base }: LanguageS
   return (
     <button
       onClick={handleSwitch}
-      className="inline-flex h-9 items-center rounded-md px-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
+      className="text-muted-foreground hover:text-foreground inline-flex h-9 items-center rounded-md px-3 text-sm transition-colors"
       aria-label={`Switch to ${label}`}
     >
       {label}

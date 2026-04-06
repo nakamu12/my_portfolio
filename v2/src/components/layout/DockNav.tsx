@@ -11,60 +11,120 @@ interface DockNavProps {
 // SVG icons as components
 const icons: Record<string, React.ReactNode> = {
   home: (
-    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg
+      className="h-5 w-5"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={1.5}
+    >
       <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
       <polyline points="9 22 9 12 15 12 15 22" />
     </svg>
   ),
   user: (
-    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg
+      className="h-5 w-5"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={1.5}
+    >
       <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" />
     </svg>
   ),
   award: (
-    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg
+      className="h-5 w-5"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={1.5}
+    >
       <circle cx="12" cy="8" r="6" />
       <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12" />
     </svg>
   ),
   code: (
-    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg
+      className="h-5 w-5"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={1.5}
+    >
       <polyline points="16 18 22 12 16 6" />
       <polyline points="8 6 2 12 8 18" />
     </svg>
   ),
   briefcase: (
-    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg
+      className="h-5 w-5"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={1.5}
+    >
       <rect x="2" y="7" width="20" height="14" rx="2" />
       <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
     </svg>
   ),
   layers: (
-    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg
+      className="h-5 w-5"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={1.5}
+    >
       <polygon points="12 2 2 7 12 12 22 7 12 2" />
       <polyline points="2 17 12 22 22 17" />
       <polyline points="2 12 12 17 22 12" />
     </svg>
   ),
   mail: (
-    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg
+      className="h-5 w-5"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={1.5}
+    >
       <rect x="2" y="4" width="20" height="16" rx="2" />
       <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
     </svg>
   ),
   sun: (
-    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg
+      className="h-5 w-5"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={1.5}
+    >
       <circle cx="12" cy="12" r="5" />
       <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
     </svg>
   ),
   moon: (
-    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg
+      className="h-5 w-5"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={1.5}
+    >
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
     </svg>
   ),
   globe: (
-    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg
+      className="h-5 w-5"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={1.5}
+    >
       <circle cx="12" cy="12" r="10" />
       <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
     </svg>
@@ -110,7 +170,8 @@ export default function DockNav({ lang, base, navItems, langLabel, currentLang }
     window.location.href = `${base}/${targetLang}/`;
   };
 
-  const isDark = typeof document !== 'undefined' && document.documentElement.classList.contains('dark');
+  const isDark =
+    typeof document !== 'undefined' && document.documentElement.classList.contains('dark');
 
   return (
     <Dock
@@ -118,60 +179,103 @@ export default function DockNav({ lang, base, navItems, langLabel, currentLang }
       iconMagnification={56}
       iconDistance={120}
       direction="middle"
-      className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 border-border/50 bg-background/70 shadow-2xl shadow-black/10"
+      className="border-border/50 bg-background/70 fixed bottom-6 left-1/2 z-50 -translate-x-1/2 shadow-2xl shadow-black/10"
     >
       {/* Home */}
-      <DockIcon className="text-muted-foreground transition-colors hover:text-foreground">
-        <a href={`${base}/${lang}/#hero`} aria-label="Home" className="flex items-center justify-center">
+      <DockIcon className="text-muted-foreground hover:text-foreground transition-colors">
+        <a
+          href={`${base}/${lang}/#hero`}
+          aria-label="Home"
+          className="flex items-center justify-center"
+        >
           {icons.home}
         </a>
       </DockIcon>
 
       {/* Separator */}
-      <div className="mx-1 h-8 w-[1px] bg-border/50" />
+      <div className="bg-border/50 mx-1 h-8 w-[1px]" />
 
       {/* Section navigation */}
       {navItems.map((item) => (
-        <DockIcon key={item.href} className="text-muted-foreground transition-colors hover:text-foreground">
-          <a href={item.href} aria-label={item.label} className="flex items-center justify-center" title={item.label}>
+        <DockIcon
+          key={item.href}
+          className="text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <a
+            href={item.href}
+            aria-label={item.label}
+            className="flex items-center justify-center"
+            title={item.label}
+          >
             {icons[iconMap[item.href]] ?? icons.layers}
           </a>
         </DockIcon>
       ))}
 
       {/* Separator */}
-      <div className="mx-1 h-8 w-[1px] bg-border/50" />
+      <div className="bg-border/50 mx-1 h-8 w-[1px]" />
 
       {/* SNS Links */}
-      <DockIcon className="text-muted-foreground transition-colors hover:text-foreground">
-        <a href="https://github.com/nakamu12" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub" className="flex items-center justify-center">
+      <DockIcon className="text-muted-foreground hover:text-foreground transition-colors">
+        <a
+          href="https://github.com/nakamu12"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+          title="GitHub"
+          className="flex items-center justify-center"
+        >
           {icons.github}
         </a>
       </DockIcon>
-      <DockIcon className="text-muted-foreground transition-colors hover:text-foreground">
-        <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn" className="flex items-center justify-center">
+      <DockIcon className="text-muted-foreground hover:text-foreground transition-colors">
+        <a
+          href="https://linkedin.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+          title="LinkedIn"
+          className="flex items-center justify-center"
+        >
           {icons.linkedin}
         </a>
       </DockIcon>
-      <DockIcon className="text-muted-foreground transition-colors hover:text-foreground">
-        <a href="https://x.com/NakamuR_general" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" title="X (Twitter)" className="flex items-center justify-center">
+      <DockIcon className="text-muted-foreground hover:text-foreground transition-colors">
+        <a
+          href="https://x.com/NakamuR_general"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="X (Twitter)"
+          title="X (Twitter)"
+          className="flex items-center justify-center"
+        >
           {icons.twitter}
         </a>
       </DockIcon>
 
       {/* Separator */}
-      <div className="mx-1 h-8 w-[1px] bg-border/50" />
+      <div className="bg-border/50 mx-1 h-8 w-[1px]" />
 
       {/* Language toggle */}
-      <DockIcon className="text-muted-foreground transition-colors hover:text-foreground">
-        <button onClick={handleLangSwitch} aria-label={langLabel} title={langLabel} className="flex items-center justify-center">
+      <DockIcon className="text-muted-foreground hover:text-foreground transition-colors">
+        <button
+          onClick={handleLangSwitch}
+          aria-label={langLabel}
+          title={langLabel}
+          className="flex items-center justify-center"
+        >
           {icons.globe}
         </button>
       </DockIcon>
 
       {/* Theme toggle */}
-      <DockIcon className="text-muted-foreground transition-colors hover:text-foreground">
-        <button onClick={handleThemeToggle} aria-label="Toggle theme" title="Toggle theme" className="flex items-center justify-center">
+      <DockIcon className="text-muted-foreground hover:text-foreground transition-colors">
+        <button
+          onClick={handleThemeToggle}
+          aria-label="Toggle theme"
+          title="Toggle theme"
+          className="flex items-center justify-center"
+        >
           {isDark ? icons.sun : icons.moon}
         </button>
       </DockIcon>

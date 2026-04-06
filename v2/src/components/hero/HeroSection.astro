@@ -18,34 +18,41 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   </div>
 
   <!-- Gradient overlay for text readability (pointer-events-none so mouse reaches canvas) -->
-  <div class="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-background/40 via-transparent to-background/60"></div>
+  <div
+    class="from-background/40 to-background/60 pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b via-transparent"
+  >
+  </div>
 
   <!-- Content (pointer-events-none on container, re-enable on interactive elements) -->
-  <div class="pointer-events-none relative z-10 mx-auto max-w-6xl px-6 text-center hero-text">
+  <div class="hero-text pointer-events-none relative z-10 mx-auto max-w-6xl px-6 text-center">
     <!-- Greeting -->
-    <p class="mb-2 text-sm font-medium tracking-widest text-muted-foreground uppercase">
+    <p class="text-muted-foreground mb-2 text-sm font-medium tracking-widest uppercase">
       {t('hero.greeting')}
     </p>
 
     <!-- Name -->
     <h1 class="text-5xl font-bold tracking-tight md:text-7xl lg:text-8xl">
-      <span class="bg-gradient-to-r from-[#686dff] to-[#b66fff] bg-clip-text text-transparent drop-shadow-sm">
+      <span
+        class="bg-gradient-to-r from-[#686dff] to-[#b66fff] bg-clip-text text-transparent drop-shadow-sm"
+      >
         {t('hero.name')}
       </span>
     </h1>
 
     <!-- Title -->
-    <p class="mt-4 text-xl font-medium text-foreground/90 md:text-2xl">
+    <p class="text-foreground/90 mt-4 text-xl font-medium md:text-2xl">
       {t('hero.title')}
     </p>
 
     <!-- Subtitle -->
-    <p class="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
+    <p class="text-muted-foreground mx-auto mt-4 max-w-2xl text-base md:text-lg">
       {t('hero.subtitle')}
     </p>
 
     <!-- CTA Buttons -->
-    <div class="pointer-events-auto mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+    <div
+      class="pointer-events-auto mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+    >
       <a
         href={`${base}/${lang}/#projects`}
         class="inline-flex h-12 items-center rounded-lg bg-[#686dff] px-8 text-sm font-medium text-white transition-colors hover:bg-[#5961ff]"
@@ -54,7 +61,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       </a>
       <a
         href={`${base}/${lang}/#contact`}
-        class="inline-flex h-12 items-center rounded-lg border border-border bg-background/50 px-8 text-sm font-medium text-foreground backdrop-blur-sm transition-colors hover:bg-accent"
+        class="border-border bg-background/50 text-foreground hover:bg-accent inline-flex h-12 items-center rounded-lg border px-8 text-sm font-medium backdrop-blur-sm transition-colors"
       >
         {t('hero.cta.contact')}
       </a>
@@ -62,24 +69,22 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     <!-- Stats -->
     <div class="mt-16 grid grid-cols-2 gap-8 sm:grid-cols-4">
-      {stats.map((stat: { value: string; label: string }) => (
-        <div class="text-center">
-          <div class="text-3xl font-bold text-foreground md:text-4xl">
-            {stat.value}
+      {
+        stats.map((stat: { value: string; label: string }) => (
+          <div class="text-center">
+            <div class="text-foreground text-3xl font-bold md:text-4xl">{stat.value}</div>
+            <div class="text-muted-foreground mt-1 text-sm">{stat.label}</div>
           </div>
-          <div class="mt-1 text-sm text-muted-foreground">
-            {stat.label}
-          </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </div>
 
   <!-- Scroll indicator -->
   <div class="absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
     <div class="flex flex-col items-center gap-2">
-      <span class="text-xs text-muted-foreground">Scroll</span>
-      <div class="h-8 w-[1px] animate-pulse bg-muted-foreground/50"></div>
+      <span class="text-muted-foreground text-xs">Scroll</span>
+      <div class="bg-muted-foreground/50 h-8 w-[1px] animate-pulse"></div>
     </div>
   </div>
 </section>

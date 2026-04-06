@@ -27,11 +27,7 @@ const navItems = [
     </a>
     <!-- Mobile: hamburger (Dock is hidden on mobile) -->
     <div class="md:hidden">
-      <MobileNav
-        client:load
-        items={navItems}
-        menuLabel={t('header.menu')}
-      />
+      <MobileNav client:load items={navItems} menuLabel={t('header.menu')} />
     </div>
   </div>
 </header>
