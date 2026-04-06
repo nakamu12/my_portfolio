@@ -18,5 +18,10 @@
   "header.theme.light": "ライト",
   "header.theme.dark": "ダーク",
   "header.lang": "English",
-  "header.menu": "メニュー"
+  "header.menu": "メニュー",
+  "experience.heading": "経歴",
+  "experience.subheading": "仕事・研究・学歴の歩み",
+  "experience.category.work": "職歴",
+  "experience.category.education": "学歴",
+  "experience.category.side-project": "副業"
 }

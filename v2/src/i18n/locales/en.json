@@ -18,5 +18,10 @@
   "header.theme.light": "Light",
   "header.theme.dark": "Dark",
   "header.lang": "日本語",
-  "header.menu": "Menu"
+  "header.menu": "Menu",
+  "experience.heading": "Experience",
+  "experience.subheading": "My career journey — work, research, and education",
+  "experience.category.work": "Work",
+  "experience.category.education": "Education",
+  "experience.category.side-project": "Side Project"
 }
