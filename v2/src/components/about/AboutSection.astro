@@ -22,7 +22,7 @@ const strengths: { name: string; subtitle?: string; desc: string }[] =
 <section id="about" aria-labelledby="about-heading" class="py-24 md:py-32">
   <div class="mx-auto max-w-6xl px-6">
     <!-- Section Heading -->
-    <div class="mb-16">
+    <div class="about-heading-group mb-16">
       <p class="text-muted-foreground mb-2 text-sm font-medium tracking-widest uppercase">
         {t('about.subheading')}
       </p>
@@ -36,7 +36,7 @@ const strengths: { name: string; subtitle?: string; desc: string }[] =
     <div class="mb-10 grid grid-cols-1 items-start gap-10 lg:grid-cols-[300px_1fr]">
       <!-- Profile Photo -->
       <div
-        class="relative mx-auto aspect-square w-64 overflow-hidden rounded-2xl ring-1 ring-white/10 lg:w-full"
+        class="about-photo relative mx-auto aspect-square w-64 overflow-hidden rounded-2xl ring-1 ring-white/10 lg:w-full"
       >
         <Image
           src={profileImage}
@@ -54,7 +54,7 @@ const strengths: { name: string; subtitle?: string; desc: string }[] =
       <!-- Bio + Attributes -->
       <div class="flex flex-col gap-8">
         <!-- Bio text -->
-        <div class="space-y-4">
+        <div class="about-bio space-y-4">
           {bio.map((paragraph) => <p class="text-muted-foreground leading-relaxed">{paragraph}</p>)}
         </div>
 
@@ -62,7 +62,7 @@ const strengths: { name: string; subtitle?: string; desc: string }[] =
         <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {
             attributes.map((attr) => (
-              <div class="bg-card border-border rounded-xl border p-4">
+              <div class="about-chip bg-card border-border rounded-xl border p-4">
                 <p class="text-muted-foreground mb-1 text-xs font-medium tracking-wider uppercase">
                   {attr.label}
                 </p>
@@ -79,11 +79,9 @@ const strengths: { name: string; subtitle?: string; desc: string }[] =
       <!-- MBTI Card -->
       {
         mbti && (
-          <div class="bg-card border-border relative overflow-hidden rounded-2xl border p-6 md:p-8">
-            {/* Glow decoration */}
+          <div class="mbti-card bg-card border-border relative overflow-hidden rounded-2xl border p-6 md:p-8">
             <div class="pointer-events-none absolute -top-10 -right-10 h-40 w-40 rounded-full bg-[#686dff]/8 blur-3xl" />
 
-            {/* Card header */}
             <div class="mb-6 flex items-start justify-between">
               <div>
                 <p class="text-muted-foreground mb-1 text-xs font-medium tracking-widest uppercase">
@@ -99,15 +97,15 @@ const strengths: { name: string; subtitle?: string; desc: string }[] =
               </div>
             </div>
 
-            {/* Trait bars */}
             <div class="space-y-3.5">
-              {mbti.traits.map((trait, i) => (
+              {mbti.traits.map((trait) => (
                 <div class="flex items-center gap-3">
                   <span class="w-4 shrink-0 text-sm font-bold text-[#686dff]">{trait.letter}</span>
                   <div class="bg-border relative h-1.5 flex-1 overflow-hidden rounded-full">
                     <div
-                      class="bar-fill absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[#686dff] to-[#b66fff]"
-                      style={`--target-width: ${trait.percent}%; animation-delay: ${i * 0.12}s`}
+                      class="mbti-bar-fill absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[#686dff] to-[#b66fff]"
+                      data-width={trait.percent}
+                      style="width: 0"
                     />
                   </div>
                   <span class="text-muted-foreground w-8 shrink-0 text-right text-xs tabular-nums">
@@ -122,14 +120,14 @@ const strengths: { name: string; subtitle?: string; desc: string }[] =
       }
 
       <!-- StrengthsFinder Card -->
-      <div class="bg-card border-border relative overflow-hidden rounded-2xl border p-6 md:p-8">
-        {/* Glow decoration */}
+      <div
+        class="sf-card bg-card border-border relative overflow-hidden rounded-2xl border p-6 md:p-8"
+      >
         <div
           class="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-[#b66fff]/8 blur-3xl"
         >
         </div>
 
-        {/* Card header */}
         <div class="mb-6">
           <p class="text-muted-foreground mb-1 text-xs font-medium tracking-widest uppercase">
             Personality
@@ -144,11 +142,10 @@ const strengths: { name: string; subtitle?: string; desc: string }[] =
           </div>
         </div>
 
-        {/* Strengths list */}
         <div class="space-y-4">
           {
             strengths.map((s, i) => (
-              <div class="flex items-start gap-4">
+              <div class="sf-item flex items-start gap-4">
                 <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#686dff] to-[#b66fff] text-xs font-bold text-white">
                   {i + 1}
                 </span>
@@ -168,15 +165,105 @@ const strengths: { name: string; subtitle?: string; desc: string }[] =
   </div>
 </section>
 
-<style>
-  .bar-fill {
-    width: 0;
-    animation: grow-bar 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
+<script>
+  import { animate, inView, stagger } from 'motion';
 
-  @keyframes grow-bar {
-    to {
-      width: var(--target-width);
+  const section = document.querySelector<HTMLElement>('#about');
+  if (section) {
+    const ease = [0.25, 0.1, 0.25, 1] as const;
+
+    // --- Section heading ---
+    const headingGroup = section.querySelector<HTMLElement>('.about-heading-group');
+    if (headingGroup) {
+      headingGroup.style.opacity = '0';
+      headingGroup.style.transform = 'translateY(20px)';
+      inView(headingGroup, () => {
+        animate(headingGroup, { opacity: 1, y: 0 }, { duration: 0.7, ease });
+      });
+    }
+
+    // --- Profile photo ---
+    const photo = section.querySelector<HTMLElement>('.about-photo');
+    if (photo) {
+      photo.style.opacity = '0';
+      photo.style.transform = 'scale(0.96)';
+      inView(photo, () => {
+        animate(photo, { opacity: 1, scale: 1 }, { duration: 0.8, ease });
+      });
+    }
+
+    // --- Bio paragraphs ---
+    const bioParagraphs = section.querySelectorAll<HTMLElement>('.about-bio p');
+    if (bioParagraphs.length) {
+      bioParagraphs.forEach((p) => {
+        p.style.opacity = '0';
+        p.style.transform = 'translateY(16px)';
+      });
+      inView(bioParagraphs[0], () => {
+        animate(bioParagraphs, { opacity: 1, y: 0 }, { delay: stagger(0.12), duration: 0.5, ease });
+      });
+    }
+
+    // --- Attribute chips ---
+    const chips = section.querySelectorAll<HTMLElement>('.about-chip');
+    if (chips.length) {
+      chips.forEach((c) => {
+        c.style.opacity = '0';
+        c.style.transform = 'translateY(12px)';
+      });
+      inView(chips[0], () => {
+        animate(chips, { opacity: 1, y: 0 }, { delay: stagger(0.08), duration: 0.4, ease });
+      });
+    }
+
+    // --- MBTI card ---
+    const mbtiCard = section.querySelector<HTMLElement>('.mbti-card');
+    if (mbtiCard) {
+      mbtiCard.style.opacity = '0';
+      mbtiCard.style.transform = 'translateY(24px)';
+      inView(mbtiCard, () => {
+        animate(mbtiCard, { opacity: 1, y: 0 }, { duration: 0.6, ease });
+
+        // Animate bars with stagger after card fades in
+        const bars = mbtiCard.querySelectorAll<HTMLElement>('.mbti-bar-fill');
+        bars.forEach((bar, i) => {
+          const targetWidth = (bar.dataset.width ?? '0') + '%';
+          animate(
+            bar,
+            { width: targetWidth },
+            {
+              duration: 1,
+              delay: 0.3 + i * 0.1,
+              ease: [0.4, 0, 0.2, 1],
+            },
+          );
+        });
+      });
+    }
+
+    // --- StrengthsFinder card ---
+    const sfCard = section.querySelector<HTMLElement>('.sf-card');
+    if (sfCard) {
+      sfCard.style.opacity = '0';
+      sfCard.style.transform = 'translateY(24px)';
+      inView(sfCard, () => {
+        animate(sfCard, { opacity: 1, y: 0 }, { duration: 0.6, delay: 0.1, ease });
+
+        const items = sfCard.querySelectorAll<HTMLElement>('.sf-item');
+        items.forEach((item) => {
+          item.style.opacity = '0';
+          item.style.transform = 'translateY(12px)';
+        });
+        animate(
+          items,
+          { opacity: 1, y: 0 },
+          {
+            delay: stagger(0.1, { start: 0.35 }),
+            duration: 0.4,
+            ease,
+          },
+        );
+      });
     }
   }
-</style>
+</script>
