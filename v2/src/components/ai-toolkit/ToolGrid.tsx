@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
 
 interface Tool {
@@ -16,19 +17,43 @@ interface Props {
   allLabel: string;
 }
 
+// ── Animation variants ─────────────────────────────────────────────────────
+const gridVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.04, delayChildren: 0.05 } },
+  exit: { opacity: 0, transition: { duration: 0.1 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 14, scale: 0.88 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: 'spring' as const, stiffness: 320, damping: 22 },
+  },
+};
+
+// ── ToolIcon ───────────────────────────────────────────────────────────────
 function ToolIcon({ tool }: { tool: Tool }) {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <a
+    <motion.a
       href={tool.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col items-center gap-3 rounded-2xl p-4 transition-all duration-200 hover:bg-white/5"
       title={tool.description}
+      className="group flex flex-col items-center gap-2.5 rounded-2xl p-3"
+      whileHover={{ y: -6, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
     >
-      {/* Icon container */}
-      <div className="border-border bg-card relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border transition-all duration-200 group-hover:border-[#686dff]/40 group-hover:shadow-[0_0_20px_rgba(104,109,255,0.12)]">
+      {/* Icon */}
+      <div
+        className={cn(
+          'border-border bg-card relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border transition-all duration-200',
+          'group-hover:border-[#686dff]/50 group-hover:bg-[rgba(104,109,255,0.06)] group-hover:shadow-[0_8px_24px_rgba(104,109,255,0.18)]',
+        )}
+      >
         {imgError ? (
           <span className="text-muted-foreground text-xl font-bold">{tool.name[0]}</span>
         ) : (
@@ -45,20 +70,19 @@ function ToolIcon({ tool }: { tool: Tool }) {
       </div>
 
       {/* Name */}
-      <span className="text-foreground w-full text-center text-xs leading-tight font-medium transition-colors group-hover:text-[#686dff]">
+      <span className="text-muted-foreground group-hover:text-foreground w-full text-center text-[11px] leading-tight font-medium transition-colors">
         {tool.name}
       </span>
-    </a>
+    </motion.a>
   );
 }
 
+// ── ToolGrid ───────────────────────────────────────────────────────────────
 export default function ToolGrid({ categories, tools, allLabel }: Props) {
   const [active, setActive] = useState(allLabel);
 
-  // Categories excluding the "all" sentinel
   const cats = categories.filter((c) => c !== allLabel);
   const tabs = [allLabel, ...cats];
-
   const filtered = active === allLabel ? tools : tools.filter((t) => t.category === active);
 
   return (
@@ -70,25 +94,36 @@ export default function ToolGrid({ categories, tools, allLabel }: Props) {
             key={tab}
             type="button"
             onClick={() => setActive(tab)}
+            aria-pressed={active === tab}
             className={cn(
               'rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-150',
               active === tab
-                ? 'bg-[#686dff] text-white shadow-[0_0_12px_rgba(104,109,255,0.4)]'
+                ? 'bg-[#686dff] text-white shadow-[0_0_12px_rgba(104,109,255,0.45)]'
                 : 'text-muted-foreground hover:text-foreground bg-white/5 hover:bg-white/10',
             )}
-            aria-pressed={active === tab}
           >
             {tab}
           </button>
         ))}
       </div>
 
-      {/* Icon grid */}
-      <div className="grid grid-cols-4 gap-2 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8">
-        {filtered.map((tool) => (
-          <ToolIcon key={tool.id} tool={tool} />
-        ))}
-      </div>
+      {/* Icon grid — AnimatePresence handles filter crossfade + stagger */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={active}
+          variants={gridVariants}
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          className="grid grid-cols-4 gap-1 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8"
+        >
+          {filtered.map((tool) => (
+            <motion.div key={tool.id} variants={itemVariants}>
+              <ToolIcon tool={tool} />
+            </motion.div>
+          ))}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }

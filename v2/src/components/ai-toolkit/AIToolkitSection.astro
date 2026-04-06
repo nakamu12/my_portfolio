@@ -20,11 +20,20 @@ const allLabel = t('aiToolkit.filter.all');
 const categories: string[] = toolsData.categories ?? [];
 ---
 
-<section id="ai-toolkit" class="py-24">
-  <div class="mx-auto max-w-6xl px-6">
+<section id="ai-toolkit" class="relative overflow-hidden py-24">
+  <!-- Dot grid background -->
+  <div
+    class="pointer-events-none absolute inset-0 opacity-[0.035]"
+    style="background-image: radial-gradient(circle, #686dff 1px, transparent 1px); background-size: 28px 28px;"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-6xl px-6">
     <!-- Section heading -->
     <div class="mb-12">
-      <h2 class="text-foreground text-3xl font-semibold tracking-tight md:text-4xl">
+      <h2
+        class="bg-gradient-to-r from-[#686dff] to-[#b66fff] bg-clip-text text-3xl font-semibold tracking-tight text-transparent md:text-4xl"
+      >
         {t('aiToolkit.heading')}
       </h2>
       <p class="text-muted-foreground mt-3 max-w-xl text-base">
