@@ -20,7 +20,8 @@
   "header.lang": "English",
   "header.menu": "メニュー",
   "contact.heading": "お問い合わせ",
-  "contact.subheading": "SNSまたはメールからお気軽にご連絡ください。",
+  "contact.subheading": "SNSからお気軽にご連絡ください。",
+  "contact.connect.label": "つながる",
   "contact.availability.label": "稼働状況",
   "contact.availability.status": "案件受付中",
   "contact.availability.detail": "フリーランス・業務委託・正社員のご相談を受け付けています。"

@@ -5,6 +5,8 @@ import socialData from '@/data/social.json';
 const lang = getLangFromUrl(Astro.url);
 const t = await getTranslations(lang);
 
+// Supported icon keys: "github" | "linkedin" | "twitter"
+// Add new entries here when social.json is updated
 const socialIconPaths: Record<string, string> = {
   github:
     'M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z',
@@ -15,11 +17,11 @@ const socialIconPaths: Record<string, string> = {
 };
 ---
 
-<section id="contact" class="py-24">
+<section id="contact" aria-labelledby="contact-heading" class="py-24">
   <div class="mx-auto max-w-6xl px-6">
     <!-- Heading -->
     <div class="mb-16">
-      <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">
+      <h2 id="contact-heading" class="text-3xl font-semibold tracking-tight md:text-4xl">
         {t('contact.heading')}
       </h2>
       <p class="text-muted-foreground mt-3 text-base md:text-lg">
@@ -54,7 +56,7 @@ const socialIconPaths: Record<string, string> = {
       <!-- Social Links -->
       <div class="border-border rounded-xl border p-8">
         <p class="text-muted-foreground mb-6 text-xs font-semibold tracking-widest uppercase">
-          Connect
+          {t('contact.connect.label')}
         </p>
         <div class="flex flex-col gap-4">
           {
@@ -63,18 +65,23 @@ const socialIconPaths: Record<string, string> = {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`Visit ${link.name}`}
                 class="group border-border flex items-center gap-4 rounded-lg border p-4 transition-colors hover:border-[#686dff]/40 hover:bg-[#686dff]/5"
               >
-                <span class="text-muted-foreground flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-colors group-hover:text-[#686dff]">
+                <span
+                  aria-hidden="true"
+                  class="text-muted-foreground flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-colors group-hover:text-[#686dff]"
+                >
                   <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d={socialIconPaths[link.icon] ?? ''} />
                   </svg>
                 </span>
                 <div>
                   <p class="text-foreground text-sm font-medium">{link.name}</p>
-                  <p class="text-muted-foreground text-xs">{link.url.replace('https://', '')}</p>
+                  <p class="text-muted-foreground text-xs">{new URL(link.url).hostname}</p>
                 </div>
                 <svg
+                  aria-hidden="true"
                   class="text-muted-foreground ml-auto h-4 w-4 transition-colors group-hover:text-[#686dff]"
                   fill="none"
                   viewBox="0 0 24 24"
