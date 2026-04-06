@@ -18,5 +18,9 @@
   "header.theme.light": "Light",
   "header.theme.dark": "Dark",
   "header.lang": "日本語",
-  "header.menu": "Menu"
+  "header.menu": "Menu",
+  "aiToolkit.heading": "AI Toolkit",
+  "aiToolkit.subheading": "Tools I use daily to build, research, and ship faster.",
+  "aiToolkit.filter.all": "All",
+  "aiToolkit.visitSite": "Visit site"
 }

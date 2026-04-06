@@ -1,10 +1,42 @@
 ---
-// AI Toolkit: Catalog of AI tools used
+import { getLangFromUrl, getTranslations } from '@/i18n/utils';
+import ToolFilter from './ToolFilter';
+
+const lang = getLangFromUrl(Astro.url);
+const t = await getTranslations(lang);
+
+const data = await import(`../../data/${lang}/ai-tools.json`);
+const toolsData = data.default ?? data;
+const tools: {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  logoUrl: string;
+  url: string;
+}[] = toolsData.items ?? [];
+const categories: string[] = toolsData.categories ?? [];
 ---
 
 <section id="ai-toolkit" class="py-24">
   <div class="mx-auto max-w-6xl px-6">
-    <h2 class="text-4xl font-semibold">AI Toolkit</h2>
-    <p class="text-muted-foreground mt-4">[ AI Toolkit — Tool Cards with Logo + Name + Usage ]</p>
+    <!-- Section heading -->
+    <div class="mb-12">
+      <h2 class="text-foreground text-3xl font-semibold tracking-tight md:text-4xl">
+        {t('aiToolkit.heading')}
+      </h2>
+      <p class="text-muted-foreground mt-3 max-w-xl text-base">
+        {t('aiToolkit.subheading')}
+      </p>
+    </div>
+
+    <!-- Interactive filter + grid (React island) -->
+    <ToolFilter
+      client:visible
+      categories={categories}
+      tools={tools}
+      allLabel={t('aiToolkit.filter.all')}
+      visitLabel={t('aiToolkit.visitSite')}
+    />
   </div>
 </section>

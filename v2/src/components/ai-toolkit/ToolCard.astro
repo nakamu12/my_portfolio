@@ -1,0 +1,72 @@
+---
+interface Props {
+  name: string;
+  category: string;
+  description: string;
+  logoUrl: string;
+  url: string;
+  visitLabel: string;
+}
+
+const { name, category, description, logoUrl, url, visitLabel } = Astro.props;
+---
+
+<a
+  href={url}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="group border-border bg-background flex flex-col gap-4 rounded-xl border p-5 transition-all duration-200 hover:border-[#686dff]/40 hover:bg-[rgba(104,109,255,0.04)]"
+  aria-label={`${name} — ${visitLabel}`}
+>
+  <!-- Header: logo + name + category -->
+  <div class="flex items-start gap-3">
+    <div
+      class="bg-muted flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg"
+    >
+      <img
+        src={logoUrl}
+        alt={`${name} logo`}
+        width="24"
+        height="24"
+        class="h-6 w-6 object-contain"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="min-w-0 flex-1">
+      <p class="text-foreground truncate text-sm font-semibold">{name}</p>
+      <span
+        class="mt-0.5 inline-block rounded-full bg-[rgba(104,109,255,0.1)] px-2 py-0.5 text-[11px] font-medium text-[#686dff]"
+      >
+        {category}
+      </span>
+    </div>
+  </div>
+
+  <!-- Description -->
+  <p class="text-muted-foreground line-clamp-2 text-sm leading-relaxed">
+    {description}
+  </p>
+
+  <!-- Visit link hint -->
+  <span
+    class="text-muted-foreground/50 mt-auto flex items-center gap-1 text-xs transition-colors group-hover:text-[#686dff]"
+  >
+    {visitLabel}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M7 7h10v10"></path>
+      <path d="M7 17 17 7"></path>
+    </svg>
+  </span>
+</a>
