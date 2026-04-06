@@ -37,7 +37,7 @@ const categoryIcons: Record<string, string> = {
 
 const platformIcons: Record<string, string> = {
   note: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512" fill="currentColor"><path d="M349.6 106H162.4C130.9 106 106 130.9 106 162.4v187.2c0 31.5 24.9 56.4 56.4 56.4h187.2c31.5 0 56.4-24.9 56.4-56.4V162.4c0-31.5-24.9-56.4-56.4-56.4zm-103.4 208.7h-52.8v-18.2h52.8v18.2zm0-48.5h-52.8v-18.2h52.8v18.2zm88.2 0h-70.1v-18.2h70.1v18.2zm0-48.4h-123v-18.2h123v18.2zm0-48.5h-123V151h123v18.3z"/></svg>`,
-  Zenn: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 88 88" fill="currentColor"><path d="M9.5 74.5L49 13h16.5L26 74.5H9.5zm32 0L80.5 13H97L58 74.5H41.5z" transform="scale(0.91)"/></svg>`,
+  Zenn: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 97 88" fill="currentColor"><path d="M9.5 74.5L49 13h16.5L26 74.5H9.5zm32 0L80.5 13H97L58 74.5H41.5z"/></svg>`,
   Qiita: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.268 2 2 8.268 2 16s6.268 14 14 14 14-6.268 14-14S23.732 2 16 2zm6.4 20.4H9.6V9.6h12.8v12.8zm-9.6-9.6v6.4h6.4v-6.4h-6.4z"/></svg>`,
 };
 
@@ -74,8 +74,16 @@ const externalLinkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="14" hei
             rel="noopener noreferrer"
             class="border-border bg-background hover:border-[#686dff]/40 group flex flex-col gap-4 rounded-xl border p-6 transition-all duration-200 hover:shadow-sm md:flex-row md:items-start md:gap-8"
           >
-            <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#ff0000]/10 text-[#ff0000]">
-              <Fragment set:html={categoryIcons['youtube']} />
+            <div
+              class:list={[
+                'flex h-14 w-14 shrink-0 items-center justify-center rounded-lg',
+                featured.category === 'youtube' && 'bg-[#ff0000]/10 text-[#ff0000]',
+                featured.category === 'podcast' && 'bg-[#1DB954]/10 text-[#1DB954]',
+                featured.category === 'presentation' && 'bg-[#686dff]/10 text-[#686dff]',
+                featured.category === 'article' && 'bg-neutral-500/10 text-neutral-500',
+              ]}
+            >
+              <Fragment set:html={categoryIcons[featured.category] ?? categoryIcons['youtube']} />
             </div>
             <div class="flex-1">
               <div class="flex items-start justify-between gap-4">
