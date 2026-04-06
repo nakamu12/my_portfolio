@@ -2,6 +2,7 @@
 import DockNav from './DockNav';
 import MobileNav from './MobileNav';
 import { getLangFromUrl, getTranslations } from '@/i18n/utils';
+import socialData from '@/data/social.json';
 
 const lang = getLangFromUrl(Astro.url);
 const t = await getTranslations(lang);
@@ -27,7 +28,13 @@ const navItems = [
     </a>
     <!-- Mobile: hamburger (Dock is hidden on mobile) -->
     <div class="md:hidden">
-      <MobileNav client:load items={navItems} menuLabel={t('header.menu')} />
+      <MobileNav
+        client:load
+        items={navItems}
+        menuLabel={t('header.menu')}
+        lang={lang}
+        base={base}
+      />
     </div>
   </div>
 </header>
@@ -41,5 +48,6 @@ const navItems = [
     navItems={navItems}
     langLabel={t('header.lang')}
     currentLang={lang}
+    socialLinks={socialData.links}
   />
 </div>

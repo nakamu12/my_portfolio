@@ -1,4 +1,12 @@
+import { useEffect, useState } from 'react';
 import { Dock, DockIcon } from '@/components/ui/dock';
+import { Home, User, Award, Code, Briefcase, Layers, Mail, Sun, Moon, Globe } from 'lucide-react';
+
+interface SocialLink {
+  name: string;
+  icon: string;
+  url: string;
+}
 
 interface DockNavProps {
   lang: string;
@@ -6,129 +14,19 @@ interface DockNavProps {
   navItems: { label: string; href: string }[];
   langLabel: string;
   currentLang: string;
+  socialLinks: SocialLink[];
 }
 
-// SVG icons as components
-const icons: Record<string, React.ReactNode> = {
-  home: (
-    <svg
-      className="h-5 w-5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={1.5}
-    >
-      <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-      <polyline points="9 22 9 12 15 12 15 22" />
-    </svg>
-  ),
-  user: (
-    <svg
-      className="h-5 w-5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={1.5}
-    >
-      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" />
-    </svg>
-  ),
-  award: (
-    <svg
-      className="h-5 w-5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={1.5}
-    >
-      <circle cx="12" cy="8" r="6" />
-      <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12" />
-    </svg>
-  ),
-  code: (
-    <svg
-      className="h-5 w-5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={1.5}
-    >
-      <polyline points="16 18 22 12 16 6" />
-      <polyline points="8 6 2 12 8 18" />
-    </svg>
-  ),
-  briefcase: (
-    <svg
-      className="h-5 w-5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={1.5}
-    >
-      <rect x="2" y="7" width="20" height="14" rx="2" />
-      <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
-    </svg>
-  ),
-  layers: (
-    <svg
-      className="h-5 w-5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={1.5}
-    >
-      <polygon points="12 2 2 7 12 12 22 7 12 2" />
-      <polyline points="2 17 12 22 22 17" />
-      <polyline points="2 12 12 17 22 12" />
-    </svg>
-  ),
-  mail: (
-    <svg
-      className="h-5 w-5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={1.5}
-    >
-      <rect x="2" y="4" width="20" height="16" rx="2" />
-      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-    </svg>
-  ),
-  sun: (
-    <svg
-      className="h-5 w-5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={1.5}
-    >
-      <circle cx="12" cy="12" r="5" />
-      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-    </svg>
-  ),
-  moon: (
-    <svg
-      className="h-5 w-5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={1.5}
-    >
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-    </svg>
-  ),
-  globe: (
-    <svg
-      className="h-5 w-5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={1.5}
-    >
-      <circle cx="12" cy="12" r="10" />
-      <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-    </svg>
-  ),
+const sectionIcons: Record<string, React.ReactNode> = {
+  '#about': <User className="h-5 w-5" />,
+  '#certifications': <Award className="h-5 w-5" />,
+  '#skills': <Code className="h-5 w-5" />,
+  '#experience': <Briefcase className="h-5 w-5" />,
+  '#projects': <Layers className="h-5 w-5" />,
+  '#contact': <Mail className="h-5 w-5" />,
+};
+
+const socialIcons: Record<string, React.ReactNode> = {
   github: (
     <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
       <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
@@ -146,22 +44,33 @@ const icons: Record<string, React.ReactNode> = {
   ),
 };
 
-const iconMap: Record<string, string> = {
-  '#about': 'user',
-  '#certifications': 'award',
-  '#skills': 'code',
-  '#experience': 'briefcase',
-  '#projects': 'layers',
-  '#contact': 'mail',
-};
+export default function DockNav({
+  lang,
+  base,
+  navItems,
+  langLabel,
+  currentLang,
+  socialLinks,
+}: DockNavProps) {
+  const [isDark, setIsDark] = useState(false);
 
-export default function DockNav({ lang, base, navItems, langLabel, currentLang }: DockNavProps) {
+  useEffect(() => {
+    setIsDark(document.documentElement.classList.contains('dark'));
+
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+    return () => observer.disconnect();
+  }, []);
+
   const handleThemeToggle = () => {
-    const isDark = document.documentElement.classList.contains('dark');
-    document.documentElement.classList.toggle('dark', !isDark);
-    localStorage.setItem('theme', !isDark ? 'dark' : 'light');
-    // Force re-render to swap icon
-    window.dispatchEvent(new Event('themechange'));
+    const next = !isDark;
+    document.documentElement.classList.toggle('dark', next);
+    localStorage.setItem('theme', next ? 'dark' : 'light');
   };
 
   const handleLangSwitch = () => {
@@ -169,9 +78,6 @@ export default function DockNav({ lang, base, navItems, langLabel, currentLang }
     localStorage.setItem('lang', targetLang);
     window.location.href = `${base}/${targetLang}/`;
   };
-
-  const isDark =
-    typeof document !== 'undefined' && document.documentElement.classList.contains('dark');
 
   return (
     <Dock
@@ -188,7 +94,7 @@ export default function DockNav({ lang, base, navItems, langLabel, currentLang }
           aria-label="Home"
           className="flex items-center justify-center"
         >
-          {icons.home}
+          <Home className="h-5 w-5" />
         </a>
       </DockIcon>
 
@@ -207,7 +113,7 @@ export default function DockNav({ lang, base, navItems, langLabel, currentLang }
             className="flex items-center justify-center"
             title={item.label}
           >
-            {icons[iconMap[item.href]] ?? icons.layers}
+            {sectionIcons[item.href] ?? <Layers className="h-5 w-5" />}
           </a>
         </DockIcon>
       ))}
@@ -215,43 +121,24 @@ export default function DockNav({ lang, base, navItems, langLabel, currentLang }
       {/* Separator */}
       <div className="bg-border/50 mx-1 h-8 w-[1px]" />
 
-      {/* SNS Links */}
-      <DockIcon className="text-muted-foreground hover:text-foreground transition-colors">
-        <a
-          href="https://github.com/nakamu12"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="GitHub"
-          title="GitHub"
-          className="flex items-center justify-center"
+      {/* SNS Links from data */}
+      {socialLinks.map((link) => (
+        <DockIcon
+          key={link.name}
+          className="text-muted-foreground hover:text-foreground transition-colors"
         >
-          {icons.github}
-        </a>
-      </DockIcon>
-      <DockIcon className="text-muted-foreground hover:text-foreground transition-colors">
-        <a
-          href="https://linkedin.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="LinkedIn"
-          title="LinkedIn"
-          className="flex items-center justify-center"
-        >
-          {icons.linkedin}
-        </a>
-      </DockIcon>
-      <DockIcon className="text-muted-foreground hover:text-foreground transition-colors">
-        <a
-          href="https://x.com/NakamuR_general"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="X (Twitter)"
-          title="X (Twitter)"
-          className="flex items-center justify-center"
-        >
-          {icons.twitter}
-        </a>
-      </DockIcon>
+          <a
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={link.name}
+            title={link.name}
+            className="flex items-center justify-center"
+          >
+            {socialIcons[link.icon] ?? <Globe className="h-5 w-5" />}
+          </a>
+        </DockIcon>
+      ))}
 
       {/* Separator */}
       <div className="bg-border/50 mx-1 h-8 w-[1px]" />
@@ -264,7 +151,7 @@ export default function DockNav({ lang, base, navItems, langLabel, currentLang }
           title={langLabel}
           className="flex items-center justify-center"
         >
-          {icons.globe}
+          <Globe className="h-5 w-5" />
         </button>
       </DockIcon>
 
@@ -276,7 +163,7 @@ export default function DockNav({ lang, base, navItems, langLabel, currentLang }
           title="Toggle theme"
           className="flex items-center justify-center"
         >
-          {isDark ? icons.sun : icons.moon}
+          {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
         </button>
       </DockIcon>
     </Dock>

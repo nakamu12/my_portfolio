@@ -115,14 +115,3 @@
 .dark .hero-text {
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
-
-/* Dock icon hover animation */
-.dock-icon {
-  transition:
-    transform 0.2s ease,
-    background-color 0.2s ease,
-    color 0.2s ease;
-}
-.dock-icon:hover {
-  transform: scale(1.25) translateY(-4px);
-}
