@@ -18,5 +18,11 @@
   "header.theme.light": "ライト",
   "header.theme.dark": "ダーク",
   "header.lang": "English",
-  "header.menu": "メニュー"
+  "header.menu": "メニュー",
+  "certifications.heading": "資格・実績",
+  "certifications.subtitle": "AI、ロボティクス、ソフトウェアエンジニアリングにわたる実績。",
+  "certifications.featured": "注目",
+  "certifications.category.certification": "資格",
+  "certifications.category.achievement": "受賞・実績",
+  "certifications.viewLink": "詳細を見る"
 }

@@ -18,5 +18,11 @@
   "header.theme.light": "Light",
   "header.theme.dark": "Dark",
   "header.lang": "日本語",
-  "header.menu": "Menu"
+  "header.menu": "Menu",
+  "certifications.heading": "Certifications & Achievements",
+  "certifications.subtitle": "Recognition across AI, robotics, and software engineering.",
+  "certifications.featured": "Featured",
+  "certifications.category.certification": "Certification",
+  "certifications.category.achievement": "Achievement",
+  "certifications.viewLink": "View details"
 }

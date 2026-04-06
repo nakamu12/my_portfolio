@@ -1,12 +1,257 @@
 ---
-// Certifications & Achievements: FDE Level 2, Hackathons, Certs
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { getLangFromUrl, getTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = await getTranslations(lang);
+
+interface CertItem {
+  title: string;
+  organization: string;
+  date: string;
+  category: 'certification' | 'achievement';
+  description: string;
+  image: string | null;
+  link: string | null;
+  featured: boolean;
+}
+
+const certsData = await import(`../../data/${lang}/certifications.json`);
+const allItems: CertItem[] = certsData.default?.items ?? certsData.items ?? [];
+
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/images/certifications/*',
+  { eager: true },
+);
+
+function getImage(filename: string | null): ImageMetadata | null {
+  if (!filename) return null;
+  return imageModules[`../../assets/images/certifications/${filename}`]?.default ?? null;
+}
+
+function formatDate(dateStr: string): string {
+  const parts = dateStr.split('-');
+  const year = parts[0];
+  const month = parts[1];
+  if (!month) return year;
+  const date = new Date(parseInt(year), parseInt(month) - 1);
+  return date.toLocaleDateString(lang === 'ja' ? 'ja-JP' : 'en-US', {
+    year: 'numeric',
+    month: 'short',
+  });
+}
+
+const highlight = allItems.find((item) => item.title === 'FDE Level 2');
+const rest = allItems.filter((item) => item.title !== 'FDE Level 2');
+const featuredRest = rest.filter((item) => item.featured);
+const regularItems = rest.filter((item) => !item.featured);
 ---
 
 <section id="certifications" class="py-24">
   <div class="mx-auto max-w-6xl px-6">
-    <h2 class="text-4xl font-semibold">Certifications & Achievements</h2>
-    <p class="text-muted-foreground mt-4">
-      [ Certifications — FDE Level 2 | Hackathon Wins | Certifications ]
-    </p>
+    <!-- Section Heading -->
+    <div class="mb-16">
+      <p class="text-muted-foreground mb-3 text-sm font-medium tracking-widest uppercase">
+        {t('certifications.heading')}
+      </p>
+      <h2 class="text-foreground text-3xl font-semibold md:text-4xl">
+        {t('certifications.subtitle')}
+      </h2>
+    </div>
+
+    <!-- FDE Level 2 Highlight Card -->
+    {
+      highlight && (
+        <div class="mb-12">
+          <div class="rounded-2xl bg-gradient-to-r from-[#686dff] to-[#b66fff] p-[1px]">
+            <div class="bg-background rounded-2xl p-8 md:p-10">
+              <div class="flex flex-col gap-6 md:flex-row md:items-start md:gap-10">
+                <div class="flex-shrink-0">
+                  <div class="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-[#686dff] to-[#b66fff]">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="flex-1">
+                  <div class="mb-3 flex flex-wrap items-center gap-2">
+                    <span class="inline-flex items-center rounded-full bg-gradient-to-r from-[#686dff] to-[#b66fff] px-3 py-0.5 text-xs font-medium text-white">
+                      {t('certifications.featured')}
+                    </span>
+                    <span class="text-muted-foreground rounded-full border border-current/20 px-3 py-0.5 text-xs font-medium">
+                      {t(`certifications.category.${highlight.category}`)}
+                    </span>
+                  </div>
+
+                  <h3 class="text-foreground mb-1 text-2xl font-bold md:text-3xl">
+                    {highlight.title}
+                  </h3>
+
+                  <div class="text-muted-foreground mb-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+                    <span class="font-medium text-[#686dff]">{highlight.organization}</span>
+                    <span>·</span>
+                    <span>{formatDate(highlight.date)}</span>
+                  </div>
+
+                  <p class="text-muted-foreground max-w-2xl leading-relaxed">
+                    {highlight.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    <!-- Featured items (non-FDE) -->
+    {
+      featuredRest.length > 0 && (
+        <div class="mb-8 grid gap-6 sm:grid-cols-2">
+          {featuredRest.map((item) => {
+            const img = getImage(item.image);
+            return (
+              <div class="border-border bg-background group relative rounded-xl border p-6 transition-shadow hover:shadow-md">
+                <div class="mb-4 flex items-center justify-between">
+                  <span class="text-muted-foreground rounded-full border border-current/20 px-2.5 py-0.5 text-xs font-medium">
+                    {t(`certifications.category.${item.category}`)}
+                  </span>
+                  <span class="text-muted-foreground text-xs">{formatDate(item.date)}</span>
+                </div>
+
+                {img && (
+                  <div class="mb-4 overflow-hidden rounded-lg">
+                    <Image
+                      src={img}
+                      alt={item.title}
+                      width={480}
+                      height={270}
+                      class="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                )}
+
+                <h3 class="text-foreground mb-2 text-lg leading-snug font-semibold">
+                  {item.title}
+                </h3>
+                <p class="text-muted-foreground mb-3 text-sm font-medium">{item.organization}</p>
+                <p class="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
+
+                {item.link && (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#686dff] transition-colors hover:text-[#5961ff]"
+                  >
+                    {t('certifications.viewLink')}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                  </a>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )
+    }
+
+    <!-- Regular items grid -->
+    {
+      regularItems.length > 0 && (
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {regularItems.map((item) => {
+            const img = getImage(item.image);
+            return (
+              <div class="border-border bg-background rounded-xl border p-5 transition-shadow hover:shadow-sm">
+                <div class="mb-3 flex items-start justify-between gap-2">
+                  <span class="text-muted-foreground rounded-full border border-current/20 px-2.5 py-0.5 text-xs font-medium">
+                    {t(`certifications.category.${item.category}`)}
+                  </span>
+                  <span class="text-muted-foreground flex-shrink-0 text-xs">
+                    {formatDate(item.date)}
+                  </span>
+                </div>
+
+                {img && (
+                  <div class="mb-3 flex items-center justify-center overflow-hidden rounded-lg">
+                    <Image
+                      src={img}
+                      alt={item.title}
+                      width={120}
+                      height={80}
+                      class="h-16 w-auto object-contain"
+                    />
+                  </div>
+                )}
+
+                <h3 class="text-foreground mb-1 text-sm leading-snug font-semibold">
+                  {item.title}
+                </h3>
+                <p class="text-muted-foreground text-xs font-medium">{item.organization}</p>
+
+                {item.description && (
+                  <p class="text-muted-foreground mt-2 text-xs leading-relaxed">
+                    {item.description}
+                  </p>
+                )}
+
+                {item.link && (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mt-3 inline-flex items-center gap-1 text-xs font-medium text-[#686dff] transition-colors hover:text-[#5961ff]"
+                  >
+                    {t('certifications.viewLink')}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                  </a>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )
+    }
   </div>
 </section>
