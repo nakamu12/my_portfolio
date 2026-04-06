@@ -1,0 +1,53 @@
+{
+  "items": [
+    {
+      "title": "SoftBank Corp.",
+      "role": "Axross Business Division",
+      "period": "2024 - Present",
+      "category": "work",
+      "description": "Planning and development of the AI/DX online learning platform 'AxrossRecipe'."
+    },
+    {
+      "title": "Magicss",
+      "role": "Developer",
+      "period": "2024 - Present",
+      "category": "side-project",
+      "description": "Contributing to the development of an automated SEO article generation service as a side project."
+    },
+    {
+      "title": "SoftBank Corp.",
+      "role": "Internal Systems Operations",
+      "period": "2020 - 2024",
+      "category": "work",
+      "description": "Managed and maintained internal corporate systems."
+    },
+    {
+      "title": "Hosei University Graduate School - Systems Engineering",
+      "role": "Autonomous Robotics Lab",
+      "period": "2018 - 2020",
+      "category": "education",
+      "description": "Research in autonomous mobile robots. Achieved grand championship at IGVC2018 international competition."
+    },
+    {
+      "title": "Mobile Sales Promotion Events",
+      "role": "Part-time Sales",
+      "period": "2017 - 2020",
+      "category": "work",
+      "description": "Engaged in mobile device sales promotion activities."
+    },
+    {
+      "title": "Hosei University - Faculty of Science and Engineering",
+      "role": "Bachelor's Program, Department of Applied Informatics",
+      "period": "2014 - 2017",
+      "category": "education",
+      "description": "Studied foundational science and engineering."
+    },
+    {
+      "title": "Hosei University Daini Senior High School",
+      "role": "General Studies",
+      "period": "2011 - 2013",
+      "category": "education",
+      "description": "Completed general high school education."
+    }
+  ]
+}

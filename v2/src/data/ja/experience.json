@@ -1,0 +1,53 @@
+{
+  "items": [
+    {
+      "title": "ソフトバンク株式会社",
+      "role": "Axross事業",
+      "period": "2024年〜",
+      "category": "work",
+      "description": "AI/DXオンライン学習プラットフォーム「AxrossRecipe」の企画・開発を担当。"
+    },
+    {
+      "title": "Magicss",
+      "role": "開発",
+      "period": "2024年〜",
+      "category": "side-project",
+      "description": "SEO記事自動生成サービスの開発に副業として参画。"
+    },
+    {
+      "title": "ソフトバンク株式会社",
+      "role": "社内システム運用",
+      "period": "2020年〜2024年",
+      "category": "work",
+      "description": "社内システムの運用・保守を担当。"
+    },
+    {
+      "title": "法政大学大学院 理工学研究科 システム理工学専攻",
+      "role": "Autonomous Robotics Lab",
+      "period": "2018年〜2020年",
+      "category": "education",
+      "description": "自律走行ロボットの研究に従事。IGVC2018国際大会で総合優勝を達成。"
+    },
+    {
+      "title": "携帯販売促進イベント",
+      "role": "アルバイト",
+      "period": "2017年〜2020年",
+      "category": "work",
+      "description": "携帯販売促進の営業活動に従事。"
+    },
+    {
+      "title": "法政大学 理工学部 創生科学科",
+      "role": "学士課程",
+      "period": "2014年〜2017年",
+      "category": "education",
+      "description": "理工学部にて基礎科学と工学を学ぶ。"
+    },
+    {
+      "title": "私立法政大学第二高等学校",
+      "role": "普通科",
+      "period": "2011年〜2013年",
+      "category": "education",
+      "description": "普通科で学業に励む。"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "categories": [
+    {
+      "name": "フロントエンド",
+      "skills": [
+        { "name": "HTML", "icon": "html5" },
+        { "name": "CSS", "icon": "css3" },
+        { "name": "JavaScript", "icon": "javascript" },
+        { "name": "React", "icon": "react" },
+        { "name": "TypeScript", "icon": "typescript" }
+      ]
+    },
+    {
+      "name": "バックエンド",
+      "skills": [
+        { "name": "Ruby", "icon": "ruby" },
+        { "name": "Python", "icon": "python" },
+        { "name": "Node.js", "icon": "nodejs" },
+        { "name": "Rails", "icon": "rails" },
+        { "name": "Django", "icon": "django" }
+      ]
+    },
+    {
+      "name": "システム/DevOps",
+      "skills": [
+        { "name": "AWS", "icon": "aws" },
+        { "name": "GCP", "icon": "gcp" },
+        { "name": "Kubernetes", "icon": "kubernetes" },
+        { "name": "Docker", "icon": "docker" },
+        { "name": "CI/CD", "icon": "cicd" }
+      ]
+    },
+    {
+      "name": "言語/ツール",
+      "skills": [
+        { "name": "C++", "icon": "cplusplus" },
+        { "name": "GAS", "icon": "google" },
+        { "name": "ROS", "icon": "ros" }
+      ]
+    }
+  ]
+}

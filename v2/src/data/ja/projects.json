@@ -1,0 +1,26 @@
+{
+  "items": [
+    {
+      "slug": "axross-recipe",
+      "title": "AxrossRecipe",
+      "description": "AI/DXのオンライン学習プラットフォーム。学習だけでなく、本気の「できる」を実現する最先端の人材育成のカタチ。",
+      "tech": ["React", "Ruby"],
+      "image": "project-axross.png",
+      "links": {
+        "site": "https://axross-recipe.com/",
+        "github": null
+      }
+    },
+    {
+      "slug": "magicss",
+      "title": "magicss",
+      "description": "キーワードを入力するだけで、解像度の高い分析データ、構成案、そしてSEO記事が自動生成されます。",
+      "tech": ["React", "Python"],
+      "image": "project-magicss.png",
+      "links": {
+        "site": "https://magicss.ai/",
+        "github": null
+      }
+    }
+  ]
+}
