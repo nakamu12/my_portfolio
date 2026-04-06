@@ -20,6 +20,8 @@ interface CertItem {
 const certsData = await import(`../../data/${lang}/certifications.json`);
 const allItems: CertItem[] = certsData.default?.items ?? certsData.items ?? [];
 
+const certItems = allItems.filter((item) => item.category === 'certification');
+
 const imageModules = import.meta.glob<{ default: ImageMetadata }>(
   '../../assets/images/certifications/*',
   { eager: true },
@@ -42,10 +44,8 @@ function formatDate(dateStr: string): string {
   });
 }
 
-const highlight = allItems.find((item) => item.title === 'FDE Level 2');
-const rest = allItems.filter((item) => item.title !== 'FDE Level 2');
-const featuredRest = rest.filter((item) => item.featured);
-const regularItems = rest.filter((item) => !item.featured);
+const highlight = certItems.find((item) => item.title === 'FDE Level 2');
+const regularCerts = certItems.filter((item) => item.title !== 'FDE Level 2');
 ---
 
 <section id="certifications" class="py-24">
@@ -79,6 +79,7 @@ const regularItems = rest.filter((item) => !item.featured);
                       stroke-width="2"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                      aria-hidden="true"
                     >
                       <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
                       <polyline points="22 4 12 14.01 9 11.01" />
@@ -90,9 +91,6 @@ const regularItems = rest.filter((item) => !item.featured);
                   <div class="mb-3 flex flex-wrap items-center gap-2">
                     <span class="inline-flex items-center rounded-full bg-gradient-to-r from-[#686dff] to-[#b66fff] px-3 py-0.5 text-xs font-medium text-white">
                       {t('certifications.featured')}
-                    </span>
-                    <span class="text-muted-foreground rounded-full border border-current/20 px-3 py-0.5 text-xs font-medium">
-                      {t(`certifications.category.${highlight.category}`)}
                     </span>
                   </div>
 
@@ -117,89 +115,24 @@ const regularItems = rest.filter((item) => !item.featured);
       )
     }
 
-    <!-- Featured items (non-FDE) -->
+    <!-- Other certifications grid -->
     {
-      featuredRest.length > 0 && (
-        <div class="mb-8 grid gap-6 sm:grid-cols-2">
-          {featuredRest.map((item) => {
-            const img = getImage(item.image);
-            return (
-              <div class="border-border bg-background group relative rounded-xl border p-6 transition-shadow hover:shadow-md">
-                <div class="mb-4 flex items-center justify-between">
-                  <span class="text-muted-foreground rounded-full border border-current/20 px-2.5 py-0.5 text-xs font-medium">
-                    {t(`certifications.category.${item.category}`)}
-                  </span>
-                  <span class="text-muted-foreground text-xs">{formatDate(item.date)}</span>
-                </div>
-
-                {img && (
-                  <div class="mb-4 overflow-hidden rounded-lg">
-                    <Image
-                      src={img}
-                      alt={item.title}
-                      width={480}
-                      height={270}
-                      class="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                )}
-
-                <h3 class="text-foreground mb-2 text-lg leading-snug font-semibold">
-                  {item.title}
-                </h3>
-                <p class="text-muted-foreground mb-3 text-sm font-medium">{item.organization}</p>
-                <p class="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
-
-                {item.link && (
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#686dff] transition-colors hover:text-[#5961ff]"
-                  >
-                    {t('certifications.viewLink')}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                      <polyline points="15 3 21 3 21 9" />
-                      <line x1="10" y1="14" x2="21" y2="3" />
-                    </svg>
-                  </a>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      )
-    }
-
-    <!-- Regular items grid -->
-    {
-      regularItems.length > 0 && (
+      regularCerts.length > 0 && (
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {regularItems.map((item) => {
+          {regularCerts.map((item) => {
             const img = getImage(item.image);
             return (
               <div class="border-border bg-background rounded-xl border p-5 transition-shadow hover:shadow-sm">
                 <div class="mb-3 flex items-start justify-between gap-2">
                   <span class="text-muted-foreground rounded-full border border-current/20 px-2.5 py-0.5 text-xs font-medium">
-                    {t(`certifications.category.${item.category}`)}
+                    {t('certifications.category.certification')}
                   </span>
                   <span class="text-muted-foreground flex-shrink-0 text-xs">
                     {formatDate(item.date)}
                   </span>
                 </div>
 
-                {img && (
+                {img ? (
                   <div class="mb-3 flex items-center justify-center overflow-hidden rounded-lg">
                     <Image
                       src={img}
@@ -208,6 +141,24 @@ const regularItems = rest.filter((item) => !item.featured);
                       height={80}
                       class="h-16 w-auto object-contain"
                     />
+                  </div>
+                ) : (
+                  <div class="mb-3 flex h-16 items-center justify-center rounded-lg bg-gradient-to-br from-[#686dff]/10 to-[#b66fff]/10">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#686dff"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
                   </div>
                 )}
 
@@ -220,32 +171,6 @@ const regularItems = rest.filter((item) => !item.featured);
                   <p class="text-muted-foreground mt-2 text-xs leading-relaxed">
                     {item.description}
                   </p>
-                )}
-
-                {item.link && (
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="mt-3 inline-flex items-center gap-1 text-xs font-medium text-[#686dff] transition-colors hover:text-[#5961ff]"
-                  >
-                    {t('certifications.viewLink')}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="12"
-                      height="12"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                      <polyline points="15 3 21 3 21 9" />
-                      <line x1="10" y1="14" x2="21" y2="3" />
-                    </svg>
-                  </a>
                 )}
               </div>
             );

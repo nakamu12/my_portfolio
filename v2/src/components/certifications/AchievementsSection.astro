@@ -1,0 +1,247 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { getLangFromUrl, getTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = await getTranslations(lang);
+
+interface AchievementItem {
+  title: string;
+  organization: string;
+  date: string;
+  category: 'certification' | 'achievement';
+  description: string;
+  image: string | null;
+  link: string | null;
+  featured: boolean;
+}
+
+const certsData = await import(`../../data/${lang}/certifications.json`);
+const allItems: AchievementItem[] = certsData.default?.items ?? certsData.items ?? [];
+
+const achievements = allItems.filter((item) => item.category === 'achievement');
+const featuredAchievements = achievements.filter((item) => item.featured);
+const regularAchievements = achievements.filter((item) => !item.featured);
+
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/images/certifications/*',
+  { eager: true },
+);
+
+function getImage(filename: string | null): ImageMetadata | null {
+  if (!filename) return null;
+  return imageModules[`../../assets/images/certifications/${filename}`]?.default ?? null;
+}
+
+function formatDate(dateStr: string): string {
+  const parts = dateStr.split('-');
+  const year = parts[0];
+  const month = parts[1];
+  if (!month) return year;
+  const date = new Date(parseInt(year), parseInt(month) - 1);
+  return date.toLocaleDateString(lang === 'ja' ? 'ja-JP' : 'en-US', {
+    year: 'numeric',
+    month: 'short',
+  });
+}
+---
+
+<section id="achievements" class="py-24">
+  <div class="mx-auto max-w-6xl px-6">
+    <!-- Section Heading -->
+    <div class="mb-16">
+      <p class="text-muted-foreground mb-3 text-sm font-medium tracking-widest uppercase">
+        {t('achievements.heading')}
+      </p>
+      <h2 class="text-foreground text-3xl font-semibold md:text-4xl">
+        {t('achievements.subtitle')}
+      </h2>
+    </div>
+
+    <!-- Featured achievements: 2-column with images -->
+    {
+      featuredAchievements.length > 0 && (
+        <div class="mb-8 grid gap-6 sm:grid-cols-2">
+          {featuredAchievements.map((item) => {
+            const img = getImage(item.image);
+            return (
+              <div class="border-border bg-background group relative rounded-xl border p-6 transition-shadow hover:shadow-md">
+                <div class="mb-4 flex items-center justify-between">
+                  <span class="text-muted-foreground rounded-full border border-current/20 px-2.5 py-0.5 text-xs font-medium">
+                    {t('achievements.category')}
+                  </span>
+                  <span class="text-muted-foreground text-xs">{formatDate(item.date)}</span>
+                </div>
+
+                {img ? (
+                  <div class="mb-4 overflow-hidden rounded-lg">
+                    <Image
+                      src={img}
+                      alt={item.title}
+                      width={480}
+                      height={270}
+                      class="h-44 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                ) : (
+                  <div class="mb-4 flex h-44 items-center justify-center rounded-lg bg-gradient-to-br from-[#686dff]/10 to-[#b66fff]/10">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="36"
+                      height="36"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#686dff"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                      <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                      <path d="M4 22h16" />
+                      <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+                      <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+                      <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+                    </svg>
+                  </div>
+                )}
+
+                <h3 class="text-foreground mb-2 text-lg leading-snug font-semibold">
+                  {item.title}
+                </h3>
+                <p class="text-muted-foreground mb-3 text-sm font-medium">{item.organization}</p>
+                <p class="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
+
+                {item.link && (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${t('achievements.viewLink')}: ${item.title}`}
+                    class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#686dff] transition-colors hover:text-[#5961ff]"
+                  >
+                    {t('achievements.viewLink')}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                  </a>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )
+    }
+
+    <!-- Regular achievements: 3-column grid -->
+    {
+      regularAchievements.length > 0 && (
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {regularAchievements.map((item) => {
+            const img = getImage(item.image);
+            return (
+              <div class="border-border bg-background rounded-xl border p-5 transition-shadow hover:shadow-sm">
+                <div class="mb-3 flex items-start justify-between gap-2">
+                  <span class="text-muted-foreground rounded-full border border-current/20 px-2.5 py-0.5 text-xs font-medium">
+                    {t('achievements.category')}
+                  </span>
+                  <span class="text-muted-foreground flex-shrink-0 text-xs">
+                    {formatDate(item.date)}
+                  </span>
+                </div>
+
+                {img ? (
+                  <div class="mb-3 overflow-hidden rounded-lg">
+                    <Image
+                      src={img}
+                      alt={item.title}
+                      width={320}
+                      height={180}
+                      class="h-28 w-full object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div class="mb-3 flex h-14 items-center justify-center rounded-lg bg-gradient-to-br from-[#686dff]/10 to-[#b66fff]/10">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#686dff"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                      <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                      <path d="M4 22h16" />
+                      <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+                      <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+                      <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+                    </svg>
+                  </div>
+                )}
+
+                <h3 class="text-foreground mb-1 text-sm leading-snug font-semibold">
+                  {item.title}
+                </h3>
+                <p class="text-muted-foreground text-xs font-medium">{item.organization}</p>
+
+                {item.description && (
+                  <p class="text-muted-foreground mt-2 text-xs leading-relaxed">
+                    {item.description}
+                  </p>
+                )}
+
+                {item.link && (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${t('achievements.viewLink')}: ${item.title}`}
+                    class="mt-3 inline-flex items-center gap-1 text-xs font-medium text-[#686dff] transition-colors hover:text-[#5961ff]"
+                  >
+                    {t('achievements.viewLink')}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                  </a>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )
+    }
+  </div>
+</section>

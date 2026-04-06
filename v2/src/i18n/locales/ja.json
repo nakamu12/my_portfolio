@@ -19,10 +19,13 @@
   "header.theme.dark": "ダーク",
   "header.lang": "English",
   "header.menu": "メニュー",
-  "certifications.heading": "資格・実績",
-  "certifications.subtitle": "AI、ロボティクス、ソフトウェアエンジニアリングにわたる実績。",
+  "certifications.heading": "資格",
+  "certifications.subtitle": "取得済みの資格・認定。",
   "certifications.featured": "注目",
   "certifications.category.certification": "資格",
-  "certifications.category.achievement": "受賞・実績",
-  "certifications.viewLink": "詳細を見る"
+  "certifications.viewLink": "詳細を見る",
+  "achievements.heading": "受賞・実績",
+  "achievements.subtitle": "AI・ロボティクス・エンジニアリング分野での受賞歴。",
+  "achievements.category": "受賞・実績",
+  "achievements.viewLink": "詳細を見る"
 }
