@@ -1,10 +1,83 @@
 ---
-// About: Self Introduction + Profile Summary
+import { Image } from 'astro:assets';
+import { getLangFromUrl, getTranslations } from '@/i18n/utils';
+import profileImage from '@/assets/images/profile/profile.jpg';
+
+const lang = getLangFromUrl(Astro.url);
+const t = await getTranslations(lang);
+
+const aboutData = await import(`../../data/${lang}/about.json`);
+const bio: string[] = aboutData.bio ?? aboutData.default?.bio ?? [];
+const summary: { label: string; value: string }[] =
+  aboutData.summary ?? aboutData.default?.summary ?? [];
 ---
 
 <section id="about" class="py-24">
   <div class="mx-auto max-w-6xl px-6">
-    <h2 class="text-4xl font-semibold">About</h2>
-    <p class="text-muted-foreground mt-4">[ About — Profile Photo | Bio | Summary ]</p>
+    <!-- Section Heading -->
+    <div class="mb-16">
+      <p class="text-muted-foreground mb-2 text-sm font-medium tracking-widest uppercase">
+        {t('about.subheading')}
+      </p>
+      <h2 class="text-3xl font-semibold md:text-4xl">
+        {t('about.heading')}
+      </h2>
+      <div class="mt-4 h-[2px] w-12 bg-gradient-to-r from-[#686dff] to-[#b66fff]"></div>
+    </div>
+
+    <!-- Content: Photo + Bio -->
+    <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-[320px_1fr]">
+      <!-- Profile Photo -->
+      <div class="flex flex-col items-center gap-6 lg:items-start">
+        <div
+          class="border-border bg-muted relative aspect-square w-64 overflow-hidden rounded-2xl border lg:w-full"
+        >
+          <Image
+            src={profileImage}
+            alt="Ryota Nakamura"
+            width={320}
+            height={320}
+            class="h-full w-full object-cover"
+          />
+        </div>
+
+        <!-- Summary Table -->
+        <div class="border-border w-full rounded-xl border p-6">
+          <dl class="space-y-4">
+            {
+              summary.map((item) => (
+                <div class="flex flex-col gap-0.5">
+                  <dt class="text-muted-foreground text-xs font-medium tracking-wider uppercase">
+                    {item.label}
+                  </dt>
+                  <dd class="text-foreground text-sm font-medium">{item.value}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+      </div>
+
+      <!-- Bio Text -->
+      <div class="space-y-6">
+        {
+          bio.map((paragraph) => (
+            <p class="text-muted-foreground text-base leading-relaxed">{paragraph}</p>
+          ))
+        }
+
+        <!-- Accent line at bottom -->
+        <div class="border-border mt-8 border-t pt-8">
+          <p class="text-foreground text-sm font-medium">
+            <span class="text-[#686dff]">→</span>
+            {
+              lang === 'ja'
+                ? ' より詳しくは、各セクションをご覧ください。'
+                : ' Explore the sections below to learn more about my work and expertise.'
+            }
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

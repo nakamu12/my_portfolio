@@ -1,0 +1,25 @@
+{
+  "bio": [
+    "I'm an AI & Robotics Engineer with a deep passion for building systems that sit at the intersection of artificial intelligence and the physical world. With experience spanning machine learning, robotic control, and full-stack development, I design solutions that are both technically rigorous and practically impactful.",
+    "My journey in technology began with a fascination for autonomous systems — machines that perceive, reason, and act. That curiosity led me through robotics competitions, AI research, and hands-on engineering roles where I've shipped production systems used by real users.",
+    "Beyond the code, I actively contribute to the AI community through media appearances and knowledge sharing. I'm a graduate of the Fujitsu Digital Enablement (FDE) Level 2 program, an intensive training I completed in India, which deepened my expertise in enterprise AI transformation and digital strategy."
+  ],
+  "summary": [
+    {
+      "label": "Focus",
+      "value": "AI Systems & Robotics"
+    },
+    {
+      "label": "Location",
+      "value": "Japan"
+    },
+    {
+      "label": "Experience",
+      "value": "5+ Years"
+    },
+    {
+      "label": "Languages",
+      "value": "Japanese, English"
+    }
+  ]
+}
