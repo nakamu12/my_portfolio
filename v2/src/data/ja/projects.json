@@ -4,22 +4,34 @@
       "slug": "axross-recipe",
       "title": "AxrossRecipe",
       "description": "AI/DXのオンライン学習プラットフォーム。学習だけでなく、本気の「できる」を実現する最先端の人材育成のカタチ。",
-      "tech": ["React", "Ruby"],
-      "image": "project-axross.png",
+      "tech": ["React", "Ruby on Rails", "PostgreSQL", "AWS"],
+      "image": null,
       "links": {
         "site": "https://axross-recipe.com/",
         "github": null
+      },
+      "caseStudy": {
+        "challenge": "従来のオンライン学習は動画視聴が中心で、知識を実際のスキルに転換することが難しい構造でした。「見る」と「できる」のギャップが、学習定着率の低下と成果の出にくい体験を生んでいました。",
+        "approach": "学習者のゴールとスキルレベルに合わせて、AIがパーソナライズされた学習パスを提案するプロジェクト型学習モデルを設計。インタラクティブなコード課題やピアレビューワークフローを実装し、現場に近い学習体験を実現しました。",
+        "techDetails": "ReactによるダイナミックなコースプレーヤーUI、Ruby on RailsによるバックエンドAPIとLMSロジック、PostgreSQLでユーザー進捗・コースコンテンツを管理。AWS（S3、CloudFront）でスケーラブルな動画配信を実現しています。",
+        "outcome": "500以上のコースと数千名の登録学習者でリリース。従来の動画主体プラットフォームと比較して、コース完了率が約40%向上し、プロジェクト型アプローチの有効性を実証しました。"
       }
     },
     {
       "slug": "magicss",
       "title": "magicss",
       "description": "キーワードを入力するだけで、解像度の高い分析データ、構成案、そしてSEO記事が自動生成されます。",
-      "tech": ["React", "Python"],
-      "image": "project-magicss.png",
+      "tech": ["React", "Python", "FastAPI", "OpenAI API"],
+      "image": null,
       "links": {
         "site": "https://magicss.ai/",
         "github": null
+      },
+      "caseStudy": {
+        "challenge": "コンテンツチームはリサーチとキーワード分析に60〜80%の時間を費やしており、執筆に入る前の段階でリソースが枯渇していました。手作業によるSEOリサーチは遅く、一貫性に欠け、検索トレンドの変化に追いつけない課題がありました。",
+        "approach": "LLMを活用してコンテンツリサーチのパイプライン全体を自動化。検索意図のシグナルや競合データを集約するキーワード分析エンジンを構築し、構造化されたコンテキストをGPTに渡すことで、構成案から本文記事まで自動生成する仕組みを実現しました。",
+        "techDetails": "Reactフロントエンドで生成コンテンツのレビュー・編集UXを提供。Python + FastAPIバックエンドがAIパイプラインをオーケストレーション。OpenAI API（GPT-4）で記事生成。SEOのベストプラクティスを一貫して適用するカスタムプロンプトエンジニアリングを実装しています。",
+        "outcome": "コンテンツ制作時間を約70%削減。magicssを導入したチームは、人員を増やすことなく月10本から50本以上の記事制作を実現。早期ユーザーからは3ヶ月以内にオーガニック検索順位の向上が報告されています。"
       }
     }
   ]

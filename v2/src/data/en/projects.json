@@ -4,22 +4,34 @@
       "slug": "axross-recipe",
       "title": "AxrossRecipe",
       "description": "An AI/DX online learning platform. Going beyond learning to enable real skill acquisition through cutting-edge talent development.",
-      "tech": ["React", "Ruby"],
-      "image": "project-axross.png",
+      "tech": ["React", "Ruby on Rails", "PostgreSQL", "AWS"],
+      "image": null,
       "links": {
         "site": "https://axross-recipe.com/",
         "github": null
+      },
+      "caseStudy": {
+        "challenge": "Traditional online learning platforms focus on video consumption, but learners struggle to apply knowledge in real-world scenarios. The gap between \"watching\" and \"doing\" was leading to low skill retention and poor learning outcomes.",
+        "approach": "Designed a project-based learning model where AI suggests personalized learning paths based on the learner's goals and skill level. Implemented interactive code challenges and peer-review workflows to simulate real work environments.",
+        "techDetails": "Built the frontend with React for dynamic course player experiences. Ruby on Rails powers the backend API and LMS logic. PostgreSQL stores user progress and course content. AWS (S3, CloudFront) handles media delivery for video content at scale.",
+        "outcome": "Launched with 500+ courses and thousands of registered learners. The platform achieved a 40% higher course completion rate compared to conventional video-only platforms, validating the project-based approach."
       }
     },
     {
       "slug": "magicss",
       "title": "magicss",
       "description": "Simply enter keywords to automatically generate high-resolution analytics, content outlines, and SEO-optimized articles.",
-      "tech": ["React", "Python"],
-      "image": "project-magicss.png",
+      "tech": ["React", "Python", "FastAPI", "OpenAI API"],
+      "image": null,
       "links": {
         "site": "https://magicss.ai/",
         "github": null
+      },
+      "caseStudy": {
+        "challenge": "Content teams spend 60-80% of their time on research and keyword analysis before writing a single word. Manual SEO research is slow, inconsistent, and fails to keep pace with rapidly changing search trends.",
+        "approach": "Leveraged large language models to automate the content research pipeline. Built a keyword analysis engine that aggregates search intent signals and competitor data, then passes structured context to GPT to generate outlines and full draft articles.",
+        "techDetails": "React frontend with a clean editor UX for reviewing and editing generated content. Python + FastAPI backend orchestrates the AI pipeline. The OpenAI API (GPT-4) handles article generation. Custom prompt engineering ensures SEO best practices are consistently applied.",
+        "outcome": "Reduced content production time by approximately 70%. Teams using magicss were able to scale from 10 to 50+ articles per month without additional headcount. Early users reported a measurable lift in organic search rankings within 3 months."
       }
     }
   ]

@@ -1,12 +1,46 @@
 ---
-// Projects: Project cards → detail pages
+import { getLangFromUrl, getTranslations } from '@/i18n/utils';
+import ProjectCard from './ProjectCard.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = await getTranslations(lang);
+
+const { items } = (await import(`../../data/${lang}/projects.json`)) as {
+  items: Array<{
+    slug: string;
+    title: string;
+    description: string;
+    tech: string[];
+    image: string | null;
+    links: { site: string | null; github: string | null };
+  }>;
+};
 ---
 
 <section id="projects" class="py-24">
   <div class="mx-auto max-w-6xl px-6">
-    <h2 class="text-4xl font-semibold">Projects</h2>
-    <p class="text-muted-foreground mt-4">
-      [ Projects — Cards: Thumbnail | Title | Tech Stack | Links → Detail Page ]
-    </p>
+    <!-- Section Heading -->
+    <div class="mb-14">
+      <p class="text-sm font-medium text-[#686dff] tracking-widest uppercase mb-3">
+        {t('projects.subheading')}
+      </p>
+      <h2 class="text-4xl md:text-5xl font-semibold tracking-tight">
+        {t('projects.heading')}
+      </h2>
+    </div>
+
+    <!-- Project Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {items.map((project) => (
+        <ProjectCard
+          slug={project.slug}
+          title={project.title}
+          description={project.description}
+          tech={project.tech}
+          image={project.image}
+          links={project.links}
+        />
+      ))}
+    </div>
   </div>
 </section>

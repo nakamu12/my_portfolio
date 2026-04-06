@@ -18,5 +18,17 @@
   "header.theme.light": "Light",
   "header.theme.dark": "Dark",
   "header.lang": "日本語",
-  "header.menu": "Menu"
+  "header.menu": "Menu",
+  "projects.heading": "Projects",
+  "projects.subheading": "Things I've built",
+  "projects.viewSite": "View Site",
+  "projects.viewGitHub": "GitHub",
+  "projects.viewDetails": "Case Study",
+  "projects.backToProjects": "← Back to Projects",
+  "projects.challenge": "Challenge",
+  "projects.approach": "Approach",
+  "projects.techDetails": "Tech Stack",
+  "projects.outcome": "Outcome",
+  "projects.techUsed": "Technologies Used",
+  "projects.links": "Links"
 }

@@ -18,5 +18,17 @@
   "header.theme.light": "ライト",
   "header.theme.dark": "ダーク",
   "header.lang": "English",
-  "header.menu": "メニュー"
+  "header.menu": "メニュー",
+  "projects.heading": "プロジェクト",
+  "projects.subheading": "制作実績",
+  "projects.viewSite": "サイトを見る",
+  "projects.viewGitHub": "GitHub",
+  "projects.viewDetails": "ケーススタディ",
+  "projects.backToProjects": "← プロジェクト一覧へ",
+  "projects.challenge": "課題",
+  "projects.approach": "アプローチ",
+  "projects.techDetails": "技術選定",
+  "projects.outcome": "成果",
+  "projects.techUsed": "使用技術",
+  "projects.links": "リンク"
 }
