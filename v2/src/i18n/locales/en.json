@@ -18,5 +18,10 @@
   "header.theme.light": "Light",
   "header.theme.dark": "Dark",
   "header.lang": "日本語",
-  "header.menu": "Menu"
+  "header.menu": "Menu",
+  "contact.heading": "Get in Touch",
+  "contact.subheading": "Feel free to reach out via social media or email.",
+  "contact.availability.label": "Availability",
+  "contact.availability.status": "Open to opportunities",
+  "contact.availability.detail": "Available for freelance, contract, and full-time roles."
 }
