@@ -1,13 +1,30 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/layout/Header.astro';
+import HeroSection from '@/components/hero/HeroSection.astro';
+import AboutSection from '@/components/about/AboutSection.astro';
+import CertificationsSection from '@/components/certifications/CertificationsSection.astro';
+import AIToolkitSection from '@/components/ai-toolkit/AIToolkitSection.astro';
+import SkillsSection from '@/components/skills/SkillsSection.astro';
+import ExperienceSection from '@/components/experience/ExperienceSection.astro';
+import ProjectsSection from '@/components/projects/ProjectsSection.astro';
+import MediaSection from '@/components/media/MediaSection.astro';
+import ContactSection from '@/components/contact/ContactSection.astro';
+import Footer from '@/components/layout/Footer.astro';
 ---
 
 <BaseLayout>
-  <main class="flex min-h-screen items-center justify-center">
-    <div class="text-center">
-      <h1 class="text-5xl font-bold">Ryota Nakamura</h1>
-      <p class="mt-4 text-lg text-muted-foreground">AI & Robotics Engineer</p>
-      <p class="mt-2 text-sm text-muted-foreground">Portfolio v2 — Coming Soon</p>
-    </div>
+  <Header />
+  <main>
+    <HeroSection />
+    <AboutSection />
+    <CertificationsSection />
+    <AIToolkitSection />
+    <SkillsSection />
+    <ExperienceSection />
+    <ProjectsSection />
+    <MediaSection />
+    <ContactSection />
   </main>
+  <Footer />
 </BaseLayout>
