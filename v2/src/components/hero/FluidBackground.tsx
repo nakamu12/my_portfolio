@@ -1,42 +1,72 @@
 import { useEffect, useRef } from 'react';
-import webGLFluidEnhanced from 'webgl-fluid-enhanced';
+import WebGLFluidEnhanced from 'webgl-fluid-enhanced';
 
 interface FluidBackgroundProps {
   className?: string;
 }
 
+const DARK_PALETTE = ['#686dff', '#b66fff', '#9e86ed', '#4a3aad'];
+const LIGHT_PALETTE = ['#3b82f6', '#686dff', '#60a5fa', '#818cf8'];
+
+function getThemeConfig() {
+  const isDark = document.documentElement.classList.contains('dark');
+  return {
+    colorPalette: isDark ? DARK_PALETTE : LIGHT_PALETTE,
+    bloomIntensity: isDark ? 0.6 : 0.4,
+    brightness: isDark ? 1.0 : 0.7,
+  };
+}
+
 export default function FluidBackground({ className = '' }: FluidBackgroundProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLDivElement>(null);
+  const simulationRef = useRef<WebGLFluidEnhanced | null>(null);
 
   useEffect(() => {
     if (!canvasRef.current) return;
 
-    webGLFluidEnhanced.simulation(canvasRef.current, {
-      SIM_RESOLUTION: 128,
-      DYE_RESOLUTION: 1024,
-      DENSITY_DISSIPATION: 3.5,
-      VELOCITY_DISSIPATION: 2,
-      PRESSURE: 0.1,
-      CURL: 30,
-      SPLAT_RADIUS: 0.3,
-      SPLAT_FORCE: 6000,
-      COLOR_PALETTE: ['#686dff', '#b66fff', '#1a1a2e', '#16213e'],
-      HOVER: true,
-      SPLAT_ON_CLICK: false,
-      SUNRAYS: false,
-      BLOOM: true,
-      BLOOM_INTENSITY: 0.3,
-      BLOOM_THRESHOLD: 0.6,
-      BACK_COLOR: { r: 0, g: 0, b: 0 },
-      TRANSPARENT: true,
+    const simulation = new WebGLFluidEnhanced(canvasRef.current);
+    simulationRef.current = simulation;
+
+    const themeConfig = getThemeConfig();
+
+    simulation.setConfig({
+      simResolution: 128,
+      dyeResolution: 1024,
+      densityDissipation: 0.6,
+      velocityDissipation: 0.3,
+      pressure: 0.8,
+      curl: 20,
+      splatRadius: 0.3,
+      splatForce: 6000,
+      hover: true,
+      bloom: true,
+      bloomThreshold: 0.3,
+      sunrays: false,
+      transparent: true,
+      colorful: true,
+      colorUpdateSpeed: 8,
+      ...themeConfig,
     });
+
+    simulation.start();
+
+    // Watch for dark class changes on <html>
+    const observer = new MutationObserver(() => {
+      if (simulationRef.current) {
+        simulationRef.current.setConfig(getThemeConfig());
+      }
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    return () => {
+      observer.disconnect();
+      simulation.stop();
+    };
   }, []);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className={`pointer-events-auto ${className}`}
-      style={{ width: '100%', height: '100%' }}
-    />
-  );
+  return <div ref={canvasRef} className={`pointer-events-auto ${className}`} />;
 }

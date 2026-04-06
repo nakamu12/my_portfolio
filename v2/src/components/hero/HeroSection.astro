@@ -17,11 +17,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <FluidBackground client:load className="h-full w-full" />
   </div>
 
-  <!-- Gradient overlay for text readability -->
-  <div class="absolute inset-0 z-[1] bg-gradient-to-b from-background/60 via-background/30 to-background/80"></div>
+  <!-- Gradient overlay for text readability (pointer-events-none so mouse reaches canvas) -->
+  <div class="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-background/40 via-transparent to-background/60"></div>
 
-  <!-- Content -->
-  <div class="relative z-10 mx-auto max-w-6xl px-6 text-center">
+  <!-- Content (pointer-events-none on container, re-enable on interactive elements) -->
+  <div class="pointer-events-none relative z-10 mx-auto max-w-6xl px-6 text-center">
     <!-- Greeting -->
     <p class="mb-2 text-sm font-medium tracking-widest text-muted-foreground uppercase">
       {t('hero.greeting')}
@@ -45,7 +45,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     </p>
 
     <!-- CTA Buttons -->
-    <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+    <div class="pointer-events-auto mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
       <a
         href={`${base}/${lang}/#projects`}
         class="inline-flex h-12 items-center rounded-lg bg-[#686dff] px-8 text-sm font-medium text-white transition-colors hover:bg-[#5961ff]"
