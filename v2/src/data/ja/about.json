@@ -4,22 +4,48 @@
     "テクノロジーへの関心は、自律システム——知覚し、推論し、行動する機械——への好奇心から始まりました。その探求心は、ロボット競技会やAI研究、実際のユーザーに使われるプロダクトを届けてきたエンジニアリングの現場へと私を導いてきました。",
     "エンジニアリングの枠を超えて、メディア出演や知識共有を通じてAIコミュニティへの貢献も積極的に行っています。インドで受講した集中研修「富士通 Digital Enablement（FDE）Level 2」を修了し、エンタープライズAIトランスフォーメーションとデジタル戦略への知見をさらに深めました。"
   ],
-  "summary": [
+  "attributes": [
+    { "label": "職種", "value": "AI開発エンジニア・テックコンテンツクリエイター" },
+    { "label": "生年月日", "value": "1995年12月15日" },
+    { "label": "出身地", "value": "神奈川県 川崎市" },
+    { "label": "趣味", "value": "サウナ、お酒、アニメ、漫画、読書" }
+  ],
+  "mbti": {
+    "type": "ENTJ-A",
+    "label": "指揮官型",
+    "traits": [
+      { "letter": "E", "name": "外向型", "percent": 81 },
+      { "letter": "N", "name": "直感型", "percent": 81 },
+      { "letter": "T", "name": "思考型", "percent": 56 },
+      { "letter": "J", "name": "判断型", "percent": 78 },
+      { "letter": "A", "name": "自己主張型", "percent": 65 }
+    ]
+  },
+  "strengths": [
     {
-      "label": "専門領域",
-      "value": "AIシステム・ロボティクス"
+      "name": "活発性",
+      "subtitle": "Activator",
+      "desc": "アイデアを行動に変え、プロジェクトを推進する能力"
     },
     {
-      "label": "拠点",
-      "value": "日本"
+      "name": "指令性",
+      "subtitle": "Command",
+      "desc": "状況を的確に判断し、適切なリーダーシップを発揮する"
     },
     {
-      "label": "経験",
-      "value": "5年以上"
+      "name": "学習欲",
+      "subtitle": "Learner",
+      "desc": "新しい技術を学ぶプロセスに喜びを見出す"
     },
     {
-      "label": "言語",
-      "value": "日本語、英語"
+      "name": "競争性",
+      "subtitle": "Competition",
+      "desc": "強い動機づけによって高いパフォーマンスを発揮する"
+    },
+    {
+      "name": "自我",
+      "subtitle": "Significance",
+      "desc": "重要で価値のある結果を生み出すことに努める"
     }
   ]
 }

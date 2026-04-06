@@ -8,72 +8,175 @@ const t = await getTranslations(lang);
 
 const aboutData = await import(`../../data/${lang}/about.json`);
 const bio: string[] = aboutData.bio ?? aboutData.default?.bio ?? [];
-const summary: { label: string; value: string }[] =
-  aboutData.summary ?? aboutData.default?.summary ?? [];
+const attributes: { label: string; value: string }[] =
+  aboutData.attributes ?? aboutData.default?.attributes ?? [];
+const mbti: {
+  type: string;
+  label: string;
+  traits: { letter: string; name: string; percent: number }[];
+} | null = aboutData.mbti ?? aboutData.default?.mbti ?? null;
+const strengths: { name: string; subtitle?: string; desc: string }[] =
+  aboutData.strengths ?? aboutData.default?.strengths ?? [];
 ---
 
-<section id="about" class="py-24">
+<section id="about" aria-labelledby="about-heading" class="py-24 md:py-32">
   <div class="mx-auto max-w-6xl px-6">
     <!-- Section Heading -->
     <div class="mb-16">
       <p class="text-muted-foreground mb-2 text-sm font-medium tracking-widest uppercase">
         {t('about.subheading')}
       </p>
-      <h2 class="text-3xl font-semibold md:text-4xl">
+      <h2 id="about-heading" class="text-3xl font-semibold md:text-4xl">
         {t('about.heading')}
       </h2>
       <div class="mt-4 h-[2px] w-12 bg-gradient-to-r from-[#686dff] to-[#b66fff]"></div>
     </div>
 
-    <!-- Content: Photo + Bio -->
-    <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-[320px_1fr]">
+    <!-- Profile + Bio -->
+    <div class="mb-10 grid grid-cols-1 items-start gap-10 lg:grid-cols-[300px_1fr]">
       <!-- Profile Photo -->
-      <div class="flex flex-col items-center gap-6 lg:items-start">
+      <div
+        class="relative mx-auto aspect-square w-64 overflow-hidden rounded-2xl ring-1 ring-white/10 lg:w-full"
+      >
+        <Image
+          src={profileImage}
+          alt={t('about.profileAlt')}
+          width={600}
+          height={600}
+          class="h-full w-full object-cover"
+        />
         <div
-          class="border-border bg-muted relative aspect-square w-64 overflow-hidden rounded-2xl border lg:w-full"
+          class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"
         >
-          <Image
-            src={profileImage}
-            alt={t('about.profileAlt')}
-            width={320}
-            height={320}
-            class="h-full w-full object-cover"
-          />
-        </div>
-
-        <!-- Summary Table -->
-        <div class="border-border w-full rounded-xl border p-6">
-          <dl class="space-y-4">
-            {
-              summary.map((item) => (
-                <div class="flex flex-col gap-0.5">
-                  <dt class="text-muted-foreground text-xs font-medium tracking-wider uppercase">
-                    {item.label}
-                  </dt>
-                  <dd class="text-foreground text-sm font-medium">{item.value}</dd>
-                </div>
-              ))
-            }
-          </dl>
         </div>
       </div>
 
-      <!-- Bio Text -->
-      <div class="space-y-6">
-        {
-          bio.map((paragraph) => (
-            <p class="text-muted-foreground text-base leading-relaxed">{paragraph}</p>
-          ))
-        }
+      <!-- Bio + Attributes -->
+      <div class="flex flex-col gap-8">
+        <!-- Bio text -->
+        <div class="space-y-4">
+          {bio.map((paragraph) => <p class="text-muted-foreground leading-relaxed">{paragraph}</p>)}
+        </div>
 
-        <!-- Accent line at bottom -->
-        <div class="border-border mt-8 border-t pt-8">
-          <p class="text-foreground text-sm font-medium">
-            <span class="text-[#686dff]">→</span>
-            {t('about.cta')}
+        <!-- Attribute chips -->
+        <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {
+            attributes.map((attr) => (
+              <div class="bg-card border-border rounded-xl border p-4">
+                <p class="text-muted-foreground mb-1 text-xs font-medium tracking-wider uppercase">
+                  {attr.label}
+                </p>
+                <p class="text-foreground text-sm leading-snug font-medium">{attr.value}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Personality: MBTI + StrengthsFinder -->
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <!-- MBTI Card -->
+      {
+        mbti && (
+          <div class="bg-card border-border relative overflow-hidden rounded-2xl border p-6 md:p-8">
+            {/* Glow decoration */}
+            <div class="pointer-events-none absolute -top-10 -right-10 h-40 w-40 rounded-full bg-[#686dff]/8 blur-3xl" />
+
+            {/* Card header */}
+            <div class="mb-6 flex items-start justify-between">
+              <div>
+                <p class="text-muted-foreground mb-1 text-xs font-medium tracking-widest uppercase">
+                  Personality
+                </p>
+                <h3 class="text-foreground text-lg font-semibold">MBTI</h3>
+              </div>
+              <div class="text-right">
+                <p class="bg-gradient-to-r from-[#686dff] to-[#b66fff] bg-clip-text text-4xl font-bold tracking-tight text-transparent">
+                  {mbti.type}
+                </p>
+                <p class="text-muted-foreground text-sm">{mbti.label}</p>
+              </div>
+            </div>
+
+            {/* Trait bars */}
+            <div class="space-y-3.5">
+              {mbti.traits.map((trait, i) => (
+                <div class="flex items-center gap-3">
+                  <span class="w-4 shrink-0 text-sm font-bold text-[#686dff]">{trait.letter}</span>
+                  <div class="bg-border relative h-1.5 flex-1 overflow-hidden rounded-full">
+                    <div
+                      class="bar-fill absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[#686dff] to-[#b66fff]"
+                      style={`--target-width: ${trait.percent}%; animation-delay: ${i * 0.12}s`}
+                    />
+                  </div>
+                  <span class="text-muted-foreground w-8 shrink-0 text-right text-xs tabular-nums">
+                    {trait.percent}%
+                  </span>
+                  <span class="text-muted-foreground w-20 shrink-0 text-xs">{trait.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+      }
+
+      <!-- StrengthsFinder Card -->
+      <div class="bg-card border-border relative overflow-hidden rounded-2xl border p-6 md:p-8">
+        {/* Glow decoration */}
+        <div
+          class="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-[#b66fff]/8 blur-3xl"
+        >
+        </div>
+
+        {/* Card header */}
+        <div class="mb-6">
+          <p class="text-muted-foreground mb-1 text-xs font-medium tracking-widest uppercase">
+            Personality
           </p>
+          <div class="flex items-center gap-3">
+            <h3 class="text-foreground text-lg font-semibold">StrengthsFinder</h3>
+            <span
+              class="rounded-full bg-[#686dff]/10 px-2.5 py-0.5 text-xs font-semibold text-[#686dff]"
+            >
+              TOP 5
+            </span>
+          </div>
+        </div>
+
+        {/* Strengths list */}
+        <div class="space-y-4">
+          {
+            strengths.map((s, i) => (
+              <div class="flex items-start gap-4">
+                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#686dff] to-[#b66fff] text-xs font-bold text-white">
+                  {i + 1}
+                </span>
+                <div class="min-w-0 flex-1">
+                  <div class="mb-0.5 flex items-baseline gap-2">
+                    <span class="text-foreground text-sm font-semibold">{s.name}</span>
+                    {s.subtitle && <span class="text-muted-foreground text-xs">{s.subtitle}</span>}
+                  </div>
+                  <p class="text-muted-foreground text-xs leading-relaxed">{s.desc}</p>
+                </div>
+              </div>
+            ))
+          }
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .bar-fill {
+    width: 0;
+    animation: grow-bar 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes grow-bar {
+    to {
+      width: var(--target-width);
+    }
+  }
+</style>
