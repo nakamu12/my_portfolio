@@ -21,7 +21,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <div class="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-background/40 via-transparent to-background/60"></div>
 
   <!-- Content (pointer-events-none on container, re-enable on interactive elements) -->
-  <div class="pointer-events-none relative z-10 mx-auto max-w-6xl px-6 text-center">
+  <div class="pointer-events-none relative z-10 mx-auto max-w-6xl px-6 text-center hero-text">
     <!-- Greeting -->
     <p class="mb-2 text-sm font-medium tracking-widest text-muted-foreground uppercase">
       {t('hero.greeting')}
@@ -29,13 +29,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     <!-- Name -->
     <h1 class="text-5xl font-bold tracking-tight md:text-7xl lg:text-8xl">
-      <span class="bg-gradient-to-r from-[#686dff] to-[#b66fff] bg-clip-text text-transparent">
+      <span class="bg-gradient-to-r from-[#686dff] to-[#b66fff] bg-clip-text text-transparent drop-shadow-sm">
         {t('hero.name')}
       </span>
     </h1>
 
     <!-- Title -->
-    <p class="mt-4 text-xl font-medium text-foreground/80 md:text-2xl">
+    <p class="mt-4 text-xl font-medium text-foreground/90 md:text-2xl">
       {t('hero.title')}
     </p>
 

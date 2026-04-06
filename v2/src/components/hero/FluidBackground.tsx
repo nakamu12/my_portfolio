@@ -5,15 +5,15 @@ interface FluidBackgroundProps {
   className?: string;
 }
 
-const DARK_PALETTE = ['#686dff', '#b66fff', '#9e86ed', '#4a3aad'];
-const LIGHT_PALETTE = ['#3b82f6', '#686dff', '#60a5fa', '#818cf8'];
+const DARK_PALETTE = ['#686dff', '#686dff', '#5b6fff', '#b66fff', '#4a5eff'];
+const LIGHT_PALETTE = ['#686dff', '#686dff', '#5b6fff', '#b66fff', '#4a5eff'];
 
 function getThemeConfig() {
   const isDark = document.documentElement.classList.contains('dark');
   return {
     colorPalette: isDark ? DARK_PALETTE : LIGHT_PALETTE,
-    bloomIntensity: isDark ? 0.6 : 0.4,
-    brightness: isDark ? 1.0 : 0.7,
+    bloomIntensity: isDark ? 0.4 : 0.5,
+    brightness: isDark ? 0.6 : 0.8,
   };
 }
 
