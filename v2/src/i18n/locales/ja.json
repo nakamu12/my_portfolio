@@ -22,7 +22,7 @@
   "contact.heading": "お問い合わせ",
   "contact.subheading": "SNSからお気軽にご連絡ください。",
   "contact.connect.label": "つながる",
-  "contact.availability.label": "稼働状況",
-  "contact.availability.status": "案件受付中",
-  "contact.availability.detail": "フリーランス・業務委託・正社員のご相談を受け付けています。"
+  "contact.availability.label": "ステータス",
+  "contact.availability.status": "つながりを歓迎します",
+  "contact.availability.detail": "技術的な議論やコラボレーションはお気軽にどうぞ。"
 }
