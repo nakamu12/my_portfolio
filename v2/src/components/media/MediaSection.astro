@@ -1,12 +1,192 @@
 ---
-// Media & Speaking: Press mentions + talks
+import { getLangFromUrl, getTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = await getTranslations(lang);
+
+const mediaData = await import(`../../data/${lang}/media.json`);
+const featured = mediaData.featured ?? mediaData.default?.featured;
+const items: {
+  title: string;
+  category: string;
+  description: string;
+  link: string;
+  stats?: Record<string, string>;
+}[] = mediaData.items ?? mediaData.default?.items ?? [];
+const platforms: {
+  name: string;
+  description: string;
+  link: string;
+}[] = mediaData.platforms ?? mediaData.default?.platforms ?? [];
+
+const categoryOrder = ['youtube', 'podcast', 'presentation', 'article'];
+
+type Item = (typeof items)[number];
+const grouped = categoryOrder.reduce<Record<string, Item[]>>((acc, cat) => {
+  const filtered = items.filter((item) => item.category === cat);
+  if (filtered.length > 0) acc[cat] = filtered;
+  return acc;
+}, {});
+
+const categoryIcons: Record<string, string> = {
+  youtube: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>`,
+  podcast: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="3"/><path d="M6.343 17.657A8 8 0 1 1 17.657 6.343 8 8 0 0 1 6.343 17.657z"/><path d="M12 21v-6"/><path d="M9 21h6"/></svg>`,
+  presentation: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h20v14H2z"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>`,
+  article: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`,
+};
+
+const platformIcons: Record<string, string> = {
+  note: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512" fill="currentColor"><path d="M349.6 106H162.4C130.9 106 106 130.9 106 162.4v187.2c0 31.5 24.9 56.4 56.4 56.4h187.2c31.5 0 56.4-24.9 56.4-56.4V162.4c0-31.5-24.9-56.4-56.4-56.4zm-103.4 208.7h-52.8v-18.2h52.8v18.2zm0-48.5h-52.8v-18.2h52.8v18.2zm88.2 0h-70.1v-18.2h70.1v18.2zm0-48.4h-123v-18.2h123v18.2zm0-48.5h-123V151h123v18.3z"/></svg>`,
+  Zenn: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 88 88" fill="currentColor"><path d="M9.5 74.5L49 13h16.5L26 74.5H9.5zm32 0L80.5 13H97L58 74.5H41.5z" transform="scale(0.91)"/></svg>`,
+  Qiita: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.268 2 2 8.268 2 16s6.268 14 14 14 14-6.268 14-14S23.732 2 16 2zm6.4 20.4H9.6V9.6h12.8v12.8zm-9.6-9.6v6.4h6.4v-6.4h-6.4z"/></svg>`,
+};
+
+const externalLinkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
 ---
 
 <section id="media" class="py-24">
   <div class="mx-auto max-w-6xl px-6">
-    <h2 class="text-4xl font-semibold">Media & Speaking</h2>
-    <p class="text-muted-foreground mt-4">
-      [ Media — Press Mentions | Conference Talks | Podcast ]
-    </p>
+    <!-- Section Header -->
+    <div class="mb-16">
+      <h2 class="text-4xl font-semibold md:text-5xl">{t('media.title')}</h2>
+      <p class="text-muted-foreground mt-4 text-base md:text-lg">{t('media.subtitle')}</p>
+    </div>
+
+    <!-- Featured Item -->
+    {
+      featured && (
+        <div class="mb-16">
+          <span class="mb-4 inline-flex items-center gap-1.5 rounded-full border border-[#686dff]/30 bg-[#686dff]/10 px-3 py-1 text-xs font-medium text-[#686dff]">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            {t('media.featured')}
+          </span>
+          <a
+            href={featured.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="border-border bg-background hover:border-[#686dff]/40 group flex flex-col gap-4 rounded-xl border p-6 transition-all duration-200 hover:shadow-sm md:flex-row md:items-start md:gap-8"
+          >
+            <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#ff0000]/10 text-[#ff0000]">
+              <Fragment set:html={categoryIcons['youtube']} />
+            </div>
+            <div class="flex-1">
+              <div class="flex items-start justify-between gap-4">
+                <h3 class="group-hover:text-[#686dff] text-foreground text-lg font-semibold transition-colors">
+                  {featured.title}
+                </h3>
+                <span class="text-muted-foreground mt-1 shrink-0 opacity-0 transition-opacity group-hover:opacity-100">
+                  <Fragment set:html={externalLinkIcon} />
+                </span>
+              </div>
+              <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
+                {featured.description}
+              </p>
+            </div>
+          </a>
+        </div>
+      )
+    }
+
+    <!-- Items by Category -->
+    <div class="space-y-14">
+      {
+        Object.entries(grouped).map(([cat, catItems]) => (
+          <div>
+            <div class="mb-6 flex items-center gap-3">
+              <span class="text-muted-foreground flex items-center gap-2 text-sm font-medium uppercase tracking-wider">
+                <span
+                  class:list={[
+                    'flex h-6 w-6 items-center justify-center rounded',
+                    cat === 'youtube' && 'bg-[#ff0000]/10 text-[#ff0000]',
+                    cat === 'podcast' && 'bg-[#1DB954]/10 text-[#1DB954]',
+                    cat === 'presentation' && 'bg-[#686dff]/10 text-[#686dff]',
+                    cat === 'article' && 'bg-neutral-500/10 text-neutral-500',
+                  ]}
+                >
+                  <Fragment set:html={categoryIcons[cat] ?? ''} />
+                </span>
+                {t(`media.category.${cat}`)}
+              </span>
+              <div class="border-border h-px flex-1 border-t" />
+            </div>
+
+            <div class="grid gap-4 md:grid-cols-2">
+              {catItems.map((item) => (
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="border-border bg-background hover:border-[#686dff]/30 group flex flex-col gap-3 rounded-lg border p-5 transition-all duration-200 hover:shadow-sm"
+                >
+                  <div class="flex items-start justify-between gap-3">
+                    <h4 class="group-hover:text-[#686dff] text-foreground text-sm font-medium leading-snug transition-colors">
+                      {item.title}
+                    </h4>
+                    <span class="text-muted-foreground mt-0.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-100">
+                      <Fragment set:html={externalLinkIcon} />
+                    </span>
+                  </div>
+                  <p class="text-muted-foreground text-xs leading-relaxed">{item.description}</p>
+                  {item.stats && Object.keys(item.stats).length > 0 && (
+                    <div class="mt-auto flex flex-wrap gap-2 pt-1">
+                      {Object.values(item.stats).map((val) => (
+                        <span class="border-border text-muted-foreground rounded-full border px-2 py-0.5 text-[11px]">
+                          {val}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </a>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Writing Platforms -->
+    {
+      platforms.length > 0 && (
+        <div class="mt-20">
+          <div class="mb-8">
+            <h3 class="text-foreground text-xl font-semibold">{t('media.writing.title')}</h3>
+            <p class="text-muted-foreground mt-2 text-sm">{t('media.writing.subtitle')}</p>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-3">
+            {platforms.map((platform) => (
+              <a
+                href={platform.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="border-border bg-background hover:border-[#686dff]/30 group flex items-center gap-4 rounded-lg border p-5 transition-all duration-200 hover:shadow-sm"
+              >
+                <span class="text-muted-foreground group-hover:text-[#686dff] transition-colors">
+                  <Fragment
+                    set:html={
+                      platformIcons[platform.name] ??
+                      `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>`
+                    }
+                  />
+                </span>
+                <div>
+                  <p class="text-foreground group-hover:text-[#686dff] text-sm font-medium transition-colors">
+                    {platform.name}
+                  </p>
+                  <p class="text-muted-foreground mt-0.5 text-xs">{platform.description}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      )
+    }
   </div>
 </section>

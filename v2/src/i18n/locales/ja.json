@@ -18,5 +18,15 @@
   "header.theme.light": "ライト",
   "header.theme.dark": "ダーク",
   "header.lang": "English",
-  "header.menu": "メニュー"
+  "header.menu": "メニュー",
+  "media.title": "メディア・登壇",
+  "media.subtitle": "メディア掲載、登壇実績、ポッドキャスト出演。",
+  "media.featured": "注目",
+  "media.category.youtube": "YouTube",
+  "media.category.podcast": "Podcast",
+  "media.category.presentation": "登壇",
+  "media.category.article": "記事",
+  "media.writing.title": "執筆活動",
+  "media.writing.subtitle": "各プラットフォームで技術記事を執筆しています。",
+  "media.visit": "見る"
 }
