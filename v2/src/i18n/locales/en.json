@@ -18,5 +18,7 @@
   "header.theme.light": "Light",
   "header.theme.dark": "Dark",
   "header.lang": "日本語",
-  "header.menu": "Menu"
+  "header.menu": "Menu",
+  "skills.title": "Skills",
+  "skills.subtitle": "Technologies and tools I work with"
 }
