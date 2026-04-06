@@ -1,6 +1,6 @@
 ---
 import { getLangFromUrl, getTranslations } from '@/i18n/utils';
-import ToolMarquee from './ToolMarquee';
+import ToolGrid from './ToolGrid';
 
 const lang = getLangFromUrl(Astro.url);
 const t = await getTranslations(lang);
@@ -16,12 +16,11 @@ const tools: {
   url: string;
 }[] = toolsData.items ?? [];
 
-// Strip the "All" / "すべて" sentinel — marquee rows are self-organising
 const allLabel = t('aiToolkit.filter.all');
-const categories: string[] = (toolsData.categories ?? []).filter((c: string) => c !== allLabel);
+const categories: string[] = toolsData.categories ?? [];
 ---
 
-<section id="ai-toolkit" class="overflow-hidden py-24">
+<section id="ai-toolkit" class="py-24">
   <div class="mx-auto max-w-6xl px-6">
     <!-- Section heading -->
     <div class="mb-12">
@@ -32,10 +31,8 @@ const categories: string[] = (toolsData.categories ?? []).filter((c: string) => 
         {t('aiToolkit.subheading')}
       </p>
     </div>
-  </div>
 
-  <!-- Full-width marquee (bleeds past the max-w container intentionally) -->
-  <div class="px-6">
-    <ToolMarquee client:visible categories={categories} tools={tools} />
+    <!-- Icon grid with category filter -->
+    <ToolGrid client:visible categories={categories} tools={tools} allLabel={allLabel} />
   </div>
 </section>
