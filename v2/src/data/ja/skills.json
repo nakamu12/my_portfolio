@@ -36,7 +36,8 @@
       "skills": [
         { "name": "Apache Spark", "icon": "apachespark" },
         { "name": "PySpark", "icon": "pyspark" },
-        { "name": "Scala", "icon": "scala" }
+        { "name": "Scala", "icon": "scala" },
+        { "name": "Treasure Data", "icon": "treasuredata" }
       ]
     },
     {
