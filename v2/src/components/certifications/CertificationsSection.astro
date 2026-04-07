@@ -133,13 +133,13 @@ const regularCerts = certItems.filter((item) => item.title !== 'FDE Level 2');
                 </div>
 
                 {img ? (
-                  <div class="mb-3 flex items-center justify-center rounded-lg py-2">
+                  <div class="mb-3 py-2">
                     <Image
                       src={img}
                       alt={item.title}
-                      width={160}
-                      height={160}
-                      class="w-auto object-contain"
+                      width={320}
+                      height={200}
+                      class="w-full object-contain"
                     />
                   </div>
                 ) : (
