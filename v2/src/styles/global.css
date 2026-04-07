@@ -115,31 +115,3 @@
 .dark .hero-text {
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
-
-/* AI Toolkit — Marquee animation */
-@keyframes marquee-left {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-@keyframes marquee-right {
-  from {
-    transform: translateX(-50%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-.animate-marquee-left {
-  animation: marquee-left var(--marquee-duration, 30s) linear infinite;
-}
-.animate-marquee-right {
-  animation: marquee-right var(--marquee-duration, 30s) linear infinite;
-}
-.marquee-row:hover .animate-marquee-left,
-.marquee-row:hover .animate-marquee-right {
-  animation-play-state: paused;
-}

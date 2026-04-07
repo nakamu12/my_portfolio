@@ -5,17 +5,27 @@ import ToolGrid from './ToolGrid';
 const lang = getLangFromUrl(Astro.url);
 const t = await getTranslations(lang);
 
-const data = await import(`../../data/${lang}/ai-tools.json`);
-const toolsData = data.default ?? data;
-const tools: {
+interface Tool {
   id: string;
   name: string;
   category: string;
   description: string;
   logoUrl: string;
   url: string;
-}[] = toolsData.items ?? [];
+}
 
+const toolsData =
+  lang === 'ja'
+    ? (await import('../../data/ja/ai-tools.json')).default
+    : (await import('../../data/en/ai-tools.json')).default;
+
+const tools: Tool[] = (toolsData.items ?? []).filter(
+  (item: unknown): item is Tool =>
+    typeof item === 'object' &&
+    item !== null &&
+    typeof (item as Tool).url === 'string' &&
+    /^https?:\/\//.test((item as Tool).url),
+);
 const allLabel = t('aiToolkit.filter.all');
 const categories: string[] = toolsData.categories ?? [];
 ---

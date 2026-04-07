@@ -99,7 +99,7 @@ export default function ToolGrid({ categories, tools, allLabel }: Props) {
               'rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-150',
               active === tab
                 ? 'bg-[#686dff] text-white shadow-[0_0_12px_rgba(104,109,255,0.45)]'
-                : 'text-muted-foreground hover:text-foreground bg-white/5 hover:bg-white/10',
+                : 'text-muted-foreground hover:text-foreground bg-muted hover:bg-muted/80',
             )}
           >
             {tab}
