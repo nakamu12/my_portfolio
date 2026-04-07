@@ -33,44 +33,43 @@ const strengths: { name: string; subtitle?: string; desc: string }[] =
     </div>
 
     <!-- Profile + Bio -->
-    <div class="mb-10 flex items-start gap-6 sm:gap-8 lg:gap-12">
-      <!-- Profile Photo (small, always left) -->
-      <div
-        class="about-photo relative aspect-square w-28 shrink-0 overflow-hidden rounded-2xl ring-1 ring-white/10 sm:w-40 lg:w-52"
-      >
-        <Image
-          src={profileImage}
-          alt={t('about.profileAlt')}
-          width={400}
-          height={400}
-          class="h-full w-full object-cover"
-        />
+    <div class="mb-10 grid grid-cols-1 gap-8 lg:grid-cols-[280px_1fr] lg:gap-12">
+      <!-- Left: Photo + Attribute chips -->
+      <div class="flex flex-col gap-4">
         <div
-          class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"
+          class="about-photo relative aspect-square w-full overflow-hidden rounded-2xl ring-1 ring-white/10"
         >
+          <Image
+            src={profileImage}
+            alt={t('about.profileAlt')}
+            width={560}
+            height={560}
+            class="h-full w-full object-cover"
+          />
+          <div
+            class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"
+          >
+          </div>
         </div>
-      </div>
 
-      <!-- Bio + Attributes -->
-      <div class="flex min-w-0 flex-1 flex-col gap-5">
-        <!-- Bio text -->
-        <p class="about-bio text-muted-foreground text-sm leading-relaxed sm:text-base">{bio}</p>
-
-        <!-- Attribute chips -->
-        <div class="grid grid-cols-2 gap-2 sm:gap-3">
+        <!-- Attribute chips under photo -->
+        <div class="grid grid-cols-2 gap-2">
           {
             attributes.map((attr) => (
-              <div class="about-chip bg-card border-border rounded-xl border px-3 py-3 sm:px-4 sm:py-4">
-                <p class="text-muted-foreground mb-0.5 text-[10px] font-medium tracking-wider uppercase sm:text-xs">
+              <div class="about-chip bg-card border-border rounded-xl border px-3 py-3">
+                <p class="text-muted-foreground mb-0.5 text-[10px] font-medium tracking-wider uppercase">
                   {attr.label}
                 </p>
-                <p class="text-foreground text-xs leading-snug font-medium sm:text-sm">
-                  {attr.value}
-                </p>
+                <p class="text-foreground text-xs leading-snug font-medium">{attr.value}</p>
               </div>
             ))
           }
         </div>
+      </div>
+
+      <!-- Right: Bio text -->
+      <div class="flex items-start">
+        <p class="about-bio text-muted-foreground text-base leading-relaxed lg:text-lg">{bio}</p>
       </div>
     </div>
 
