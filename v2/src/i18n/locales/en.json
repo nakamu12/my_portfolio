@@ -22,10 +22,12 @@
   "media.title": "Media & Speaking",
   "media.subtitle": "Press mentions, conference talks, and podcast appearances.",
   "media.featured": "Featured",
+  "media.category.all": "All",
   "media.category.youtube": "YouTube",
   "media.category.podcast": "Podcast",
   "media.category.presentation": "Presentation",
   "media.category.article": "Article",
   "media.writing.title": "Writing",
-  "media.writing.subtitle": "Articles and technical posts across platforms."
+  "media.writing.subtitle": "Articles and technical posts across platforms.",
+  "media.visit": "View Playlist"
 }

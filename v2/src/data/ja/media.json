@@ -9,6 +9,7 @@
     {
       "title": "TECH WORLD",
       "category": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/7zVhl7wIC3M/hqdefault.jpg",
       "description": "ソフトバンクのエンジニアリング文化や働き方について、現役エンジニアが本音で語るインタビューシリーズです。",
       "link": "https://www.youtube.com/watch?v=7zVhl7wIC3M&list=PLdWTmEF6jFdYNfb8YPgt35pH58zKQjFzT",
       "stats": { "views": "10K+", "duration": "15min" }
@@ -16,6 +17,7 @@
     {
       "title": "enXross Hackathon 2nd 最終プレゼンテーション",
       "category": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/70QUKzJ-ciQ/hqdefault.jpg",
       "description": "XR技術を活用したハッカソンでのファイナリストプレゼンテーション。React x 8th Wallで実現したWebARアプリケーションの開発過程を紹介。",
       "link": "https://youtu.be/70QUKzJ-ciQ?si=x5_gNFDugCKbLJAj&t=7553",
       "stats": { "result": "Finalist", "participants": "300+" }
