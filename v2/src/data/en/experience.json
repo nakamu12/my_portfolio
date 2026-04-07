@@ -2,33 +2,27 @@
   "items": [
     {
       "title": "SoftBank Corp.",
-      "role": "AI/DX Platform Engineer · Axross Business Division",
-      "period": "2024 – Present",
+      "period": "2020 – Present",
       "category": "work",
-      "achievements": [
-        "Planning and development of the AI/DX online learning platform AxrossRecipe",
-        "Designed LLM-powered content generation pipelines to automate course production",
-        "Led cross-functional feature rollouts with product, design, and data teams"
-      ]
-    },
-    {
-      "title": "Magicss",
-      "role": "Developer (Side Project)",
-      "period": "2024 – Present",
-      "category": "side-project",
-      "achievements": [
-        "Contributing to development of an automated SEO article generation service",
-        "Built API integrations and backend workflows for content automation"
-      ]
-    },
-    {
-      "title": "SoftBank Corp.",
-      "role": "Internal Systems Operations Engineer",
-      "period": "2020 – 2024",
-      "category": "work",
-      "achievements": [
-        "Managed and maintained large-scale internal corporate systems",
-        "Drove automation initiatives to reduce manual operations overhead"
+      "roles": [
+        {
+          "role": "AI/DX Platform Engineer · Axross Business Division",
+          "period": "2024 – Present",
+          "achievements": [
+            "Planning and development of the AI/DX online learning platform AxrossRecipe",
+            "Designed LLM-powered content generation pipelines to automate course production",
+            "Led cross-functional feature rollouts with product, design, and data teams"
+          ],
+          "concurrent": "Magicss — Developing an automated SEO article generation service as a concurrent side project (2024 – Present)"
+        },
+        {
+          "role": "Internal Systems Operations Engineer",
+          "period": "2020 – 2024",
+          "achievements": [
+            "Managed and maintained large-scale internal corporate systems",
+            "Drove automation initiatives to reduce manual operations overhead"
+          ]
+        }
       ]
     },
     {
@@ -42,15 +36,6 @@
       ]
     },
     {
-      "title": "Mobile Sales Promotion Events",
-      "role": "Part-time Sales",
-      "period": "2017 – 2020",
-      "category": "work",
-      "achievements": [
-        "Engaged in mobile device sales promotion and customer engagement activities"
-      ]
-    },
-    {
       "title": "Hosei University",
       "role": "B.Eng. · Faculty of Science and Engineering · Applied Informatics",
       "period": "2014 – 2018",
@@ -58,7 +43,8 @@
       "achievements": [
         "Studied computer science fundamentals, algorithms, and applied mathematics",
         "Joined the Autonomous Robotics Lab in junior year, specializing in robot software"
-      ]
+      ],
+      "note": "Also worked part-time in mobile device sales promotions (2017 – 2020)"
     }
   ]
 }

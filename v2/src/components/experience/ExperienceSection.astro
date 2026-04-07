@@ -4,12 +4,23 @@ import { getLangFromUrl, getTranslations } from '@/i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = await getTranslations(lang);
 
-type ExperienceItem = {
-  title: string;
+type RoleEntry = {
   role: string;
   period: string;
-  category: 'work' | 'education' | 'side-project';
   achievements: string[];
+  concurrent?: string;
+};
+
+type ExperienceItem = {
+  title: string;
+  period: string;
+  category: 'work' | 'education';
+  // Single-role entry
+  role?: string;
+  achievements?: string[];
+  note?: string;
+  // Multi-role entry (career progression at same company)
+  roles?: RoleEntry[];
 };
 
 const experienceData = await import(`../../data/${lang}/experience.json`);
@@ -18,7 +29,6 @@ const items: ExperienceItem[] = experienceData.items ?? experienceData.default?.
 const CATEGORY_LABELS: Record<ExperienceItem['category'], string> = {
   work: t('experience.category.work'),
   education: t('experience.category.education'),
-  'side-project': t('experience.category.side-project'),
 };
 ---
 
@@ -58,20 +68,6 @@ const CATEGORY_LABELS: Record<ExperienceItem['category'], string> = {
                     >
                       <path d="M10.394 2.08a1 1 0 0 0-.788 0l-7 3a1 1 0 0 0 0 1.84L5.25 8.051a.999.999 0 0 1 .356-.257l4-1.714a1 1 0 1 1 .788 1.838l-2.727 1.17 1.94.831a1 1 0 0 0 .787 0l7-3a1 1 0 0 0 0-1.838l-7-3ZM3.31 9.397 5 10.12v4.102a8.969 8.969 0 0 0-1.05-.174 1 1 0 0 1-.89-.89 11.115 11.115 0 0 1 .25-3.762ZM9.3 16.573A9.026 9.026 0 0 0 10 17a9.026 9.026 0 0 0 .7-.427V13.28L10 13.61l-.7-.329v2.684-.002ZM11 10.12l1.69-.726.001 4.102c-.348.05-.697.121-1.044.204L11 10.12Z" />
                     </svg>
-                  ) : item.category === 'side-project' ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      class="h-3.5 w-3.5 text-[#b66fff]"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M6.28 5.22a.75.75 0 0 1 0 1.06L2.56 10l3.72 3.72a.75.75 0 0 1-1.06 1.06L.97 10.53a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Zm7.44 0a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L17.44 10l-3.72-3.72a.75.75 0 0 1 0-1.06ZM11.377 2.011a.75.75 0 0 1 .612.867l-2.5 14.5a.75.75 0 0 1-1.478-.255l2.5-14.5a.75.75 0 0 1 .866-.612Z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
                   ) : (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -93,42 +89,85 @@ const CATEGORY_LABELS: Record<ExperienceItem['category'], string> = {
 
               <!-- Entry card -->
               <div class="border-border bg-background min-w-0 flex-1 rounded-xl border p-5 shadow-sm transition-shadow hover:shadow-md md:p-6">
-                <!-- Header row -->
+                <!-- Card header: company/school name + total period + category badge -->
                 <div class="flex flex-wrap items-start justify-between gap-x-4 gap-y-1">
-                  <div class="min-w-0">
-                    <h3 class="text-foreground text-base font-semibold leading-snug md:text-lg">
-                      {item.title}
-                    </h3>
-                    <p class="mt-0.5 text-sm font-medium text-[#686dff]">{item.role}</p>
-                  </div>
+                  <h3 class="text-foreground text-base font-semibold leading-snug md:text-lg">
+                    {item.title}
+                  </h3>
                   <div class="flex shrink-0 flex-col items-end gap-1.5">
                     <span class="text-muted-foreground text-xs tabular-nums">{item.period}</span>
-                    <span
-                      class:list={[
-                        'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium',
-                        item.category === 'side-project'
-                          ? 'bg-[rgba(182,111,255,0.10)] text-[#b66fff]'
-                          : 'bg-[rgba(104,109,255,0.08)] text-[#686dff]',
-                      ]}
-                    >
+                    <span class="bg-[rgba(104,109,255,0.08)] inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium text-[#686dff]">
                       {CATEGORY_LABELS[item.category]}
                     </span>
                   </div>
                 </div>
 
-                <!-- Achievements -->
-                {
-                  item.achievements && item.achievements.length > 0 && (
-                    <ul class="mt-4 space-y-1.5">
-                      {item.achievements.map((achievement) => (
-                        <li class="text-muted-foreground flex items-start gap-2 text-sm leading-relaxed">
-                          <span aria-hidden="true" class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#686dff]" />
-                          <span>{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )
-                }
+                {/* ── Multi-role entry (career progression) ── */}
+                {item.roles && item.roles.length > 0 && (
+                  <div class="mt-4 space-y-0">
+                    {item.roles.map((roleEntry, index) => (
+                      <div
+                        class:list={[
+                          index > 0 && 'border-border mt-4 border-t pt-4',
+                        ]}
+                      >
+                        <!-- Role header: title + period -->
+                        <div class="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
+                          <p class="text-sm font-medium text-[#686dff]">{roleEntry.role}</p>
+                          <span class="text-muted-foreground shrink-0 text-xs tabular-nums">
+                            {roleEntry.period}
+                          </span>
+                        </div>
+
+                        <!-- Achievements -->
+                        {roleEntry.achievements && roleEntry.achievements.length > 0 && (
+                          <ul class="mt-2 space-y-1.5">
+                            {roleEntry.achievements.map((achievement) => (
+                              <li class="text-muted-foreground flex items-start gap-2 text-sm leading-relaxed">
+                                <span aria-hidden="true" class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#686dff]" />
+                                <span>{achievement}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+
+                        <!-- Concurrent side project note -->
+                        {roleEntry.concurrent && (
+                          <div class="mt-3 flex items-start gap-2 rounded-lg bg-[rgba(182,111,255,0.07)] px-3 py-2">
+                            <span class="mt-0.5 shrink-0 inline-flex items-center rounded-full bg-[rgba(182,111,255,0.15)] px-2 py-0.5 text-xs font-medium text-[#b66fff]">
+                              {t('experience.sideProject')}
+                            </span>
+                            <span class="text-muted-foreground text-xs leading-relaxed">
+                              {roleEntry.concurrent}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* ── Single-role entry ── */}
+                {item.role && (
+                  <p class="mt-0.5 text-sm font-medium text-[#686dff]">{item.role}</p>
+                )}
+                {item.achievements && item.achievements.length > 0 && (
+                  <ul class="mt-3 space-y-1.5">
+                    {item.achievements.map((achievement) => (
+                      <li class="text-muted-foreground flex items-start gap-2 text-sm leading-relaxed">
+                        <span aria-hidden="true" class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#686dff]" />
+                        <span>{achievement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                {/* ── Optional footnote (e.g. part-time work during studies) ── */}
+                {item.note && (
+                  <p class="text-muted-foreground mt-3 border-t border-dashed pt-3 text-xs leading-relaxed border-border/50">
+                    {item.note}
+                  </p>
+                )}
               </div>
             </li>
           ))
