@@ -1,85 +1,101 @@
 {
-  "featured": {
-    "title": "SoftBank Business Channel",
-    "category": "youtube",
-    "description": "A video series explaining cutting-edge technologies by an AI engineer. Covering generative AI, machine learning, and data science in an accessible format for business applications.",
-    "link": "https://www.youtube.com/playlist?list=PLuiKmtQJC8Im8VYeL4CeuX4VDap0ZahxO"
-  },
-  "items": [
-    {
-      "title": "TECH WORLD",
+  "press": {
+    "featured": {
+      "title": "SoftBank Business Channel",
       "category": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/7zVhl7wIC3M/hqdefault.jpg",
-      "description": "An interview series where active engineers candidly discuss SoftBank's engineering culture and work style.",
-      "link": "https://www.youtube.com/watch?v=7zVhl7wIC3M&list=PLdWTmEF6jFdYNfb8YPgt35pH58zKQjFzT",
-      "stats": { "views": "10K+", "duration": "15min" }
+      "description": "A video series explaining cutting-edge technologies by an AI engineer. Covering generative AI, machine learning, and data science in an accessible format for business applications.",
+      "link": "https://www.youtube.com/playlist?list=PLuiKmtQJC8Im8VYeL4CeuX4VDap0ZahxO"
+    },
+    "items": [
+      {
+        "title": "TECH WORLD",
+        "category": "youtube",
+        "source": "SoftBank",
+        "thumbnail": "https://img.youtube.com/vi/7zVhl7wIC3M/hqdefault.jpg",
+        "description": "An interview series where active engineers candidly discuss SoftBank's engineering culture and work style.",
+        "link": "https://www.youtube.com/watch?v=7zVhl7wIC3M&list=PLdWTmEF6jFdYNfb8YPgt35pH58zKQjFzT",
+        "stats": { "views": "10K+", "duration": "15min" }
+      },
+      {
+        "title": "Tonari no Data Analyst #76",
+        "category": "podcast",
+        "source": "Spotify",
+        "description": "A one-hour talk session discussing career paths as an AI engineer, challenges in XR technology, and growth strategies as a technologist.",
+        "link": "https://open.spotify.com/episode/07Im8f3x9q1Bfek0coKcVM",
+        "stats": { "plays": "5K+", "duration": "60min" }
+      },
+      {
+        "title": "3rd-Year Engineer Roundtable",
+        "category": "press",
+        "source": "SoftBank Recruit",
+        "description": "Candid discussion among young engineers at SoftBank about technical challenges, career growth, and company culture.",
+        "link": "https://www.softbank.jp/recruit/graduate/crosstalk/engineer/",
+        "stats": {}
+      },
+      {
+        "title": "XR Beginner to Finalist — enXross HACKATHON Experience",
+        "category": "press",
+        "source": "enXross",
+        "description": "A feature article written about the journey from zero XR experience to hackathon finalist in 2 months.",
+        "link": "https://note.com/enxross/n/n8faf0b017d92",
+        "stats": {}
+      }
+    ]
+  },
+  "writing": {
+    "items": [
+      {
+        "title": "From Beginner to Finalist — 8th Wall x React in Practice",
+        "category": "written",
+        "source": "SoftBank BIZ",
+        "description": "Practical tips and best practices for WebAR application development. A systematic compilation of insights gained from real projects.",
+        "link": "https://www.softbank.jp/biz/blog/cloud-technology/articles/202412/enxross-finalist-react-8thwall/",
+        "stats": {}
+      },
+      {
+        "title": "What is o3? Latest AI Technology Explained Simply",
+        "category": "written",
+        "source": "SoftBank BIZ",
+        "description": "An accessible explanation of OpenAI's latest model o3, covering its features and applications. Also covers the differences between o3-mini and deep research.",
+        "link": "https://www.softbank.jp/biz/blog/business/articles/202503/o3/",
+        "stats": {}
+      }
+    ],
+    "supervised": [],
+    "platforms": [
+      {
+        "name": "note",
+        "description": "Technical articles and knowledge sharing",
+        "link": "https://note.com/nakamura_r/"
+      },
+      {
+        "name": "Zenn",
+        "description": "Practical programming tips",
+        "link": "https://zenn.dev/nakamura_r"
+      },
+      {
+        "name": "Qiita",
+        "description": "Programming knowledge sharing",
+        "link": "https://qiita.com/nakamura_r"
+      }
+    ]
+  },
+  "speaking": [
+    {
+      "title": "SoftBank Webinar — First Steps in Generative AI",
+      "event": "SoftBank Webinar",
+      "date": "2025-01",
+      "venue": "Online",
+      "link": "https://biz.tm.softbank.jp/me16947-wbn-entry-axross.html",
+      "stats": { "participants": "500+", "audience": "Enterprise" }
     },
     {
-      "title": "enXross Hackathon 2nd - Final Presentation",
-      "category": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/70QUKzJ-ciQ/hqdefault.jpg",
-      "description": "Finalist presentation at an XR technology hackathon. Showcasing the development process of a WebAR application built with React and 8th Wall.",
+      "title": "enXross Hackathon 2nd — Final Presentation",
+      "event": "enXross HACKATHON 2nd",
+      "date": "2024-12",
+      "venue": "Online",
       "link": "https://youtu.be/70QUKzJ-ciQ?si=x5_gNFDugCKbLJAj&t=7553",
       "stats": { "result": "Finalist", "participants": "300+" }
-    },
-    {
-      "title": "Tonari no Data Analyst #76",
-      "category": "podcast",
-      "description": "A one-hour talk session discussing career paths as an AI engineer, challenges in XR technology, and growth strategies as a technologist.",
-      "link": "https://open.spotify.com/episode/07Im8f3x9q1Bfek0coKcVM",
-      "stats": { "plays": "5K+", "duration": "60min" }
-    },
-    {
-      "title": "SoftBank Webinar - First Steps in Generative AI",
-      "category": "presentation",
-      "description": "A webinar presentation on practical use cases and implementation strategies for enterprise generative AI adoption, based on real project experience.",
-      "link": "https://biz.tm.softbank.jp/me16947-wbn-entry-axross.html",
-      "stats": { "participants": "500+", "audience": "enterprise" }
-    },
-    {
-      "title": "3rd-Year Engineer Roundtable",
-      "category": "article",
-      "description": "Candid discussion among young engineers at SoftBank about technical challenges, career growth, and company culture.",
-      "link": "https://www.softbank.jp/recruit/graduate/crosstalk/engineer/",
-      "stats": { "source": "SoftBank Recruit" }
-    },
-    {
-      "title": "XR Beginner to Finalist - enXross HACKATHON Experience",
-      "category": "article",
-      "description": "From zero XR experience to hackathon finalist in 2 months. A detailed guide on strategic learning, technology selection, and team development.",
-      "link": "https://note.com/enxross/n/n8faf0b017d92",
-      "stats": {}
-    },
-    {
-      "title": "From Beginner to Finalist - 8th Wall x React in Practice",
-      "category": "article",
-      "description": "Practical tips and best practices for WebAR application development. A systematic compilation of insights gained from real projects.",
-      "link": "https://www.softbank.jp/biz/blog/cloud-technology/articles/202412/enxross-finalist-react-8thwall/",
-      "stats": {}
-    },
-    {
-      "title": "What is o3? Latest AI Technology Explained Simply",
-      "category": "article",
-      "description": "An accessible explanation of OpenAI's latest model o3, covering its features and applications. Also covers the differences between o3-mini and deep research.",
-      "link": "https://www.softbank.jp/biz/blog/business/articles/202503/o3/",
-      "stats": {}
-    }
-  ],
-  "platforms": [
-    {
-      "name": "note",
-      "description": "Technical articles and knowledge sharing",
-      "link": "https://note.com/nakamura_r/"
-    },
-    {
-      "name": "Zenn",
-      "description": "Practical programming tips",
-      "link": "https://zenn.dev/nakamura_r"
-    },
-    {
-      "name": "Qiita",
-      "description": "Programming knowledge sharing",
-      "link": "https://qiita.com/nakamura_r"
     }
   ]
 }

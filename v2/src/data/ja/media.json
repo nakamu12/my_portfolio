@@ -1,85 +1,101 @@
 {
-  "featured": {
-    "title": "ソフトバンクビジネスチャンネル",
-    "category": "youtube",
-    "description": "AIエンジニアによる最先端テクノロジーの解説動画シリーズ。生成AI、機械学習、データサイエンスなど、ビジネスに活用できる技術を分かりやすく解説しています。",
-    "link": "https://www.youtube.com/playlist?list=PLuiKmtQJC8Im8VYeL4CeuX4VDap0ZahxO"
-  },
-  "items": [
-    {
-      "title": "TECH WORLD",
+  "press": {
+    "featured": {
+      "title": "ソフトバンクビジネスチャンネル",
       "category": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/7zVhl7wIC3M/hqdefault.jpg",
-      "description": "ソフトバンクのエンジニアリング文化や働き方について、現役エンジニアが本音で語るインタビューシリーズです。",
-      "link": "https://www.youtube.com/watch?v=7zVhl7wIC3M&list=PLdWTmEF6jFdYNfb8YPgt35pH58zKQjFzT",
-      "stats": { "views": "10K+", "duration": "15min" }
+      "description": "AIエンジニアによる最先端テクノロジーの解説動画シリーズ。生成AI、機械学習、データサイエンスなど、ビジネスに活用できる技術を分かりやすく解説しています。",
+      "link": "https://www.youtube.com/playlist?list=PLuiKmtQJC8Im8VYeL4CeuX4VDap0ZahxO"
+    },
+    "items": [
+      {
+        "title": "TECH WORLD",
+        "category": "youtube",
+        "source": "SoftBank",
+        "thumbnail": "https://img.youtube.com/vi/7zVhl7wIC3M/hqdefault.jpg",
+        "description": "ソフトバンクのエンジニアリング文化や働き方について、現役エンジニアが本音で語るインタビューシリーズです。",
+        "link": "https://www.youtube.com/watch?v=7zVhl7wIC3M&list=PLdWTmEF6jFdYNfb8YPgt35pH58zKQjFzT",
+        "stats": { "views": "10K+", "duration": "15min" }
+      },
+      {
+        "title": "となりのデータ分析屋さん #76",
+        "category": "podcast",
+        "source": "Spotify",
+        "description": "AIエンジニアとしてのキャリアパスやXR技術への挑戦、技術者としての成長戦略について語った1時間のトークセッション。",
+        "link": "https://open.spotify.com/episode/07Im8f3x9q1Bfek0coKcVM",
+        "stats": { "plays": "5K+", "duration": "60min" }
+      },
+      {
+        "title": "3年目エンジニア座談会",
+        "category": "press",
+        "source": "SoftBank Recruit",
+        "description": "ソフトバンクで働く若手エンジニアの本音トーク。技術的なチャレンジ、キャリア成長、社内文化について語り合いました。",
+        "link": "https://www.softbank.jp/recruit/graduate/crosstalk/engineer/",
+        "stats": {}
+      },
+      {
+        "title": "XR初挑戦で激戦を突破 — enXross HACKATHON体験記",
+        "category": "press",
+        "source": "enXross",
+        "description": "XR技術未経験から2ヶ月でファイナリストへの挑戦を、enXross公式が取材・執筆した特集記事。",
+        "link": "https://note.com/enxross/n/n8faf0b017d92",
+        "stats": {}
+      }
+    ]
+  },
+  "writing": {
+    "items": [
+      {
+        "title": "初心者からFinalistへ！ 8th Wall × React実践術",
+        "category": "written",
+        "source": "SoftBank BIZ",
+        "description": "WebARアプリケーション開発の実践的なTipsとベストプラクティス。実際のプロジェクトで得た知見を体系的にまとめました。",
+        "link": "https://www.softbank.jp/biz/blog/cloud-technology/articles/202412/enxross-finalist-react-8thwall/",
+        "stats": {}
+      },
+      {
+        "title": "o3とは？ 最新AI技術をかんたん解説",
+        "category": "written",
+        "source": "SoftBank BIZ",
+        "description": "OpenAIの最新モデルo3について、その特徴と活用方法を初心者にも分かりやすく解説。o3-miniやdeep researchの違いも詳しく説明。",
+        "link": "https://www.softbank.jp/biz/blog/business/articles/202503/o3/",
+        "stats": {}
+      }
+    ],
+    "supervised": [],
+    "platforms": [
+      {
+        "name": "note",
+        "description": "技術記事・知見の共有",
+        "link": "https://note.com/nakamura_r/"
+      },
+      {
+        "name": "Zenn",
+        "description": "実践的なプログラミングTips",
+        "link": "https://zenn.dev/nakamura_r"
+      },
+      {
+        "name": "Qiita",
+        "description": "プログラミング知識の共有",
+        "link": "https://qiita.com/nakamura_r"
+      }
+    ]
+  },
+  "speaking": [
+    {
+      "title": "SoftBank ウェビナー 生成AI活用の第一歩",
+      "event": "SoftBank ウェビナー",
+      "date": "2025-01",
+      "venue": "オンライン",
+      "link": "https://biz.tm.softbank.jp/me16947-wbn-entry-axross.html",
+      "stats": { "participants": "500+", "audience": "企業向け" }
     },
     {
       "title": "enXross Hackathon 2nd 最終プレゼンテーション",
-      "category": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/70QUKzJ-ciQ/hqdefault.jpg",
-      "description": "XR技術を活用したハッカソンでのファイナリストプレゼンテーション。React x 8th Wallで実現したWebARアプリケーションの開発過程を紹介。",
+      "event": "enXross HACKATHON 2nd",
+      "date": "2024-12",
+      "venue": "オンライン",
       "link": "https://youtu.be/70QUKzJ-ciQ?si=x5_gNFDugCKbLJAj&t=7553",
       "stats": { "result": "Finalist", "participants": "300+" }
-    },
-    {
-      "title": "となりのデータ分析屋さん #76",
-      "category": "podcast",
-      "description": "AIエンジニアとしてのキャリアパスやXR技術への挑戦、技術者としての成長戦略について語った1時間のトークセッション。",
-      "link": "https://open.spotify.com/episode/07Im8f3x9q1Bfek0coKcVM",
-      "stats": { "plays": "5K+", "duration": "60min" }
-    },
-    {
-      "title": "SoftBank ウェビナー 生成AI活用の第一歩",
-      "category": "presentation",
-      "description": "企業における生成AI活用の実践事例と導入戦略について、実際のプロジェクト経験を基に解説したウェビナー登壇。",
-      "link": "https://biz.tm.softbank.jp/me16947-wbn-entry-axross.html",
-      "stats": { "participants": "500+", "audience": "enterprise" }
-    },
-    {
-      "title": "3年目エンジニア座談会",
-      "category": "article",
-      "description": "ソフトバンクで働く若手エンジニアの本音トーク。技術的なチャレンジ、キャリア成長、社内文化について語り合いました。",
-      "link": "https://www.softbank.jp/recruit/graduate/crosstalk/engineer/",
-      "stats": { "source": "SoftBank Recruit" }
-    },
-    {
-      "title": "XR初挑戦で激戦を突破 enXross HACKATHON体験記",
-      "category": "article",
-      "description": "XR技術未経験から2ヶ月でファイナリストに。戦略的な学習方法と技術選定、チーム開発のノウハウを詳しく解説。",
-      "link": "https://note.com/enxross/n/n8faf0b017d92",
-      "stats": {}
-    },
-    {
-      "title": "初心者からFinalistへ！ 8th Wall x React実践術",
-      "category": "article",
-      "description": "WebARアプリケーション開発の実践的なTipsとベストプラクティス。実際のプロジェクトで得た知見を体系的にまとめました。",
-      "link": "https://www.softbank.jp/biz/blog/cloud-technology/articles/202412/enxross-finalist-react-8thwall/",
-      "stats": {}
-    },
-    {
-      "title": "o3とは？ 最新AI技術をかんたん解説",
-      "category": "article",
-      "description": "OpenAIの最新モデルo3について、その特徴と活用方法を初心者にも分かりやすく解説。o3-miniやdeep researchの違いも詳しく説明。",
-      "link": "https://www.softbank.jp/biz/blog/business/articles/202503/o3/",
-      "stats": {}
-    }
-  ],
-  "platforms": [
-    {
-      "name": "note",
-      "description": "技術記事・知見の共有",
-      "link": "https://note.com/nakamura_r/"
-    },
-    {
-      "name": "Zenn",
-      "description": "実践的なプログラミングTips",
-      "link": "https://zenn.dev/nakamura_r"
-    },
-    {
-      "name": "Qiita",
-      "description": "プログラミング知識の共有",
-      "link": "https://qiita.com/nakamura_r"
     }
   ]
 }

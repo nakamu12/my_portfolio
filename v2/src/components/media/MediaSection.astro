@@ -5,188 +5,266 @@ import { getLangFromUrl, getTranslations } from '@/i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = await getTranslations(lang);
 
-const mediaData = await import(`../../data/${lang}/media.json`);
-const featured = mediaData.featured ?? mediaData.default?.featured;
-const items: {
-  title: string;
-  category: string;
-  thumbnail?: string;
-  description: string;
-  link: string;
-  stats?: Record<string, string>;
-}[] = mediaData.items ?? mediaData.default?.items ?? [];
-const platforms: {
-  name: string;
-  description: string;
-  link: string;
-}[] = mediaData.platforms ?? mediaData.default?.platforms ?? [];
+const raw = await import(`../../data/${lang}/media.json`);
+const data = raw.default ?? raw;
 
-// Collect all i18n labels needed by the React island
-const labels: Record<string, string> = {
+// ── Data ──────────────────────────────────────────────────────────────────────
+const pressFeatured = data.press?.featured;
+const pressItems: {
+  title: string; category: string; source?: string; thumbnail?: string;
+  description: string; link: string; stats?: Record<string, string>;
+}[] = data.press?.items ?? [];
+
+const writingItems: {
+  title: string; category: string; source?: string;
+  description: string; link: string; stats?: Record<string, string>;
+}[] = [
+  ...(data.writing?.items ?? []),
+  ...(data.writing?.supervised ?? []),
+];
+const platforms: { name: string; description: string; link: string; }[] =
+  data.writing?.platforms ?? [];
+
+const speakingItems: {
+  title: string; event: string; date: string; venue: string;
+  link: string; stats?: Record<string, string>;
+}[] = [...(data.speaking ?? [])].sort((a, b) => b.date.localeCompare(a.date));
+
+// ── Stats ─────────────────────────────────────────────────────────────────────
+const statPress   = pressItems.length + (pressFeatured ? 1 : 0);
+const statWritten = (data.writing?.items ?? []).length;
+const statSupervised = (data.writing?.supervised ?? []).length;
+const statSpeaking = speakingItems.length;
+
+// ── i18n labels for React island ─────────────────────────────────────────────
+const pressLabels: Record<string, string> = {
   'media.category.all': t('media.category.all'),
   'media.category.youtube': t('media.category.youtube'),
   'media.category.podcast': t('media.category.podcast'),
-  'media.category.presentation': t('media.category.presentation'),
-  'media.category.article': t('media.category.article'),
+  'media.category.press': t('media.category.press'),
+};
+const writingLabels: Record<string, string> = {
+  'media.category.all': t('media.category.all'),
+  'media.category.written': t('media.category.written'),
+  'media.category.supervised': t('media.category.supervised'),
 };
 
+// ── Platform icons & colors ───────────────────────────────────────────────────
 const platformIcons: Record<string, string> = {
-  note: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 512 512" fill="currentColor"><path d="M349.6 106H162.4C130.9 106 106 130.9 106 162.4v187.2c0 31.5 24.9 56.4 56.4 56.4h187.2c31.5 0 56.4-24.9 56.4-56.4V162.4c0-31.5-24.9-56.4-56.4-56.4zm-103.4 208.7h-52.8v-18.2h52.8v18.2zm0-48.5h-52.8v-18.2h52.8v18.2zm88.2 0h-70.1v-18.2h70.1v18.2zm0-48.4h-123v-18.2h123v18.2zm0-48.5h-123V151h123v18.3z"/></svg>`,
-  Zenn: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 97 88" fill="currentColor"><path d="M9.5 74.5L49 13h16.5L26 74.5H9.5zm32 0L80.5 13H97L58 74.5H41.5z"/></svg>`,
-  Qiita: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.268 2 2 8.268 2 16s6.268 14 14 14 14-6.268 14-14S23.732 2 16 2zm6.4 20.4H9.6V9.6h12.8v12.8zm-9.6-9.6v6.4h6.4v-6.4h-6.4z"/></svg>`,
+  note: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512" fill="currentColor"><path d="M349.6 106H162.4C130.9 106 106 130.9 106 162.4v187.2c0 31.5 24.9 56.4 56.4 56.4h187.2c31.5 0 56.4-24.9 56.4-56.4V162.4c0-31.5-24.9-56.4-56.4-56.4zm-103.4 208.7h-52.8v-18.2h52.8v18.2zm0-48.5h-52.8v-18.2h52.8v18.2zm88.2 0h-70.1v-18.2h70.1v18.2zm0-48.4h-123v-18.2h123v18.2zm0-48.5h-123V151h123v18.3z"/></svg>`,
+  Zenn: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 97 88" fill="currentColor"><path d="M9.5 74.5L49 13h16.5L26 74.5H9.5zm32 0L80.5 13H97L58 74.5H41.5z"/></svg>`,
+  Qiita: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.268 2 2 8.268 2 16s6.268 14 14 14 14-6.268 14-14S23.732 2 16 2zm6.4 20.4H9.6V9.6h12.8v12.8zm-9.6-9.6v6.4h6.4v-6.4h-6.4z"/></svg>`,
 };
-
 const platformColors: Record<string, string> = {
   note: '#41c9b4',
   Zenn: '#3ea8ff',
   Qiita: '#55c500',
 };
+
+// ── Speaking date formatter ───────────────────────────────────────────────────
+function formatDate(dateStr: string, locale: string): string {
+  const [year, month] = dateStr.split('-');
+  if (!year || !month) return dateStr;
+  const d = new Date(parseInt(year), parseInt(month) - 1, 1);
+  return d.toLocaleDateString(locale === 'ja' ? 'ja-JP' : 'en-US', {
+    year: 'numeric', month: 'short',
+  });
+}
 ---
 
 <section id="media" class="py-24">
   <div class="mx-auto max-w-6xl px-6">
-    <!-- Section Header -->
+
+    <!-- Section Header + Stats -->
     <div class="mb-16">
       <h2 class="text-4xl font-semibold md:text-5xl">{t('media.title')}</h2>
-      <p class="text-muted-foreground mt-4 text-base md:text-lg">{t('media.subtitle')}</p>
+      <p class="text-muted-foreground mt-4 text-base">{t('media.subtitle')}</p>
+
+      <!-- Stats row -->
+      <div class="mt-8 flex flex-wrap gap-x-8 gap-y-3">
+        {statPress > 0 && (
+          <div class="flex items-baseline gap-1.5">
+            <span class="text-foreground text-2xl font-bold tabular-nums">{statPress}</span>
+            <span class="text-muted-foreground text-sm">{t('media.press.title')}</span>
+          </div>
+        )}
+        {statWritten > 0 && (
+          <div class="flex items-baseline gap-1.5">
+            <span class="text-foreground text-2xl font-bold tabular-nums">{statWritten}</span>
+            <span class="text-muted-foreground text-sm">{t('media.category.written')}</span>
+          </div>
+        )}
+        {statSupervised > 0 && (
+          <div class="flex items-baseline gap-1.5">
+            <span class="text-foreground text-2xl font-bold tabular-nums">{statSupervised}</span>
+            <span class="text-muted-foreground text-sm">{t('media.category.supervised')}</span>
+          </div>
+        )}
+        {statSpeaking > 0 && (
+          <div class="flex items-baseline gap-1.5">
+            <span class="text-foreground text-2xl font-bold tabular-nums">{statSpeaking}</span>
+            <span class="text-muted-foreground text-sm">{t('media.speaking.title')}</span>
+          </div>
+        )}
+      </div>
     </div>
 
-    <!-- Featured Card -->
-    {
-      featured && (
-        <div class="mb-16">
-          <div class="mb-4 flex items-center gap-2">
-            <span class="inline-flex items-center gap-1.5 rounded-full border border-[#686dff]/30 bg-[#686dff]/10 px-3 py-1 text-xs font-medium text-[#686dff]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="11"
-                height="11"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-              </svg>
-              {t('media.featured')}
-            </span>
-          </div>
+    <!-- ── Press & Appearances ─────────────────────────────────────────────── -->
+    <div class="mb-24">
+      <div class="mb-8">
+        <h3 class="text-foreground text-2xl font-semibold">{t('media.press.title')}</h3>
+        <p class="text-muted-foreground mt-1.5 text-sm">{t('media.press.subtitle')}</p>
+      </div>
+
+      <!-- Featured -->
+      {pressFeatured && (
+        <div class="mb-10">
+          <span class="mb-4 inline-flex items-center gap-1.5 rounded-full border border-[#686dff]/30 bg-[#686dff]/10 px-3 py-1 text-xs font-medium text-[#686dff]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            {t('media.featured')}
+          </span>
 
           <a
-            href={featured.link}
+            href={pressFeatured.link}
             target="_blank"
             rel="noopener noreferrer"
             class="border-border bg-background group overflow-hidden rounded-2xl border transition-all duration-200 hover:border-[#686dff]/40 hover:shadow-xl md:flex"
           >
-            {/* Thumbnail side */}
-            <div class="relative aspect-video shrink-0 overflow-hidden bg-gradient-to-br from-red-950 via-red-900/50 to-neutral-900 md:aspect-auto md:w-72 lg:w-80">
+            <div class="relative shrink-0 overflow-hidden bg-gradient-to-br from-red-950 via-red-900/50 to-neutral-900 md:w-72 lg:w-80" style="aspect-ratio:16/9">
               <div class="absolute inset-0 flex items-center justify-center">
                 <div class="flex h-20 w-20 items-center justify-center rounded-full bg-[#ff0000]/20 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
-                  <svg
-                    class="h-9 w-9 text-red-400"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
+                  <svg class="h-9 w-9 text-red-400" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z" />
                   </svg>
                 </div>
               </div>
-              {/* Subtle grid overlay */}
-              <div
-                class="absolute inset-0 opacity-10"
-                style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 32px 32px;"
-              />
+              <div class="absolute inset-0 opacity-10" style="background-image:linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px);background-size:32px 32px" />
             </div>
-
-            {/* Content side */}
             <div class="flex flex-1 flex-col justify-center p-6 md:p-8 lg:p-10">
               <span class="mb-3 flex items-center gap-1.5 text-xs font-medium uppercase tracking-widest text-red-400">
-                <span class="h-1.5 w-1.5 rounded-full bg-red-400" />
-                YouTube
+                <span class="h-1.5 w-1.5 rounded-full bg-red-400" /> YouTube
               </span>
-              <h3 class="group-hover:text-[#686dff] text-foreground text-xl font-bold leading-snug transition-colors md:text-2xl">
-                {featured.title}
-              </h3>
-              <p class="text-muted-foreground mt-3 text-sm leading-relaxed">
-                {featured.description}
-              </p>
+              <h4 class="group-hover:text-[#686dff] text-foreground text-xl font-bold leading-snug transition-colors md:text-2xl">
+                {pressFeatured.title}
+              </h4>
+              <p class="text-muted-foreground mt-3 text-sm leading-relaxed">{pressFeatured.description}</p>
               <div class="mt-6 flex items-center gap-2 text-sm font-medium text-[#686dff]">
                 <span>{t('media.visit')}</span>
-                <svg
-                  class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
+                <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
                 </svg>
               </div>
             </div>
           </a>
         </div>
-      )
-    }
+      )}
 
-    <!-- Carousel with filter tabs -->
-    <MediaCarousel client:visible items={items} labels={labels} />
+      <!-- Press carousel -->
+      <MediaCarousel client:visible items={pressItems} labels={pressLabels} />
+    </div>
 
-    <!-- Writing Platforms -->
-    {
-      platforms.length > 0 && (
-        <div class="mt-20">
-          <div class="mb-8 flex items-end justify-between">
-            <div>
-              <h3 class="text-foreground text-xl font-semibold">{t('media.writing.title')}</h3>
-              <p class="text-muted-foreground mt-1 text-sm">{t('media.writing.subtitle')}</p>
-            </div>
-          </div>
-          <div class="grid gap-4 sm:grid-cols-3">
-            {platforms.map((platform) => (
+    <!-- ── Writing ─────────────────────────────────────────────────────────── -->
+    <div class="mb-24">
+      <div class="mb-8">
+        <h3 class="text-foreground text-2xl font-semibold">{t('media.writing.title')}</h3>
+        <p class="text-muted-foreground mt-1.5 text-sm">{t('media.writing.subtitle')}</p>
+      </div>
+
+      <MediaCarousel
+        client:visible
+        items={writingItems}
+        labels={writingLabels}
+        emptyMessage={t('media.supervised.empty')}
+      />
+
+      <!-- Platforms -->
+      {platforms.length > 0 && (
+        <div class="mt-12">
+          <p class="text-muted-foreground mb-4 text-xs font-medium uppercase tracking-widest">
+            {t('media.writing.also_on')}
+          </p>
+          <div class="flex flex-wrap gap-3">
+            {platforms.map((p) => (
               <a
-                href={platform.link}
+                href={p.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="border-border bg-background group relative overflow-hidden rounded-xl border p-5 transition-all duration-200 hover:border-[#686dff]/30 hover:shadow-md"
+                class="border-border bg-background group flex items-center gap-2.5 rounded-full border px-4 py-2 transition-all duration-150 hover:border-[#686dff]/30 hover:shadow-sm"
               >
-                {/* Accent line on hover */}
-                <div
-                  class="absolute inset-x-0 top-0 h-0.5 scale-x-0 transition-transform duration-200 group-hover:scale-x-100"
-                  style={`background: linear-gradient(90deg, ${platformColors[platform.name] ?? '#686dff'}, transparent)`}
-                />
-                <div class="flex items-center gap-4">
-                  <span
-                    class="text-muted-foreground flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-colors group-hover:text-[var(--platform-color)]"
-                    style={`--platform-color: ${platformColors[platform.name] ?? '#686dff'}`}
-                  >
-                    <Fragment set:html={platformIcons[platform.name] ?? `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>`} />
-                  </span>
-                  <div class="min-w-0">
-                    <p class="text-foreground text-sm font-semibold">{platform.name}</p>
-                    <p class="text-muted-foreground mt-0.5 truncate text-xs">
-                      {platform.description}
-                    </p>
-                  </div>
-                  <svg
-                    class="text-muted-foreground ml-auto h-4 w-4 shrink-0 opacity-0 transition-opacity group-hover:opacity-100"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                    <polyline points="15 3 21 3 21 9" />
-                    <line x1="10" y1="14" x2="21" y2="3" />
-                  </svg>
-                </div>
+                <span class="text-muted-foreground group-hover:text-[var(--pc)] transition-colors" style={`--pc:${platformColors[p.name] ?? '#686dff'}`}>
+                  <Fragment set:html={platformIcons[p.name] ?? ''} />
+                </span>
+                <span class="text-foreground text-sm font-medium">{p.name}</span>
+                <svg class="text-muted-foreground h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
               </a>
             ))}
           </div>
         </div>
-      )
-    }
+      )}
+    </div>
+
+    <!-- ── Speaking ────────────────────────────────────────────────────────── -->
+    {speakingItems.length > 0 && (
+      <div>
+        <div class="mb-8">
+          <h3 class="text-foreground text-2xl font-semibold">{t('media.speaking.title')}</h3>
+          <p class="text-muted-foreground mt-1.5 text-sm">{t('media.speaking.subtitle')}</p>
+        </div>
+
+        <div class="relative">
+          <!-- Vertical line -->
+          <div class="border-border absolute top-2 bottom-2 left-[7px] border-l" />
+
+          <ol class="space-y-8">
+            {speakingItems.map((item) => (
+              <li class="relative flex gap-6 pl-8">
+                <!-- Dot -->
+                <div class="bg-background border-border absolute left-0 top-1.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2">
+                  <span class="bg-[#686dff] h-1.5 w-1.5 rounded-full" />
+                </div>
+
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="border-border bg-background group flex-1 rounded-xl border p-5 transition-all duration-200 hover:border-[#686dff]/30 hover:shadow-sm"
+                >
+                  <!-- Date + venue row -->
+                  <div class="mb-3 flex flex-wrap items-center gap-2">
+                    <span class="rounded-full bg-[#686dff]/10 px-2.5 py-0.5 text-xs font-semibold text-[#686dff]">
+                      {formatDate(item.date, lang)}
+                    </span>
+                    <span class="border-border text-muted-foreground rounded-full border px-2.5 py-0.5 text-xs">
+                      {item.venue}
+                    </span>
+                  </div>
+
+                  <!-- Title -->
+                  <p class="group-hover:text-[#686dff] text-foreground text-sm font-semibold leading-snug transition-colors">
+                    {item.title}
+                  </p>
+
+                  <!-- Stats badges -->
+                  {item.stats && Object.keys(item.stats).length > 0 && (
+                    <div class="mt-3 flex flex-wrap gap-1.5">
+                      {Object.values(item.stats).map((val) => (
+                        <span class="border-border text-muted-foreground rounded-full border px-2 py-0.5 text-[11px]">
+                          {val}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    )}
+
   </div>
 </section>
