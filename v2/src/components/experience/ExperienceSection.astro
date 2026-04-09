@@ -136,7 +136,7 @@ const CATEGORY_LABELS: Record<ExperienceItem['category'], string> = {
                         {roleEntry.achievements && roleEntry.achievements.length > 0 && (
                           <ul class="mt-2 space-y-1.5">
                             {roleEntry.achievements.map((achievement) => (
-                              <li class="text-muted-foreground flex items-start gap-2 text-sm leading-relaxed">
+                              <li class="text-foreground/90 flex items-start gap-2 text-sm leading-relaxed">
                                 <span aria-hidden="true" class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#686dff]" />
                                 <span>{achievement}</span>
                               </li>
@@ -156,7 +156,7 @@ const CATEGORY_LABELS: Record<ExperienceItem['category'], string> = {
                                   <span class="text-xs font-medium text-[#b66fff]">{side.title}</span>
                                   <span class="text-muted-foreground mx-1 text-xs">·</span>
                                   <span class="text-muted-foreground text-xs tabular-nums">{formatPeriod(side.startYear, side.endYear)}</span>
-                                  <p class="text-muted-foreground mt-0.5 text-xs leading-relaxed">{side.description}</p>
+                                  <p class="text-foreground/80 mt-0.5 text-xs leading-relaxed">{side.description}</p>
                                 </div>
                               </div>
                             ))}
@@ -184,7 +184,7 @@ const CATEGORY_LABELS: Record<ExperienceItem['category'], string> = {
 
                 {/* ── Optional footnote (e.g. part-time work during studies) ── */}
                 {item.note && (
-                  <p class="text-muted-foreground mt-3 border-t border-dashed pt-3 text-xs leading-relaxed border-border/50">
+                  <p class="text-foreground/60 mt-3 border-t border-dashed pt-3 text-xs leading-relaxed border-border/50">
                     {item.note}
                   </p>
                 )}
