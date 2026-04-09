@@ -9,7 +9,8 @@ export const defaultLang: Lang = 'en';
 
 export function getLangFromUrl(url: URL): Lang {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-  const path = base && url.pathname.startsWith(base) ? url.pathname.slice(base.length) : url.pathname;
+  const path =
+    base && url.pathname.startsWith(base) ? url.pathname.slice(base.length) : url.pathname;
   const [, lang] = path.split('/');
   if (lang in languages) return lang as Lang;
   return defaultLang;

@@ -23,5 +23,17 @@
   "about.subheading": "自己紹介",
   "about.profileAlt": "中村 亮太",
   "about.cta": "より詳しくは、各セクションをご覧ください。",
-  "about.personalityLabel": "パーソナリティ"
+  "about.personalityLabel": "パーソナリティ",
+  "aiToolkit.heading": "AI ツールキット",
+  "aiToolkit.subheading": "毎日使っているAIツールのカタログ。構築・リサーチ・開発を加速するための武器。",
+  "aiToolkit.filter.all": "すべて",
+  "footer.backToTop": "トップへ戻る",
+  "skills.title": "スキル",
+  "skills.subtitle": "使用している技術・ツール一覧",
+  "contact.heading": "お問い合わせ",
+  "contact.subheading": "SNSからお気軽にご連絡ください。",
+  "contact.connect.label": "つながる",
+  "contact.availability.label": "ステータス",
+  "contact.availability.status": "つながりを歓迎します",
+  "contact.availability.detail": "技術的な議論やコラボレーションはお気軽にどうぞ。"
 }
