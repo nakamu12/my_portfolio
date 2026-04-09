@@ -21,5 +21,8 @@
   "header.menu": "メニュー",
   "aiToolkit.heading": "AI ツールキット",
   "aiToolkit.subheading": "毎日使っているAIツールのカタログ。構築・リサーチ・開発を加速するための武器。",
-  "aiToolkit.filter.all": "すべて"
+  "aiToolkit.filter.all": "すべて",
+  "footer.backToTop": "トップへ戻る",
+  "skills.title": "スキル",
+  "skills.subtitle": "使用している技術・ツール一覧"
 }
