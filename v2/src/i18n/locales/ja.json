@@ -18,5 +18,6 @@
   "header.theme.light": "ライト",
   "header.theme.dark": "ダーク",
   "header.lang": "English",
-  "header.menu": "メニュー"
+  "header.menu": "メニュー",
+  "footer.backToTop": "トップへ戻る"
 }
