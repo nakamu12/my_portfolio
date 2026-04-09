@@ -2,12 +2,14 @@
   "items": [
     {
       "title": "SoftBank Corp.",
-      "period": "2020 – Present",
+      "startYear": 2020,
+      "endYear": null,
       "category": "work",
       "roles": [
         {
           "role": "AI/DX Platform Engineer · Axross Business Division",
-          "period": "2024 – Present",
+          "startYear": 2024,
+          "endYear": null,
           "achievements": [
             "Planning and development of the AI/DX online learning platform AxrossRecipe",
             "Designed LLM-powered content generation pipelines to automate course production",
@@ -16,14 +18,16 @@
           "concurrent": [
             {
               "title": "Magicss",
-              "period": "2024 – 2025",
+              "startYear": 2024,
+              "endYear": 2025,
               "description": "Developing an automated SEO article generation service"
             }
           ]
         },
         {
           "role": "Internal Systems Operations Engineer",
-          "period": "2020 – 2024",
+          "startYear": 2020,
+          "endYear": 2024,
           "achievements": [
             "Managed and maintained large-scale internal corporate systems",
             "Drove automation initiatives to reduce manual operations overhead"
@@ -34,7 +38,8 @@
     {
       "title": "Hosei University Graduate School",
       "role": "M.Eng. · Systems Engineering · Autonomous Robotics Lab",
-      "period": "2018 – 2020",
+      "startYear": 2018,
+      "endYear": 2020,
       "category": "education",
       "achievements": [
         "Research in autonomous mobile robots — navigation, perception, and control",
@@ -44,7 +49,8 @@
     {
       "title": "Hosei University",
       "role": "B.Eng. · Faculty of Science and Engineering · Applied Informatics",
-      "period": "2014 – 2018",
+      "startYear": 2014,
+      "endYear": 2018,
       "category": "education",
       "achievements": [
         "Studied computer science fundamentals, algorithms, and applied mathematics",

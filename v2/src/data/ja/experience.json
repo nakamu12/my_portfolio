@@ -2,12 +2,14 @@
   "items": [
     {
       "title": "ソフトバンク株式会社",
-      "period": "2020年〜現在",
+      "startYear": 2020,
+      "endYear": null,
       "category": "work",
       "roles": [
         {
           "role": "AI/DXプラットフォームエンジニア · Axross事業",
-          "period": "2024年〜現在",
+          "startYear": 2024,
+          "endYear": null,
           "achievements": [
             "AI/DXオンライン学習プラットフォーム「AxrossRecipe」の企画・開発を担当",
             "LLMを活用したコンテンツ生成パイプラインを設計し、コース制作を自動化",
@@ -16,14 +18,16 @@
           "concurrent": [
             {
               "title": "Magicss",
-              "period": "2024年〜2025年",
+              "startYear": 2024,
+              "endYear": 2025,
               "description": "SEO記事自動生成サービスの開発に副業として並行参画"
             }
           ]
         },
         {
           "role": "社内システム運用エンジニア",
-          "period": "2020年〜2024年",
+          "startYear": 2020,
+          "endYear": 2024,
           "achievements": [
             "大規模な社内システムの運用・保守を担当",
             "手動作業の削減を目的とした自動化施策を推進"
@@ -34,7 +38,8 @@
     {
       "title": "法政大学大学院",
       "role": "修士（工学）· 理工学研究科 · Autonomous Robotics Lab",
-      "period": "2018年〜2020年",
+      "startYear": 2018,
+      "endYear": 2020,
       "category": "education",
       "achievements": [
         "自律走行ロボットの研究に従事（ナビゲーション・認識・制御）",
@@ -44,7 +49,8 @@
     {
       "title": "法政大学",
       "role": "学士（工学）· 理工学部 創生科学科",
-      "period": "2014年〜2018年",
+      "startYear": 2014,
+      "endYear": 2018,
       "category": "education",
       "achievements": [
         "コンピュータサイエンスの基礎、アルゴリズム、応用数学を学ぶ",
