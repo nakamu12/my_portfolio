@@ -34,25 +34,28 @@ const strengths: { name: string; subtitle?: string; desc: string }[] =
 
     <!-- Profile + Bio -->
     <div class="mb-10 grid grid-cols-1 gap-8 lg:grid-cols-[280px_1fr] lg:gap-12">
-      <!-- Left: Photo + Attribute chips -->
-      <div class="flex flex-col gap-4">
+      <!-- Left: Photo only -->
+      <div
+        class="about-photo relative aspect-square w-full overflow-hidden rounded-2xl ring-1 ring-white/10"
+      >
+        <Image
+          src={profileImage}
+          alt={t('about.profileAlt')}
+          width={560}
+          height={560}
+          class="h-full w-full object-cover"
+        />
         <div
-          class="about-photo relative aspect-square w-full overflow-hidden rounded-2xl ring-1 ring-white/10"
+          class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"
         >
-          <Image
-            src={profileImage}
-            alt={t('about.profileAlt')}
-            width={560}
-            height={560}
-            class="h-full w-full object-cover"
-          />
-          <div
-            class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"
-          >
-          </div>
         </div>
+      </div>
 
-        <!-- Attribute chips under photo -->
+      <!-- Right: Bio text + Attribute chips -->
+      <div class="flex flex-col gap-5">
+        <p class="about-bio text-muted-foreground text-base leading-relaxed lg:text-lg">{bio}</p>
+
+        <!-- Attribute chips -->
         <div class="grid grid-cols-2 gap-2">
           {
             attributes.map((attr) => (
@@ -65,11 +68,6 @@ const strengths: { name: string; subtitle?: string; desc: string }[] =
             ))
           }
         </div>
-      </div>
-
-      <!-- Right: Bio text -->
-      <div class="flex items-start">
-        <p class="about-bio text-muted-foreground text-base leading-relaxed lg:text-lg">{bio}</p>
       </div>
     </div>
 
