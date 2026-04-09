@@ -92,6 +92,16 @@ const SOURCE_STYLES: Record<string, { gradient: string; textColor: string }> = {
 
 const CAT_KEY_PREFIX = 'media.category.';
 
+// ── YouTube thumbnail helper ──────────────────────────────────────────────────
+function getYoutubeThumbnail(url: string): string | undefined {
+  // https://www.youtube.com/watch?v=VIDEO_ID  or  https://youtu.be/VIDEO_ID
+  const watchMatch = url.match(/[?&]v=([^&]+)/);
+  if (watchMatch) return `https://img.youtube.com/vi/${watchMatch[1]}/hqdefault.jpg`;
+  const shortMatch = url.match(/youtu\.be\/([^?&/]+)/);
+  if (shortMatch) return `https://img.youtube.com/vi/${shortMatch[1]}/hqdefault.jpg`;
+  return undefined;
+}
+
 export default function MediaCarousel({ items, labels, emptyMessage }: Props) {
   const [active, setActive] = useState<Category>('all');
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -193,6 +203,7 @@ export default function MediaCarousel({ items, labels, emptyMessage }: Props) {
 function MediaCard({ item }: { item: MediaItem }) {
   const style = CAT_STYLES[item.category] ?? CAT_STYLES.press;
   const srcStyle = item.source ? SOURCE_STYLES[item.source] : undefined;
+  const thumbnail = item.thumbnail ?? (item.category === 'youtube' ? getYoutubeThumbnail(item.link) : undefined);
 
   return (
     <a
@@ -204,9 +215,9 @@ function MediaCard({ item }: { item: MediaItem }) {
     >
       {/* Thumbnail */}
       <div className="bg-muted relative aspect-video overflow-hidden">
-        {item.thumbnail ? (
+        {thumbnail ? (
           <img
-            src={item.thumbnail}
+            src={thumbnail}
             alt={item.title}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
