@@ -2,147 +2,73 @@
 import { getLangFromUrl, getTranslations } from '@/i18n/utils';
 
 interface Props {
-  slug: string;
   title: string;
   description: string;
   tech: string[];
-  image: string | null;
-  status: 'active' | 'archived';
-  period: string;
+  period: string | null;
   links: {
     site: string | null;
     github: string | null;
   };
 }
 
-const { slug, title, description, tech, image, status, period, links } = Astro.props;
+const { title, description, tech, period, links } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = await getTranslations(lang);
-
-const isArchived = status === 'archived';
-const detailUrl = `/${lang}/projects/${slug}/`;
 ---
 
-<article class:list={[
-  "group flex flex-col rounded-xl border bg-card overflow-hidden transition-all duration-300",
-  isArchived
-    ? "border-border opacity-70 hover:opacity-90"
-    : "border-border hover:border-[#686dff]/40 hover:shadow-[0_0_0_1px_rgba(104,109,255,0.2)]"
-]}>
-  <!-- Thumbnail -->
-  <a href={detailUrl} class="block aspect-video bg-muted relative overflow-hidden">
-    {image ? (
-      <img
-        src={`/images/projects/${image}`}
-        alt={title}
-        class:list={[
-          "w-full h-full object-cover transition-transform duration-500 group-hover:scale-105",
-          isArchived && "grayscale-[60%]"
-        ]}
-        loading="lazy"
-      />
-    ) : (
-      <div class:list={[
-        "w-full h-full flex items-center justify-center bg-gradient-to-br",
-        isArchived
-          ? "from-[rgba(120,120,120,0.06)] to-[rgba(120,120,120,0.06)]"
-          : "from-[rgba(104,109,255,0.08)] to-[rgba(182,111,255,0.08)]"
-      ]}>
-        <span class:list={[
-          "text-4xl font-bold select-none font-mono",
-          isArchived ? "text-muted-foreground/20" : "text-[#686dff]/30"
-        ]}>
-          {title.slice(0, 2).toUpperCase()}
-        </span>
-      </div>
-    )}
-
-    <!-- Archived badge overlay -->
-    {isArchived && (
-      <div class="absolute top-3 left-3 flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-background/80 backdrop-blur-sm border border-border text-xs font-medium text-muted-foreground">
-        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/>
-        </svg>
-        {t('projects.status.archived')}
-      </div>
-    )}
-  </a>
+<article class="flex flex-col rounded-xl border border-border bg-card overflow-hidden opacity-70 hover:opacity-90 transition-opacity duration-300">
+  <!-- Thumbnail placeholder -->
+  <div class="aspect-video bg-muted flex items-center justify-center">
+    <span class="text-3xl font-bold text-muted-foreground/20 select-none font-mono">
+      {title.slice(0, 2).toUpperCase()}
+    </span>
+  </div>
 
   <!-- Content -->
-  <div class="flex flex-col flex-1 p-6 gap-4">
-    <!-- Title & Description -->
-    <div class="flex flex-col gap-2">
-      <div class="flex items-baseline justify-between gap-2">
-        <a href={detailUrl} class="group/title min-w-0">
-          <h3 class:list={[
-            "text-lg font-semibold tracking-tight truncate transition-colors duration-200",
-            isArchived ? "group-hover/title:text-foreground" : "group-hover/title:text-[#686dff]"
-          ]}>
-            {title}
-          </h3>
-        </a>
-        <span class="text-xs text-muted-foreground shrink-0 font-mono">{period}</span>
-      </div>
-      <p class="text-sm text-muted-foreground leading-relaxed line-clamp-3">
-        {description}
-      </p>
+  <div class="flex flex-col flex-1 p-5 gap-3">
+    <div class="flex items-baseline justify-between gap-2">
+      <h3 class="text-base font-semibold tracking-tight">{title}</h3>
+      {period && (
+        <span class="text-xs text-muted-foreground font-mono shrink-0">{period}</span>
+      )}
     </div>
 
-    <!-- Tech Stack Tags -->
-    <div class="flex flex-wrap gap-2">
+    <p class="text-sm text-muted-foreground leading-relaxed line-clamp-2">{description}</p>
+
+    <div class="flex flex-wrap gap-1.5">
       {tech.map((tag) => (
-        <span class:list={[
-          "inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium border",
-          isArchived
-            ? "bg-muted/50 text-muted-foreground border-border"
-            : "bg-[rgba(104,109,255,0.08)] text-[#686dff] border-[rgba(104,109,255,0.15)]"
-        ]}>
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-muted text-muted-foreground border border-border">
           {tag}
         </span>
       ))}
     </div>
 
     <!-- Links -->
-    <div class="flex items-center gap-3 mt-auto pt-2">
-      <a
-        href={detailUrl}
-        class:list={[
-          "inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200",
-          isArchived
-            ? "text-muted-foreground hover:text-foreground"
-            : "text-[#686dff] hover:text-[#5961ff]"
-        ]}
-      >
-        {t('projects.viewDetails')}
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
-        </svg>
-      </a>
-
+    <div class="flex items-center gap-3 mt-auto pt-1">
       {links.site && (
         <a
           href={links.site}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 ml-auto"
+          class="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors duration-200"
           aria-label={`Visit ${title} website`}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
           </svg>
           {t('projects.viewSite')}
         </a>
       )}
-
       {links.github && (
         <a
           href={links.github}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+          class="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors duration-200"
           aria-label={`View ${title} on GitHub`}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
           </svg>
           {t('projects.viewGitHub')}

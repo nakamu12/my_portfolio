@@ -1,26 +1,31 @@
 ---
 import { getLangFromUrl, getTranslations } from '@/i18n/utils';
+import FeaturedProjectCard from './FeaturedProjectCard.astro';
 import ProjectCard from './ProjectCard.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = await getTranslations(lang);
 
-const { items } = (await import(`../../data/${lang}/projects.json`)) as {
-  items: Array<{
-    slug: string;
-    title: string;
-    description: string;
-    tech: string[];
-    image: string | null;
-    status: 'active' | 'archived';
-    period: string;
-    links: { site: string | null; github: string | null };
-  }>;
-};
+interface Project {
+  slug: string;
+  title: string;
+  description: string;
+  tech: string[];
+  status: 'active' | 'archived';
+  period: string | null;
+  image: string | null;
+  links: { site: string | null; github: string | null };
+}
+
+const { items } = (await import(`../../data/${lang}/projects.json`)) as { items: Project[] };
+
+const active = items.filter((p) => p.status === 'active');
+const archived = items.filter((p) => p.status === 'archived');
 ---
 
 <section id="projects" class="py-24">
   <div class="mx-auto max-w-6xl px-6">
+
     <!-- Section Heading -->
     <div class="mb-14">
       <p class="text-sm font-medium text-[#686dff] tracking-widest uppercase mb-3">
@@ -31,20 +36,45 @@ const { items } = (await import(`../../data/${lang}/projects.json`)) as {
       </h2>
     </div>
 
-    <!-- Project Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {items.map((project) => (
-        <ProjectCard
-          slug={project.slug}
-          title={project.title}
-          description={project.description}
-          tech={project.tech}
-          image={project.image}
-          status={project.status}
-          period={project.period}
-          links={project.links}
-        />
-      ))}
-    </div>
+    <!-- Current Projects -->
+    {active.length > 0 && (
+      <div class="mb-16">
+        <p class="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-6">
+          {t('projects.section.current')}
+        </p>
+        <div class="flex flex-col gap-6">
+          {active.map((project) => (
+            <FeaturedProjectCard
+              title={project.title}
+              description={project.description}
+              tech={project.tech}
+              image={project.image}
+              links={project.links}
+            />
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Past Projects -->
+    {archived.length > 0 && (
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-6">
+          {t('projects.section.past')}
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {archived.map((project) => (
+            <ProjectCard
+              title={project.title}
+              description={project.description}
+              tech={project.tech}
+              period={project.period}
+              links={project.links}
+            />
+          ))}
+        </div>
+      </div>
+    )}
+
   </div>
 </section>

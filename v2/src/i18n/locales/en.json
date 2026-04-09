@@ -32,5 +32,7 @@
   "projects.techUsed": "Technologies Used",
   "projects.links": "Links",
   "projects.status.archived": "Archived",
-  "projects.status.active": "Active"
+  "projects.status.active": "Live",
+  "projects.section.current": "Current",
+  "projects.section.past": "Past Projects"
 }

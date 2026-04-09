@@ -32,5 +32,7 @@
   "projects.techUsed": "使用技術",
   "projects.links": "リンク",
   "projects.status.archived": "アーカイブ",
-  "projects.status.active": "公開中"
+  "projects.status.active": "運用中",
+  "projects.section.current": "現在",
+  "projects.section.past": "過去のプロジェクト"
 }
