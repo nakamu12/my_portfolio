@@ -67,7 +67,7 @@ const CATEGORY_LABELS: Record<ExperienceItem['category'], string> = {
       <ul class="space-y-10">
         {
           items.map((item) => (
-            <li class="relative flex gap-6 md:gap-8">
+            <li class="experience-item relative flex gap-6 md:gap-8">
               <!-- Timeline dot (decorative) -->
               <div aria-hidden="true" class="relative z-10 mt-1 shrink-0">
                 <div class="bg-background flex h-8 w-8 items-center justify-center rounded-full border-2 border-[#686dff] shadow-sm">
@@ -196,3 +196,20 @@ const CATEGORY_LABELS: Record<ExperienceItem['category'], string> = {
     </div>
   </div>
 </section>
+
+<script>
+  import { animate, inView } from 'motion';
+
+  const items = document.querySelectorAll<HTMLElement>('#experience .experience-item');
+  items.forEach((item, index) => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(16px)';
+    inView(
+      item,
+      () => {
+        animate(item, { opacity: 1, y: 0 }, { duration: 0.5, delay: index === 0 ? 0 : 0.05, ease: [0.25, 0.1, 0.25, 1] });
+      },
+      { once: true, margin: '0px 0px -60px 0px' }
+    );
+  });
+</script>
