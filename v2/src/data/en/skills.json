@@ -3,38 +3,57 @@
     {
       "name": "Frontend",
       "skills": [
-        { "name": "HTML", "icon": "html5" },
-        { "name": "CSS", "icon": "css3" },
-        { "name": "JavaScript", "icon": "javascript" },
         { "name": "React", "icon": "react" },
-        { "name": "TypeScript", "icon": "typescript" }
+        { "name": "TypeScript", "icon": "typescript" },
+        { "name": "JavaScript", "icon": "javascript" },
+        { "name": "HTML", "icon": "html5" },
+        { "name": "CSS", "icon": "css3" }
       ]
     },
     {
-      "name": "Backend",
+      "name": "Backend & API",
       "skills": [
-        { "name": "Ruby", "icon": "ruby" },
         { "name": "Python", "icon": "python" },
+        { "name": "FastAPI", "icon": "fastapi" },
         { "name": "Node.js", "icon": "nodejs" },
-        { "name": "Rails", "icon": "rails" },
-        { "name": "Django", "icon": "django" }
+        { "name": "Ruby on Rails", "icon": "rails" },
+        { "name": "Java", "icon": "java" },
+        { "name": "MongoDB", "icon": "mongodb" }
       ]
     },
     {
-      "name": "System/DevOps",
+      "name": "AI / GenAI",
+      "skills": [
+        { "name": "LangChain", "icon": "langchain" },
+        { "name": "OpenAI Agents SDK", "icon": "openai" },
+        { "name": "RAG Pipeline", "icon": "rag" },
+        { "name": "ChromaDB", "icon": "chromadb" },
+        { "name": "LangSmith", "icon": "langsmith" }
+      ]
+    },
+    {
+      "name": "Big Data",
+      "skills": [
+        { "name": "Apache Spark", "icon": "apachespark" },
+        { "name": "PySpark", "icon": "pyspark" },
+        { "name": "Scala", "icon": "scala" },
+        { "name": "Treasure Data", "icon": "treasuredata" }
+      ]
+    },
+    {
+      "name": "Cloud & DevOps",
       "skills": [
         { "name": "AWS", "icon": "aws" },
+        { "name": "Azure", "icon": "azure" },
         { "name": "GCP", "icon": "gcp" },
-        { "name": "Kubernetes", "icon": "kubernetes" },
         { "name": "Docker", "icon": "docker" },
-        { "name": "CI/CD", "icon": "cicd" }
+        { "name": "Kubernetes", "icon": "kubernetes" }
       ]
     },
     {
-      "name": "Languages/Tools",
+      "name": "Robotics",
       "skills": [
         { "name": "C++", "icon": "cplusplus" },
-        { "name": "GAS", "icon": "google" },
         { "name": "ROS", "icon": "ros" }
       ]
     }
