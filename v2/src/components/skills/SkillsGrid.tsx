@@ -98,7 +98,7 @@ export default function SkillsGrid({ categories }: Props) {
                 <motion.div
                   key={skill.name}
                   variants={skillVariants}
-                  className="border-border bg-card hover:border-[#686dff]/40 hover:bg-[#686dff]/[0.04] flex items-center gap-2 rounded-lg border px-3 py-2 transition-colors"
+                  className="border-border bg-card flex items-center gap-2 rounded-lg border px-3 py-2 transition-colors hover:border-[#686dff]/40 hover:bg-[#686dff]/[0.04]"
                 >
                   {iconUrl ? (
                     <img
@@ -112,7 +112,7 @@ export default function SkillsGrid({ categories }: Props) {
                   ) : (
                     <span
                       aria-hidden="true"
-                      className="text-[#686dff] size-5 shrink-0 text-center text-xs font-bold leading-5"
+                      className="size-5 shrink-0 text-center text-xs leading-5 font-bold text-[#686dff]"
                     >
                       {skill.name.slice(0, 2).toUpperCase()}
                     </span>
