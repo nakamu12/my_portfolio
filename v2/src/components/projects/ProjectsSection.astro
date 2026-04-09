@@ -12,6 +12,8 @@ const { items } = (await import(`../../data/${lang}/projects.json`)) as {
     description: string;
     tech: string[];
     image: string | null;
+    status: 'active' | 'archived';
+    period: string;
     links: { site: string | null; github: string | null };
   }>;
 };
@@ -38,6 +40,8 @@ const { items } = (await import(`../../data/${lang}/projects.json`)) as {
           description={project.description}
           tech={project.tech}
           image={project.image}
+          status={project.status}
+          period={project.period}
           links={project.links}
         />
       ))}

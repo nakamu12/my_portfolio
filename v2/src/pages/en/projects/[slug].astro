@@ -12,6 +12,8 @@ export async function getStaticPaths() {
       description: string;
       tech: string[];
       image: string | null;
+      status: 'active' | 'archived';
+      period: string;
       links: { site: string | null; github: string | null };
       caseStudy: {
         challenge: string;
@@ -70,9 +72,20 @@ const sections = [
           </div>
         )}
 
-        <h1 class="text-4xl md:text-5xl font-semibold tracking-tight mb-4">
-          {project.title}
-        </h1>
+        <div class="flex items-center gap-3 mb-4 flex-wrap">
+          <h1 class="text-4xl md:text-5xl font-semibold tracking-tight">
+            {project.title}
+          </h1>
+          {project.status === 'archived' && (
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-muted border border-border text-sm font-medium text-muted-foreground">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/>
+              </svg>
+              {t('projects.status.archived')}
+            </span>
+          )}
+          <span class="text-sm font-mono text-muted-foreground">{project.period}</span>
+        </div>
         <p class="text-lg text-muted-foreground leading-relaxed">
           {project.description}
         </p>

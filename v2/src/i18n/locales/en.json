@@ -30,5 +30,7 @@
   "projects.techDetails": "Tech Stack",
   "projects.outcome": "Outcome",
   "projects.techUsed": "Technologies Used",
-  "projects.links": "Links"
+  "projects.links": "Links",
+  "projects.status.archived": "Archived",
+  "projects.status.active": "Active"
 }

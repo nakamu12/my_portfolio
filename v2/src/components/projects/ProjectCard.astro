@@ -7,34 +7,63 @@ interface Props {
   description: string;
   tech: string[];
   image: string | null;
+  status: 'active' | 'archived';
+  period: string;
   links: {
     site: string | null;
     github: string | null;
   };
 }
 
-const { slug, title, description, tech, image, links } = Astro.props;
+const { slug, title, description, tech, image, status, period, links } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = await getTranslations(lang);
 
+const isArchived = status === 'archived';
 const detailUrl = `/${lang}/projects/${slug}/`;
 ---
 
-<article class="group flex flex-col rounded-xl border border-border bg-card overflow-hidden transition-all duration-300 hover:border-[#686dff]/40 hover:shadow-[0_0_0_1px_rgba(104,109,255,0.2)]">
+<article class:list={[
+  "group flex flex-col rounded-xl border bg-card overflow-hidden transition-all duration-300",
+  isArchived
+    ? "border-border opacity-70 hover:opacity-90"
+    : "border-border hover:border-[#686dff]/40 hover:shadow-[0_0_0_1px_rgba(104,109,255,0.2)]"
+]}>
   <!-- Thumbnail -->
   <a href={detailUrl} class="block aspect-video bg-muted relative overflow-hidden">
     {image ? (
       <img
         src={`/images/projects/${image}`}
         alt={title}
-        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        class:list={[
+          "w-full h-full object-cover transition-transform duration-500 group-hover:scale-105",
+          isArchived && "grayscale-[60%]"
+        ]}
         loading="lazy"
       />
     ) : (
-      <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-[rgba(104,109,255,0.08)] to-[rgba(182,111,255,0.08)]">
-        <span class="text-4xl font-bold text-[#686dff]/30 select-none font-mono">
+      <div class:list={[
+        "w-full h-full flex items-center justify-center bg-gradient-to-br",
+        isArchived
+          ? "from-[rgba(120,120,120,0.06)] to-[rgba(120,120,120,0.06)]"
+          : "from-[rgba(104,109,255,0.08)] to-[rgba(182,111,255,0.08)]"
+      ]}>
+        <span class:list={[
+          "text-4xl font-bold select-none font-mono",
+          isArchived ? "text-muted-foreground/20" : "text-[#686dff]/30"
+        ]}>
           {title.slice(0, 2).toUpperCase()}
         </span>
+      </div>
+    )}
+
+    <!-- Archived badge overlay -->
+    {isArchived && (
+      <div class="absolute top-3 left-3 flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-background/80 backdrop-blur-sm border border-border text-xs font-medium text-muted-foreground">
+        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/>
+        </svg>
+        {t('projects.status.archived')}
       </div>
     )}
   </a>
@@ -43,11 +72,17 @@ const detailUrl = `/${lang}/projects/${slug}/`;
   <div class="flex flex-col flex-1 p-6 gap-4">
     <!-- Title & Description -->
     <div class="flex flex-col gap-2">
-      <a href={detailUrl} class="group/title">
-        <h3 class="text-lg font-semibold tracking-tight group-hover/title:text-[#686dff] transition-colors duration-200">
-          {title}
-        </h3>
-      </a>
+      <div class="flex items-baseline justify-between gap-2">
+        <a href={detailUrl} class="group/title min-w-0">
+          <h3 class:list={[
+            "text-lg font-semibold tracking-tight truncate transition-colors duration-200",
+            isArchived ? "group-hover/title:text-foreground" : "group-hover/title:text-[#686dff]"
+          ]}>
+            {title}
+          </h3>
+        </a>
+        <span class="text-xs text-muted-foreground shrink-0 font-mono">{period}</span>
+      </div>
       <p class="text-sm text-muted-foreground leading-relaxed line-clamp-3">
         {description}
       </p>
@@ -56,7 +91,12 @@ const detailUrl = `/${lang}/projects/${slug}/`;
     <!-- Tech Stack Tags -->
     <div class="flex flex-wrap gap-2">
       {tech.map((tag) => (
-        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-[rgba(104,109,255,0.08)] text-[#686dff] border border-[rgba(104,109,255,0.15)]">
+        <span class:list={[
+          "inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium border",
+          isArchived
+            ? "bg-muted/50 text-muted-foreground border-border"
+            : "bg-[rgba(104,109,255,0.08)] text-[#686dff] border-[rgba(104,109,255,0.15)]"
+        ]}>
           {tag}
         </span>
       ))}
@@ -66,7 +106,12 @@ const detailUrl = `/${lang}/projects/${slug}/`;
     <div class="flex items-center gap-3 mt-auto pt-2">
       <a
         href={detailUrl}
-        class="inline-flex items-center gap-1.5 text-sm font-medium text-[#686dff] hover:text-[#5961ff] transition-colors duration-200"
+        class:list={[
+          "inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200",
+          isArchived
+            ? "text-muted-foreground hover:text-foreground"
+            : "text-[#686dff] hover:text-[#5961ff]"
+        ]}
       >
         {t('projects.viewDetails')}
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

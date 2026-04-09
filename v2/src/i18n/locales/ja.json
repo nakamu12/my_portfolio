@@ -30,5 +30,7 @@
   "projects.techDetails": "技術選定",
   "projects.outcome": "成果",
   "projects.techUsed": "使用技術",
-  "projects.links": "リンク"
+  "projects.links": "リンク",
+  "projects.status.archived": "アーカイブ",
+  "projects.status.active": "公開中"
 }
