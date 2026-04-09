@@ -82,7 +82,7 @@ const strengths: { name: string; subtitle?: string; desc: string }[] =
             <div class="mb-6 flex items-start justify-between">
               <div>
                 <p class="text-muted-foreground mb-1 text-xs font-medium tracking-widest uppercase">
-                  Personality
+                  {t('about.personalityLabel')}
                 </p>
                 <h3 class="text-foreground text-lg font-semibold">MBTI</h3>
               </div>
@@ -127,7 +127,7 @@ const strengths: { name: string; subtitle?: string; desc: string }[] =
 
         <div class="mb-6">
           <p class="text-muted-foreground mb-1 text-xs font-medium tracking-widest uppercase">
-            Personality
+            {t('about.personalityLabel')}
           </p>
           <div class="flex items-center gap-3">
             <h3 class="text-foreground text-lg font-semibold">StrengthsFinder</h3>
@@ -241,14 +241,15 @@ const strengths: { name: string; subtitle?: string; desc: string }[] =
     if (sfCard) {
       sfCard.style.opacity = '0';
       sfCard.style.transform = 'translateY(24px)';
+
+      const items = sfCard.querySelectorAll<HTMLElement>('.sf-item');
+      items.forEach((item) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(12px)';
+      });
+
       inView(sfCard, () => {
         animate(sfCard, { opacity: 1, y: 0 }, { duration: 0.6, delay: 0.1, ease });
-
-        const items = sfCard.querySelectorAll<HTMLElement>('.sf-item');
-        items.forEach((item) => {
-          item.style.opacity = '0';
-          item.style.transform = 'translateY(12px)';
-        });
         animate(
           items,
           { opacity: 1, y: 0 },
