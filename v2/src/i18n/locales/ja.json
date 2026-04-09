@@ -24,5 +24,11 @@
   "aiToolkit.filter.all": "すべて",
   "footer.backToTop": "トップへ戻る",
   "skills.title": "スキル",
-  "skills.subtitle": "使用している技術・ツール一覧"
+  "skills.subtitle": "使用している技術・ツール一覧",
+  "contact.heading": "お問い合わせ",
+  "contact.subheading": "SNSからお気軽にご連絡ください。",
+  "contact.connect.label": "つながる",
+  "contact.availability.label": "ステータス",
+  "contact.availability.status": "つながりを歓迎します",
+  "contact.availability.detail": "技術的な議論やコラボレーションはお気軽にどうぞ。"
 }

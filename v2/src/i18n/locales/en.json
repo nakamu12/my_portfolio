@@ -24,5 +24,11 @@
   "aiToolkit.filter.all": "All",
   "footer.backToTop": "Back to Top",
   "skills.title": "Skills",
-  "skills.subtitle": "Technologies and tools I work with"
+  "skills.subtitle": "Technologies and tools I work with",
+  "contact.heading": "Get in Touch",
+  "contact.subheading": "Feel free to reach out via social media.",
+  "contact.connect.label": "Connect",
+  "contact.availability.label": "Availability",
+  "contact.availability.status": "Open to Connect",
+  "contact.availability.detail": "Always happy to exchange ideas and explore opportunities together."
 }
