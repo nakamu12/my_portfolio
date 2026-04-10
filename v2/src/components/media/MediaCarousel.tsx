@@ -181,8 +181,8 @@ export default function MediaCarousel({ items, labels, emptyMessage }: Props) {
             className="flex gap-4 overflow-x-auto pb-3"
             style={{ scrollbarWidth: 'none', scrollSnapType: 'x mandatory' } as React.CSSProperties}
           >
-            {filtered.map((item, i) => (
-              <MediaCard key={`${item.category}-${i}`} item={item} />
+            {filtered.map((item) => (
+              <MediaCard key={item.link} item={item} labels={labels} />
             ))}
           </div>
 
@@ -200,10 +200,11 @@ export default function MediaCarousel({ items, labels, emptyMessage }: Props) {
 }
 
 // ── Card ──────────────────────────────────────────────────────────────────────
-function MediaCard({ item }: { item: MediaItem }) {
+function MediaCard({ item, labels }: { item: MediaItem; labels: Record<string, string> }) {
   const style = CAT_STYLES[item.category] ?? CAT_STYLES.press;
   const srcStyle = item.source ? SOURCE_STYLES[item.source] : undefined;
-  const thumbnail = item.thumbnail ?? (item.category === 'youtube' ? getYoutubeThumbnail(item.link) : undefined);
+  // Thumbnails are resolved at build time; no client-side YouTube fallback needed
+  const thumbnail = item.thumbnail;
 
   return (
     <a
@@ -238,7 +239,7 @@ function MediaCard({ item }: { item: MediaItem }) {
         <div className={`absolute left-2.5 top-2.5 flex items-center gap-1.5 rounded-full border ${style.border} ${style.bg} px-2.5 py-0.5 backdrop-blur-sm`}>
           <span className={`h-1.5 w-1.5 rounded-full ${style.dot}`} />
           <span className={`text-[10px] font-semibold uppercase tracking-wide ${style.text}`}>
-            {item.category}
+            {labels[`${CAT_KEY_PREFIX}${item.category}`] ?? item.category}
           </span>
         </div>
       </div>
@@ -264,7 +265,7 @@ function MediaCard({ item }: { item: MediaItem }) {
             <span />
           )}
           <span className={`flex shrink-0 items-center gap-1 text-xs font-medium ${style.text} opacity-0 transition-opacity group-hover:opacity-100`}>
-            Open
+            {labels['media.card.open'] ?? 'Open'}
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
               <polyline points="15 3 21 3 21 9" />

@@ -36,5 +36,6 @@
   "media.category.supervised": "監修",
   "media.supervised.empty": "監修記事は順次掲載予定です。",
   "media.speaking.title": "登壇",
-  "media.speaking.subtitle": "ウェビナー、ハッカソン発表、勉強会など。"
+  "media.speaking.subtitle": "ウェビナー、ハッカソン発表、勉強会など。",
+  "media.card.open": "開く"
 }

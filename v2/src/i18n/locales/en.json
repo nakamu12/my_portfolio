@@ -36,5 +36,6 @@
   "media.category.supervised": "Supervised",
   "media.supervised.empty": "Supervised articles coming soon.",
   "media.speaking.title": "Speaking",
-  "media.speaking.subtitle": "Webinars, hackathon presentations, and live talks."
+  "media.speaking.subtitle": "Webinars, hackathon presentations, and live talks.",
+  "media.card.open": "Open"
 }
