@@ -23,7 +23,9 @@ export function useTranslatedPath(lang: Lang) {
 }
 
 export async function getTranslations(lang: Lang) {
-  const ui = (await import(`./locales/${lang}.json`)).default as Record<string, string>;
+  // Defense-in-depth: ensure lang is in the allowlist before dynamic import
+  const safeLang: Lang = lang in languages ? lang : defaultLang;
+  const ui = (await import(`./locales/${safeLang}.json`)).default as Record<string, string>;
   return function t(key: string): string {
     return ui[key] ?? key;
   };
