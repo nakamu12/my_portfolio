@@ -1,12 +1,23 @@
 ---
-// Skills: Technical stack by category
+import { getLangFromUrl, getTranslations } from '@/i18n/utils';
+import SkillsGrid from './SkillsGrid';
+
+const lang = getLangFromUrl(Astro.url);
+const t = await getTranslations(lang);
+
+const skillsData = await import(`../../data/${lang}/skills.json`);
+const categories = skillsData.categories ?? skillsData.default?.categories ?? [];
 ---
 
 <section id="skills" class="py-24">
   <div class="mx-auto max-w-6xl px-6">
-    <h2 class="text-4xl font-semibold">Skills</h2>
-    <p class="text-muted-foreground mt-4">
-      [ Skills — Category Grid: Languages | Frameworks | Tools | Cloud ]
-    </p>
+    <!-- Section heading -->
+    <div class="mb-16">
+      <h2 class="text-foreground text-3xl font-semibold md:text-4xl">{t('skills.title')}</h2>
+      <p class="text-muted-foreground mt-3 text-base">{t('skills.subtitle')}</p>
+    </div>
+
+    <!-- Animated grid (client:visible = hydrate when scrolled into view) -->
+    <SkillsGrid client:visible categories={categories} />
   </div>
 </section>
