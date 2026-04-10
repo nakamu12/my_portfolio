@@ -83,11 +83,26 @@ async function fetchOgImage(url: string): Promise<string | undefined> {
   }
 }
 
-const featuredThumb: string | undefined = pressFeatured
-  ? (pressFeatured.thumbnail
-      ?? getYoutubeThumbnail(pressFeatured.link)
-      ?? await fetchOgImage(pressFeatured.channelUrl ?? pressFeatured.link))
-  : undefined;
+// ── Enrich items with OGP thumbnails (parallel fetch at build time) ──────────
+async function resolveThumbnail(item: { category: string; thumbnail?: string; link: string }): Promise<string | undefined> {
+  if (item.thumbnail) return item.thumbnail;
+  if (item.category === 'youtube') return getYoutubeThumbnail(item.link);
+  return fetchOgImage(item.link);
+}
+
+const [
+  featuredThumb,
+  enrichedPressItems,
+  enrichedWritingItems,
+] = await Promise.all([
+  pressFeatured
+    ? (pressFeatured.thumbnail
+        ?? getYoutubeThumbnail(pressFeatured.link)
+        ?? fetchOgImage(pressFeatured.channelUrl ?? pressFeatured.link))
+    : Promise.resolve(undefined),
+  Promise.all(pressItems.map(async (item) => ({ ...item, thumbnail: await resolveThumbnail(item) }))),
+  Promise.all(writingItems.map(async (item) => ({ ...item, thumbnail: await resolveThumbnail(item) }))),
+]);
 
 // ── Speaking date formatter ───────────────────────────────────────────────────
 function formatDate(dateStr: string, locale: string): string {
@@ -202,7 +217,7 @@ function formatDate(dateStr: string, locale: string): string {
       )}
 
       <!-- Press carousel -->
-      <MediaCarousel client:visible items={pressItems} labels={pressLabels} />
+      <MediaCarousel client:visible items={enrichedPressItems} labels={pressLabels} />
     </div>
 
     <!-- ── Writing ─────────────────────────────────────────────────────────── -->
@@ -214,7 +229,7 @@ function formatDate(dateStr: string, locale: string): string {
 
       <MediaCarousel
         client:visible
-        items={writingItems}
+        items={enrichedWritingItems}
         labels={writingLabels}
         emptyMessage={t('media.supervised.empty')}
       />
