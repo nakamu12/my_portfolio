@@ -70,8 +70,23 @@ function getYoutubeThumbnail(url: string): string | undefined {
   return undefined;
 }
 
+async function fetchOgImage(url: string): Promise<string | undefined> {
+  try {
+    const res = await fetch(url, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1)' },
+    });
+    const html = await res.text();
+    const match = html.match(/<meta[^>]+property="og:image"[^>]+content="([^"]+)"/);
+    return match?.[1];
+  } catch {
+    return undefined;
+  }
+}
+
 const featuredThumb: string | undefined = pressFeatured
-  ? (pressFeatured.thumbnail ?? getYoutubeThumbnail(pressFeatured.link))
+  ? (pressFeatured.thumbnail
+      ?? getYoutubeThumbnail(pressFeatured.link)
+      ?? await fetchOgImage(pressFeatured.channelUrl ?? pressFeatured.link))
   : undefined;
 
 // ── Speaking date formatter ───────────────────────────────────────────────────
