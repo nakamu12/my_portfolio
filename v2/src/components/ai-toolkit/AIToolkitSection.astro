@@ -1,10 +1,57 @@
 ---
-// AI Toolkit: Catalog of AI tools used
+import { getLangFromUrl, getTranslations } from '@/i18n/utils';
+import ToolGrid from './ToolGrid';
+
+const lang = getLangFromUrl(Astro.url);
+const t = await getTranslations(lang);
+
+interface Tool {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  logoUrl: string;
+  url: string;
+}
+
+const toolsData =
+  lang === 'ja'
+    ? (await import('../../data/ja/ai-tools.json')).default
+    : (await import('../../data/en/ai-tools.json')).default;
+
+const tools: Tool[] = (toolsData.items ?? []).filter(
+  (item: unknown): item is Tool =>
+    typeof item === 'object' &&
+    item !== null &&
+    typeof (item as Tool).url === 'string' &&
+    /^https?:\/\//.test((item as Tool).url),
+);
+const allLabel = t('aiToolkit.filter.all');
+const categories: string[] = toolsData.categories ?? [];
 ---
 
-<section id="ai-toolkit" class="py-24">
-  <div class="mx-auto max-w-6xl px-6">
-    <h2 class="text-4xl font-semibold">AI Toolkit</h2>
-    <p class="text-muted-foreground mt-4">[ AI Toolkit — Tool Cards with Logo + Name + Usage ]</p>
+<section id="ai-toolkit" class="relative overflow-hidden py-24">
+  <!-- Dot grid background -->
+  <div
+    class="pointer-events-none absolute inset-0 opacity-[0.035]"
+    style="background-image: radial-gradient(circle, #686dff 1px, transparent 1px); background-size: 28px 28px;"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-6xl px-6">
+    <!-- Section heading -->
+    <div class="mb-12">
+      <h2
+        class="bg-gradient-to-r from-[#686dff] to-[#b66fff] bg-clip-text text-3xl font-semibold tracking-tight text-transparent md:text-4xl"
+      >
+        {t('aiToolkit.heading')}
+      </h2>
+      <p class="text-muted-foreground mt-3 max-w-xl text-base">
+        {t('aiToolkit.subheading')}
+      </p>
+    </div>
+
+    <!-- Icon grid with category filter -->
+    <ToolGrid client:visible categories={categories} tools={tools} allLabel={allLabel} />
   </div>
 </section>

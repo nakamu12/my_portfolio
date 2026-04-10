@@ -1,0 +1,47 @@
+{
+  "bio": "Focused on robotics research during university, I joined SoftBank Corp. in 2020 after completing my master's degree. Over 4 years I worked on enterprise systems and big data infrastructure, while also supporting robotics development through the company's internal side-project program. I later transferred to the \"Axross\" AI/DX talent development platform, working broadly as a product engineer, training instructor, and content lead. Actively participating in hackathons, I accumulated awards and was recognized as a high-market-value talent within the company. Since February 2026, following a 2-month FDE training program in India, I now work across FDE development & promotion, internal certified instructor, and content creation.",
+  "attributes": [
+    { "label": "Role", "value": "FDE & Tech Content Lead" },
+    { "label": "Date of Birth", "value": "December 15, 1995" },
+    { "label": "Hometown", "value": "Kawasaki, Kanagawa" },
+    { "label": "Hobbies", "value": "Sauna, Drinks, Anime, Manga, Books" }
+  ],
+  "mbti": {
+    "type": "ENTJ-A",
+    "label": "Commander",
+    "traits": [
+      { "letter": "E", "name": "Extroverted", "percent": 81 },
+      { "letter": "N", "name": "Intuitive", "percent": 81 },
+      { "letter": "T", "name": "Thinking", "percent": 56 },
+      { "letter": "J", "name": "Judging", "percent": 78 },
+      { "letter": "A", "name": "Assertive", "percent": 65 }
+    ]
+  },
+  "strengths": [
+    {
+      "name": "Activator",
+      "subtitle": "活発性",
+      "desc": "The ability to turn ideas into action and drive projects forward"
+    },
+    {
+      "name": "Command",
+      "subtitle": "指令性",
+      "desc": "Accurately reads situations and demonstrates appropriate leadership"
+    },
+    {
+      "name": "Learner",
+      "subtitle": "学習欲",
+      "desc": "Finds joy in the process of learning new technologies"
+    },
+    {
+      "name": "Competition",
+      "subtitle": "競争性",
+      "desc": "Achieves high performance through strong motivation"
+    },
+    {
+      "name": "Significance",
+      "subtitle": "自我",
+      "desc": "Strives to produce important and valuable outcomes"
+    }
+  ]
+}

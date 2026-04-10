@@ -1,0 +1,101 @@
+{
+  "categories": ["すべて", "コーディング", "デザイン", "リサーチ", "生産性", "インフラ"],
+  "items": [
+    {
+      "id": "claude",
+      "name": "Claude",
+      "category": "コーディング",
+      "description": "コーディング、アーキテクチャレビュー、複雑な推論タスクに使用するメインAIアシスタント。",
+      "logoUrl": "https://www.anthropic.com/favicon.ico",
+      "url": "https://claude.ai"
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "category": "コーディング",
+      "description": "コンテキスト対応の自動補完とインラインチャットを備えたAI搭載コードエディタ。",
+      "logoUrl": "https://cursor.sh/favicon.ico",
+      "url": "https://cursor.sh"
+    },
+    {
+      "id": "github-copilot",
+      "name": "GitHub Copilot",
+      "category": "コーディング",
+      "description": "OpenAI Codexを活用したエディタ内コード提案機能で開発速度を向上。",
+      "logoUrl": "https://github.com/favicon.ico",
+      "url": "https://github.com/features/copilot"
+    },
+    {
+      "id": "v0",
+      "name": "v0 by Vercel",
+      "category": "デザイン",
+      "description": "自然言語プロンプトからReactコンポーネントを生成するジェネレーティブUIツール。",
+      "logoUrl": "https://v0.dev/favicon.ico",
+      "url": "https://v0.dev"
+    },
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "category": "リサーチ",
+      "description": "GPT-4oを活用したアイデア出し、要約、探索的リサーチに使用。",
+      "logoUrl": "https://openai.com/favicon.ico",
+      "url": "https://chatgpt.com"
+    },
+    {
+      "id": "perplexity",
+      "name": "Perplexity",
+      "category": "リサーチ",
+      "description": "引用付きのリアルタイムWeb検索が可能なAI搭載サーチエンジン。",
+      "logoUrl": "https://www.perplexity.ai/favicon.ico",
+      "url": "https://www.perplexity.ai"
+    },
+    {
+      "id": "notebooklm",
+      "name": "NotebookLM",
+      "category": "リサーチ",
+      "description": "ドキュメントの統合とインサイト生成を行うGoogleのAIリサーチアシスタント。",
+      "logoUrl": "https://notebooklm.google.com/favicon.ico",
+      "url": "https://notebooklm.google.com"
+    },
+    {
+      "id": "midjourney",
+      "name": "Midjourney",
+      "category": "デザイン",
+      "description": "コンセプトアート、UIモックアップ、ビジュアルアセット生成用のテキスト→画像AI。",
+      "logoUrl": "https://www.midjourney.com/favicon.ico",
+      "url": "https://www.midjourney.com"
+    },
+    {
+      "id": "linear",
+      "name": "Linear",
+      "category": "生産性",
+      "description": "AIによるイシュー作成とスプリント計画支援機能を持つプロジェクト管理ツール。",
+      "logoUrl": "https://linear.app/favicon.ico",
+      "url": "https://linear.app"
+    },
+    {
+      "id": "notion-ai",
+      "name": "Notion AI",
+      "category": "生産性",
+      "description": "ドキュメント作成やノートの要約に使えるNotionに組み込まれたAIライティングアシスタント。",
+      "logoUrl": "https://www.notion.so/favicon.ico",
+      "url": "https://www.notion.so"
+    },
+    {
+      "id": "aws-bedrock",
+      "name": "AWS Bedrock",
+      "category": "インフラ",
+      "description": "本番MLパイプラインでファウンデーションモデルをデプロイするためのマネージドサービス。",
+      "logoUrl": "https://aws.amazon.com/favicon.ico",
+      "url": "https://aws.amazon.com/bedrock"
+    },
+    {
+      "id": "langchain",
+      "name": "LangChain",
+      "category": "インフラ",
+      "description": "チェーン、エージェント、メモリを使ったLLM搭載アプリ構築のためのフレームワーク。",
+      "logoUrl": "https://python.langchain.com/favicon.ico",
+      "url": "https://www.langchain.com"
+    }
+  ]
+}
