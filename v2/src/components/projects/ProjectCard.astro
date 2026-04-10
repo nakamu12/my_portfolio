@@ -6,23 +6,34 @@ interface Props {
   description: string;
   tech: string[];
   period: string | null;
+  image: string | null;
   links: {
     site: string | null;
     github: string | null;
   };
 }
 
-const { title, description, tech, period, links } = Astro.props;
+const { title, description, tech, period, image, links } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = await getTranslations(lang);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <article class="flex flex-col rounded-xl border border-border bg-card overflow-hidden opacity-70 hover:opacity-90 transition-opacity duration-300">
-  <!-- Thumbnail placeholder -->
-  <div class="aspect-video bg-muted flex items-center justify-center">
-    <span class="text-3xl font-bold text-muted-foreground/20 select-none font-mono">
-      {title.slice(0, 2).toUpperCase()}
-    </span>
+  <!-- Thumbnail -->
+  <div class="relative aspect-video bg-muted overflow-hidden flex items-center justify-center">
+    {image ? (
+      <img
+        src={`${base}/images/projects/${image}`}
+        alt={title}
+        class="absolute inset-0 w-full h-full object-contain p-4"
+        loading="lazy"
+      />
+    ) : (
+      <span class="text-3xl font-bold text-muted-foreground/20 select-none font-mono">
+        {title.slice(0, 2).toUpperCase()}
+      </span>
+    )}
   </div>
 
   <!-- Content -->
