@@ -4,7 +4,9 @@
       "slug": "axross-recipe",
       "title": "AxrossRecipe",
       "description": "AI/DXのオンライン学習プラットフォーム。学習だけでなく、本気の「できる」を実現する最先端の人材育成のカタチ。",
-      "tech": ["React", "Ruby"],
+      "tech": ["React", "Ruby on Rails", "PostgreSQL", "AWS"],
+      "status": "active",
+      "period": null,
       "image": "project-axross.png",
       "links": {
         "site": "https://axross-recipe.com/",
@@ -15,7 +17,9 @@
       "slug": "magicss",
       "title": "magicss",
       "description": "キーワードを入力するだけで、解像度の高い分析データ、構成案、そしてSEO記事が自動生成されます。",
-      "tech": ["React", "Python"],
+      "tech": ["React", "Python", "FastAPI", "OpenAI API"],
+      "status": "archived",
+      "period": "2023–2025",
       "image": "project-magicss.png",
       "links": {
         "site": "https://magicss.ai/",
