@@ -2,6 +2,7 @@
 import { getLangFromUrl, getTranslations } from '@/i18n/utils';
 import FeaturedProjectCard from './FeaturedProjectCard.astro';
 import ProjectCard from './ProjectCard.astro';
+import SectionHeading from '@/components/common/SectionHeading.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = await getTranslations(lang);
@@ -17,7 +18,30 @@ interface Project {
   links: { site: string | null; github: string | null };
 }
 
-const { items } = (await import(`../../data/${lang}/projects.json`)) as { items: Project[] };
+function sanitizeUrl(url: string | null): string | null {
+  if (!url) return null;
+  return url.startsWith('https://') || url.startsWith('http://') ? url : null;
+}
+
+function sanitizeImageFilename(filename: string | null): string | null {
+  if (!filename) return null;
+  return /^[\w-]+\.(png|jpg|jpeg|webp|gif|svg)$/i.test(filename) ? filename : null;
+}
+
+let items: Project[] = [];
+try {
+  const data = (await import(`../../data/${lang}/projects.json`)) as { items: Project[] };
+  items = data.items.map((p) => ({
+    ...p,
+    image: sanitizeImageFilename(p.image),
+    links: {
+      site: sanitizeUrl(p.links.site),
+      github: sanitizeUrl(p.links.github),
+    },
+  }));
+} catch (e) {
+  console.error(`[ProjectsSection] Failed to load projects for lang="${lang}":`, e);
+}
 
 const active = items.filter((p) => p.status === 'active');
 const archived = items.filter((p) => p.status === 'archived');
@@ -27,14 +51,10 @@ const archived = items.filter((p) => p.status === 'archived');
   <div class="mx-auto max-w-6xl px-6">
 
     <!-- Section Heading -->
-    <div class="mb-14">
-      <p class="text-sm font-medium text-[#686dff] tracking-widest uppercase mb-3">
-        {t('projects.subheading')}
-      </p>
-      <h2 class="text-4xl md:text-5xl font-semibold tracking-tight">
-        {t('projects.heading')}
-      </h2>
-    </div>
+    <SectionHeading
+      subheading={t('projects.subheading')}
+      heading={t('projects.heading')}
+    />
 
     <!-- Current Projects -->
     {active.length > 0 && (
@@ -50,6 +70,7 @@ const archived = items.filter((p) => p.status === 'archived');
               tech={project.tech}
               image={project.image}
               links={project.links}
+              t={t}
             />
           ))}
         </div>
@@ -71,6 +92,7 @@ const archived = items.filter((p) => p.status === 'archived');
               period={project.period}
               image={project.image}
               links={project.links}
+              t={t}
             />
           ))}
         </div>
