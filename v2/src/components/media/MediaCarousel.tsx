@@ -92,16 +92,6 @@ const SOURCE_STYLES: Record<string, { gradient: string; textColor: string }> = {
 
 const CAT_KEY_PREFIX = 'media.category.';
 
-// ── YouTube thumbnail helper ──────────────────────────────────────────────────
-function getYoutubeThumbnail(url: string): string | undefined {
-  // https://www.youtube.com/watch?v=VIDEO_ID  or  https://youtu.be/VIDEO_ID
-  const watchMatch = url.match(/[?&]v=([^&]+)/);
-  if (watchMatch) return `https://img.youtube.com/vi/${watchMatch[1]}/hqdefault.jpg`;
-  const shortMatch = url.match(/youtu\.be\/([^?&/]+)/);
-  if (shortMatch) return `https://img.youtube.com/vi/${shortMatch[1]}/hqdefault.jpg`;
-  return undefined;
-}
-
 export default function MediaCarousel({ items, labels, emptyMessage }: Props) {
   const [active, setActive] = useState<Category>('all');
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -145,7 +135,7 @@ export default function MediaCarousel({ items, labels, emptyMessage }: Props) {
             className={`flex shrink-0 cursor-pointer items-center gap-1.5 rounded-full border px-4 py-1.5 text-sm font-medium transition-all duration-150 ${
               active === cat
                 ? 'border-[#686dff] bg-[#686dff] text-white'
-                : 'border-border bg-background text-muted-foreground hover:border-[#686dff]/40 hover:text-foreground'
+                : 'border-border bg-background text-muted-foreground hover:text-foreground hover:border-[#686dff]/40'
             }`}
           >
             {labelFor(cat)}
@@ -171,9 +161,20 @@ export default function MediaCarousel({ items, labels, emptyMessage }: Props) {
           <button
             onClick={() => scroll('prev')}
             aria-label="Previous"
-            className="border-border bg-background absolute -left-4 top-[38%] z-10 flex h-9 w-9 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border shadow-md transition hover:border-[#686dff]/50 hover:text-[#686dff]"
+            className="border-border bg-background absolute top-[38%] -left-4 z-10 flex h-9 w-9 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border shadow-md transition hover:border-[#686dff]/50 hover:text-[#686dff]"
           >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
           </button>
 
           <div
@@ -189,9 +190,20 @@ export default function MediaCarousel({ items, labels, emptyMessage }: Props) {
           <button
             onClick={() => scroll('next')}
             aria-label="Next"
-            className="border-border bg-background absolute -right-4 top-[38%] z-10 flex h-9 w-9 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border shadow-md transition hover:border-[#686dff]/50 hover:text-[#686dff]"
+            className="border-border bg-background absolute top-[38%] -right-4 z-10 flex h-9 w-9 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border shadow-md transition hover:border-[#686dff]/50 hover:text-[#686dff]"
           >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
           </button>
         </div>
       )}
@@ -225,7 +237,9 @@ function MediaCard({ item, labels }: { item: MediaItem; labels: Record<string, s
           />
         ) : srcStyle ? (
           /* Source-branded gradient */
-          <div className={`flex h-full w-full flex-col items-center justify-center gap-1 bg-gradient-to-br ${srcStyle.gradient}`}>
+          <div
+            className={`flex h-full w-full flex-col items-center justify-center gap-1 bg-gradient-to-br ${srcStyle.gradient}`}
+          >
             <span className={`text-lg font-bold tracking-tight ${srcStyle.textColor} opacity-50`}>
               {item.source}
             </span>
@@ -236,9 +250,11 @@ function MediaCard({ item, labels }: { item: MediaItem; labels: Record<string, s
         )}
 
         {/* Category pill */}
-        <div className={`absolute left-2.5 top-2.5 flex items-center gap-1.5 rounded-full border ${style.border} ${style.bg} px-2.5 py-0.5 backdrop-blur-sm`}>
+        <div
+          className={`absolute top-2.5 left-2.5 flex items-center gap-1.5 rounded-full border ${style.border} ${style.bg} px-2.5 py-0.5 backdrop-blur-sm`}
+        >
           <span className={`h-1.5 w-1.5 rounded-full ${style.dot}`} />
-          <span className={`text-[10px] font-semibold uppercase tracking-wide ${style.text}`}>
+          <span className={`text-[10px] font-semibold tracking-wide uppercase ${style.text}`}>
             {labels[`${CAT_KEY_PREFIX}${item.category}`] ?? item.category}
           </span>
         </div>
@@ -246,7 +262,7 @@ function MediaCard({ item, labels }: { item: MediaItem; labels: Record<string, s
 
       {/* Content */}
       <div className="p-4">
-        <h4 className="line-clamp-2 text-sm font-semibold leading-snug text-foreground transition-colors group-hover:text-[#686dff]">
+        <h4 className="text-foreground line-clamp-2 text-sm leading-snug font-semibold transition-colors group-hover:text-[#686dff]">
           {item.title}
         </h4>
         <p className="text-muted-foreground mt-1.5 line-clamp-2 text-xs leading-relaxed">
@@ -255,18 +271,34 @@ function MediaCard({ item, labels }: { item: MediaItem; labels: Record<string, s
         <div className="mt-3 flex items-center justify-between gap-2">
           {item.stats && Object.keys(item.stats).length > 0 ? (
             <div className="flex flex-wrap gap-1">
-              {Object.values(item.stats).slice(0, 2).map((val, i) => (
-                <span key={i} className="border-border text-muted-foreground rounded-full border px-2 py-0.5 text-[10px]">
-                  {val}
-                </span>
-              ))}
+              {Object.values(item.stats)
+                .slice(0, 2)
+                .map((val, i) => (
+                  <span
+                    key={i}
+                    className="border-border text-muted-foreground rounded-full border px-2 py-0.5 text-[10px]"
+                  >
+                    {val}
+                  </span>
+                ))}
             </div>
           ) : (
             <span />
           )}
-          <span className={`flex shrink-0 items-center gap-1 text-xs font-medium ${style.text} opacity-0 transition-opacity group-hover:opacity-100`}>
+          <span
+            className={`flex shrink-0 items-center gap-1 text-xs font-medium ${style.text} opacity-0 transition-opacity group-hover:opacity-100`}
+          >
             {labels['media.card.open'] ?? 'Open'}
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="11"
+              height="11"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
               <polyline points="15 3 21 3 21 9" />
               <line x1="10" y1="14" x2="21" y2="3" />
@@ -291,16 +323,38 @@ function CategoryPlaceholder({ category }: { category: string }) {
   if (category === 'podcast') {
     return (
       <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-green-950 via-green-900/40 to-neutral-900">
-        <svg className="h-12 w-12 text-green-400 opacity-40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="11" r="3" /><path d="M6.343 17.657A8 8 0 1 1 17.657 6.343 8 8 0 0 1 6.343 17.657z" /><path d="M12 21v-6" /><path d="M9 21h6" />
+        <svg
+          className="h-12 w-12 text-green-400 opacity-40"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <circle cx="12" cy="11" r="3" />
+          <path d="M6.343 17.657A8 8 0 1 1 17.657 6.343 8 8 0 0 1 6.343 17.657z" />
+          <path d="M12 21v-6" />
+          <path d="M9 21h6" />
         </svg>
       </div>
     );
   }
   return (
     <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-neutral-800 via-neutral-800/60 to-neutral-900">
-      <svg className="h-10 w-10 text-neutral-500 opacity-40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" />
+      <svg
+        className="h-10 w-10 text-neutral-500 opacity-40"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <line x1="16" y1="13" x2="8" y2="13" />
+        <line x1="16" y1="17" x2="8" y2="17" />
       </svg>
     </div>
   );

@@ -11,27 +11,37 @@ const data = raw.default ?? raw;
 // ── Data ──────────────────────────────────────────────────────────────────────
 const pressFeatured = data.press?.featured;
 const pressItems: {
-  title: string; category: string; source?: string; thumbnail?: string;
-  description: string; link: string; stats?: Record<string, string>;
+  title: string;
+  category: string;
+  source?: string;
+  thumbnail?: string;
+  description: string;
+  link: string;
+  stats?: Record<string, string>;
 }[] = data.press?.items ?? [];
 
 const writingItems: {
-  title: string; category: string; source?: string;
-  description: string; link: string; stats?: Record<string, string>;
-}[] = [
-  ...(data.writing?.items ?? []),
-  ...(data.writing?.supervised ?? []),
-];
-const platforms: { name: string; description: string; link: string; }[] =
+  title: string;
+  category: string;
+  source?: string;
+  description: string;
+  link: string;
+  stats?: Record<string, string>;
+}[] = [...(data.writing?.items ?? []), ...(data.writing?.supervised ?? [])];
+const platforms: { name: string; description: string; link: string }[] =
   data.writing?.platforms ?? [];
 
 const speakingItems: {
-  title: string; event: string; date: string; venue: string;
-  link: string; stats?: Record<string, string>;
+  title: string;
+  event: string;
+  date: string;
+  venue: string;
+  link: string;
+  stats?: Record<string, string>;
 }[] = [...(data.speaking ?? [])].sort((a, b) => b.date.localeCompare(a.date));
 
 // ── Stats ─────────────────────────────────────────────────────────────────────
-const statPress   = pressItems.length + (pressFeatured ? 1 : 0);
+const statPress = pressItems.length + (pressFeatured ? 1 : 0);
 const statWritten = (data.writing?.items ?? []).length;
 const statSupervised = (data.writing?.supervised ?? []).length;
 const statSpeaking = speakingItems.length;
@@ -66,9 +76,11 @@ const platformColors: Record<string, string> = {
 // ── YouTube thumbnail helper ─────────────────────────────────────────────────
 function getYoutubeThumbnail(url: string): string | undefined {
   const watchMatch = url.match(/[?&]v=([^&]+)/);
-  if (watchMatch) return `https://img.youtube.com/vi/${encodeURIComponent(watchMatch[1])}/hqdefault.jpg`;
+  if (watchMatch)
+    return `https://img.youtube.com/vi/${encodeURIComponent(watchMatch[1])}/hqdefault.jpg`;
   const shortMatch = url.match(/youtu\.be\/([^?&/]+)/);
-  if (shortMatch) return `https://img.youtube.com/vi/${encodeURIComponent(shortMatch[1])}/hqdefault.jpg`;
+  if (shortMatch)
+    return `https://img.youtube.com/vi/${encodeURIComponent(shortMatch[1])}/hqdefault.jpg`;
   return undefined;
 }
 
@@ -99,24 +111,28 @@ async function fetchOgImage(url: string): Promise<string | undefined> {
 }
 
 // ── Enrich items with OGP thumbnails (parallel fetch at build time) ──────────
-async function resolveThumbnail(item: { category: string; thumbnail?: string; link: string }): Promise<string | undefined> {
+async function resolveThumbnail(item: {
+  category: string;
+  thumbnail?: string;
+  link: string;
+}): Promise<string | undefined> {
   if (item.thumbnail) return item.thumbnail;
   if (item.category === 'youtube') return getYoutubeThumbnail(item.link);
   return fetchOgImage(item.link);
 }
 
-const [
-  featuredThumb,
-  enrichedPressItems,
-  enrichedWritingItems,
-] = await Promise.all([
+const [featuredThumb, enrichedPressItems, enrichedWritingItems] = await Promise.all([
   pressFeatured
-    ? (pressFeatured.thumbnail
-        ?? getYoutubeThumbnail(pressFeatured.link)
-        ?? fetchOgImage(pressFeatured.channelUrl ?? pressFeatured.link))
+    ? (pressFeatured.thumbnail ??
+      getYoutubeThumbnail(pressFeatured.link) ??
+      fetchOgImage(pressFeatured.channelUrl ?? pressFeatured.link))
     : Promise.resolve(undefined),
-  Promise.all(pressItems.map(async (item) => ({ ...item, thumbnail: await resolveThumbnail(item) }))),
-  Promise.all(writingItems.map(async (item) => ({ ...item, thumbnail: await resolveThumbnail(item) }))),
+  Promise.all(
+    pressItems.map(async (item) => ({ ...item, thumbnail: await resolveThumbnail(item) })),
+  ),
+  Promise.all(
+    writingItems.map(async (item) => ({ ...item, thumbnail: await resolveThumbnail(item) })),
+  ),
 ]);
 
 // ── Speaking date formatter ───────────────────────────────────────────────────
@@ -125,14 +141,14 @@ function formatDate(dateStr: string, locale: string): string {
   if (!year || !month) return dateStr;
   const d = new Date(parseInt(year), parseInt(month) - 1, 1);
   return d.toLocaleDateString(locale === 'ja' ? 'ja-JP' : 'en-US', {
-    year: 'numeric', month: 'short',
+    year: 'numeric',
+    month: 'short',
   });
 }
 ---
 
 <section id="media" class="py-24">
   <div class="mx-auto max-w-6xl px-6">
-
     <!-- Section Header + Stats -->
     <div class="mb-16">
       <h2 class="text-4xl font-semibold md:text-5xl">{t('media.title')}</h2>
@@ -140,30 +156,38 @@ function formatDate(dateStr: string, locale: string): string {
 
       <!-- Stats row -->
       <div class="mt-8 flex flex-wrap gap-x-8 gap-y-3">
-        {statPress > 0 && (
-          <div class="flex items-baseline gap-1.5">
-            <span class="text-foreground text-2xl font-bold tabular-nums">{statPress}</span>
-            <span class="text-muted-foreground text-sm">{t('media.press.title')}</span>
-          </div>
-        )}
-        {statWritten > 0 && (
-          <div class="flex items-baseline gap-1.5">
-            <span class="text-foreground text-2xl font-bold tabular-nums">{statWritten}</span>
-            <span class="text-muted-foreground text-sm">{t('media.category.written')}</span>
-          </div>
-        )}
-        {statSupervised > 0 && (
-          <div class="flex items-baseline gap-1.5">
-            <span class="text-foreground text-2xl font-bold tabular-nums">{statSupervised}</span>
-            <span class="text-muted-foreground text-sm">{t('media.category.supervised')}</span>
-          </div>
-        )}
-        {statSpeaking > 0 && (
-          <div class="flex items-baseline gap-1.5">
-            <span class="text-foreground text-2xl font-bold tabular-nums">{statSpeaking}</span>
-            <span class="text-muted-foreground text-sm">{t('media.speaking.title')}</span>
-          </div>
-        )}
+        {
+          statPress > 0 && (
+            <div class="flex items-baseline gap-1.5">
+              <span class="text-foreground text-2xl font-bold tabular-nums">{statPress}</span>
+              <span class="text-muted-foreground text-sm">{t('media.press.title')}</span>
+            </div>
+          )
+        }
+        {
+          statWritten > 0 && (
+            <div class="flex items-baseline gap-1.5">
+              <span class="text-foreground text-2xl font-bold tabular-nums">{statWritten}</span>
+              <span class="text-muted-foreground text-sm">{t('media.category.written')}</span>
+            </div>
+          )
+        }
+        {
+          statSupervised > 0 && (
+            <div class="flex items-baseline gap-1.5">
+              <span class="text-foreground text-2xl font-bold tabular-nums">{statSupervised}</span>
+              <span class="text-muted-foreground text-sm">{t('media.category.supervised')}</span>
+            </div>
+          )
+        }
+        {
+          statSpeaking > 0 && (
+            <div class="flex items-baseline gap-1.5">
+              <span class="text-foreground text-2xl font-bold tabular-nums">{statSpeaking}</span>
+              <span class="text-muted-foreground text-sm">{t('media.speaking.title')}</span>
+            </div>
+          )
+        }
       </div>
     </div>
 
@@ -175,61 +199,91 @@ function formatDate(dateStr: string, locale: string): string {
       </div>
 
       <!-- Featured -->
-      {pressFeatured && (
-        <div class="mb-10">
-          <span class="mb-4 inline-flex items-center gap-1.5 rounded-full border border-[#686dff]/30 bg-[#686dff]/10 px-3 py-1 text-xs font-medium text-[#686dff]">
-            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-            </svg>
-            {t('media.featured')}
-          </span>
+      {
+        pressFeatured && (
+          <div class="mb-10">
+            <span class="mb-4 inline-flex items-center gap-1.5 rounded-full border border-[#686dff]/30 bg-[#686dff]/10 px-3 py-1 text-xs font-medium text-[#686dff]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="11"
+                height="11"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+              {t('media.featured')}
+            </span>
 
-          <a
-            href={pressFeatured.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="border-border bg-background group overflow-hidden rounded-2xl border transition-all duration-200 hover:border-[#686dff]/40 hover:shadow-xl md:flex"
-          >
-            {featuredThumb ? (
-              <div class="relative shrink-0 overflow-hidden md:w-72 lg:w-80" style="aspect-ratio:16/9">
-                <img
-                  src={featuredThumb}
-                  alt={pressFeatured.title}
-                  class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-              </div>
-            ) : (
-              <div class="relative shrink-0 overflow-hidden bg-gradient-to-br from-red-950 via-red-900/50 to-neutral-900 md:w-72 lg:w-80" style="aspect-ratio:16/9">
-                <div class="absolute inset-0 flex items-center justify-center">
-                  <div class="flex h-20 w-20 items-center justify-center rounded-full bg-[#ff0000]/20 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
-                    <svg class="h-9 w-9 text-red-400" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z" />
-                    </svg>
-                  </div>
+            <a
+              href={pressFeatured.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="border-border bg-background group overflow-hidden rounded-2xl border transition-all duration-200 hover:border-[#686dff]/40 hover:shadow-xl md:flex"
+            >
+              {featuredThumb ? (
+                <div
+                  class="relative shrink-0 overflow-hidden md:w-72 lg:w-80"
+                  style="aspect-ratio:16/9"
+                >
+                  <img
+                    src={featuredThumb}
+                    alt={pressFeatured.title}
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                 </div>
-                <div class="absolute inset-0 opacity-10" style="background-image:linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px);background-size:32px 32px" />
+              ) : (
+                <div
+                  class="relative shrink-0 overflow-hidden bg-gradient-to-br from-red-950 via-red-900/50 to-neutral-900 md:w-72 lg:w-80"
+                  style="aspect-ratio:16/9"
+                >
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="flex h-20 w-20 items-center justify-center rounded-full bg-[#ff0000]/20 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
+                      <svg class="h-9 w-9 text-red-400" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div
+                    class="absolute inset-0 opacity-10"
+                    style="background-image:linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px);background-size:32px 32px"
+                  />
+                </div>
+              )}
+              <div class="flex flex-1 flex-col justify-center p-6 md:p-8 lg:p-10">
+                <span class="mb-3 flex items-center gap-1.5 text-xs font-medium tracking-widest text-red-400 uppercase">
+                  <span class="h-1.5 w-1.5 rounded-full bg-red-400" /> YouTube
+                </span>
+                <h4 class="text-foreground text-xl leading-snug font-bold transition-colors group-hover:text-[#686dff] md:text-2xl">
+                  {pressFeatured.title}
+                </h4>
+                <p class="text-muted-foreground mt-3 text-sm leading-relaxed">
+                  {pressFeatured.description}
+                </p>
+                <div class="mt-6 flex items-center gap-2 text-sm font-medium text-[#686dff]">
+                  <span>{t('media.visit')}</span>
+                  <svg
+                    class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <>
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </>
+                  </svg>
+                </div>
               </div>
-            )}
-            <div class="flex flex-1 flex-col justify-center p-6 md:p-8 lg:p-10">
-              <span class="mb-3 flex items-center gap-1.5 text-xs font-medium uppercase tracking-widest text-red-400">
-                <span class="h-1.5 w-1.5 rounded-full bg-red-400" /> YouTube
-              </span>
-              <h4 class="group-hover:text-[#686dff] text-foreground text-xl font-bold leading-snug transition-colors md:text-2xl">
-                {pressFeatured.title}
-              </h4>
-              <p class="text-muted-foreground mt-3 text-sm leading-relaxed">{pressFeatured.description}</p>
-              <div class="mt-6 flex items-center gap-2 text-sm font-medium text-[#686dff]">
-                <span>{t('media.visit')}</span>
-                <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                </svg>
-              </div>
-            </div>
-          </a>
-        </div>
-      )}
+            </a>
+          </div>
+        )
+      }
 
       <!-- Press carousel -->
       <MediaCarousel client:visible items={enrichedPressItems} labels={pressLabels} />
@@ -250,91 +304,102 @@ function formatDate(dateStr: string, locale: string): string {
       />
 
       <!-- Platforms -->
-      {platforms.length > 0 && (
-        <div class="mt-12">
-          <p class="text-muted-foreground mb-4 text-xs font-medium uppercase tracking-widest">
-            {t('media.writing.also_on')}
-          </p>
-          <div class="flex flex-wrap gap-3">
-            {platforms.map((p) => (
-              <a
-                href={p.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="border-border bg-background group flex items-center gap-2.5 rounded-full border px-4 py-2 transition-all duration-150 hover:border-[#686dff]/30 hover:shadow-sm"
-              >
-                <span class="text-muted-foreground group-hover:text-[var(--pc)] transition-colors" style={`--pc:${platformColors[p.name] ?? '#686dff'}`}>
-                  <Fragment set:html={platformIcons[p.name] ?? ''} />
-                </span>
-                <span class="text-foreground text-sm font-medium">{p.name}</span>
-                <svg class="text-muted-foreground h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-              </a>
-            ))}
+      {
+        platforms.length > 0 && (
+          <div class="mt-12">
+            <p class="text-muted-foreground mb-4 text-xs font-medium tracking-widest uppercase">
+              {t('media.writing.also_on')}
+            </p>
+            <div class="flex flex-wrap gap-3">
+              {platforms.map((p) => (
+                <a
+                  href={p.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="border-border bg-background group flex items-center gap-2.5 rounded-full border px-4 py-2 transition-all duration-150 hover:border-[#686dff]/30 hover:shadow-sm"
+                >
+                  <span
+                    class="text-muted-foreground transition-colors group-hover:text-[var(--pc)]"
+                    style={`--pc:${platformColors[p.name] ?? '#686dff'}`}
+                  >
+                    <Fragment set:html={platformIcons[p.name] ?? ''} />
+                  </span>
+                  <span class="text-foreground text-sm font-medium">{p.name}</span>
+                  <svg
+                    class="text-muted-foreground h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )
+      }
     </div>
 
     <!-- ── Speaking ────────────────────────────────────────────────────────── -->
-    {speakingItems.length > 0 && (
-      <div>
-        <div class="mb-8">
-          <h3 class="text-foreground text-2xl font-semibold">{t('media.speaking.title')}</h3>
-          <p class="text-muted-foreground mt-1.5 text-sm">{t('media.speaking.subtitle')}</p>
-        </div>
+    {
+      speakingItems.length > 0 && (
+        <div>
+          <div class="mb-8">
+            <h3 class="text-foreground text-2xl font-semibold">{t('media.speaking.title')}</h3>
+            <p class="text-muted-foreground mt-1.5 text-sm">{t('media.speaking.subtitle')}</p>
+          </div>
 
-        <div class="relative">
-          <!-- Vertical line -->
-          <div class="border-border absolute top-2 bottom-2 left-[7px] border-l" />
+          <div class="relative">
+            <div class="border-border absolute top-2 bottom-2 left-[7px] border-l" />
 
-          <ol class="space-y-8">
-            {speakingItems.map((item) => (
-              <li class="relative flex gap-6 pl-8">
-                <!-- Dot -->
-                <div class="bg-background border-border absolute left-0 top-1.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2">
-                  <span class="bg-[#686dff] h-1.5 w-1.5 rounded-full" />
-                </div>
-
-                <a
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="border-border bg-background group flex-1 rounded-xl border p-5 transition-all duration-200 hover:border-[#686dff]/30 hover:shadow-sm"
-                >
-                  <!-- Date + venue row -->
-                  <div class="mb-3 flex flex-wrap items-center gap-2">
-                    <span class="rounded-full bg-[#686dff]/10 px-2.5 py-0.5 text-xs font-semibold text-[#686dff]">
-                      {formatDate(item.date, lang)}
-                    </span>
-                    <span class="border-border text-muted-foreground rounded-full border px-2.5 py-0.5 text-xs">
-                      {item.venue}
-                    </span>
+            <ol class="space-y-8">
+              {speakingItems.map((item) => (
+                <li class="relative flex gap-6 pl-8">
+                  <div class="bg-background border-border absolute top-1.5 left-0 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2">
+                    <span class="h-1.5 w-1.5 rounded-full bg-[#686dff]" />
                   </div>
 
-                  <!-- Title -->
-                  <p class="group-hover:text-[#686dff] text-foreground text-sm font-semibold leading-snug transition-colors">
-                    {item.title}
-                  </p>
-
-                  <!-- Stats badges -->
-                  {item.stats && Object.keys(item.stats).length > 0 && (
-                    <div class="mt-3 flex flex-wrap gap-1.5">
-                      {Object.values(item.stats).map((val) => (
-                        <span class="border-border text-muted-foreground rounded-full border px-2 py-0.5 text-[11px]">
-                          {val}
-                        </span>
-                      ))}
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="border-border bg-background group flex-1 rounded-xl border p-5 transition-all duration-200 hover:border-[#686dff]/30 hover:shadow-sm"
+                  >
+                    <div class="mb-3 flex flex-wrap items-center gap-2">
+                      <span class="rounded-full bg-[#686dff]/10 px-2.5 py-0.5 text-xs font-semibold text-[#686dff]">
+                        {formatDate(item.date, lang)}
+                      </span>
+                      <span class="border-border text-muted-foreground rounded-full border px-2.5 py-0.5 text-xs">
+                        {item.venue}
+                      </span>
                     </div>
-                  )}
-                </a>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </div>
-    )}
 
+                    <p class="text-foreground text-sm leading-snug font-semibold transition-colors group-hover:text-[#686dff]">
+                      {item.title}
+                    </p>
+
+                    {item.stats && Object.keys(item.stats).length > 0 && (
+                      <div class="mt-3 flex flex-wrap gap-1.5">
+                        {Object.values(item.stats).map((val) => (
+                          <span class="border-border text-muted-foreground rounded-full border px-2 py-0.5 text-[11px]">
+                            {val}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      )
+    }
   </div>
 </section>
