@@ -1,0 +1,101 @@
+{
+  "categories": ["All", "Coding", "Design", "Research", "Productivity", "Infrastructure"],
+  "items": [
+    {
+      "id": "claude",
+      "name": "Claude",
+      "category": "Coding",
+      "description": "Primary AI assistant for coding, architecture review, and complex reasoning tasks.",
+      "logoUrl": "https://www.anthropic.com/favicon.ico",
+      "url": "https://claude.ai"
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "category": "Coding",
+      "description": "AI-powered code editor with context-aware autocomplete and inline chat.",
+      "logoUrl": "https://cursor.sh/favicon.ico",
+      "url": "https://cursor.sh"
+    },
+    {
+      "id": "github-copilot",
+      "name": "GitHub Copilot",
+      "category": "Coding",
+      "description": "In-editor code suggestions powered by OpenAI Codex for faster development.",
+      "logoUrl": "https://github.com/favicon.ico",
+      "url": "https://github.com/features/copilot"
+    },
+    {
+      "id": "v0",
+      "name": "v0 by Vercel",
+      "category": "Design",
+      "description": "Generative UI tool that converts natural language prompts to React components.",
+      "logoUrl": "https://v0.dev/favicon.ico",
+      "url": "https://v0.dev"
+    },
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "category": "Research",
+      "description": "Used for ideation, summarization, and exploratory research with GPT-4o.",
+      "logoUrl": "https://openai.com/favicon.ico",
+      "url": "https://chatgpt.com"
+    },
+    {
+      "id": "perplexity",
+      "name": "Perplexity",
+      "category": "Research",
+      "description": "AI-powered search engine for real-time web research with cited sources.",
+      "logoUrl": "https://www.perplexity.ai/favicon.ico",
+      "url": "https://www.perplexity.ai"
+    },
+    {
+      "id": "notebooklm",
+      "name": "NotebookLM",
+      "category": "Research",
+      "description": "Google's AI research assistant for synthesizing documents and generating insights.",
+      "logoUrl": "https://notebooklm.google.com/favicon.ico",
+      "url": "https://notebooklm.google.com"
+    },
+    {
+      "id": "midjourney",
+      "name": "Midjourney",
+      "category": "Design",
+      "description": "Text-to-image AI for generating concept art, UI mockups, and visual assets.",
+      "logoUrl": "https://www.midjourney.com/favicon.ico",
+      "url": "https://www.midjourney.com"
+    },
+    {
+      "id": "linear",
+      "name": "Linear",
+      "category": "Productivity",
+      "description": "Project management tool with AI-assisted issue writing and sprint planning.",
+      "logoUrl": "https://linear.app/favicon.ico",
+      "url": "https://linear.app"
+    },
+    {
+      "id": "notion-ai",
+      "name": "Notion AI",
+      "category": "Productivity",
+      "description": "AI writing assistant embedded in Notion for drafting docs and summarizing notes.",
+      "logoUrl": "https://www.notion.so/favicon.ico",
+      "url": "https://www.notion.so"
+    },
+    {
+      "id": "aws-bedrock",
+      "name": "AWS Bedrock",
+      "category": "Infrastructure",
+      "description": "Managed service for deploying foundation models in production ML pipelines.",
+      "logoUrl": "https://aws.amazon.com/favicon.ico",
+      "url": "https://aws.amazon.com/bedrock"
+    },
+    {
+      "id": "langchain",
+      "name": "LangChain",
+      "category": "Infrastructure",
+      "description": "Framework for building LLM-powered applications with chains, agents, and memory.",
+      "logoUrl": "https://python.langchain.com/favicon.ico",
+      "url": "https://www.langchain.com"
+    }
+  ]
+}
