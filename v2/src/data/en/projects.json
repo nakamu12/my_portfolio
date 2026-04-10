@@ -7,7 +7,7 @@
       "tech": ["React", "Ruby on Rails", "PostgreSQL", "AWS"],
       "status": "active",
       "period": null,
-      "image": null,
+      "image": "project-axross.png",
       "links": {
         "site": "https://axross-recipe.com/",
         "github": null
@@ -20,7 +20,7 @@
       "tech": ["React", "Python", "FastAPI", "OpenAI API"],
       "status": "archived",
       "period": "2023–2025",
-      "image": null,
+      "image": "project-magicss.png",
       "links": {
         "site": "https://magicss.ai/",
         "github": null
