@@ -8,15 +8,17 @@
 
 ロゴは上から下に **R → Bridge → N** のストーリーを持つ:
 
-```
- ┌─────────┐
- │  ██▓▓   │  ← R's leg: 太い・斜め（~28°）
- │   █▓    │     R のレッグ（脚）のダイナミックさ
- │    ●    │  ← Bridge node: 接続点
- │   ▓█    │     AI と現実世界をつなぐ橋渡し
- │   ▓█    │  ← N's stroke: 細い・垂直寄り（~8°）
- └─────────┘     N の最終ストロークの安定感
-```
+<p align="center">
+  <img src="logo-gradient.svg" width="128" height="128" alt="RN Logo — Gradient" />
+  &nbsp;&nbsp;&nbsp;
+  <img src="logo-mono-black.svg" width="128" height="128" alt="RN Logo — Mono Black" />
+  &nbsp;&nbsp;&nbsp;
+  <img src="logo-mono-white.svg" width="128" height="128" alt="RN Logo — Mono White" />
+</p>
+
+- **Upper slash** — R のレッグ（脚）。太い・斜め（~28°）でダイナミック
+- **Bridge node** — 接続点。AI と現実世界をつなぐ橋渡し
+- **Lower slash** — N の最終ストローク。細い・垂直寄り（~8°）で安定感
 
 ### Design Elements
 

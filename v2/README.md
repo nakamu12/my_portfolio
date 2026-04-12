@@ -119,15 +119,13 @@ The portfolio inherits the **OmniCore** product brand:
 
 A rounded square (squircle) with a split-slash motif. The mark reads **R → Bridge → N** from top to bottom:
 
-```
- ┌─────────┐
- │  ██▓▓   │  ← R's leg — wide, diagonal (~28°)
- │   █▓    │
- │    ●    │  ← Bridge node — AI ↔ real world
- │   ▓█    │
- │   ▓█    │  ← N's stroke — narrow, vertical (~8°)
- └─────────┘
-```
+<p align="center">
+  <img src="src/assets/logo/logo-gradient.svg" width="128" height="128" alt="RN Logo — VB: Dynamic" />
+  &nbsp;&nbsp;&nbsp;
+  <img src="src/assets/logo/logo-mono-black.svg" width="128" height="128" alt="RN Logo — Mono Black" />
+  &nbsp;&nbsp;&nbsp;
+  <img src="src/assets/logo/logo-mono-white.svg" width="128" height="128" alt="RN Logo — Mono White" />
+</p>
 
 | Element     | Symbolism                                             |
 | ----------- | ----------------------------------------------------- |
