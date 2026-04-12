@@ -7,6 +7,10 @@ import {
   getCertificationImage,
   formatCertificationDate,
 } from '@/lib/certifications';
+import SectionHeading from '@/components/common/SectionHeading.astro';
+import SectionContainer from '@/components/common/SectionContainer.astro';
+import PillBadge from '@/components/common/PillBadge.astro';
+import CardTitle from '@/components/common/CardTitle.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = await getTranslations(lang);
@@ -37,122 +41,108 @@ const highlight = certItems.find((item) => item.priority !== null && item.priori
 const regularCerts = certItems.filter((item) => item !== highlight);
 ---
 
-<section id="certifications" class="py-24">
-  <div class="mx-auto max-w-6xl px-6">
-    <!-- Section Heading -->
-    <div class="mb-16">
-      <p class="text-muted-foreground mb-3 text-sm font-medium tracking-widest uppercase">
-        {t('certifications.heading')}
-      </p>
-      <h2 class="text-foreground text-3xl font-semibold md:text-4xl">
-        {t('certifications.subtitle')}
-      </h2>
-    </div>
+<SectionContainer id="certifications">
+  <SectionHeading level="h2" heading={t('certifications.heading')} titleOnly />
 
-    <!-- FDE Level 2 Highlight Card -->
-    {
-      highlight && (
-        <div class="mb-12">
-          <div class="rounded-2xl bg-gradient-to-r from-[#686dff] to-[#b66fff] p-[1px]">
-            <div class="bg-background rounded-2xl p-8 md:p-10">
-              <div class="flex flex-col gap-6 md:flex-row md:items-start md:gap-10">
-                <div class="flex-shrink-0">
-                  <div class="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-[#686dff] to-[#b66fff]">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="28"
-                      height="28"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="white"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                      <polyline points="22 4 12 14.01 9 11.01" />
-                    </svg>
-                  </div>
+  <!-- FDE Level 2 Highlight Card -->
+  {
+    highlight && (
+      <div class="mb-12">
+        <div class="rounded-2xl bg-gradient-to-r from-[#686dff] to-[#b66fff] p-[1px]">
+          <div class="bg-background rounded-2xl p-8 md:p-10">
+            <div class="flex flex-col gap-6 md:flex-row md:items-start md:gap-10">
+              <div class="flex-shrink-0">
+                <div class="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-[#686dff] to-[#b66fff]">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                  </svg>
+                </div>
+              </div>
+
+              <div class="flex-1">
+                <div class="mb-3 flex flex-wrap items-center gap-2">
+                  <PillBadge tone="gradient">{t('certifications.featured')}</PillBadge>
                 </div>
 
-                <div class="flex-1">
-                  <div class="mb-3 flex flex-wrap items-center gap-2">
-                    <span class="inline-flex items-center rounded-full bg-gradient-to-r from-[#686dff] to-[#b66fff] px-3 py-0.5 text-xs font-medium text-white">
-                      {t('certifications.featured')}
-                    </span>
-                  </div>
+                <CardTitle text={highlight.title} size="xl" class="mb-1 font-bold" />
 
-                  <h3 class="text-foreground mb-1 text-2xl font-bold md:text-3xl">
-                    {highlight.title}
-                  </h3>
-
-                  <div class="text-muted-foreground mb-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-                    <span class="font-medium text-[#686dff]">{highlight.organization}</span>
-                    <span>·</span>
-                    <span>{formatCertificationDate(highlight.date, lang)}</span>
-                  </div>
-
-                  <p class="text-muted-foreground max-w-2xl leading-relaxed">
-                    {highlight.description}
-                  </p>
+                <div class="text-muted-foreground mb-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+                  <span class="font-medium text-[#686dff]">{highlight.organization}</span>
+                  <span>·</span>
+                  <span>{formatCertificationDate(highlight.date, lang)}</span>
                 </div>
+
+                <p class="text-muted-foreground max-w-2xl leading-relaxed">
+                  {highlight.description}
+                </p>
               </div>
             </div>
           </div>
         </div>
-      )
-    }
+      </div>
+    )
+  }
 
-    <!-- Other certifications list -->
-    {
-      regularCerts.length > 0 && (
-        <div class="divide-border divide-y">
-          {regularCerts.map((item) => {
-            const img = getCertificationImage(item.image);
-            return (
-              <div class="flex items-center gap-4 py-4">
-                <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#686dff]/10 to-[#b66fff]/10">
-                  {img ? (
-                    <Image
-                      src={img}
-                      alt={item.title}
-                      width={40}
-                      height={40}
-                      class="h-7 w-7 object-contain"
-                    />
-                  ) : (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#686dff"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                      <polyline points="22 4 12 14.01 9 11.01" />
-                    </svg>
-                  )}
-                </div>
-
-                <div class="min-w-0 flex-1">
-                  <h3 class="text-foreground text-sm leading-snug font-semibold">{item.title}</h3>
-                  <p class="text-muted-foreground text-xs">
-                    {item.organization}
-                    <span class="mx-1.5">·</span>
-                    {formatCertificationDate(item.date, lang)}
-                  </p>
-                </div>
+  <!-- Other certifications list -->
+  {
+    regularCerts.length > 0 && (
+      <div class="divide-border divide-y">
+        {regularCerts.map((item) => {
+          const img = getCertificationImage(item.image);
+          return (
+            <div class="flex items-center gap-4 py-4">
+              <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#686dff]/10 to-[#b66fff]/10">
+                {img ? (
+                  <Image
+                    src={img}
+                    alt={item.title}
+                    width={40}
+                    height={40}
+                    class="h-7 w-7 object-contain"
+                  />
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#686dff"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                  </svg>
+                )}
               </div>
-            );
-          })}
-        </div>
-      )
-    }
-  </div>
-</section>
+
+              <div class="min-w-0 flex-1">
+                <CardTitle text={item.title} as="h3" size="sm" class="leading-snug" />
+                <p class="text-muted-foreground text-xs">
+                  {item.organization}
+                  <span class="mx-1.5">·</span>
+                  {formatCertificationDate(item.date, lang)}
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    )
+  }
+</SectionContainer>

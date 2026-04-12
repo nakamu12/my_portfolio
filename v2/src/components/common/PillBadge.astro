@@ -1,0 +1,35 @@
+---
+interface Props {
+  as?: 'span' | 'p' | 'div';
+  text?: string;
+  tone?: 'primary' | 'secondary' | 'success' | 'muted' | 'gradient';
+  size?: 'sm' | 'md';
+  class?: string;
+}
+
+const { as = 'span', text, tone = 'primary', size = 'md', class: className = '' } = Astro.props;
+
+const Tag = as;
+const toneClass = {
+  primary: 'bg-[#686dff]/10 text-[#686dff]',
+  secondary: 'bg-[#b66fff]/12 text-[#b66fff]',
+  success: 'bg-emerald-500/12 text-emerald-600 dark:text-emerald-400',
+  muted: 'bg-muted text-muted-foreground',
+  gradient: 'bg-gradient-to-r from-[#686dff] to-[#b66fff] text-white',
+} satisfies Record<'primary' | 'secondary' | 'success' | 'muted' | 'gradient', string>;
+const sizeClass = {
+  sm: 'px-2 py-0.5 text-[11px]',
+  md: 'px-2.5 py-0.5 text-xs',
+} satisfies Record<'sm' | 'md', string>;
+---
+
+<Tag
+  class:list={[
+    'inline-flex items-center rounded-full font-medium',
+    toneClass[tone],
+    sizeClass[size],
+    className,
+  ]}
+>
+  {text ?? <slot />}
+</Tag>

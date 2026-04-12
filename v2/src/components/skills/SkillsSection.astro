@@ -1,6 +1,8 @@
 ---
 import { getLangFromUrl, getTranslations } from '@/i18n/utils';
 import SkillsGrid from './SkillsGrid';
+import SectionHeading from '@/components/common/SectionHeading.astro';
+import SectionContainer from '@/components/common/SectionContainer.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = await getTranslations(lang);
@@ -9,15 +11,9 @@ const skillsData = await import(`../../data/${lang}/skills.json`);
 const categories = skillsData.categories ?? skillsData.default?.categories ?? [];
 ---
 
-<section id="skills" class="py-24">
-  <div class="mx-auto max-w-6xl px-6">
-    <!-- Section heading -->
-    <div class="mb-16">
-      <h2 class="text-foreground text-3xl font-semibold md:text-4xl">{t('skills.title')}</h2>
-      <p class="text-muted-foreground mt-3 text-base">{t('skills.subtitle')}</p>
-    </div>
+<SectionContainer id="skills">
+  <SectionHeading level="h2" heading={t('skills.title')} titleOnly />
 
-    <!-- Animated grid (client:visible = hydrate when scrolled into view) -->
-    <SkillsGrid client:visible categories={categories} />
-  </div>
-</section>
+  <!-- Animated grid (client:visible = hydrate when scrolled into view) -->
+  <SkillsGrid client:visible categories={categories} />
+</SectionContainer>

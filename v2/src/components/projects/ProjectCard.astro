@@ -1,4 +1,9 @@
 ---
+import SurfaceCard from '@/components/common/SurfaceCard.astro';
+import CardTitle from '@/components/common/CardTitle.astro';
+import TagList from '@/components/common/TagList.astro';
+import ExternalLinkAction from '@/components/common/ExternalLinkAction.astro';
+
 interface Props {
   title: string;
   description: string;
@@ -16,8 +21,10 @@ const { title, description, tech, period, image, links, t } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<article
-  class="border-border bg-card flex flex-col overflow-hidden rounded-xl border opacity-70 transition-opacity duration-300 hover:opacity-90"
+<SurfaceCard
+  as="article"
+  padding="none"
+  class="flex flex-col overflow-hidden opacity-70 transition-opacity duration-300 hover:opacity-90"
 >
   <!-- Thumbnail -->
   <div class="bg-muted relative flex aspect-video items-center justify-center overflow-hidden">
@@ -40,21 +47,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <!-- Content -->
   <div class="flex flex-1 flex-col gap-3 p-5">
     <div class="flex items-baseline justify-between gap-2">
-      <h3 class="text-base font-semibold tracking-tight">{title}</h3>
+      <CardTitle text={title} size="sm" />
       {period && <span class="text-muted-foreground shrink-0 font-mono text-xs">{period}</span>}
     </div>
 
     <p class="text-muted-foreground line-clamp-2 text-sm leading-relaxed">{description}</p>
 
-    <div class="flex flex-wrap gap-1.5">
-      {
-        tech.map((tag) => (
-          <span class="bg-muted text-muted-foreground border-border inline-flex items-center rounded border px-2 py-0.5 text-xs font-medium">
-            {tag}
-          </span>
-        ))
-      }
-    </div>
+    <TagList items={tech} class="gap-1.5" itemClass="rounded border" />
 
     <!-- Links -->
     <div class="mt-auto flex items-center gap-3 pt-1">
@@ -67,25 +66,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             class="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-xs transition-colors duration-200"
             aria-label={`${t('projects.ariaVisitSite')} - ${title}`}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="12"
-              height="12"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <>
-                <path d="M15 3h6v6" />
-                <path d="M10 14 21 3" />
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-              </>
-            </svg>
-            {t('projects.viewSite')}
+            <ExternalLinkAction label={t('projects.viewSite')} icon="external" />
           </a>
         )
       }
@@ -114,4 +95,4 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       }
     </div>
   </div>
-</article>
+</SurfaceCard>

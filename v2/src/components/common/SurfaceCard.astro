@@ -1,0 +1,64 @@
+---
+interface Props {
+  as?: 'div' | 'article' | 'a';
+  href?: string;
+  target?: string;
+  rel?: string;
+  rounded?: 'xl' | '2xl';
+  padding?: 'none' | 'sm' | 'md' | 'lg';
+  tone?: 'card' | 'background' | 'muted';
+  interactive?: boolean;
+  class?: string;
+}
+
+const {
+  as = 'div',
+  href,
+  target,
+  rel,
+  rounded = 'xl',
+  padding = 'md',
+  tone = 'card',
+  interactive = false,
+  class: className = '',
+} = Astro.props;
+
+const Tag = as;
+const roundedClass = {
+  xl: 'rounded-xl',
+  '2xl': 'rounded-2xl',
+} satisfies Record<'xl' | '2xl', string>;
+const paddingClass = {
+  none: '',
+  sm: 'p-4',
+  md: 'p-6',
+  lg: 'p-8',
+} satisfies Record<'none' | 'sm' | 'md' | 'lg', string>;
+const toneClass = {
+  card: 'bg-card',
+  background: 'bg-background',
+  muted: 'bg-muted',
+} satisfies Record<'card' | 'background' | 'muted', string>;
+const linkProps =
+  as === 'a'
+    ? {
+        href,
+        target,
+        rel: rel ?? 'noopener noreferrer',
+      }
+    : {};
+---
+
+<Tag
+  {...linkProps}
+  class:list={[
+    'border-border border',
+    roundedClass[rounded],
+    paddingClass[padding],
+    toneClass[tone],
+    interactive && 'transition-shadow hover:shadow-md',
+    className,
+  ]}
+>
+  <slot />
+</Tag>

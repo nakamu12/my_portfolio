@@ -1,4 +1,6 @@
 import { useState, useRef } from 'react';
+import FilterTabs from '@/components/common/FilterTabs';
+import { sanitizeExternalUrl } from '@/lib/url';
 
 export type MediaItem = {
   title: string;
@@ -105,7 +107,17 @@ export default function MediaCarousel({ items, labels, emptyMessage }: Props) {
     counts[cat] = items.filter((i) => i.category === cat).length;
   }
 
+  const labelFor = (cat: string) =>
+    cat === 'all'
+      ? (labels[`${CAT_KEY_PREFIX}all`] ?? 'All')
+      : (labels[`${CAT_KEY_PREFIX}${cat}`] ?? cat);
+
   const filtered = active === 'all' ? items : items.filter((i) => i.category === active);
+  const tabItems = visibleCats.map((cat) => ({
+    key: cat,
+    label: labelFor(cat),
+    count: counts[cat],
+  }));
 
   const scroll = (dir: 'prev' | 'next') => {
     scrollRef.current?.scrollBy({ left: dir === 'next' ? 320 : -320, behavior: 'smooth' });
@@ -116,39 +128,17 @@ export default function MediaCarousel({ items, labels, emptyMessage }: Props) {
     scrollRef.current?.scrollTo({ left: 0, behavior: 'smooth' });
   };
 
-  const labelFor = (cat: string) =>
-    cat === 'all'
-      ? (labels[`${CAT_KEY_PREFIX}all`] ?? 'All')
-      : (labels[`${CAT_KEY_PREFIX}${cat}`] ?? cat);
-
   return (
     <div>
       {/* Filter tabs */}
-      <div
-        className="mb-8 flex gap-2 overflow-x-auto pb-1"
-        style={{ scrollbarWidth: 'none' } as React.CSSProperties}
-      >
-        {visibleCats.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => handleCat(cat)}
-            className={`flex shrink-0 cursor-pointer items-center gap-1.5 rounded-full border px-4 py-1.5 text-sm font-medium transition-all duration-150 ${
-              active === cat
-                ? 'border-[#686dff] bg-[#686dff] text-white'
-                : 'border-border bg-background text-muted-foreground hover:text-foreground hover:border-[#686dff]/40'
-            }`}
-          >
-            {labelFor(cat)}
-            <span
-              className={`rounded-full px-1.5 py-0.5 text-[10px] font-semibold ${
-                active === cat ? 'bg-white/20 text-white' : 'bg-muted text-muted-foreground'
-              }`}
-            >
-              {counts[cat]}
-            </span>
-          </button>
-        ))}
-      </div>
+      <FilterTabs
+        items={tabItems}
+        activeKey={active}
+        onChange={handleCat}
+        variant="outline"
+        scrollable
+        className="mb-8"
+      />
 
       {/* Empty state */}
       {filtered.length === 0 ? (
@@ -215,17 +205,12 @@ export default function MediaCarousel({ items, labels, emptyMessage }: Props) {
 function MediaCard({ item, labels }: { item: MediaItem; labels: Record<string, string> }) {
   const style = CAT_STYLES[item.category] ?? CAT_STYLES.press;
   const srcStyle = item.source ? SOURCE_STYLES[item.source] : undefined;
+  const safeLink = sanitizeExternalUrl(item.link);
   // Thumbnails are resolved at build time; no client-side YouTube fallback needed
   const thumbnail = item.thumbnail;
 
-  return (
-    <a
-      href={item.link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="border-border bg-background group w-72 shrink-0 overflow-hidden rounded-xl border transition-all duration-200 hover:border-[#686dff]/40 hover:shadow-lg"
-      style={{ scrollSnapAlign: 'start' }}
-    >
+  const content = (
+    <>
       {/* Thumbnail */}
       <div className="bg-muted relative aspect-video overflow-hidden">
         {thumbnail ? (
@@ -285,27 +270,54 @@ function MediaCard({ item, labels }: { item: MediaItem; labels: Record<string, s
           ) : (
             <span />
           )}
-          <span
-            className={`flex shrink-0 items-center gap-1 text-xs font-medium ${style.text} opacity-0 transition-opacity group-hover:opacity-100`}
-          >
-            {labels['media.card.open'] ?? 'Open'}
-            <svg
-              width="11"
-              height="11"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+          {safeLink ? (
+            <span
+              className={`flex shrink-0 items-center gap-1 text-xs font-medium ${style.text} opacity-0 transition-opacity group-hover:opacity-100`}
             >
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-              <polyline points="15 3 21 3 21 9" />
-              <line x1="10" y1="14" x2="21" y2="3" />
-            </svg>
-          </span>
+              {labels['media.card.open'] ?? 'Open'}
+              <svg
+                width="11"
+                height="11"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+            </span>
+          ) : (
+            <span />
+          )}
         </div>
       </div>
+    </>
+  );
+
+  const cardClass =
+    'border-border bg-background group w-72 shrink-0 overflow-hidden rounded-xl border transition-all duration-200 hover:border-[#686dff]/40 hover:shadow-lg';
+
+  if (!safeLink) {
+    return (
+      <div className={cardClass} style={{ scrollSnapAlign: 'start' }}>
+        {content}
+      </div>
+    );
+  }
+
+  return (
+    <a
+      href={safeLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cardClass}
+      style={{ scrollSnapAlign: 'start' }}
+    >
+      {content}
     </a>
   );
 }
