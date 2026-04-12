@@ -44,7 +44,7 @@ jobs:
           fetch-depth: 1
 
       - name: Run Claude PR Action
-        uses: nakamu12/claude-code-action@main
+        uses: nakamu12/claude-code-action@f70aaf085a8e972192008b1bdb7d4e1cad1f70fe # main
         with:
           use_oauth: true
           claude_access_token: ${{ secrets.CLAUDE_ACCESS_TOKEN }}
