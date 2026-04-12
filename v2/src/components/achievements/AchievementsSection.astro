@@ -8,6 +8,9 @@ import {
   formatCertificationDate,
   isSafeUrl,
 } from '@/lib/certifications';
+import SectionHeading from '@/components/common/SectionHeading.astro';
+import SectionContainer from '@/components/common/SectionContainer.astro';
+import CardTitle from '@/components/common/CardTitle.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = await getTranslations(lang);
@@ -107,16 +110,8 @@ function getBentoPosition(index: number): string {
 }
 ---
 
-<section id="achievements" class="py-24">
-  <div class="mx-auto max-w-6xl px-6">
-    <div class="mb-16">
-      <p class="text-muted-foreground mb-3 text-sm font-medium tracking-widest uppercase">
-        {t('achievements.heading')}
-      </p>
-      <h2 class="text-foreground text-3xl font-semibold md:text-4xl">
-        {t('achievements.subtitle')}
-      </h2>
-    </div>
+<SectionContainer id="achievements">
+    <SectionHeading level="h2" heading={t('achievements.heading')} titleOnly />
 
     {/* Shared SVG defs for decorative gradient (reused by all no-image cards) */}
     <svg width="0" height="0" class="absolute" aria-hidden="true">
@@ -231,9 +226,11 @@ function getBentoPosition(index: number): string {
                   )}
                 </div>
 
-                <h3 class:list={['leading-snug font-semibold text-white', titleSizeClasses[size]]}>
-                  {item.title}
-                </h3>
+                <CardTitle
+                  text={item.title}
+                  as="h3"
+                  class={`leading-snug text-white ${titleSizeClasses[size]}`}
+                />
 
                 <p class="mt-1 text-xs text-white/60">{item.organization}</p>
 
@@ -248,5 +245,4 @@ function getBentoPosition(index: number): string {
         })
       }
     </div>
-  </div>
-</section>
+</SectionContainer>

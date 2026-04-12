@@ -1,4 +1,10 @@
 ---
+import SurfaceCard from '@/components/common/SurfaceCard.astro';
+import OverlineLabel from '@/components/common/OverlineLabel.astro';
+import CardTitle from '@/components/common/CardTitle.astro';
+import TagList from '@/components/common/TagList.astro';
+import ExternalLinkAction from '@/components/common/ExternalLinkAction.astro';
+
 interface Props {
   title: string;
   description: string;
@@ -15,7 +21,12 @@ const { title, description, tech, image, links, t } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<article class="bg-card overflow-hidden rounded-2xl border border-[rgba(104,109,255,0.2)]">
+<SurfaceCard
+  as="article"
+  rounded="2xl"
+  padding="none"
+  class="overflow-hidden border-[rgba(104,109,255,0.2)]"
+>
   <div class="md:flex">
     <!-- Thumbnail -->
     <div class="shrink-0 md:w-1/2">
@@ -53,27 +64,22 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             ></span>
             <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
           </span>
-          <span class="text-xs font-semibold tracking-widest text-emerald-500 uppercase">
-            {t('projects.status.active')}
-          </span>
+          <OverlineLabel
+            as="span"
+            text={t('projects.status.active')}
+            tone="success"
+            class="text-emerald-500"
+          />
         </div>
 
         <!-- Title & Description -->
         <div class="flex flex-col gap-2">
-          <h3 class="text-2xl font-semibold tracking-tight">{title}</h3>
+          <CardTitle text={title} size="lg" />
           <p class="text-muted-foreground leading-relaxed">{description}</p>
         </div>
 
         <!-- Tech Stack Tags -->
-        <div class="flex flex-wrap gap-2">
-          {
-            tech.map((tag) => (
-              <span class="inline-flex items-center rounded-md border border-[rgba(104,109,255,0.15)] bg-[rgba(104,109,255,0.08)] px-2.5 py-0.5 text-xs font-medium text-[#686dff]">
-                {tag}
-              </span>
-            ))
-          }
-        </div>
+        <TagList items={tech} tone="brand" />
       </div>
 
       <!-- Links -->
@@ -86,25 +92,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
               rel="noopener noreferrer"
               class="inline-flex items-center gap-2 rounded-lg bg-[#686dff] px-4 py-2 text-sm font-medium text-white transition-colors duration-200 hover:bg-[#5961ff]"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <>
-                  <path d="M15 3h6v6" />
-                  <path d="M10 14 21 3" />
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                </>
-              </svg>
-              {t('projects.viewSite')}
+              <ExternalLinkAction label={t('projects.viewSite')} icon="external" />
             </a>
           )
         }
@@ -133,4 +121,4 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       </div>
     </div>
   </div>
-</article>
+</SurfaceCard>

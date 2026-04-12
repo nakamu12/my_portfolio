@@ -7,6 +7,10 @@ import {
   getCertificationImage,
   formatCertificationDate,
 } from '@/lib/certifications';
+import SectionHeading from '@/components/common/SectionHeading.astro';
+import SectionContainer from '@/components/common/SectionContainer.astro';
+import PillBadge from '@/components/common/PillBadge.astro';
+import CardTitle from '@/components/common/CardTitle.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = await getTranslations(lang);
@@ -37,17 +41,8 @@ const highlight = certItems.find((item) => item.priority !== null && item.priori
 const regularCerts = certItems.filter((item) => item !== highlight);
 ---
 
-<section id="certifications" class="py-24">
-  <div class="mx-auto max-w-6xl px-6">
-    <!-- Section Heading -->
-    <div class="mb-16">
-      <p class="text-muted-foreground mb-3 text-sm font-medium tracking-widest uppercase">
-        {t('certifications.heading')}
-      </p>
-      <h2 class="text-foreground text-3xl font-semibold md:text-4xl">
-        {t('certifications.subtitle')}
-      </h2>
-    </div>
+<SectionContainer id="certifications">
+    <SectionHeading level="h2" heading={t('certifications.heading')} titleOnly />
 
     <!-- FDE Level 2 Highlight Card -->
     {
@@ -78,14 +73,10 @@ const regularCerts = certItems.filter((item) => item !== highlight);
 
                 <div class="flex-1">
                   <div class="mb-3 flex flex-wrap items-center gap-2">
-                    <span class="inline-flex items-center rounded-full bg-gradient-to-r from-[#686dff] to-[#b66fff] px-3 py-0.5 text-xs font-medium text-white">
-                      {t('certifications.featured')}
-                    </span>
+                    <PillBadge tone="gradient">{t('certifications.featured')}</PillBadge>
                   </div>
 
-                  <h3 class="text-foreground mb-1 text-2xl font-bold md:text-3xl">
-                    {highlight.title}
-                  </h3>
+                  <CardTitle text={highlight.title} size="xl" class="mb-1 font-bold" />
 
                   <div class="text-muted-foreground mb-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
                     <span class="font-medium text-[#686dff]">{highlight.organization}</span>
@@ -141,7 +132,7 @@ const regularCerts = certItems.filter((item) => item !== highlight);
                 </div>
 
                 <div class="min-w-0 flex-1">
-                  <h3 class="text-foreground text-sm leading-snug font-semibold">{item.title}</h3>
+                  <CardTitle text={item.title} as="h3" size="sm" class="leading-snug" />
                   <p class="text-muted-foreground text-xs">
                     {item.organization}
                     <span class="mx-1.5">·</span>
@@ -154,5 +145,4 @@ const regularCerts = certItems.filter((item) => item !== highlight);
         </div>
       )
     }
-  </div>
-</section>
+</SectionContainer>

@@ -1,0 +1,39 @@
+---
+interface Props {
+  as?: 'section' | 'div';
+  id?: string;
+  ariaLabelledby?: string;
+  padding?: 'default' | 'compact' | 'hero' | 'none';
+  width?: 'wide' | 'narrow';
+  class?: string;
+  innerClass?: string;
+}
+
+const {
+  as = 'section',
+  id,
+  ariaLabelledby,
+  padding = 'default',
+  width = 'wide',
+  class: className = '',
+  innerClass = '',
+} = Astro.props;
+
+const Tag = as;
+const paddingClass = {
+  default: 'py-24',
+  compact: 'py-20',
+  hero: 'py-24 md:py-32',
+  none: '',
+} satisfies Record<'default' | 'compact' | 'hero' | 'none', string>;
+const widthClass = {
+  wide: 'mx-auto max-w-6xl px-6',
+  narrow: 'mx-auto max-w-4xl px-6',
+} satisfies Record<'wide' | 'narrow', string>;
+---
+
+<Tag id={id} aria-labelledby={ariaLabelledby} class:list={[paddingClass[padding], className]}>
+  <div class:list={[widthClass[width], innerClass]}>
+    <slot />
+  </div>
+</Tag>

@@ -1,0 +1,41 @@
+---
+import SectionHeading from '@/components/common/SectionHeading.astro';
+
+interface Props {
+  heading: string;
+  id?: string;
+  description?: string;
+  align?: 'left' | 'center';
+  variant?: 'default' | 'gradient';
+  rootClass?: string;
+  headingClass?: string;
+  descriptionClass?: string;
+  titleOnly?: boolean;
+}
+
+const {
+  heading,
+  id,
+  description,
+  align = 'left',
+  variant = 'default',
+  rootClass = '',
+  headingClass,
+  descriptionClass = 'text-sm',
+  titleOnly = false,
+} = Astro.props;
+---
+
+<SectionHeading
+  id={id}
+  heading={heading}
+  level="h3"
+  spacing="subsection"
+  align={align}
+  variant={variant}
+  rootClass={rootClass}
+  headingClass={headingClass}
+  descriptionClass={descriptionClass}
+  description={description}
+  titleOnly={titleOnly}
+/>

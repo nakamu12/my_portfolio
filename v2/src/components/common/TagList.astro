@@ -1,0 +1,27 @@
+---
+import TagChip from '@/components/common/TagChip.astro';
+
+interface Props {
+  items: string[];
+  tone?: 'default' | 'brand';
+  class?: string;
+  itemClass?: string;
+}
+
+const {
+  items,
+  tone = 'default',
+  class: className = '',
+  itemClass = '',
+} = Astro.props;
+---
+
+<ul class:list={['flex flex-wrap gap-2', className]}>
+  {
+    items.map((item) => (
+      <li>
+        <TagChip text={item} tone={tone} class={itemClass} />
+      </li>
+    ))
+  }
+</ul>

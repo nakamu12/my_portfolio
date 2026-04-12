@@ -2,6 +2,11 @@
 import { Image } from 'astro:assets';
 import { getLangFromUrl, getTranslations } from '@/i18n/utils';
 import profileImage from '@/assets/images/profile/profile.jpg';
+import SectionHeading from '@/components/common/SectionHeading.astro';
+import SectionContainer from '@/components/common/SectionContainer.astro';
+import OverlineLabel from '@/components/common/OverlineLabel.astro';
+import CardTitle from '@/components/common/CardTitle.astro';
+import PillBadge from '@/components/common/PillBadge.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = await getTranslations(lang);
@@ -19,20 +24,16 @@ const strengths: { name: string; subtitle?: string; desc: string }[] =
   aboutData.strengths ?? aboutData.default?.strengths ?? [];
 ---
 
-<section id="about" aria-labelledby="about-heading" class="py-24 md:py-32">
-  <div class="mx-auto max-w-6xl px-6">
+<SectionContainer id="about" ariaLabelledby="about-heading" padding="hero">
     <!-- Section Heading -->
-    <div class="about-heading-group mb-16">
-      <p class="text-muted-foreground mb-2 text-sm font-medium tracking-widest uppercase">
-        {t('about.subheading')}
-      </p>
-      <h2 id="about-heading" class="text-3xl font-semibold md:text-4xl">
-        {t('about.heading')}
-      </h2>
-      <div class="mt-4 h-[2px] w-12 bg-gradient-to-r from-[#686dff] to-[#b66fff]"></div>
+    <div class="about-heading-group mb-12 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+      <SectionHeading id="about-heading" level="h2" heading={t('about.heading')} spacing="none" titleOnly />
     </div>
 
     <!-- Profile + Bio -->
+    <p class="text-foreground mb-6 text-xl font-semibold tracking-tight md:text-2xl">
+      {t('hero.name')}
+    </p>
     <div class="mb-10 grid grid-cols-1 gap-8 lg:grid-cols-[280px_1fr] lg:gap-12">
       <!-- Left: Photo only -->
       <div
@@ -81,10 +82,8 @@ const strengths: { name: string; subtitle?: string; desc: string }[] =
 
             <div class="mb-6 flex items-start justify-between">
               <div>
-                <p class="text-muted-foreground mb-1 text-xs font-medium tracking-widest uppercase">
-                  {t('about.personalityLabel')}
-                </p>
-                <h3 class="text-foreground text-lg font-semibold">MBTI</h3>
+                <OverlineLabel text={t('about.personalityLabel')} class="mb-1" />
+                <CardTitle text="MBTI" size="md" />
               </div>
               <div class="text-right">
                 <p class="bg-gradient-to-r from-[#686dff] to-[#b66fff] bg-clip-text text-4xl font-bold tracking-tight text-transparent">
@@ -126,16 +125,10 @@ const strengths: { name: string; subtitle?: string; desc: string }[] =
         </div>
 
         <div class="mb-6">
-          <p class="text-muted-foreground mb-1 text-xs font-medium tracking-widest uppercase">
-            {t('about.personalityLabel')}
-          </p>
+          <OverlineLabel text={t('about.personalityLabel')} class="mb-1" />
           <div class="flex items-center gap-3">
-            <h3 class="text-foreground text-lg font-semibold">StrengthsFinder</h3>
-            <span
-              class="rounded-full bg-[#686dff]/10 px-2.5 py-0.5 text-xs font-semibold text-[#686dff]"
-            >
-              TOP 5
-            </span>
+            <CardTitle text="StrengthsFinder" size="md" />
+            <PillBadge tone="primary">TOP 5</PillBadge>
           </div>
         </div>
 
@@ -159,8 +152,7 @@ const strengths: { name: string; subtitle?: string; desc: string }[] =
         </div>
       </div>
     </div>
-  </div>
-</section>
+</SectionContainer>
 
 <script>
   import { animate, inView, stagger } from 'motion';

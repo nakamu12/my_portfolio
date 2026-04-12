@@ -1,5 +1,9 @@
 ---
 import { getLangFromUrl, getTranslations } from '@/i18n/utils';
+import SectionHeading from '@/components/common/SectionHeading.astro';
+import SectionContainer from '@/components/common/SectionContainer.astro';
+import TimelineTrack from '@/components/common/TimelineTrack.astro';
+import TimelineItem from '@/components/common/TimelineItem.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = await getTranslations(lang);
@@ -45,29 +49,18 @@ const CATEGORY_LABELS: Record<ExperienceItem['category'], string> = {
 };
 ---
 
-<section id="experience" aria-labelledby="experience-heading" class="py-24">
-  <div class="mx-auto max-w-4xl px-6">
+<SectionContainer id="experience" ariaLabelledby="experience-heading" width="narrow">
     <!-- Section Heading -->
-    <div class="mb-16">
-      <h2 id="experience-heading" class="text-3xl font-semibold md:text-4xl">
-        {t('experience.heading')}
-      </h2>
-      <p class="text-muted-foreground mt-3 text-base">{t('experience.subheading')}</p>
-    </div>
+    <SectionHeading id="experience-heading" level="h2" heading={t('experience.heading')} titleOnly />
 
     <!-- Timeline -->
-    <div class="relative">
-      <!-- Vertical gradient line (decorative) -->
-      <div
-        aria-hidden="true"
-        class="absolute top-2 bottom-0 left-[15px] w-px bg-gradient-to-b from-[#686dff] via-[#b66fff] to-transparent md:left-[19px]"
-      >
-      </div>
-
-      <ul class="space-y-10">
+    <TimelineTrack
+      listClass="space-y-10"
+      lineClass="bottom-0 left-[15px] bg-gradient-to-b from-[#686dff] via-[#b66fff] to-transparent md:left-[19px]"
+    >
         {
           items.map((item) => (
-            <li class="experience-item relative flex gap-6 md:gap-8">
+            <TimelineItem class="experience-item flex gap-6 md:gap-8">
               <div aria-hidden="true" class="relative z-10 mt-1 shrink-0">
                 <div class="bg-background flex h-8 w-8 items-center justify-center rounded-full border-2 border-[#686dff] shadow-sm">
                   {item.category === 'education' ? (
@@ -191,13 +184,11 @@ const CATEGORY_LABELS: Record<ExperienceItem['category'], string> = {
                   </p>
                 )}
               </div>
-            </li>
+            </TimelineItem>
           ))
         }
-      </ul>
-    </div>
-  </div>
-</section>
+    </TimelineTrack>
+</SectionContainer>
 
 <style>
   /* Ensure items are visible without JS (progressive enhancement) */

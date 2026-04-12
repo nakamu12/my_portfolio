@@ -1,0 +1,29 @@
+---
+import { getSocialIconPath } from '@/lib/social';
+
+interface Props {
+  icon: string;
+  class?: string;
+}
+
+const { icon, class: className = '' } = Astro.props;
+const path = getSocialIconPath(icon);
+---
+
+{
+  path ? (
+    <svg class:list={['h-5 w-5', className]} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path d={path} />
+    </svg>
+  ) : (
+    <span
+      aria-hidden="true"
+      class:list={[
+        'text-muted-foreground inline-flex h-5 w-5 items-center justify-center text-xs font-semibold uppercase',
+        className,
+      ]}
+    >
+      {icon.slice(0, 1)}
+    </span>
+  )
+}

@@ -1,6 +1,17 @@
 ---
 import MediaCarousel from './MediaCarousel';
 import { getLangFromUrl, getTranslations } from '@/i18n/utils';
+import SectionHeading from '@/components/common/SectionHeading.astro';
+import SectionContainer from '@/components/common/SectionContainer.astro';
+import SubsectionHeading from '@/components/common/SubsectionHeading.astro';
+import OverlineLabel from '@/components/common/OverlineLabel.astro';
+import PillBadge from '@/components/common/PillBadge.astro';
+import CardTitle from '@/components/common/CardTitle.astro';
+import ExternalLinkAction from '@/components/common/ExternalLinkAction.astro';
+import TimelineTrack from '@/components/common/TimelineTrack.astro';
+import TimelineItem from '@/components/common/TimelineItem.astro';
+import TimelineDot from '@/components/common/TimelineDot.astro';
+import { isSafePublicHttpUrl, sanitizeExternalUrl } from '@/lib/url';
 
 const lang = getLangFromUrl(Astro.url);
 const t = await getTranslations(lang);
@@ -85,6 +96,8 @@ function getYoutubeThumbnail(url: string): string | undefined {
 }
 
 async function fetchOgImage(url: string): Promise<string | undefined> {
+  if (!isSafePublicHttpUrl(url)) return undefined;
+
   try {
     const res = await fetch(url, {
       signal: AbortSignal.timeout(5000),
@@ -97,14 +110,10 @@ async function fetchOgImage(url: string): Promise<string | undefined> {
       html.match(/<meta[^>]+content="([^"]+)"[^>]+property="og:image"/);
     const raw = match?.[1];
     if (!raw) return undefined;
-    // Validate: only allow https image URLs
-    try {
-      const parsed = new URL(raw);
-      if (parsed.protocol !== 'https:') return undefined;
-    } catch {
-      return undefined;
-    }
-    return raw;
+    if (!isSafePublicHttpUrl(raw)) return undefined;
+    const safeRaw = sanitizeExternalUrl(raw);
+    if (!safeRaw || !safeRaw.startsWith('https://')) return undefined;
+    return safeRaw;
   } catch {
     return undefined;
   }
@@ -147,12 +156,10 @@ function formatDate(dateStr: string, locale: string): string {
 }
 ---
 
-<section id="media" class="py-24">
-  <div class="mx-auto max-w-6xl px-6">
+<SectionContainer id="media">
     <!-- Section Header + Stats -->
+    <SectionHeading level="h2" heading={t('media.title')} titleOnly />
     <div class="mb-16">
-      <h2 class="text-4xl font-semibold md:text-5xl">{t('media.title')}</h2>
-      <p class="text-muted-foreground mt-4 text-base">{t('media.subtitle')}</p>
 
       <!-- Stats row -->
       <div class="mt-8 flex flex-wrap gap-x-8 gap-y-3">
@@ -194,7 +201,7 @@ function formatDate(dateStr: string, locale: string): string {
     <!-- ── Press & Appearances ─────────────────────────────────────────────── -->
     <div class="mb-24">
       <div class="mb-8">
-        <h3 class="text-foreground text-2xl font-semibold">{t('media.press.title')}</h3>
+        <SubsectionHeading heading={t('media.press.title')} rootClass="mb-0" titleOnly />
         <p class="text-muted-foreground mt-1.5 text-sm">{t('media.press.subtitle')}</p>
       </div>
 
@@ -202,7 +209,7 @@ function formatDate(dateStr: string, locale: string): string {
       {
         pressFeatured && (
           <div class="mb-10">
-            <span class="mb-4 inline-flex items-center gap-1.5 rounded-full border border-[#686dff]/30 bg-[#686dff]/10 px-3 py-1 text-xs font-medium text-[#686dff]">
+            <PillBadge tone="primary" class="mb-4 gap-1.5 border border-[#686dff]/30 px-3 py-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="11"
@@ -213,7 +220,7 @@ function formatDate(dateStr: string, locale: string): string {
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
               </svg>
               {t('media.featured')}
-            </span>
+            </PillBadge>
 
             <a
               href={pressFeatured.link}
@@ -256,28 +263,17 @@ function formatDate(dateStr: string, locale: string): string {
                 <span class="mb-3 flex items-center gap-1.5 text-xs font-medium tracking-widest text-red-400 uppercase">
                   <span class="h-1.5 w-1.5 rounded-full bg-red-400" /> YouTube
                 </span>
-                <h4 class="text-foreground text-xl leading-snug font-bold transition-colors group-hover:text-[#686dff] md:text-2xl">
-                  {pressFeatured.title}
-                </h4>
+                <CardTitle
+                  text={pressFeatured.title}
+                  as="h4"
+                  size="lg"
+                  class="font-bold transition-colors group-hover:text-[#686dff]"
+                />
                 <p class="text-muted-foreground mt-3 text-sm leading-relaxed">
                   {pressFeatured.description}
                 </p>
-                <div class="mt-6 flex items-center gap-2 text-sm font-medium text-[#686dff]">
-                  <span>{t('media.visit')}</span>
-                  <svg
-                    class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <>
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <polyline points="12 5 19 12 12 19" />
-                    </>
-                  </svg>
+                <div class="mt-6 text-sm font-medium text-[#686dff]">
+                  <ExternalLinkAction label={t('media.visit')} icon="arrow" />
                 </div>
               </div>
             </a>
@@ -292,7 +288,7 @@ function formatDate(dateStr: string, locale: string): string {
     <!-- ── Writing ─────────────────────────────────────────────────────────── -->
     <div class="mb-24">
       <div class="mb-8">
-        <h3 class="text-foreground text-2xl font-semibold">{t('media.writing.title')}</h3>
+        <SubsectionHeading heading={t('media.writing.title')} rootClass="mb-0" titleOnly />
         <p class="text-muted-foreground mt-1.5 text-sm">{t('media.writing.subtitle')}</p>
       </div>
 
@@ -307,9 +303,7 @@ function formatDate(dateStr: string, locale: string): string {
       {
         platforms.length > 0 && (
           <div class="mt-12">
-            <p class="text-muted-foreground mb-4 text-xs font-medium tracking-widest uppercase">
-              {t('media.writing.also_on')}
-            </p>
+            <OverlineLabel text={t('media.writing.also_on')} class="mb-4" />
             <div class="flex flex-wrap gap-3">
               {platforms.map((p) => (
                 <a
@@ -351,19 +345,14 @@ function formatDate(dateStr: string, locale: string): string {
       speakingItems.length > 0 && (
         <div>
           <div class="mb-8">
-            <h3 class="text-foreground text-2xl font-semibold">{t('media.speaking.title')}</h3>
+            <SubsectionHeading heading={t('media.speaking.title')} rootClass="mb-0" titleOnly />
             <p class="text-muted-foreground mt-1.5 text-sm">{t('media.speaking.subtitle')}</p>
           </div>
 
-          <div class="relative">
-            <div class="border-border absolute top-2 bottom-2 left-[7px] border-l" />
-
-            <ol class="space-y-8">
+          <TimelineTrack listTag="ol" listClass="space-y-8">
               {speakingItems.map((item) => (
-                <li class="relative flex gap-6 pl-8">
-                  <div class="bg-background border-border absolute top-1.5 left-0 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2">
-                    <span class="h-1.5 w-1.5 rounded-full bg-[#686dff]" />
-                  </div>
+                <TimelineItem class="flex gap-6 pl-8">
+                  <TimelineDot />
 
                   <a
                     href={item.link}
@@ -372,12 +361,10 @@ function formatDate(dateStr: string, locale: string): string {
                     class="border-border bg-background group flex-1 rounded-xl border p-5 transition-all duration-200 hover:border-[#686dff]/30 hover:shadow-sm"
                   >
                     <div class="mb-3 flex flex-wrap items-center gap-2">
-                      <span class="rounded-full bg-[#686dff]/10 px-2.5 py-0.5 text-xs font-semibold text-[#686dff]">
-                        {formatDate(item.date, lang)}
-                      </span>
-                      <span class="border-border text-muted-foreground rounded-full border px-2.5 py-0.5 text-xs">
+                      <PillBadge tone="primary">{formatDate(item.date, lang)}</PillBadge>
+                      <PillBadge tone="muted" class="border-border border">
                         {item.venue}
-                      </span>
+                      </PillBadge>
                     </div>
 
                     <p class="text-foreground text-sm leading-snug font-semibold transition-colors group-hover:text-[#686dff]">
@@ -394,12 +381,10 @@ function formatDate(dateStr: string, locale: string): string {
                       </div>
                     )}
                   </a>
-                </li>
+                </TimelineItem>
               ))}
-            </ol>
-          </div>
+          </TimelineTrack>
         </div>
       )
     }
-  </div>
-</section>
+</SectionContainer>

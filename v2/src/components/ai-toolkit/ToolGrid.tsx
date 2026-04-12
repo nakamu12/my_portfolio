@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
+import FilterTabs from '@/components/common/FilterTabs';
 
 interface Tool {
   id: string;
@@ -84,28 +85,18 @@ export default function ToolGrid({ categories, tools, allLabel }: Props) {
   const cats = categories.filter((c) => c !== allLabel);
   const tabs = [allLabel, ...cats];
   const filtered = active === allLabel ? tools : tools.filter((t) => t.category === active);
+  const tabItems = tabs.map((tab) => ({ key: tab, label: tab }));
 
   return (
     <div>
       {/* Category tabs */}
-      <div className="mb-8 flex flex-wrap gap-2">
-        {tabs.map((tab) => (
-          <button
-            key={tab}
-            type="button"
-            onClick={() => setActive(tab)}
-            aria-pressed={active === tab}
-            className={cn(
-              'rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-150',
-              active === tab
-                ? 'bg-[#686dff] text-white shadow-[0_0_12px_rgba(104,109,255,0.45)]'
-                : 'text-muted-foreground hover:text-foreground bg-muted hover:bg-muted/80',
-            )}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
+      <FilterTabs
+        items={tabItems}
+        activeKey={active}
+        onChange={setActive}
+        variant="soft"
+        className="mb-8"
+      />
 
       {/* Icon grid — AnimatePresence handles filter crossfade + stagger */}
       <AnimatePresence mode="wait">
