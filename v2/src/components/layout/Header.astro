@@ -21,10 +21,24 @@ const navItems = [
 <!-- Top: Logo only (minimal) -->
 <header class="fixed top-0 z-50 w-full">
   <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-    <a href={`${base}/${lang}/`} class="text-lg font-bold tracking-tight">
-      <span class="bg-gradient-to-r from-[#686dff] to-[#b66fff] bg-clip-text text-transparent">
-        RN
-      </span>
+    <a href={`${base}/${lang}/`} class="flex items-center" aria-label="Home">
+      <svg
+        class="h-8 w-8"
+        viewBox="0 0 100 100"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="header-logo-grad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#686dff"></stop>
+            <stop offset="100%" stop-color="#b66fff"></stop>
+          </linearGradient>
+        </defs>
+        <rect x="4" y="4" width="92" height="92" rx="18" fill="url(#header-logo-grad)"></rect>
+        <polygon points="44,4 78,4 54,44 38,44" fill="#fff"></polygon>
+        <circle cx="48" cy="50" r="4" fill="#fff"></circle>
+        <polygon points="42,56 54,56 36,96 26,96" fill="#fff"></polygon>
+      </svg>
     </a>
     <!-- Mobile: hamburger (Dock is hidden on mobile) -->
     <div class="md:hidden">
