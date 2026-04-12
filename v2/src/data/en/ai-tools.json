@@ -21,7 +21,7 @@
       "id": "github-copilot",
       "name": "GitHub Copilot",
       "category": "Coding",
-      "description": "In-editor code suggestions powered by OpenAI Codex for faster development.",
+      "description": "In-editor AI code suggestions and completion to speed up development.",
       "logoUrl": "https://github.com/favicon.ico",
       "url": "https://github.com/features/copilot"
     },
@@ -29,7 +29,7 @@
       "id": "v0",
       "name": "v0 by Vercel",
       "category": "Design",
-      "description": "Generative UI tool that converts natural language prompts to React components.",
+      "description": "Generative UI tool that turns natural language prompts into React components.",
       "logoUrl": "https://v0.dev/favicon.ico",
       "url": "https://v0.dev"
     },
@@ -37,7 +37,7 @@
       "id": "chatgpt",
       "name": "ChatGPT",
       "category": "Research",
-      "description": "Used for ideation, summarization, and exploratory research with GPT-4o.",
+      "description": "Used for ideation, summarization, and exploratory research.",
       "logoUrl": "https://openai.com/favicon.ico",
       "url": "https://chatgpt.com"
     },
@@ -85,7 +85,7 @@
       "id": "aws-bedrock",
       "name": "AWS Bedrock",
       "category": "Infrastructure",
-      "description": "Managed service for deploying foundation models in production ML pipelines.",
+      "description": "Managed service for building and operating generative AI applications with foundation models.",
       "logoUrl": "https://aws.amazon.com/favicon.ico",
       "url": "https://aws.amazon.com/bedrock"
     },

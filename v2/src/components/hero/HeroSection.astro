@@ -5,10 +5,9 @@ import { getLangFromUrl, getTranslations } from '@/i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = await getTranslations(lang);
 
-const statsData = await import(`../../data/${lang}/stats.json`);
-const stats = statsData.items ?? statsData.default?.items ?? [];
-
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const visionLabelRaw = t('hero.visionLabel');
+const visionLabel = visionLabelRaw === 'hero.visionLabel' ? (lang === 'ja' ? 'ビジョン' : 'VISION') : visionLabelRaw;
 ---
 
 <section id="hero" class="relative flex min-h-screen items-center justify-center overflow-hidden">
@@ -32,28 +31,28 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <!-- Content (pointer-events-none on container, re-enable on interactive elements) -->
   <div class="hero-text pointer-events-none relative z-10 mx-auto max-w-6xl px-6 text-center">
-    <!-- Greeting -->
-    <p class="text-muted-foreground mb-2 text-sm font-medium tracking-widest uppercase">
-      {t('hero.greeting')}
+    <!-- Vision label -->
+    <p class="text-muted-foreground mb-2 text-xs font-semibold tracking-[0.14em] uppercase">
+      {visionLabel}
     </p>
 
-    <!-- Name -->
-    <h1 class="text-5xl font-bold tracking-tight md:text-7xl lg:text-8xl">
+    <!-- Vision -->
+    <h1 class="text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
       <span
-        class="bg-gradient-to-r from-[#686dff] to-[#b66fff] bg-clip-text text-transparent drop-shadow-sm"
+        class="bg-gradient-to-r from-[#686dff] to-[#b66fff] bg-clip-text text-transparent drop-shadow-sm md:whitespace-nowrap"
       >
-        {t('hero.name')}
+        {t('hero.vision')}
       </span>
     </h1>
 
-    <!-- Title -->
-    <p class="text-foreground/90 mt-4 text-xl font-medium md:text-2xl">
-      {t('hero.title')}
+    <!-- Name -->
+    <p class="text-foreground mt-5 text-2xl font-semibold tracking-tight md:text-3xl">
+      {t('hero.name')}
     </p>
 
-    <!-- Subtitle -->
-    <p class="text-muted-foreground mx-auto mt-4 max-w-2xl text-base md:text-lg">
-      {t('hero.subtitle')}
+    <!-- Role -->
+    <p class="text-foreground/90 mt-3 text-xl font-medium md:text-2xl">
+      {t('hero.title')}
     </p>
 
     <!-- CTA Buttons -->
@@ -74,17 +73,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       </a>
     </div>
 
-    <!-- Stats -->
-    <div class="mt-16 grid grid-cols-2 gap-8 sm:grid-cols-4">
-      {
-        stats.map((stat: { value: string; label: string }) => (
-          <div class="text-center">
-            <div class="text-foreground text-3xl font-bold md:text-4xl">{stat.value}</div>
-            <div class="text-muted-foreground mt-1 text-sm">{stat.label}</div>
-          </div>
-        ))
-      }
-    </div>
   </div>
 
   <!-- Scroll indicator -->

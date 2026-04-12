@@ -1,10 +1,10 @@
 {
-  "bio": "Focused on robotics research during university, I joined SoftBank Corp. in 2020 after completing my master's degree. Over 4 years I worked on enterprise systems and big data infrastructure, while also supporting robotics development through the company's internal side-project program. I later transferred to the \"Axross\" AI/DX talent development platform, working broadly as a product engineer, training instructor, and content lead. Actively participating in hackathons, I accumulated awards and was recognized as a high-market-value talent within the company. Since February 2026, following a 2-month FDE training program in India, I now work across FDE development & promotion, internal certified instructor, and content creation.",
+  "bio": "After focusing on robotics research at university, I joined SoftBank Corp. in 2020 upon completing my master's degree. For the first four years, I worked on enterprise systems and big-data infrastructure, while also supporting robotics development through the company's internal side-project program. I later moved to Axross, an AI/DX talent development platform, where I worked as a product engineer, instructor, and technical content lead. Through active participation in hackathons, I built a track record of awards and was recognized internally as high-impact technical talent. Since February 2026, after completing an eight-week FDE training program in India, I have focused on company-wide FDE enablement, internal instructor certification, and technical outreach.",
   "attributes": [
-    { "label": "Role", "value": "FDE & Tech Content Lead" },
+    { "label": "Role", "value": "Forward Deployed Engineer (FDE) / Tech Content Lead" },
     { "label": "Date of Birth", "value": "December 15, 1995" },
     { "label": "Hometown", "value": "Kawasaki, Kanagawa" },
-    { "label": "Hobbies", "value": "Sauna, Drinks, Anime, Manga, Books" }
+    { "label": "Hobbies", "value": "Sauna, drinks, anime, manga, and reading" }
   ],
   "mbti": {
     "type": "ENTJ-A",
@@ -20,28 +20,28 @@
   "strengths": [
     {
       "name": "Activator",
-      "subtitle": "活発性",
-      "desc": "The ability to turn ideas into action and drive projects forward"
+      "subtitle": "Action",
+      "desc": "Turns ideas into action and moves projects forward quickly"
     },
     {
       "name": "Command",
-      "subtitle": "指令性",
-      "desc": "Accurately reads situations and demonstrates appropriate leadership"
+      "subtitle": "Command",
+      "desc": "Reads situations accurately and provides decisive leadership"
     },
     {
       "name": "Learner",
-      "subtitle": "学習欲",
-      "desc": "Finds joy in the process of learning new technologies"
+      "subtitle": "Learner",
+      "desc": "Enjoys mastering new technologies through continuous learning"
     },
     {
       "name": "Competition",
-      "subtitle": "競争性",
-      "desc": "Achieves high performance through strong motivation"
+      "subtitle": "Competition",
+      "desc": "Performs strongly in high-standard competitive environments"
     },
     {
       "name": "Significance",
-      "subtitle": "自我",
-      "desc": "Strives to produce important and valuable outcomes"
+      "subtitle": "Significance",
+      "desc": "Has a strong drive to create meaningful, high-impact outcomes"
     }
   ]
 }

@@ -15,10 +15,9 @@
       "skills": [
         { "name": "Python", "icon": "python" },
         { "name": "FastAPI", "icon": "fastapi" },
-        { "name": "Node.js", "icon": "nodejs" },
+        { "name": "Hono", "icon": "hono" },
         { "name": "Ruby on Rails", "icon": "rails" },
-        { "name": "Java", "icon": "java" },
-        { "name": "MongoDB", "icon": "mongodb" }
+        { "name": "Java", "icon": "java" }
       ]
     },
     {
@@ -26,8 +25,7 @@
       "skills": [
         { "name": "LangChain", "icon": "langchain" },
         { "name": "OpenAI Agents SDK", "icon": "openai" },
-        { "name": "RAGパイプライン", "icon": "rag" },
-        { "name": "ChromaDB", "icon": "chromadb" },
+        { "name": "RAG", "icon": "rag" },
         { "name": "LangSmith", "icon": "langsmith" }
       ]
     },
@@ -36,18 +34,19 @@
       "skills": [
         { "name": "Apache Spark", "icon": "apachespark" },
         { "name": "PySpark", "icon": "pyspark" },
-        { "name": "Scala", "icon": "scala" },
-        { "name": "Treasure Data", "icon": "treasuredata" }
+        { "name": "Treasure Data", "icon": "https://www.treasuredata.co.jp/wp-content/uploads/2024/05/cropped-cropped-td-favicon-270x270-1-192x192.png" }
       ]
     },
     {
-      "name": "クラウド & DevOps",
+      "name": "インフラ & DevOps",
       "skills": [
         { "name": "AWS", "icon": "aws" },
         { "name": "Azure", "icon": "azure" },
         { "name": "GCP", "icon": "gcp" },
         { "name": "Docker", "icon": "docker" },
-        { "name": "Kubernetes", "icon": "kubernetes" }
+        { "name": "Kubernetes", "icon": "kubernetes" },
+        { "name": "ChromaDB", "icon": "chromadb" },
+        { "name": "MongoDB", "icon": "mongodb" }
       ]
     },
     {
