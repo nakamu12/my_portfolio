@@ -1,51 +1,110 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code when working with this repository.
 
 ## Project Overview
 
-This is a Japanese engineer portfolio website built as a static site showcasing robotics, AI development skills, and professional achievements. The site targets freelance opportunities and tech community visibility.
+Portfolio website for a Japanese AI & Robotics engineer, built with modern frameworks.
+Legacy v1 (vanilla HTML/CSS/JS) has been removed; the repository root is now the Astro project.
+
+## Tech Stack
+
+| Layer | Choice |
+|---|---|
+| Framework | Astro (Static Site Generation) |
+| UI Library | React (Islands Architecture) |
+| Styling | Tailwind CSS v4 |
+| UI Components | shadcn/ui |
+| Animation | Motion (motion.dev) |
+| Fluid Effect | webgl-fluid-enhanced |
+| Fonts | Geist + Noto Sans JP + Geist Mono |
+| Package Manager | Bun |
+| Linter | ESLint (strict) |
+| Formatter | Prettier |
+| Deploy | GitHub Pages |
 
 ## Architecture
 
-### Component-Based Structure
-- **Main entry**: `index.html` contains placeholder divs for each section
-- **Component system**: HTML components in `/components/` directory are dynamically loaded via `js/components-loader.js`
-- **Initialization flow**: Components load synchronously using XMLHttpRequest, then page initialization runs
+### Hybrid Component Architecture
 
-### Key Files
-- `js/components-loader.js`: Core component loading system using synchronous XHR
-- `js/main.js`: Main functionality including AOS animations, smooth scrolling, navigation
-- `js/hero-animation.js`: Hero section animations
-- `js/link-preview.js`: Link preview functionality
-- `css/style.css`: Complete styling with CSS custom properties
+Components are organized by section with shared utilities:
 
-### Component Loading Order
-Components load in this sequence: header → hero → about → skills → experience → projects → media → contact → footer
+```
+src/
+├── components/
+│   ├── ui/              ← shadcn/ui primitives
+│   ├── common/          ← Shared components (SectionHeading, Badge, etc.)
+│   ├── layout/          ← Header, Footer, Nav, ThemeToggle
+│   ├── hero/            ← Section-specific components
+│   ├── about/
+│   └── ...
+├── layouts/             ← BaseLayout.astro
+├── pages/               ← File-based routing with i18n
+│   ├── index.astro      ← Language detection → redirect
+│   ├── en/
+│   └── ja/
+├── data/                ← Content data (JSON, locale-separated)
+│   ├── en/
+│   └── ja/
+├── i18n/                ← UI text translations
+├── hooks/               ← Shared React hooks
+├── lib/                 ← Utilities (cn() helper, etc.)
+└── styles/              ← global.css with design tokens
+```
+
+### Islands Architecture
+
+- `.astro` files for static content (default)
+- `.tsx` files only for interactive components that need client-side hydration
+- Use `client:visible` for below-fold interactive components
+- Use `client:load` only when immediate interactivity is required
+
+### Data Management
+
+All content data is managed as JSON files in `src/data/{lang}/`:
+- `projects.json`, `certifications.json`, `experience.json`
+- `ai-tools.json`, `skills.json`, `stats.json`
+
+UI text translations are in `src/i18n/locales/{lang}.json`.
+
+## Brand Design
+
+- **Base**: Black × White (monochrome, 95%+ of surface area)
+- **Accent**: OmniCore Blue `#686dff` (primary), OmniCore Purple `#b66fff` (gradient)
+- **Gradient**: `#686dff → #b66fff`
+- **Light BG**: `#ffffff` / `#f5f5f5`
+- **Dark BG**: `#0f0f0f` / `#111111`
+- **Design principle**: Less is more. Whitespace over decoration.
+
+Full spec: `.local/brand-design-system.md`
 
 ## Development
 
-### No Build Process
-This is a vanilla HTML/CSS/JavaScript site with no build tools or package manager. Open `index.html` directly in browser for development.
+### Commands
 
-### Color Scheme
-- Primary: `#0a1c2e` (Deep Navy Blue)
-- Secondary: `#1d1d1f` (Near Black)  
-- Accent: `#757575` (Silver/Light Gray)
-- Highlight: `#3498db` (Blue)
+```bash
+bun run dev          # Start dev server
+bun run build        # Production build
+bun run preview      # Preview production build
+bun run lint         # ESLint check
+bun run lint:fix     # ESLint auto-fix
+bun run format       # Prettier format
+bun run format:check # Prettier check
+```
 
-### External Dependencies
-- Font Awesome 6.4.0 (icons)
-- AOS 2.3.4 (scroll animations)
-- Google Fonts (Montserrat, Noto Sans JP, Roboto)
+### Branch Strategy
 
-## File Organization
+- `main` — production
+- `develop/v2` — development base
+- `feature/*` — individual section implementations (worktree-based)
 
-### Assets Structure
-- `/assets/images/`: All images including achievements, certifications, projects, profile
-- `/components/`: Modular HTML sections (header.html, hero.html, etc.)
-- `/css/`: Single stylesheet (style.css)
-- `/js/`: JavaScript modules
+### i18n
 
-### Deployment
-Designed for GitHub Pages deployment - static files served directly from main branch root.
+- Path-based routing: `/en/`, `/ja/`
+- Root `/` detects browser language via `navigator.language` and redirects
+- User's manual language selection is stored in `localStorage`
+
+## File Management
+
+- `.local/` — Internal documents, specs (gitignored)
+- `CLAUDE.md` — This file (gitignored, local only)

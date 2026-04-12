@@ -1,0 +1,417 @@
+{
+  "categories": [
+    "すべて",
+    "汎用",
+    "動画生成",
+    "検索エンジン",
+    "AIワークフローツール",
+    "Coding",
+    "AI IDE",
+    "Agents SDK",
+    "Cloud API",
+    "LLM Ops",
+    "その他"
+  ],
+  "items": [
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "category": "汎用",
+      "description": "企画、文章作成、実装相談まで幅広く使う汎用AIアシスタント。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=chatgpt.com&sz=128",
+      "url": "https://chatgpt.com/"
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "category": "汎用",
+      "description": "GoogleのマルチモーダルAI。調査、要約、発想整理に活用。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=gemini.google.com&sz=128",
+      "url": "https://gemini.google.com/"
+    },
+    {
+      "id": "claude",
+      "name": "Claude",
+      "category": "汎用",
+      "description": "長文読解と深い推論に強いAIアシスタント。設計・実装検討に使用。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=claude.ai&sz=128",
+      "url": "https://claude.ai/"
+    },
+    {
+      "id": "perplexity",
+      "name": "Perplexity",
+      "category": "汎用",
+      "description": "出典付きで素早く調べられるAI検索/回答エンジン。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=perplexity.ai&sz=128",
+      "url": "https://www.perplexity.ai/"
+    },
+    {
+      "id": "microsoft-copilot",
+      "name": "Microsoft Copilot",
+      "category": "汎用",
+      "description": "Microsoft製品群と連携して使う日常業務向けAIアシスタント。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=copilot.microsoft.com&sz=128",
+      "url": "https://copilot.microsoft.com/"
+    },
+    {
+      "id": "genspark",
+      "name": "Genspark",
+      "category": "汎用",
+      "description": "情報探索と要点整理をまとめて行えるAIリサーチツール。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=genspark.ai&sz=128",
+      "url": "https://www.genspark.ai/"
+    },
+    {
+      "id": "grok",
+      "name": "Grok",
+      "category": "汎用",
+      "description": "xAIの対話型アシスタント。アイデア出しと分析に活用。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=x.ai&sz=128",
+      "url": "https://x.ai/grok"
+    },
+    {
+      "id": "deepseek",
+      "name": "DeepSeek",
+      "category": "汎用",
+      "description": "推論系タスクで使うモデル群。技術検証や比較に利用。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=deepseek.com&sz=128",
+      "url": "https://www.deepseek.com/en"
+    },
+    {
+      "id": "qwen",
+      "name": "Qwen",
+      "category": "汎用",
+      "description": "多言語対応のモデル群。生成と推論タスクで活用。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=qwen.ai&sz=128",
+      "url": "https://qwen.ai/"
+    },
+    {
+      "id": "mistral-ai",
+      "name": "Mistral AI",
+      "category": "汎用",
+      "description": "高速で軽量なモデルを中心に使えるLLMプラットフォーム。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=mistral.ai&sz=128",
+      "url": "https://mistral.ai/"
+    },
+    {
+      "id": "sarashina",
+      "name": "Sarashina",
+      "category": "汎用",
+      "description": "日本語処理を重視した国産系LLMとして活用。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=sbintuitions.co.jp&sz=128",
+      "url": "https://www.sbintuitions.co.jp/"
+    },
+    {
+      "id": "notion-ai",
+      "name": "Notion AI",
+      "category": "汎用",
+      "description": "Notion上で文章作成・要約・整理を支援するAI機能。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=notion.so&sz=128",
+      "url": "https://www.notion.so/product/ai"
+    },
+    {
+      "id": "openai-sora",
+      "name": "OpenAI Sora",
+      "category": "動画生成",
+      "description": "プロンプトから映像コンセプトを生成する動画モデル。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=openai.com&sz=128",
+      "url": "https://openai.com/sora/"
+    },
+    {
+      "id": "kling-ai",
+      "name": "Kling AI",
+      "category": "動画生成",
+      "description": "テキスト/画像から映像を生成できる動画生成サービス。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=kling.ai&sz=128",
+      "url": "https://kling.ai/app/"
+    },
+    {
+      "id": "heygen",
+      "name": "HeyGen",
+      "category": "動画生成",
+      "description": "アバター動画やナレーション動画を作成できるAIツール。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=heygen.com&sz=128",
+      "url": "https://www.heygen.com/"
+    },
+    {
+      "id": "openai-atlas",
+      "name": "OpenAI Atlas",
+      "category": "検索エンジン",
+      "description": "ChatGPT上でWeb検索を強化するOpenAIの検索体験。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=chatgpt.com&sz=128",
+      "url": "https://chatgpt.com/atlas"
+    },
+    {
+      "id": "dify",
+      "name": "Dify",
+      "category": "AIワークフローツール",
+      "description": "LLMアプリや社内AIツールを構築できる開発プラットフォーム。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=dify.ai&sz=128",
+      "url": "https://dify.ai/"
+    },
+    {
+      "id": "n8n",
+      "name": "n8n",
+      "category": "AIワークフローツール",
+      "description": "API連携と自動化をノーコード/ローコードで組めるワークフローツール。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=n8n.io&sz=128",
+      "url": "https://n8n.io/"
+    },
+    {
+      "id": "sim-ai",
+      "name": "Sim AI",
+      "category": "AIワークフローツール",
+      "description": "AI処理を視覚的に接続して自動化できるワークフロービルダー。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=sim.ai&sz=128",
+      "url": "https://www.sim.ai/"
+    },
+    {
+      "id": "zapier",
+      "name": "Zapier",
+      "category": "AIワークフローツール",
+      "description": "SaaS間連携とタスク自動化を行う定番オートメーション基盤。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=zapier.com&sz=128",
+      "url": "https://zapier.com/"
+    },
+    {
+      "id": "openai-agent-builder",
+      "name": "OpenAI Agent Builder",
+      "category": "AIワークフローツール",
+      "description": "OpenAIでツール利用型エージェントを設計するための基盤。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=platform.openai.com&sz=128",
+      "url": "https://platform.openai.com/docs/guides/agent-builder"
+    },
+    {
+      "id": "google-opal",
+      "name": "Google Opal",
+      "category": "AIワークフローツール",
+      "description": "GoogleのノーコードAIワークフロー作成アプローチ。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=opal.google&sz=128",
+      "url": "https://opal.google/"
+    },
+    {
+      "id": "devin",
+      "name": "Devin",
+      "category": "Coding",
+      "description": "開発タスクを委譲して進めるAIソフトウェアエンジニア。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=devin.ai&sz=128",
+      "url": "https://devin.ai/"
+    },
+    {
+      "id": "github-copilot",
+      "name": "GitHub Copilot",
+      "category": "Coding",
+      "description": "エディタ内補完とチャットで開発を加速するAIコーディング支援。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=github.com&sz=128",
+      "url": "https://github.com/features/copilot"
+    },
+    {
+      "id": "claude-code",
+      "name": "Claude Code",
+      "category": "Coding",
+      "description": "AnthropicのCLI型コーディングエージェント。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=anthropic.com&sz=128",
+      "url": "https://www.anthropic.com/product/claude-code"
+    },
+    {
+      "id": "codex",
+      "name": "Codex",
+      "category": "Coding",
+      "description": "OpenAIのコーディングエージェント/実装支援環境。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=openai.com&sz=128",
+      "url": "https://openai.com/codex/"
+    },
+    {
+      "id": "replit",
+      "name": "Replit",
+      "category": "Coding",
+      "description": "ブラウザ上で開発・実行・共有まで行えるAI対応開発環境。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=replit.com&sz=128",
+      "url": "https://replit.com/"
+    },
+    {
+      "id": "youware",
+      "name": "YouWare",
+      "category": "Coding",
+      "description": "自然言語からWebアプリを素早く形にするAIビルダー。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=youware.com&sz=128",
+      "url": "https://www.youware.com/"
+    },
+    {
+      "id": "mgx",
+      "name": "MGX",
+      "category": "Coding",
+      "description": "AI活用で高速にプロトタイピングを進める開発環境。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=mgx.dev&sz=128",
+      "url": "https://mgx.dev/"
+    },
+    {
+      "id": "v0",
+      "name": "v0",
+      "category": "Coding",
+      "description": "プロンプトからUIコンポーネントを生成するフロントエンド支援。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=v0.dev&sz=128",
+      "url": "https://v0.dev/"
+    },
+    {
+      "id": "bolt-new",
+      "name": "bolt.new",
+      "category": "Coding",
+      "description": "ブラウザ完結でフルスタック生成まで行えるAI開発環境。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=bolt.new&sz=128",
+      "url": "https://bolt.new/"
+    },
+    {
+      "id": "rork",
+      "name": "Rork",
+      "category": "Coding",
+      "description": "要件テキストからプロダクト実装を進めるAIコーディング基盤。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=rork.com&sz=128",
+      "url": "https://rork.com/"
+    },
+    {
+      "id": "firebase-studio",
+      "name": "Firebase Studio",
+      "category": "Coding",
+      "description": "Firebase中心でAIアプリ開発を進めるスタジオ環境。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=firebase.studio&sz=128",
+      "url": "https://firebase.studio/"
+    },
+    {
+      "id": "lovable",
+      "name": "Lovable",
+      "category": "Coding",
+      "description": "プロンプトからWebサービスを構築するAIプロダクトビルダー。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=lovable.dev&sz=128",
+      "url": "https://lovable.dev/"
+    },
+    {
+      "id": "windsurf",
+      "name": "Windsurf",
+      "category": "AI IDE",
+      "description": "エージェント編集に強いAIファーストIDE。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=windsurf.com&sz=128",
+      "url": "https://windsurf.com/"
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "category": "AI IDE",
+      "description": "文脈理解型のAI編集を強みとするAIネイティブIDE。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=cursor.com&sz=128",
+      "url": "https://cursor.com/"
+    },
+    {
+      "id": "antigravity",
+      "name": "Antigravity",
+      "category": "AI IDE",
+      "description": "Google系の実験的AI IDE。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=antigravity.google&sz=128",
+      "url": "https://antigravity.google/"
+    },
+    {
+      "id": "visual-studio-code",
+      "name": "Visual Studio Code",
+      "category": "AI IDE",
+      "description": "拡張性が高く、AI拡張と組み合わせて使う定番IDE。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=code.visualstudio.com&sz=128",
+      "url": "https://code.visualstudio.com/"
+    },
+    {
+      "id": "openai-agents-sdk",
+      "name": "OpenAI Agents SDK",
+      "category": "Agents SDK",
+      "description": "マルチステップ/ツール連携のエージェントを組むSDK。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=platform.openai.com&sz=128",
+      "url": "https://platform.openai.com/docs/guides/agents-sdk"
+    },
+    {
+      "id": "langchain",
+      "name": "LangChain",
+      "category": "Agents SDK",
+      "description": "チェーン、RAG、エージェントを構築する開発フレームワーク。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=langchain.com&sz=128",
+      "url": "https://www.langchain.com/"
+    },
+    {
+      "id": "gcp-vertex-ai",
+      "name": "GCP Vertex AI",
+      "category": "Cloud API",
+      "description": "モデル運用、チューニング、推論提供を行うクラウドAI基盤。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=cloud.google.com&sz=128",
+      "url": "https://cloud.google.com/vertex-ai"
+    },
+    {
+      "id": "langfuse",
+      "name": "Langfuse",
+      "category": "LLM Ops",
+      "description": "プロンプトとエージェント実行を追跡するLLMオブザーバビリティ。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=langfuse.com&sz=128",
+      "url": "https://langfuse.com/"
+    },
+    {
+      "id": "grafana",
+      "name": "Grafana",
+      "category": "LLM Ops",
+      "description": "AIシステムを含む監視・可視化ダッシュボード基盤。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=grafana.com&sz=128",
+      "url": "https://grafana.com/"
+    },
+    {
+      "id": "gamma",
+      "name": "Gamma",
+      "category": "その他",
+      "description": "資料作成を高速化するAIプレゼンテーションツール。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=gamma.app&sz=128",
+      "url": "https://gamma.app/"
+    },
+    {
+      "id": "tldv",
+      "name": "tl;dv",
+      "category": "その他",
+      "description": "会議録画の要約・ハイライト共有を行うAI会議アシスタント。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=tldv.io&sz=128",
+      "url": "https://tldv.io/"
+    },
+    {
+      "id": "manus",
+      "name": "Manus",
+      "category": "その他",
+      "description": "タスクの自律実行を目指すAIエージェントプロダクト。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=manus.im&sz=128",
+      "url": "https://manus.im/"
+    },
+    {
+      "id": "openhands",
+      "name": "OpenHands",
+      "category": "その他",
+      "description": "オープンソースのソフトウェア向けAIエージェント。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=openhands.dev&sz=128",
+      "url": "https://openhands.dev/"
+    },
+    {
+      "id": "magicss",
+      "name": "magicss",
+      "category": "その他",
+      "description": "生成AIでコンテンツやデザイン制作を補助するツール。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=magicss.ai&sz=128",
+      "url": "https://magicss.ai/"
+    },
+    {
+      "id": "raycast",
+      "name": "Raycast",
+      "category": "その他",
+      "description": "ランチャーとAI機能を統合した生産性向上ツール。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=raycast.com&sz=128",
+      "url": "https://www.raycast.com/"
+    },
+    {
+      "id": "notebooklm",
+      "name": "NotebookLM",
+      "category": "その他",
+      "description": "ソース根拠付きで整理・要約できるリサーチノートAI。",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=notebooklm.google.com&sz=128",
+      "url": "https://notebooklm.google.com/"
+    }
+  ]
+}

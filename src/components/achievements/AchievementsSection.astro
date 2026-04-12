@@ -1,0 +1,248 @@
+---
+import { Image } from 'astro:assets';
+import { getLangFromUrl, getTranslations } from '@/i18n/utils';
+import {
+  SUPPORTED_LANGS,
+  isSupportedLang,
+  getCertificationImage,
+  formatCertificationDate,
+  isSafeUrl,
+} from '@/lib/certifications';
+import SectionHeading from '@/components/common/SectionHeading.astro';
+import SectionContainer from '@/components/common/SectionContainer.astro';
+import CardTitle from '@/components/common/CardTitle.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = await getTranslations(lang);
+
+interface AchievementItem {
+  title: string;
+  organization: string;
+  date: string;
+  category: 'certification' | 'achievement';
+  description: string;
+  image: string | null;
+  link: string | null;
+  priority: number | null;
+}
+
+// Defense-in-depth: validate lang against local allowlist before dynamic import
+if (!isSupportedLang(lang)) {
+  throw new Error(`Unsupported language: ${lang}. Must be one of ${SUPPORTED_LANGS.join(', ')}`);
+}
+const certsData = await import(`../../data/${lang}/certifications.json`);
+const allItems: AchievementItem[] = certsData.default?.items ?? certsData.items ?? [];
+
+// Filter achievements, sort by priority (lower = more important, null = last)
+const achievements = allItems
+  .filter((item) => item.category === 'achievement')
+  .sort((a, b) => (a.priority ?? 999) - (b.priority ?? 999));
+
+// Bento layout: compute optimal sizes based on total item count
+// Uses "blocks" that fill the 3-col grid with minimal gaps:
+//   Large block = large(2x2) + tall(1x2) → 2 items, fills 2 rows perfectly
+//   Small block = wide(2x1) + normal(1x1) → 2 items, fills 1 row perfectly
+//   Remainder 1 item → wide(2x1), leaves 1 cell gap (maximum waste)
+type BentoSize = 'large' | 'tall' | 'normal' | 'wide';
+
+const sizeClasses: Record<BentoSize, string> = {
+  large: 'sm:col-span-2 sm:row-span-2',
+  tall: 'sm:row-span-2',
+  wide: 'sm:col-span-2 lg:col-span-3',
+  normal: '',
+};
+
+const titleSizeClasses: Record<BentoSize, string> = {
+  large: 'text-lg md:text-xl',
+  tall: 'text-base md:text-lg',
+  wide: 'text-base md:text-lg',
+  normal: 'text-sm md:text-base',
+};
+
+// Recursive bento layout: every 5 items repeats the same sub-pattern
+// Block pattern (1-5 items):
+//   1: wide
+//   2: large, tall
+//   3: large, tall, wide
+//   4: large, large(zz), tall, tall
+//   5: large, large(zz), tall, normal, normal
+// For N>5: first 5 items form a block, remaining N-5 recurse
+const count = achievements.length;
+
+function blockPattern(n: number): BentoSize[] {
+  if (n <= 0) return [];
+  if (n === 1) return ['wide'];
+  if (n === 2) return ['large', 'tall'];
+  if (n === 3) return ['large', 'tall', 'wide'];
+  if (n === 4) return ['large', 'large', 'tall', 'tall'];
+  return ['large', 'large', 'tall', 'normal', 'normal'];
+}
+
+function buildLayout(total: number): BentoSize[] {
+  const sizes: BentoSize[] = [];
+  let remaining = total;
+  while (remaining > 0) {
+    const chunk = Math.min(remaining, 5);
+    sizes.push(...blockPattern(chunk));
+    remaining -= chunk;
+  }
+  return sizes;
+}
+
+const layoutSizes = buildLayout(count);
+
+function getBentoSize(index: number): BentoSize {
+  return layoutSizes[index] ?? 'normal';
+}
+
+// Track large card positions for zigzag placement
+// Both large cards need explicit col-start to avoid grid-auto-flow:dense
+// placing the second (explicit) card before the first (auto-placed) card,
+// which would visually invert the priority order.
+const largeIndices = layoutSizes.map((s, i) => (s === 'large' ? i : -1)).filter((i) => i >= 0);
+
+function getBentoPosition(index: number): string {
+  if (layoutSizes[index] !== 'large') return '';
+  const largePos = largeIndices.indexOf(index);
+  // Odd positions zigzag to col-start-2, even stay at col-start-1.
+  // Explicit col-start on BOTH ensures priority order is preserved.
+  return largePos % 2 === 1 ? 'lg:col-start-2' : 'lg:col-start-1';
+}
+---
+
+<SectionContainer id="achievements">
+  <SectionHeading level="h2" heading={t('achievements.heading')} titleOnly />
+
+  {/* Shared SVG defs for decorative gradient (reused by all no-image cards) */}
+  <svg width="0" height="0" class="absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="bento-icon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#686dff"></stop>
+        <stop offset="100%" stop-color="#b66fff"></stop>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <div
+    class="grid [grid-auto-flow:dense] auto-rows-[14rem] grid-cols-1 gap-3 sm:grid-cols-2 md:auto-rows-[16rem] lg:grid-cols-3"
+  >
+    {
+      achievements.map((item, index) => {
+        const img = getCertificationImage(item.image);
+        const size = getBentoSize(index);
+        const position = getBentoPosition(index);
+        const safeLink = isSafeUrl(item.link) ? item.link : null;
+        const Tag = safeLink ? 'a' : 'div';
+        const linkProps = safeLink
+          ? {
+              href: safeLink,
+              target: '_blank',
+              rel: 'noopener noreferrer',
+              'aria-label': `${item.title} — ${item.organization} (${t('achievements.viewLink')})`,
+            }
+          : {};
+
+        return (
+          <Tag
+            {...linkProps}
+            class:list={[
+              'group relative overflow-hidden rounded-2xl transition-shadow duration-300 hover:shadow-xl',
+              sizeClasses[size],
+              position,
+            ]}
+          >
+            {img ? (
+              <Image
+                src={img}
+                alt={item.title}
+                width={800}
+                height={600}
+                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            ) : (
+              <div class="absolute inset-0 bg-gradient-to-br from-[#686dff]/10 to-[#b66fff]/10">
+                <div
+                  class="absolute inset-0 opacity-[0.07]"
+                  style="background-image: radial-gradient(circle, #686dff 1px, transparent 1px); background-size: 24px 24px;"
+                />
+                <div class="absolute inset-0 flex items-center justify-center opacity-15">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="80"
+                    height="80"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="url(#bento-icon-gradient)"
+                    stroke-width="0.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                    <path d="M4 22h16" />
+                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+                  </svg>
+                </div>
+                <div class="absolute -top-6 -right-6 h-24 w-24 rounded-full bg-[#686dff]/10" />
+                <div class="absolute -bottom-4 -left-4 h-16 w-16 rounded-full bg-[#b66fff]/10" />
+              </div>
+            )}
+
+            <div
+              class:list={[
+                'absolute inset-0',
+                img
+                  ? 'bg-gradient-to-t from-black/80 via-black/30 to-transparent'
+                  : 'bg-gradient-to-t from-black/70 via-transparent to-transparent',
+              ]}
+            />
+
+            <div class="relative z-10 flex h-full flex-col justify-end p-5 md:p-6">
+              <div class="mb-2 flex items-center gap-2">
+                <span class="rounded-full bg-white/15 px-2.5 py-0.5 text-xs font-medium text-white/80 backdrop-blur-sm">
+                  {formatCertificationDate(item.date, lang)}
+                </span>
+                {safeLink && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="opacity-0 transition-opacity duration-300 group-hover:opacity-70"
+                    aria-hidden="true"
+                  >
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                )}
+              </div>
+
+              <CardTitle
+                text={item.title}
+                as="h3"
+                class={`leading-snug text-white ${titleSizeClasses[size]}`}
+              />
+
+              <p class="mt-1 text-xs text-white/60">{item.organization}</p>
+
+              {(size === 'large' || size === 'wide' || size === 'tall') && item.description && (
+                <p class="mt-2 line-clamp-2 text-sm leading-relaxed text-white/70">
+                  {item.description}
+                </p>
+              )}
+            </div>
+          </Tag>
+        );
+      })
+    }
+  </div>
+</SectionContainer>

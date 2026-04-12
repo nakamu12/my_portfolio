@@ -1,0 +1,417 @@
+{
+  "categories": [
+    "All",
+    "General",
+    "Video Generation",
+    "Search Engine",
+    "AI Workflow Tools",
+    "Coding",
+    "AI IDE",
+    "Agents SDK",
+    "Cloud API",
+    "LLM Ops",
+    "Other"
+  ],
+  "items": [
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "category": "General",
+      "description": "General-purpose AI assistant for planning, writing, and implementation support.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=chatgpt.com&sz=128",
+      "url": "https://chatgpt.com/"
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "category": "General",
+      "description": "Google's multimodal assistant used for research, drafting, and problem solving.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=gemini.google.com&sz=128",
+      "url": "https://gemini.google.com/"
+    },
+    {
+      "id": "claude",
+      "name": "Claude",
+      "category": "General",
+      "description": "AI assistant for long-context analysis, architecture thinking, and code support.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=claude.ai&sz=128",
+      "url": "https://claude.ai/"
+    },
+    {
+      "id": "perplexity",
+      "name": "Perplexity",
+      "category": "General",
+      "description": "Answer engine for fast web research with source-linked responses.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=perplexity.ai&sz=128",
+      "url": "https://www.perplexity.ai/"
+    },
+    {
+      "id": "microsoft-copilot",
+      "name": "Microsoft Copilot",
+      "category": "General",
+      "description": "Microsoft's assistant across web and productivity workflows.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=copilot.microsoft.com&sz=128",
+      "url": "https://copilot.microsoft.com/"
+    },
+    {
+      "id": "genspark",
+      "name": "Genspark",
+      "category": "General",
+      "description": "AI search and synthesis tool for collecting and structuring information.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=genspark.ai&sz=128",
+      "url": "https://www.genspark.ai/"
+    },
+    {
+      "id": "grok",
+      "name": "Grok",
+      "category": "General",
+      "description": "xAI assistant used for conversational analysis and quick ideation.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=x.ai&sz=128",
+      "url": "https://x.ai/grok"
+    },
+    {
+      "id": "deepseek",
+      "name": "DeepSeek",
+      "category": "General",
+      "description": "Reasoning-oriented model family used for technical exploration.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=deepseek.com&sz=128",
+      "url": "https://www.deepseek.com/en"
+    },
+    {
+      "id": "qwen",
+      "name": "Qwen",
+      "category": "General",
+      "description": "Alibaba's model ecosystem used for multilingual reasoning and generation.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=qwen.ai&sz=128",
+      "url": "https://qwen.ai/"
+    },
+    {
+      "id": "mistral-ai",
+      "name": "Mistral AI",
+      "category": "General",
+      "description": "Open-weight and API models used for fast, efficient LLM workflows.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=mistral.ai&sz=128",
+      "url": "https://mistral.ai/"
+    },
+    {
+      "id": "sarashina",
+      "name": "Sarashina",
+      "category": "General",
+      "description": "Japanese-oriented language model line used for local-language tasks.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=sbintuitions.co.jp&sz=128",
+      "url": "https://www.sbintuitions.co.jp/"
+    },
+    {
+      "id": "notion-ai",
+      "name": "Notion AI",
+      "category": "General",
+      "description": "AI features inside Notion for writing, summarizing, and note refinement.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=notion.so&sz=128",
+      "url": "https://www.notion.so/product/ai"
+    },
+    {
+      "id": "openai-sora",
+      "name": "OpenAI Sora",
+      "category": "Video Generation",
+      "description": "Text-to-video model for generating cinematic visual concepts.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=openai.com&sz=128",
+      "url": "https://openai.com/sora/"
+    },
+    {
+      "id": "kling-ai",
+      "name": "Kling AI",
+      "category": "Video Generation",
+      "description": "Video generation platform for prompt-based scene creation.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=kling.ai&sz=128",
+      "url": "https://kling.ai/app/"
+    },
+    {
+      "id": "heygen",
+      "name": "HeyGen",
+      "category": "Video Generation",
+      "description": "AI video tool for avatar-based presentation and narration.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=heygen.com&sz=128",
+      "url": "https://www.heygen.com/"
+    },
+    {
+      "id": "openai-atlas",
+      "name": "OpenAI Atlas",
+      "category": "Search Engine",
+      "description": "OpenAI's search experience in ChatGPT for grounded web answers.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=chatgpt.com&sz=128",
+      "url": "https://chatgpt.com/atlas"
+    },
+    {
+      "id": "dify",
+      "name": "Dify",
+      "category": "AI Workflow Tools",
+      "description": "LLM app platform for building prompt flows and internal AI tools.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=dify.ai&sz=128",
+      "url": "https://dify.ai/"
+    },
+    {
+      "id": "n8n",
+      "name": "n8n",
+      "category": "AI Workflow Tools",
+      "description": "Workflow automation platform for connecting APIs and AI steps.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=n8n.io&sz=128",
+      "url": "https://n8n.io/"
+    },
+    {
+      "id": "sim-ai",
+      "name": "Sim AI",
+      "category": "AI Workflow Tools",
+      "description": "Visual AI workflow builder for chaining models and actions.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=sim.ai&sz=128",
+      "url": "https://www.sim.ai/"
+    },
+    {
+      "id": "zapier",
+      "name": "Zapier",
+      "category": "AI Workflow Tools",
+      "description": "Automation platform that links SaaS tools and AI tasks.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=zapier.com&sz=128",
+      "url": "https://zapier.com/"
+    },
+    {
+      "id": "openai-agent-builder",
+      "name": "OpenAI Agent Builder",
+      "category": "AI Workflow Tools",
+      "description": "OpenAI framework/docs for composing tool-using agents.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=platform.openai.com&sz=128",
+      "url": "https://platform.openai.com/docs/guides/agent-builder"
+    },
+    {
+      "id": "google-opal",
+      "name": "Google Opal",
+      "category": "AI Workflow Tools",
+      "description": "Google's no-code workflow approach for building AI mini apps.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=opal.google&sz=128",
+      "url": "https://opal.google/"
+    },
+    {
+      "id": "devin",
+      "name": "Devin",
+      "category": "Coding",
+      "description": "AI software engineer product for delegated development tasks.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=devin.ai&sz=128",
+      "url": "https://devin.ai/"
+    },
+    {
+      "id": "github-copilot",
+      "name": "GitHub Copilot",
+      "category": "Coding",
+      "description": "In-editor coding assistant for code completion and chat.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=github.com&sz=128",
+      "url": "https://github.com/features/copilot"
+    },
+    {
+      "id": "claude-code",
+      "name": "Claude Code",
+      "category": "Coding",
+      "description": "Anthropic's coding agent workflow for repository-level tasks.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=anthropic.com&sz=128",
+      "url": "https://www.anthropic.com/product/claude-code"
+    },
+    {
+      "id": "codex",
+      "name": "Codex",
+      "category": "Coding",
+      "description": "OpenAI coding agent for implementation, edits, and automation.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=openai.com&sz=128",
+      "url": "https://openai.com/codex/"
+    },
+    {
+      "id": "replit",
+      "name": "Replit",
+      "category": "Coding",
+      "description": "Cloud development environment with integrated AI coding support.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=replit.com&sz=128",
+      "url": "https://replit.com/"
+    },
+    {
+      "id": "youware",
+      "name": "YouWare",
+      "category": "Coding",
+      "description": "AI app builder focused on quickly shipping full-stack products.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=youware.com&sz=128",
+      "url": "https://www.youware.com/"
+    },
+    {
+      "id": "mgx",
+      "name": "MGX",
+      "category": "Coding",
+      "description": "AI-assisted development environment for rapid prototyping.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=mgx.dev&sz=128",
+      "url": "https://mgx.dev/"
+    },
+    {
+      "id": "v0",
+      "name": "v0",
+      "category": "Coding",
+      "description": "Prompt-to-UI generator for React and frontend scaffolding.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=v0.dev&sz=128",
+      "url": "https://v0.dev/"
+    },
+    {
+      "id": "bolt-new",
+      "name": "bolt.new",
+      "category": "Coding",
+      "description": "Browser-based AI coding environment for full-stack generation.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=bolt.new&sz=128",
+      "url": "https://bolt.new/"
+    },
+    {
+      "id": "rork",
+      "name": "Rork",
+      "category": "Coding",
+      "description": "AI coding platform for building products from natural language specs.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=rork.com&sz=128",
+      "url": "https://rork.com/"
+    },
+    {
+      "id": "firebase-studio",
+      "name": "Firebase Studio",
+      "category": "Coding",
+      "description": "Firebase-based AI app studio for rapid app development.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=firebase.studio&sz=128",
+      "url": "https://firebase.studio/"
+    },
+    {
+      "id": "lovable",
+      "name": "Lovable",
+      "category": "Coding",
+      "description": "AI product builder for turning prompts into working web apps.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=lovable.dev&sz=128",
+      "url": "https://lovable.dev/"
+    },
+    {
+      "id": "windsurf",
+      "name": "Windsurf",
+      "category": "AI IDE",
+      "description": "AI-first IDE experience for code generation and agentic editing.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=windsurf.com&sz=128",
+      "url": "https://windsurf.com/"
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "category": "AI IDE",
+      "description": "AI-native code editor focused on context-aware coding workflows.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=cursor.com&sz=128",
+      "url": "https://cursor.com/"
+    },
+    {
+      "id": "antigravity",
+      "name": "Antigravity",
+      "category": "AI IDE",
+      "description": "Experimental AI IDE experience from Google's ecosystem.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=antigravity.google&sz=128",
+      "url": "https://antigravity.google/"
+    },
+    {
+      "id": "visual-studio-code",
+      "name": "Visual Studio Code",
+      "category": "AI IDE",
+      "description": "Extensible IDE often used with AI coding extensions and agents.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=code.visualstudio.com&sz=128",
+      "url": "https://code.visualstudio.com/"
+    },
+    {
+      "id": "openai-agents-sdk",
+      "name": "OpenAI Agents SDK",
+      "category": "Agents SDK",
+      "description": "SDK for building multi-tool, multi-step AI agents.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=platform.openai.com&sz=128",
+      "url": "https://platform.openai.com/docs/guides/agents-sdk"
+    },
+    {
+      "id": "langchain",
+      "name": "LangChain",
+      "category": "Agents SDK",
+      "description": "Framework for chains, agents, retrieval, and LLM orchestration.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=langchain.com&sz=128",
+      "url": "https://www.langchain.com/"
+    },
+    {
+      "id": "gcp-vertex-ai",
+      "name": "GCP Vertex AI",
+      "category": "Cloud API",
+      "description": "Google Cloud platform for model serving, tuning, and MLOps.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=cloud.google.com&sz=128",
+      "url": "https://cloud.google.com/vertex-ai"
+    },
+    {
+      "id": "langfuse",
+      "name": "Langfuse",
+      "category": "LLM Ops",
+      "description": "LLM observability and tracing platform for prompts and agents.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=langfuse.com&sz=128",
+      "url": "https://langfuse.com/"
+    },
+    {
+      "id": "grafana",
+      "name": "Grafana",
+      "category": "LLM Ops",
+      "description": "Monitoring and dashboard stack used for AI system observability.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=grafana.com&sz=128",
+      "url": "https://grafana.com/"
+    },
+    {
+      "id": "gamma",
+      "name": "Gamma",
+      "category": "Other",
+      "description": "AI presentation tool for quickly generating slide narratives.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=gamma.app&sz=128",
+      "url": "https://gamma.app/"
+    },
+    {
+      "id": "tldv",
+      "name": "tl;dv",
+      "category": "Other",
+      "description": "Meeting assistant for recording, summarizing, and sharing highlights.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=tldv.io&sz=128",
+      "url": "https://tldv.io/"
+    },
+    {
+      "id": "manus",
+      "name": "Manus",
+      "category": "Other",
+      "description": "Autonomous AI agent product for end-to-end task execution.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=manus.im&sz=128",
+      "url": "https://manus.im/"
+    },
+    {
+      "id": "openhands",
+      "name": "OpenHands",
+      "category": "Other",
+      "description": "Open-source coding agent platform for software tasks.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=openhands.dev&sz=128",
+      "url": "https://openhands.dev/"
+    },
+    {
+      "id": "magicss",
+      "name": "magicss",
+      "category": "Other",
+      "description": "AI tool used for rapid content/design generation workflows.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=magicss.ai&sz=128",
+      "url": "https://magicss.ai/"
+    },
+    {
+      "id": "raycast",
+      "name": "Raycast",
+      "category": "Other",
+      "description": "Productivity launcher with AI features and extension workflows.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=raycast.com&sz=128",
+      "url": "https://www.raycast.com/"
+    },
+    {
+      "id": "notebooklm",
+      "name": "NotebookLM",
+      "category": "Other",
+      "description": "Source-grounded research notebook for summarization and Q&A.",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=notebooklm.google.com&sz=128",
+      "url": "https://notebooklm.google.com/"
+    }
+  ]
+}

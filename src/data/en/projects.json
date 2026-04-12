@@ -1,0 +1,30 @@
+{
+  "items": [
+    {
+      "slug": "axross-recipe",
+      "title": "Axross Recipe",
+      "description": "An AI/DX learning platform designed to turn learning into practical, job-ready capability.",
+      "tech": ["React", "Ruby on Rails", "PostgreSQL", "AWS"],
+      "status": "active",
+      "period": null,
+      "image": "project-axross.png",
+      "links": {
+        "site": "https://axross-recipe.com/",
+        "github": null
+      }
+    },
+    {
+      "slug": "magicss",
+      "title": "magicss",
+      "description": "Enter keywords to automatically generate structured analysis, content outlines, and SEO-ready articles.",
+      "tech": ["React", "Python", "FastAPI", "OpenAI API"],
+      "status": "archived",
+      "period": "2023–2025",
+      "image": "project-magicss.png",
+      "links": {
+        "site": "https://magicss.ai/",
+        "github": null
+      }
+    }
+  ]
+}

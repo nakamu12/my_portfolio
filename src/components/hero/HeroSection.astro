@@ -1,0 +1,85 @@
+---
+import FluidBackground from './FluidBackground';
+import { getLangFromUrl, getTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = await getTranslations(lang);
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const visionLabelRaw = t('hero.visionLabel');
+const visionLabel =
+  visionLabelRaw === 'hero.visionLabel' ? (lang === 'ja' ? 'ビジョン' : 'VISION') : visionLabelRaw;
+---
+
+<section id="hero" class="relative flex min-h-screen items-center justify-center overflow-hidden">
+  <!-- Fluid Animation Background
+       mask-image fades the canvas alpha to 0 over the bottom ~30% of Hero,
+       so the fluid visually dissolves into the page background and blends
+       seamlessly into the About section below instead of ending on a hard
+       horizontal line. -->
+  <div
+    class="absolute inset-0 z-0"
+    style="mask-image: linear-gradient(to bottom, black 0%, black 68%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 0%, black 68%, transparent 100%);"
+  >
+    <FluidBackground client:load className="h-full w-full" />
+  </div>
+
+  <!-- Gradient overlay for text readability (pointer-events-none so mouse reaches canvas) -->
+  <div
+    class="from-background/40 to-background/60 pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b via-transparent"
+  >
+  </div>
+
+  <!-- Content (pointer-events-none on container, re-enable on interactive elements) -->
+  <div class="hero-text pointer-events-none relative z-10 mx-auto max-w-6xl px-6 text-center">
+    <!-- Vision label -->
+    <p class="text-muted-foreground mb-2 text-xs font-semibold tracking-[0.14em] uppercase">
+      {visionLabel}
+    </p>
+
+    <!-- Vision -->
+    <h1 class="text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
+      <span
+        class="bg-gradient-to-r from-[#686dff] to-[#b66fff] bg-clip-text text-transparent drop-shadow-sm md:whitespace-nowrap"
+      >
+        {t('hero.vision')}
+      </span>
+    </h1>
+
+    <!-- Name -->
+    <p class="text-foreground mt-5 text-2xl font-semibold tracking-tight md:text-3xl">
+      {t('hero.name')}
+    </p>
+
+    <!-- Role -->
+    <p class="text-foreground/90 mt-3 text-xl font-medium md:text-2xl">
+      {t('hero.title')}
+    </p>
+
+    <!-- CTA Buttons -->
+    <div
+      class="pointer-events-auto mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+    >
+      <a
+        href={`${base}/${lang}/#projects`}
+        class="inline-flex h-12 items-center rounded-lg bg-[#686dff] px-8 text-sm font-medium text-white transition-colors hover:bg-[#5961ff]"
+      >
+        {t('hero.cta.projects')}
+      </a>
+      <a
+        href={`${base}/${lang}/#contact`}
+        class="border-border bg-background/50 text-foreground hover:bg-accent inline-flex h-12 items-center rounded-lg border px-8 text-sm font-medium backdrop-blur-sm transition-colors"
+      >
+        {t('hero.cta.contact')}
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
+    <div class="flex flex-col items-center gap-2">
+      <span class="text-muted-foreground text-xs">Scroll</span>
+      <div class="bg-muted-foreground/50 h-8 w-[1px] animate-pulse"></div>
+    </div>
+  </div>
+</section>

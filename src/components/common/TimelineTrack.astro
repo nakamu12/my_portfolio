@@ -1,0 +1,23 @@
+---
+interface Props {
+  listTag?: 'ul' | 'ol';
+  listClass?: string;
+  lineClass?: string;
+  class?: string;
+}
+
+const { listTag = 'ul', listClass = '', lineClass = '', class: className = '' } = Astro.props;
+
+const ListTag = listTag;
+---
+
+<div class:list={['relative', className]}>
+  <div
+    aria-hidden="true"
+    class:list={['bg-border absolute top-2 bottom-2 left-[7px] w-px', lineClass]}
+  >
+  </div>
+  <ListTag class:list={['space-y-8', listClass]}>
+    <slot />
+  </ListTag>
+</div>

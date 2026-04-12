@@ -1,0 +1,72 @@
+---
+interface Props {
+  heading: string;
+  eyebrow?: string;
+  description?: string;
+  id?: string;
+  level?: 'h2' | 'h3';
+  spacing?: 'section' | 'subsection' | 'none';
+  align?: 'left' | 'center';
+  variant?: 'default' | 'gradient';
+  rootClass?: string;
+  headingClass?: string;
+  descriptionClass?: string;
+  showLine?: boolean;
+  titleOnly?: boolean;
+}
+
+const {
+  heading,
+  eyebrow,
+  description,
+  id,
+  level = 'h2',
+  spacing = 'section',
+  align = 'left',
+  variant = 'default',
+  rootClass = '',
+  headingClass,
+  descriptionClass = 'text-base',
+  showLine = false,
+  titleOnly = false,
+} = Astro.props;
+
+const HeadingTag = level;
+const levelDefaultClass = {
+  h2: 'text-3xl md:text-4xl',
+  h3: 'text-2xl md:text-3xl',
+} satisfies Record<'h2' | 'h3', string>;
+const resolvedHeadingClass = headingClass ?? levelDefaultClass[level];
+const headingBaseClass = `${resolvedHeadingClass} font-semibold tracking-tight`;
+const headingFinalClass =
+  variant === 'gradient'
+    ? `bg-gradient-to-r from-[#686dff] to-[#b66fff] bg-clip-text text-transparent ${headingBaseClass}`
+    : `text-foreground ${headingBaseClass}`;
+const alignClass = align === 'center' ? 'text-center' : 'text-left';
+const spacingClass = {
+  section: 'mb-16',
+  subsection: 'mb-8',
+  none: 'mb-0',
+} satisfies Record<'section' | 'subsection' | 'none', string>;
+---
+
+<div class:list={['section-heading', spacingClass[spacing], alignClass, rootClass]}>
+  {
+    !titleOnly && eyebrow && (
+      <p class="mb-3 text-sm font-medium tracking-widest text-[#686dff] uppercase">{eyebrow}</p>
+    )
+  }
+  <HeadingTag id={id} class={headingFinalClass}>
+    {heading}
+  </HeadingTag>
+  {
+    !titleOnly && description && (
+      <p class={`text-muted-foreground mt-3 ${descriptionClass}`}>{description}</p>
+    )
+  }
+  {
+    !titleOnly && showLine && (
+      <div class="mt-4 h-[2px] w-12 bg-gradient-to-r from-[#686dff] to-[#b66fff]" />
+    )
+  }
+</div>

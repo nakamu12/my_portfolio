@@ -1,0 +1,265 @@
+---
+import { Image } from 'astro:assets';
+import { getLangFromUrl, getTranslations } from '@/i18n/utils';
+import profileImage from '@/assets/images/profile/profile.jpg';
+import SectionHeading from '@/components/common/SectionHeading.astro';
+import SectionContainer from '@/components/common/SectionContainer.astro';
+import OverlineLabel from '@/components/common/OverlineLabel.astro';
+import CardTitle from '@/components/common/CardTitle.astro';
+import PillBadge from '@/components/common/PillBadge.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = await getTranslations(lang);
+
+const aboutData = await import(`../../data/${lang}/about.json`);
+const bio: string = aboutData.bio ?? aboutData.default?.bio ?? '';
+const attributes: { label: string; value: string }[] =
+  aboutData.attributes ?? aboutData.default?.attributes ?? [];
+const mbti: {
+  type: string;
+  label: string;
+  traits: { letter: string; name: string; percent: number }[];
+} | null = aboutData.mbti ?? aboutData.default?.mbti ?? null;
+const strengths: { name: string; subtitle?: string; desc: string }[] =
+  aboutData.strengths ?? aboutData.default?.strengths ?? [];
+---
+
+<SectionContainer id="about" ariaLabelledby="about-heading" padding="hero">
+  <!-- Section Heading -->
+  <div
+    class="about-heading-group mb-12 flex flex-col gap-3 md:flex-row md:items-end md:justify-between"
+  >
+    <SectionHeading
+      id="about-heading"
+      level="h2"
+      heading={t('about.heading')}
+      spacing="none"
+      titleOnly
+    />
+  </div>
+
+  <!-- Profile + Bio -->
+  <p class="text-foreground mb-6 text-xl font-semibold tracking-tight md:text-2xl">
+    {t('about.name')}
+  </p>
+  <div class="mb-10 grid grid-cols-1 gap-8 lg:grid-cols-[280px_1fr] lg:gap-12">
+    <!-- Left: Photo only -->
+    <div
+      class="about-photo relative aspect-square w-full overflow-hidden rounded-2xl ring-1 ring-white/10 lg:aspect-auto"
+    >
+      <Image
+        src={profileImage}
+        alt={t('about.profileAlt')}
+        width={560}
+        height={560}
+        class="h-full w-full object-cover"
+      />
+      <div
+        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"
+      >
+      </div>
+    </div>
+
+    <!-- Right: Bio text + Attribute chips -->
+    <div class="flex flex-col gap-5">
+      <p class="about-bio text-muted-foreground text-base leading-relaxed lg:text-lg">{bio}</p>
+
+      <!-- Attribute chips -->
+      <div class="grid grid-cols-2 gap-2">
+        {
+          attributes.map((attr) => (
+            <div class="about-chip bg-card border-border rounded-xl border px-3 py-3">
+              <p class="text-muted-foreground mb-0.5 text-[10px] font-medium tracking-wider uppercase">
+                {attr.label}
+              </p>
+              <p class="text-foreground text-xs leading-snug font-medium">{attr.value}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Personality: MBTI + StrengthsFinder -->
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+    <!-- MBTI Card -->
+    {
+      mbti && (
+        <div class="mbti-card bg-card border-border relative overflow-hidden rounded-2xl border p-6 md:p-8">
+          <div class="pointer-events-none absolute -top-10 -right-10 h-40 w-40 rounded-full bg-[#686dff]/8 blur-3xl" />
+
+          <div class="mb-6 flex items-start justify-between">
+            <div>
+              <OverlineLabel text={t('about.personalityLabel')} class="mb-1" />
+              <CardTitle text="MBTI" size="md" />
+            </div>
+            <div class="text-right">
+              <p class="bg-gradient-to-r from-[#686dff] to-[#b66fff] bg-clip-text text-4xl font-bold tracking-tight text-transparent">
+                {mbti.type}
+              </p>
+              <p class="text-muted-foreground text-sm">{mbti.label}</p>
+            </div>
+          </div>
+
+          <div class="space-y-3.5">
+            {mbti.traits.map((trait) => (
+              <div class="flex items-center gap-3">
+                <span class="w-4 shrink-0 text-sm font-bold text-[#686dff]">{trait.letter}</span>
+                <div class="bg-border relative h-1.5 flex-1 overflow-hidden rounded-full">
+                  <div
+                    class="mbti-bar-fill absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[#686dff] to-[#b66fff]"
+                    data-width={trait.percent}
+                    style="width: 0"
+                  />
+                </div>
+                <span class="text-muted-foreground w-8 shrink-0 text-right text-xs tabular-nums">
+                  {trait.percent}%
+                </span>
+                <span class="text-muted-foreground w-20 shrink-0 text-xs">{trait.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    }
+
+    <!-- StrengthsFinder Card -->
+    <div
+      class="sf-card bg-card border-border relative overflow-hidden rounded-2xl border p-6 md:p-8"
+    >
+      <div
+        class="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-[#b66fff]/8 blur-3xl"
+      >
+      </div>
+
+      <div class="mb-6">
+        <OverlineLabel text={t('about.personalityLabel')} class="mb-1" />
+        <div class="flex items-center gap-3">
+          <CardTitle text="StrengthsFinder" size="md" />
+          <PillBadge tone="primary">TOP 5</PillBadge>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        {
+          strengths.map((s, i) => (
+            <div class="sf-item flex items-start gap-4">
+              <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#686dff] to-[#b66fff] text-xs font-bold text-white">
+                {i + 1}
+              </span>
+              <div class="min-w-0 flex-1">
+                <div class="mb-0.5 flex items-baseline gap-2">
+                  <span class="text-foreground text-sm font-semibold">{s.name}</span>
+                  {s.subtitle && <span class="text-muted-foreground text-xs">{s.subtitle}</span>}
+                </div>
+                <p class="text-muted-foreground text-xs leading-relaxed">{s.desc}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</SectionContainer>
+
+<script>
+  import { animate, inView, stagger } from 'motion';
+
+  const section = document.querySelector<HTMLElement>('#about');
+  if (section) {
+    const ease = [0.25, 0.1, 0.25, 1] as const;
+
+    // --- Section heading ---
+    const headingGroup = section.querySelector<HTMLElement>('.about-heading-group');
+    if (headingGroup) {
+      headingGroup.style.opacity = '0';
+      headingGroup.style.transform = 'translateY(20px)';
+      inView(headingGroup, () => {
+        animate(headingGroup, { opacity: 1, y: 0 }, { duration: 0.7, ease });
+      });
+    }
+
+    // --- Profile photo ---
+    const photo = section.querySelector<HTMLElement>('.about-photo');
+    if (photo) {
+      photo.style.opacity = '0';
+      photo.style.transform = 'scale(0.96)';
+      inView(photo, () => {
+        animate(photo, { opacity: 1, scale: 1 }, { duration: 0.8, ease });
+      });
+    }
+
+    // --- Bio ---
+    const bioEl = section.querySelector<HTMLElement>('.about-bio');
+    if (bioEl) {
+      bioEl.style.opacity = '0';
+      bioEl.style.transform = 'translateY(16px)';
+      inView(bioEl, () => {
+        animate(bioEl, { opacity: 1, y: 0 }, { duration: 0.5, ease });
+      });
+    }
+
+    // --- Attribute chips ---
+    const chips = section.querySelectorAll<HTMLElement>('.about-chip');
+    if (chips.length) {
+      chips.forEach((c) => {
+        c.style.opacity = '0';
+        c.style.transform = 'translateY(12px)';
+      });
+      inView(chips[0], () => {
+        animate(chips, { opacity: 1, y: 0 }, { delay: stagger(0.08), duration: 0.4, ease });
+      });
+    }
+
+    // --- MBTI card ---
+    const mbtiCard = section.querySelector<HTMLElement>('.mbti-card');
+    if (mbtiCard) {
+      mbtiCard.style.opacity = '0';
+      mbtiCard.style.transform = 'translateY(24px)';
+      inView(mbtiCard, () => {
+        animate(mbtiCard, { opacity: 1, y: 0 }, { duration: 0.6, ease });
+
+        // Animate bars with stagger after card fades in
+        const bars = mbtiCard.querySelectorAll<HTMLElement>('.mbti-bar-fill');
+        bars.forEach((bar, i) => {
+          const targetWidth = (bar.dataset.width ?? '0') + '%';
+          animate(
+            bar,
+            { width: targetWidth },
+            {
+              duration: 1,
+              delay: 0.3 + i * 0.1,
+              ease: [0.4, 0, 0.2, 1],
+            },
+          );
+        });
+      });
+    }
+
+    // --- StrengthsFinder card ---
+    const sfCard = section.querySelector<HTMLElement>('.sf-card');
+    if (sfCard) {
+      sfCard.style.opacity = '0';
+      sfCard.style.transform = 'translateY(24px)';
+
+      const items = sfCard.querySelectorAll<HTMLElement>('.sf-item');
+      items.forEach((item) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(12px)';
+      });
+
+      inView(sfCard, () => {
+        animate(sfCard, { opacity: 1, y: 0 }, { duration: 0.6, delay: 0.1, ease });
+        animate(
+          items,
+          { opacity: 1, y: 0 },
+          {
+            delay: stagger(0.1, { start: 0.35 }),
+            duration: 0.4,
+            ease,
+          },
+        );
+      });
+    }
+  }
+</script>

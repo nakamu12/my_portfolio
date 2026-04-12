@@ -1,0 +1,20 @@
+{
+  "name": "Ryota Nakamura Portfolio",
+  "short_name": "RN Portfolio",
+  "icons": [
+    {
+      "src": "/my_portfolio/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/my_portfolio/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/my_portfolio/",
+  "theme_color": "#686dff",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}

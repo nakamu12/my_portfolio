@@ -1,0 +1,28 @@
+---
+// Root page: detect browser language and redirect
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting...</title>
+    <script is:inline define:vars={{ base: base }}>
+      (function () {
+        const stored = localStorage.getItem('lang');
+        if (stored) {
+          window.location.replace(base + stored + '/');
+          return;
+        }
+        const browserLang = navigator.language || 'en';
+        const lang = browserLang.startsWith('ja') ? 'ja' : 'en';
+        window.location.replace(base + lang + '/');
+      })();
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content={'0;url=' + base + 'en/'} />
+    </noscript>
+  </head>
+  <body></body>
+</html>

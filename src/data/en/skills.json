@@ -1,0 +1,61 @@
+{
+  "categories": [
+    {
+      "name": "Frontend",
+      "skills": [
+        { "name": "React", "icon": "react" },
+        { "name": "TypeScript", "icon": "typescript" },
+        { "name": "JavaScript", "icon": "javascript" },
+        { "name": "HTML", "icon": "html5" },
+        { "name": "CSS", "icon": "css3" }
+      ]
+    },
+    {
+      "name": "Backend & API",
+      "skills": [
+        { "name": "Python", "icon": "python" },
+        { "name": "FastAPI", "icon": "fastapi" },
+        { "name": "Node.js", "icon": "nodejs" },
+        { "name": "Ruby on Rails", "icon": "rails" },
+        { "name": "Java", "icon": "java" },
+        { "name": "MongoDB", "icon": "mongodb" }
+      ]
+    },
+    {
+      "name": "AI / GenAI",
+      "skills": [
+        { "name": "LangChain", "icon": "langchain" },
+        { "name": "OpenAI Agents SDK", "icon": "openai" },
+        { "name": "RAG Pipeline", "icon": "rag" },
+        { "name": "ChromaDB", "icon": "chromadb" },
+        { "name": "LangSmith", "icon": "langsmith" }
+      ]
+    },
+    {
+      "name": "Big Data",
+      "skills": [
+        { "name": "Apache Spark", "icon": "apachespark" },
+        { "name": "PySpark", "icon": "pyspark" },
+        { "name": "Scala", "icon": "scala" },
+        { "name": "Treasure Data", "icon": "treasuredata" }
+      ]
+    },
+    {
+      "name": "Cloud & DevOps",
+      "skills": [
+        { "name": "AWS", "icon": "aws" },
+        { "name": "Azure", "icon": "azure" },
+        { "name": "GCP", "icon": "gcp" },
+        { "name": "Docker", "icon": "docker" },
+        { "name": "Kubernetes", "icon": "kubernetes" }
+      ]
+    },
+    {
+      "name": "Robotics",
+      "skills": [
+        { "name": "C++", "icon": "cplusplus" },
+        { "name": "ROS", "icon": "ros" }
+      ]
+    }
+  ]
+}

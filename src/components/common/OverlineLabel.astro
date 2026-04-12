@@ -1,0 +1,21 @@
+---
+interface Props {
+  text?: string;
+  as?: 'p' | 'span' | 'div';
+  tone?: 'muted' | 'accent' | 'success';
+  class?: string;
+}
+
+const { text, as = 'p', tone = 'muted', class: className = '' } = Astro.props;
+
+const Tag = as;
+const toneClass = {
+  muted: 'text-muted-foreground',
+  accent: 'text-[#686dff]',
+  success: 'text-emerald-600 dark:text-emerald-400',
+} satisfies Record<'muted' | 'accent' | 'success', string>;
+---
+
+<Tag class:list={['text-xs font-semibold tracking-widest uppercase', toneClass[tone], className]}>
+  {text ?? <slot />}
+</Tag>

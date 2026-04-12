@@ -1,0 +1,63 @@
+{
+  "items": [
+    {
+      "title": "SoftBank Corp.",
+      "startYear": 2020,
+      "endYear": null,
+      "category": "work",
+      "roles": [
+        {
+          "role": "AI/DX Platform Engineer · Axross Business Division",
+          "startYear": 2024,
+          "endYear": null,
+          "achievements": [
+            "Led technical content and product development for Axross Recipe, an AI/DX online learning platform",
+            "Developed features including Prompt Share and Request Board",
+            "Partnered with product, design, and data teams to improve user experience"
+          ],
+          "concurrent": [
+            {
+              "title": "Magicss",
+              "startYear": 2024,
+              "endYear": 2025,
+              "description": "Contributed part-time to the development of an automated SEO article generation service"
+            }
+          ]
+        },
+        {
+          "role": "Internal Systems Operations Engineer",
+          "startYear": 2020,
+          "endYear": 2024,
+          "achievements": [
+            "Operated and maintained enterprise mobility systems for corporate customers",
+            "Led automation initiatives to reduce manual operational work",
+            "Later joined the launch of an internal data platform and built hands-on data engineering experience"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Hosei University Graduate School",
+      "role": "M.Eng. · Graduate School of Science and Engineering · Autonomous Robotics Lab",
+      "startYear": 2018,
+      "endYear": 2020,
+      "category": "education",
+      "achievements": [
+        "Conducted research on autonomous mobile robots (navigation, perception, and control)",
+        "Won the grand championship at IGVC 2018, an international autonomous vehicle competition"
+      ]
+    },
+    {
+      "title": "Hosei University",
+      "role": "B.Eng. · Faculty of Science and Engineering · Department of Frontier Sciences",
+      "startYear": 2014,
+      "endYear": 2018,
+      "category": "education",
+      "achievements": [
+        "Built a foundation in physics and mathematics, then studied statistics, informatics, and humanities/social sciences to systematically develop scientific methods for measuring, synthesizing, understanding, and communicating",
+        "In the third year, completed PBL and laboratory-based projects from problem definition through validation and presentation, then joined the Autonomous Robotics Lab in the fall to focus on mobile robot software research"
+      ],
+      "note": "During university, also worked part-time in mobile-device sales promotion events (2017-2020)"
+    }
+  ]
+}

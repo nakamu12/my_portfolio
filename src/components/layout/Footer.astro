@@ -1,0 +1,39 @@
+---
+import { getLangFromUrl, getTranslations } from '@/i18n/utils';
+import socialData from '@/data/social.json';
+import SocialLinkItem from '@/components/common/SocialLinkItem.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = await getTranslations(lang);
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="pb-12 md:pb-24" aria-label="Site footer">
+  <!-- Gradient border top -->
+  <div class="h-px w-full bg-gradient-to-r from-[#686dff] to-[#b66fff]"></div>
+  <div class="mx-auto max-w-6xl px-6 pt-12">
+    <!-- SNS Links -->
+    <div class="mb-8 flex justify-center gap-6">
+      {socialData.links.map((link) => <SocialLinkItem link={link} variant="footer" />)}
+    </div>
+
+    <!-- Bottom row: copyright / back to top -->
+    <div class="text-muted-foreground flex items-center justify-between text-sm">
+      <p>© {currentYear} Ryota Nakamura</p>
+
+      <a href="#hero" class="hover:text-foreground flex items-center gap-1.5 transition-colors">
+        {t('footer.backToTop')}
+        <svg
+          class="h-4 w-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 15l7-7 7 7"
+          ></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
