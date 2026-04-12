@@ -157,234 +157,233 @@ function formatDate(dateStr: string, locale: string): string {
 ---
 
 <SectionContainer id="media">
-    <!-- Section Header + Stats -->
-    <SectionHeading level="h2" heading={t('media.title')} titleOnly />
-    <div class="mb-16">
-
-      <!-- Stats row -->
-      <div class="mt-8 flex flex-wrap gap-x-8 gap-y-3">
-        {
-          statPress > 0 && (
-            <div class="flex items-baseline gap-1.5">
-              <span class="text-foreground text-2xl font-bold tabular-nums">{statPress}</span>
-              <span class="text-muted-foreground text-sm">{t('media.press.title')}</span>
-            </div>
-          )
-        }
-        {
-          statWritten > 0 && (
-            <div class="flex items-baseline gap-1.5">
-              <span class="text-foreground text-2xl font-bold tabular-nums">{statWritten}</span>
-              <span class="text-muted-foreground text-sm">{t('media.category.written')}</span>
-            </div>
-          )
-        }
-        {
-          statSupervised > 0 && (
-            <div class="flex items-baseline gap-1.5">
-              <span class="text-foreground text-2xl font-bold tabular-nums">{statSupervised}</span>
-              <span class="text-muted-foreground text-sm">{t('media.category.supervised')}</span>
-            </div>
-          )
-        }
-        {
-          statSpeaking > 0 && (
-            <div class="flex items-baseline gap-1.5">
-              <span class="text-foreground text-2xl font-bold tabular-nums">{statSpeaking}</span>
-              <span class="text-muted-foreground text-sm">{t('media.speaking.title')}</span>
-            </div>
-          )
-        }
-      </div>
-    </div>
-
-    <!-- ── Press & Appearances ─────────────────────────────────────────────── -->
-    <div class="mb-24">
-      <div class="mb-8">
-        <SubsectionHeading heading={t('media.press.title')} rootClass="mb-0" titleOnly />
-        <p class="text-muted-foreground mt-1.5 text-sm">{t('media.press.subtitle')}</p>
-      </div>
-
-      <!-- Featured -->
+  <!-- Section Header + Stats -->
+  <SectionHeading level="h2" heading={t('media.title')} titleOnly />
+  <div class="mb-16">
+    <!-- Stats row -->
+    <div class="mt-8 flex flex-wrap gap-x-8 gap-y-3">
       {
-        pressFeatured && (
-          <div class="mb-10">
-            <PillBadge tone="primary" class="mb-4 gap-1.5 border border-[#686dff]/30 px-3 py-1">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="11"
-                height="11"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-              </svg>
-              {t('media.featured')}
-            </PillBadge>
-
-            <a
-              href={pressFeatured.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="border-border bg-background group overflow-hidden rounded-2xl border transition-all duration-200 hover:border-[#686dff]/40 hover:shadow-xl md:flex"
-            >
-              {featuredThumb ? (
-                <div
-                  class="relative shrink-0 overflow-hidden md:w-72 lg:w-80"
-                  style="aspect-ratio:16/9"
-                >
-                  <img
-                    src={featuredThumb}
-                    alt={pressFeatured.title}
-                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                </div>
-              ) : (
-                <div
-                  class="relative shrink-0 overflow-hidden bg-gradient-to-br from-red-950 via-red-900/50 to-neutral-900 md:w-72 lg:w-80"
-                  style="aspect-ratio:16/9"
-                >
-                  <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="flex h-20 w-20 items-center justify-center rounded-full bg-[#ff0000]/20 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
-                      <svg class="h-9 w-9 text-red-400" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z" />
-                      </svg>
-                    </div>
-                  </div>
-                  <div
-                    class="absolute inset-0 opacity-10"
-                    style="background-image:linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px);background-size:32px 32px"
-                  />
-                </div>
-              )}
-              <div class="flex flex-1 flex-col justify-center p-6 md:p-8 lg:p-10">
-                <span class="mb-3 flex items-center gap-1.5 text-xs font-medium tracking-widest text-red-400 uppercase">
-                  <span class="h-1.5 w-1.5 rounded-full bg-red-400" /> YouTube
-                </span>
-                <CardTitle
-                  text={pressFeatured.title}
-                  as="h4"
-                  size="lg"
-                  class="font-bold transition-colors group-hover:text-[#686dff]"
-                />
-                <p class="text-muted-foreground mt-3 text-sm leading-relaxed">
-                  {pressFeatured.description}
-                </p>
-                <div class="mt-6 text-sm font-medium text-[#686dff]">
-                  <ExternalLinkAction label={t('media.visit')} icon="arrow" />
-                </div>
-              </div>
-            </a>
+        statPress > 0 && (
+          <div class="flex items-baseline gap-1.5">
+            <span class="text-foreground text-2xl font-bold tabular-nums">{statPress}</span>
+            <span class="text-muted-foreground text-sm">{t('media.press.title')}</span>
           </div>
         )
       }
-
-      <!-- Press carousel -->
-      <MediaCarousel client:visible items={enrichedPressItems} labels={pressLabels} />
-    </div>
-
-    <!-- ── Writing ─────────────────────────────────────────────────────────── -->
-    <div class="mb-24">
-      <div class="mb-8">
-        <SubsectionHeading heading={t('media.writing.title')} rootClass="mb-0" titleOnly />
-        <p class="text-muted-foreground mt-1.5 text-sm">{t('media.writing.subtitle')}</p>
-      </div>
-
-      <MediaCarousel
-        client:visible
-        items={enrichedWritingItems}
-        labels={writingLabels}
-        emptyMessage={t('media.supervised.empty')}
-      />
-
-      <!-- Platforms -->
       {
-        platforms.length > 0 && (
-          <div class="mt-12">
-            <OverlineLabel text={t('media.writing.also_on')} class="mb-4" />
-            <div class="flex flex-wrap gap-3">
-              {platforms.map((p) => (
-                <a
-                  href={p.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="border-border bg-background group flex items-center gap-2.5 rounded-full border px-4 py-2 transition-all duration-150 hover:border-[#686dff]/30 hover:shadow-sm"
-                >
-                  <span
-                    class="text-muted-foreground transition-colors group-hover:text-[var(--pc)]"
-                    style={`--pc:${platformColors[p.name] ?? '#686dff'}`}
-                  >
-                    <Fragment set:html={platformIcons[p.name] ?? ''} />
-                  </span>
-                  <span class="text-foreground text-sm font-medium">{p.name}</span>
-                  <svg
-                    class="text-muted-foreground h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                    <polyline points="15 3 21 3 21 9" />
-                    <line x1="10" y1="14" x2="21" y2="3" />
-                  </svg>
-                </a>
-              ))}
-            </div>
+        statWritten > 0 && (
+          <div class="flex items-baseline gap-1.5">
+            <span class="text-foreground text-2xl font-bold tabular-nums">{statWritten}</span>
+            <span class="text-muted-foreground text-sm">{t('media.category.written')}</span>
+          </div>
+        )
+      }
+      {
+        statSupervised > 0 && (
+          <div class="flex items-baseline gap-1.5">
+            <span class="text-foreground text-2xl font-bold tabular-nums">{statSupervised}</span>
+            <span class="text-muted-foreground text-sm">{t('media.category.supervised')}</span>
+          </div>
+        )
+      }
+      {
+        statSpeaking > 0 && (
+          <div class="flex items-baseline gap-1.5">
+            <span class="text-foreground text-2xl font-bold tabular-nums">{statSpeaking}</span>
+            <span class="text-muted-foreground text-sm">{t('media.speaking.title')}</span>
           </div>
         )
       }
     </div>
+  </div>
 
-    <!-- ── Speaking ────────────────────────────────────────────────────────── -->
+  <!-- ── Press & Appearances ─────────────────────────────────────────────── -->
+  <div class="mb-24">
+    <div class="mb-8">
+      <SubsectionHeading heading={t('media.press.title')} rootClass="mb-0" titleOnly />
+      <p class="text-muted-foreground mt-1.5 text-sm">{t('media.press.subtitle')}</p>
+    </div>
+
+    <!-- Featured -->
     {
-      speakingItems.length > 0 && (
-        <div>
-          <div class="mb-8">
-            <SubsectionHeading heading={t('media.speaking.title')} rootClass="mb-0" titleOnly />
-            <p class="text-muted-foreground mt-1.5 text-sm">{t('media.speaking.subtitle')}</p>
-          </div>
+      pressFeatured && (
+        <div class="mb-10">
+          <PillBadge tone="primary" class="mb-4 gap-1.5 border border-[#686dff]/30 px-3 py-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="11"
+              height="11"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            {t('media.featured')}
+          </PillBadge>
 
-          <TimelineTrack listTag="ol" listClass="space-y-8">
-              {speakingItems.map((item) => (
-                <TimelineItem class="flex gap-6 pl-8">
-                  <TimelineDot />
-
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="border-border bg-background group flex-1 rounded-xl border p-5 transition-all duration-200 hover:border-[#686dff]/30 hover:shadow-sm"
-                  >
-                    <div class="mb-3 flex flex-wrap items-center gap-2">
-                      <PillBadge tone="primary">{formatDate(item.date, lang)}</PillBadge>
-                      <PillBadge tone="muted" class="border-border border">
-                        {item.venue}
-                      </PillBadge>
-                    </div>
-
-                    <p class="text-foreground text-sm leading-snug font-semibold transition-colors group-hover:text-[#686dff]">
-                      {item.title}
-                    </p>
-
-                    {item.stats && Object.keys(item.stats).length > 0 && (
-                      <div class="mt-3 flex flex-wrap gap-1.5">
-                        {Object.values(item.stats).map((val) => (
-                          <span class="border-border text-muted-foreground rounded-full border px-2 py-0.5 text-[11px]">
-                            {val}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </a>
-                </TimelineItem>
-              ))}
-          </TimelineTrack>
+          <a
+            href={pressFeatured.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="border-border bg-background group overflow-hidden rounded-2xl border transition-all duration-200 hover:border-[#686dff]/40 hover:shadow-xl md:flex"
+          >
+            {featuredThumb ? (
+              <div
+                class="relative shrink-0 overflow-hidden md:w-72 lg:w-80"
+                style="aspect-ratio:16/9"
+              >
+                <img
+                  src={featuredThumb}
+                  alt={pressFeatured.title}
+                  class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+              </div>
+            ) : (
+              <div
+                class="relative shrink-0 overflow-hidden bg-gradient-to-br from-red-950 via-red-900/50 to-neutral-900 md:w-72 lg:w-80"
+                style="aspect-ratio:16/9"
+              >
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="flex h-20 w-20 items-center justify-center rounded-full bg-[#ff0000]/20 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
+                    <svg class="h-9 w-9 text-red-400" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z" />
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  class="absolute inset-0 opacity-10"
+                  style="background-image:linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px);background-size:32px 32px"
+                />
+              </div>
+            )}
+            <div class="flex flex-1 flex-col justify-center p-6 md:p-8 lg:p-10">
+              <span class="mb-3 flex items-center gap-1.5 text-xs font-medium tracking-widest text-red-400 uppercase">
+                <span class="h-1.5 w-1.5 rounded-full bg-red-400" /> YouTube
+              </span>
+              <CardTitle
+                text={pressFeatured.title}
+                as="h4"
+                size="lg"
+                class="font-bold transition-colors group-hover:text-[#686dff]"
+              />
+              <p class="text-muted-foreground mt-3 text-sm leading-relaxed">
+                {pressFeatured.description}
+              </p>
+              <div class="mt-6 text-sm font-medium text-[#686dff]">
+                <ExternalLinkAction label={t('media.visit')} icon="arrow" />
+              </div>
+            </div>
+          </a>
         </div>
       )
     }
+
+    <!-- Press carousel -->
+    <MediaCarousel client:visible items={enrichedPressItems} labels={pressLabels} />
+  </div>
+
+  <!-- ── Writing ─────────────────────────────────────────────────────────── -->
+  <div class="mb-24">
+    <div class="mb-8">
+      <SubsectionHeading heading={t('media.writing.title')} rootClass="mb-0" titleOnly />
+      <p class="text-muted-foreground mt-1.5 text-sm">{t('media.writing.subtitle')}</p>
+    </div>
+
+    <MediaCarousel
+      client:visible
+      items={enrichedWritingItems}
+      labels={writingLabels}
+      emptyMessage={t('media.supervised.empty')}
+    />
+
+    <!-- Platforms -->
+    {
+      platforms.length > 0 && (
+        <div class="mt-12">
+          <OverlineLabel text={t('media.writing.also_on')} class="mb-4" />
+          <div class="flex flex-wrap gap-3">
+            {platforms.map((p) => (
+              <a
+                href={p.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="border-border bg-background group flex items-center gap-2.5 rounded-full border px-4 py-2 transition-all duration-150 hover:border-[#686dff]/30 hover:shadow-sm"
+              >
+                <span
+                  class="text-muted-foreground transition-colors group-hover:text-[var(--pc)]"
+                  style={`--pc:${platformColors[p.name] ?? '#686dff'}`}
+                >
+                  <Fragment set:html={platformIcons[p.name] ?? ''} />
+                </span>
+                <span class="text-foreground text-sm font-medium">{p.name}</span>
+                <svg
+                  class="text-muted-foreground h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </a>
+            ))}
+          </div>
+        </div>
+      )
+    }
+  </div>
+
+  <!-- ── Speaking ────────────────────────────────────────────────────────── -->
+  {
+    speakingItems.length > 0 && (
+      <div>
+        <div class="mb-8">
+          <SubsectionHeading heading={t('media.speaking.title')} rootClass="mb-0" titleOnly />
+          <p class="text-muted-foreground mt-1.5 text-sm">{t('media.speaking.subtitle')}</p>
+        </div>
+
+        <TimelineTrack listTag="ol" listClass="space-y-8">
+          {speakingItems.map((item) => (
+            <TimelineItem class="flex gap-6 pl-8">
+              <TimelineDot />
+
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="border-border bg-background group flex-1 rounded-xl border p-5 transition-all duration-200 hover:border-[#686dff]/30 hover:shadow-sm"
+              >
+                <div class="mb-3 flex flex-wrap items-center gap-2">
+                  <PillBadge tone="primary">{formatDate(item.date, lang)}</PillBadge>
+                  <PillBadge tone="muted" class="border-border border">
+                    {item.venue}
+                  </PillBadge>
+                </div>
+
+                <p class="text-foreground text-sm leading-snug font-semibold transition-colors group-hover:text-[#686dff]">
+                  {item.title}
+                </p>
+
+                {item.stats && Object.keys(item.stats).length > 0 && (
+                  <div class="mt-3 flex flex-wrap gap-1.5">
+                    {Object.values(item.stats).map((val) => (
+                      <span class="border-border text-muted-foreground rounded-full border px-2 py-0.5 text-[11px]">
+                        {val}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </a>
+            </TimelineItem>
+          ))}
+        </TimelineTrack>
+      </div>
+    )
+  }
 </SectionContainer>

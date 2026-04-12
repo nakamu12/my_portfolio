@@ -46,7 +46,12 @@ export default function FilterTabs({
               );
 
         return (
-          <button key={item.key} type="button" onClick={() => onChange(item.key)} className={buttonClass}>
+          <button
+            key={item.key}
+            type="button"
+            onClick={() => onChange(item.key)}
+            className={buttonClass}
+          >
             {item.label}
             {typeof item.count === 'number' && (
               <span

@@ -111,138 +111,138 @@ function getBentoPosition(index: number): string {
 ---
 
 <SectionContainer id="achievements">
-    <SectionHeading level="h2" heading={t('achievements.heading')} titleOnly />
+  <SectionHeading level="h2" heading={t('achievements.heading')} titleOnly />
 
-    {/* Shared SVG defs for decorative gradient (reused by all no-image cards) */}
-    <svg width="0" height="0" class="absolute" aria-hidden="true">
-      <defs>
-        <linearGradient id="bento-icon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#686dff"></stop>
-          <stop offset="100%" stop-color="#b66fff"></stop>
-        </linearGradient>
-      </defs>
-    </svg>
+  {/* Shared SVG defs for decorative gradient (reused by all no-image cards) */}
+  <svg width="0" height="0" class="absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="bento-icon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#686dff"></stop>
+        <stop offset="100%" stop-color="#b66fff"></stop>
+      </linearGradient>
+    </defs>
+  </svg>
 
-    <div
-      class="grid [grid-auto-flow:dense] auto-rows-[14rem] grid-cols-1 gap-3 sm:grid-cols-2 md:auto-rows-[16rem] lg:grid-cols-3"
-    >
-      {
-        achievements.map((item, index) => {
-          const img = getCertificationImage(item.image);
-          const size = getBentoSize(index);
-          const position = getBentoPosition(index);
-          const safeLink = isSafeUrl(item.link) ? item.link : null;
-          const Tag = safeLink ? 'a' : 'div';
-          const linkProps = safeLink
-            ? {
-                href: safeLink,
-                target: '_blank',
-                rel: 'noopener noreferrer',
-                'aria-label': `${item.title} — ${item.organization} (${t('achievements.viewLink')})`,
-              }
-            : {};
+  <div
+    class="grid [grid-auto-flow:dense] auto-rows-[14rem] grid-cols-1 gap-3 sm:grid-cols-2 md:auto-rows-[16rem] lg:grid-cols-3"
+  >
+    {
+      achievements.map((item, index) => {
+        const img = getCertificationImage(item.image);
+        const size = getBentoSize(index);
+        const position = getBentoPosition(index);
+        const safeLink = isSafeUrl(item.link) ? item.link : null;
+        const Tag = safeLink ? 'a' : 'div';
+        const linkProps = safeLink
+          ? {
+              href: safeLink,
+              target: '_blank',
+              rel: 'noopener noreferrer',
+              'aria-label': `${item.title} — ${item.organization} (${t('achievements.viewLink')})`,
+            }
+          : {};
 
-          return (
-            <Tag
-              {...linkProps}
-              class:list={[
-                'group relative overflow-hidden rounded-2xl transition-shadow duration-300 hover:shadow-xl',
-                sizeClasses[size],
-                position,
-              ]}
-            >
-              {img ? (
-                <Image
-                  src={img}
-                  alt={item.title}
-                  width={800}
-                  height={600}
-                  class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              ) : (
-                <div class="absolute inset-0 bg-gradient-to-br from-[#686dff]/10 to-[#b66fff]/10">
-                  <div
-                    class="absolute inset-0 opacity-[0.07]"
-                    style="background-image: radial-gradient(circle, #686dff 1px, transparent 1px); background-size: 24px 24px;"
-                  />
-                  <div class="absolute inset-0 flex items-center justify-center opacity-15">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="80"
-                      height="80"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="url(#bento-icon-gradient)"
-                      stroke-width="0.8"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
-                      <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
-                      <path d="M4 22h16" />
-                      <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
-                      <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
-                      <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
-                    </svg>
-                  </div>
-                  <div class="absolute -top-6 -right-6 h-24 w-24 rounded-full bg-[#686dff]/10" />
-                  <div class="absolute -bottom-4 -left-4 h-16 w-16 rounded-full bg-[#b66fff]/10" />
-                </div>
-              )}
-
-              <div
-                class:list={[
-                  'absolute inset-0',
-                  img
-                    ? 'bg-gradient-to-t from-black/80 via-black/30 to-transparent'
-                    : 'bg-gradient-to-t from-black/70 via-transparent to-transparent',
-                ]}
+        return (
+          <Tag
+            {...linkProps}
+            class:list={[
+              'group relative overflow-hidden rounded-2xl transition-shadow duration-300 hover:shadow-xl',
+              sizeClasses[size],
+              position,
+            ]}
+          >
+            {img ? (
+              <Image
+                src={img}
+                alt={item.title}
+                width={800}
+                height={600}
+                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-
-              <div class="relative z-10 flex h-full flex-col justify-end p-5 md:p-6">
-                <div class="mb-2 flex items-center gap-2">
-                  <span class="rounded-full bg-white/15 px-2.5 py-0.5 text-xs font-medium text-white/80 backdrop-blur-sm">
-                    {formatCertificationDate(item.date, lang)}
-                  </span>
-                  {safeLink && (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="white"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="opacity-0 transition-opacity duration-300 group-hover:opacity-70"
-                      aria-hidden="true"
-                    >
-                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                      <polyline points="15 3 21 3 21 9" />
-                      <line x1="10" y1="14" x2="21" y2="3" />
-                    </svg>
-                  )}
-                </div>
-
-                <CardTitle
-                  text={item.title}
-                  as="h3"
-                  class={`leading-snug text-white ${titleSizeClasses[size]}`}
+            ) : (
+              <div class="absolute inset-0 bg-gradient-to-br from-[#686dff]/10 to-[#b66fff]/10">
+                <div
+                  class="absolute inset-0 opacity-[0.07]"
+                  style="background-image: radial-gradient(circle, #686dff 1px, transparent 1px); background-size: 24px 24px;"
                 />
+                <div class="absolute inset-0 flex items-center justify-center opacity-15">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="80"
+                    height="80"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="url(#bento-icon-gradient)"
+                    stroke-width="0.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                    <path d="M4 22h16" />
+                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+                  </svg>
+                </div>
+                <div class="absolute -top-6 -right-6 h-24 w-24 rounded-full bg-[#686dff]/10" />
+                <div class="absolute -bottom-4 -left-4 h-16 w-16 rounded-full bg-[#b66fff]/10" />
+              </div>
+            )}
 
-                <p class="mt-1 text-xs text-white/60">{item.organization}</p>
+            <div
+              class:list={[
+                'absolute inset-0',
+                img
+                  ? 'bg-gradient-to-t from-black/80 via-black/30 to-transparent'
+                  : 'bg-gradient-to-t from-black/70 via-transparent to-transparent',
+              ]}
+            />
 
-                {(size === 'large' || size === 'wide' || size === 'tall') && item.description && (
-                  <p class="mt-2 line-clamp-2 text-sm leading-relaxed text-white/70">
-                    {item.description}
-                  </p>
+            <div class="relative z-10 flex h-full flex-col justify-end p-5 md:p-6">
+              <div class="mb-2 flex items-center gap-2">
+                <span class="rounded-full bg-white/15 px-2.5 py-0.5 text-xs font-medium text-white/80 backdrop-blur-sm">
+                  {formatCertificationDate(item.date, lang)}
+                </span>
+                {safeLink && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="opacity-0 transition-opacity duration-300 group-hover:opacity-70"
+                    aria-hidden="true"
+                  >
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
                 )}
               </div>
-            </Tag>
-          );
-        })
-      }
-    </div>
+
+              <CardTitle
+                text={item.title}
+                as="h3"
+                class={`leading-snug text-white ${titleSizeClasses[size]}`}
+              />
+
+              <p class="mt-1 text-xs text-white/60">{item.organization}</p>
+
+              {(size === 'large' || size === 'wide' || size === 'tall') && item.description && (
+                <p class="mt-2 line-clamp-2 text-sm leading-relaxed text-white/70">
+                  {item.description}
+                </p>
+              )}
+            </div>
+          </Tag>
+        );
+      })
+    }
+  </div>
 </SectionContainer>

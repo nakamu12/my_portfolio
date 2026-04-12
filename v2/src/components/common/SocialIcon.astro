@@ -12,7 +12,12 @@ const path = getSocialIconPath(icon);
 
 {
   path ? (
-    <svg class:list={['h-5 w-5', className]} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <svg
+      class:list={['h-5 w-5', className]}
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
       <path d={path} />
     </svg>
   ) : (

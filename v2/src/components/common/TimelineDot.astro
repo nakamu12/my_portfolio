@@ -4,10 +4,7 @@ interface Props {
   innerClass?: string;
 }
 
-const {
-  class: className = '',
-  innerClass = '',
-} = Astro.props;
+const { class: className = '', innerClass = '' } = Astro.props;
 ---
 
 <div

@@ -7,13 +7,7 @@ interface Props {
   class?: string;
 }
 
-const {
-  as = 'span',
-  text,
-  tone = 'primary',
-  size = 'md',
-  class: className = '',
-} = Astro.props;
+const { as = 'span', text, tone = 'primary', size = 'md', class: className = '' } = Astro.props;
 
 const Tag = as;
 const toneClass = {

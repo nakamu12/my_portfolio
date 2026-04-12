@@ -6,12 +6,7 @@ interface Props {
   class?: string;
 }
 
-const {
-  text,
-  as = 'h3',
-  size = 'md',
-  class: className = '',
-} = Astro.props;
+const { text, as = 'h3', size = 'md', class: className = '' } = Astro.props;
 
 const Tag = as;
 const sizeClass = {
@@ -22,6 +17,12 @@ const sizeClass = {
 } satisfies Record<'xl' | 'lg' | 'md' | 'sm', string>;
 ---
 
-<Tag class:list={['text-foreground leading-snug font-semibold tracking-tight', sizeClass[size], className]}>
+<Tag
+  class:list={[
+    'text-foreground leading-snug font-semibold tracking-tight',
+    sizeClass[size],
+    className,
+  ]}
+>
   {text ?? <slot />}
 </Tag>

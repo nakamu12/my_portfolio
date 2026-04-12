@@ -14,11 +14,7 @@ const currentYear = new Date().getFullYear();
   <div class="mx-auto max-w-6xl px-6 pt-12">
     <!-- SNS Links -->
     <div class="mb-8 flex justify-center gap-6">
-      {
-        socialData.links.map((link) => (
-          <SocialLinkItem link={link} variant="footer" />
-        ))
-      }
+      {socialData.links.map((link) => <SocialLinkItem link={link} variant="footer" />)}
     </div>
 
     <!-- Bottom row: copyright / back to top -->

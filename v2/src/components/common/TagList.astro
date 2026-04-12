@@ -8,12 +8,7 @@ interface Props {
   itemClass?: string;
 }
 
-const {
-  items,
-  tone = 'default',
-  class: className = '',
-  itemClass = '',
-} = Astro.props;
+const { items, tone = 'default', class: className = '', itemClass = '' } = Astro.props;
 ---
 
 <ul class:list={['flex flex-wrap gap-2', className]}>

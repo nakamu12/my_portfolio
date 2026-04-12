@@ -6,18 +6,17 @@ interface Props {
   class?: string;
 }
 
-const {
-  listTag = 'ul',
-  listClass = '',
-  lineClass = '',
-  class: className = '',
-} = Astro.props;
+const { listTag = 'ul', listClass = '', lineClass = '', class: className = '' } = Astro.props;
 
 const ListTag = listTag;
 ---
 
 <div class:list={['relative', className]}>
-  <div aria-hidden="true" class:list={['absolute top-2 bottom-2 left-[7px] w-px bg-border', lineClass]}></div>
+  <div
+    aria-hidden="true"
+    class:list={['bg-border absolute top-2 bottom-2 left-[7px] w-px', lineClass]}
+  >
+  </div>
   <ListTag class:list={['space-y-8', listClass]}>
     <slot />
   </ListTag>
