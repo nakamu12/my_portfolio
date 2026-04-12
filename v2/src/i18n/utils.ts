@@ -1,3 +1,6 @@
+import enUi from './locales/en.json';
+import jaUi from './locales/ja.json';
+
 export const languages = {
   en: 'English',
   ja: '日本語',
@@ -22,10 +25,15 @@ export function useTranslatedPath(lang: Lang) {
   };
 }
 
+const UI_LOCALES: Record<Lang, Record<string, string>> = {
+  en: enUi as Record<string, string>,
+  ja: jaUi as Record<string, string>,
+};
+
 export async function getTranslations(lang: Lang) {
-  // Defense-in-depth: ensure lang is in the allowlist before dynamic import
+  // Defense-in-depth: ensure lang is in the allowlist before locale selection
   const safeLang: Lang = lang in languages ? lang : defaultLang;
-  const ui = (await import(`./locales/${safeLang}.json`)).default as Record<string, string>;
+  const ui = UI_LOCALES[safeLang] ?? UI_LOCALES[defaultLang];
   return function t(key: string): string {
     return ui[key] ?? key;
   };

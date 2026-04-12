@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Globe, Moon, Sun } from 'lucide-react';
+import { Moon, Sun } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useThemeState } from '@/hooks/useThemeState';
 import { useLangSwitch } from '@/hooks/useLangSwitch';
@@ -37,13 +37,20 @@ export default function ThemeLangControls({
 }: ThemeLangControlsProps) {
   const { isDark, toggleTheme } = useThemeState();
   const switchLang = useLangSwitch(currentLang, base);
+  const isJapanese = currentLang === 'ja';
 
   const controls: ThemeLangControl[] = [
     {
       key: 'lang',
       label: langLabel,
       title: langLabel,
-      icon: <Globe className={iconClassName} />,
+      icon: (
+        <span className="text-[10px] leading-none font-semibold tracking-wide">
+          <span className={cn(isJapanese ? 'opacity-100' : 'opacity-50')}>JP</span>
+          <span className="px-0.5 opacity-50">/</span>
+          <span className={cn(!isJapanese ? 'opacity-100' : 'opacity-50')}>EN</span>
+        </span>
+      ),
       onClick: switchLang,
     },
     {

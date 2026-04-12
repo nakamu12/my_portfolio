@@ -1,11 +1,11 @@
 {
   "items": [
     {
-      "title": "FDE Level 2",
-      "organization": "Anthropic",
+      "title": "FDE Level Engineer2",
+      "organization": "Indian Company",
       "date": "2026-03",
       "category": "certification",
-      "description": "Completed the FDE Level 2 certification through an intensive hands-on training program held in India. Selected as one of a small group of engineers, this certification demonstrates advanced expertise in deploying and optimizing AI systems at enterprise scale.",
+      "description": "Completed an eight-week training program in India and earned FDE2 certification. Can now rapidly develop full-stack AI applications.",
       "image": null,
       "link": null,
       "priority": 1
@@ -15,7 +15,7 @@
       "organization": "Intelligent Ground Vehicle Competition",
       "date": "2018-06",
       "category": "achievement",
-      "description": "Won all 3 categories in the autonomous robot international competition, achieving the grand championship for the first time in 16 years.",
+      "description": "Won awards in all three categories at an international autonomous robotics competition and secured the overall championship.",
       "image": "achievement-igvc-2018.jpg",
       "link": "https://www.ikko.k.hosei.ac.jp/~arl/joomla3703/index.php/igvc/igvc2018%E7%B5%90%E6%9E%9C%E5%A0%B1%E5%91%8A-2018%E5%B9%B46%E6%9C%884%E6%97%A5.html",
       "priority": 1
@@ -32,20 +32,20 @@
     },
     {
       "title": "enXross Hackathon 2nd - Partner Special Award",
-      "organization": "enXross",
+      "organization": "Tokyo Dome",
       "date": "2024-07",
       "category": "achievement",
-      "description": "Despite being an XR beginner, received high praise from internal and external experts for an XR-powered business solution proposal.",
+      "description": "Despite starting as an XR beginner, received strong recognition from internal and external experts for an XR-based business solution proposal.",
       "image": "achievement-enxross-2024.jpg",
       "link": "https://note.com/enxross/n/n8faf0b017d92",
       "priority": 3
     },
     {
       "title": "KDG HACKS Excellence Award",
-      "organization": "KDG HACKS",
+      "organization": "KDDI",
       "date": "2018-12",
       "category": "achievement",
-      "description": "Developed an innovative IoT solution in a 48-hour hackathon. Recognized for business value.",
+      "description": "Developed an innovative IoT solution in a 48-hour hackathon and was recognized for its business value.",
       "image": "achievement-kdg-hack.jpg",
       "link": "https://www.ikko.k.hosei.ac.jp/~arl/joomla3703/index.php/arl/kdg-hacks%E3%81%A7%E4%B8%AD%E6%9D%91-%E4%BA%AE%E5%A4%AA%E5%90%9B-m1-%E5%9B%9B%E6%9C%A8-%E5%AE%8F%E9%A6%99%E3%81%95%E3%82%93-m1-%E3%81%8C%E5%84%AA%E7%A7%80%E8%B3%9E%E3%82%92%E5%8F%97%E8%B3%9E%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F.html",
       "priority": 4
@@ -55,7 +55,7 @@
       "organization": "IPA",
       "date": "2022-06-27",
       "category": "certification",
-      "description": "National IT engineer certification exam",
+      "description": "National certification for foundational IT engineering knowledge",
       "image": "cert-kihon.png",
       "link": null,
       "priority": null
@@ -65,7 +65,7 @@
       "organization": "Japan Chamber of Commerce and Industry",
       "date": "2022-01-29",
       "category": "certification",
-      "description": "JCCI Bookkeeping Level 3",
+      "description": "Japan Chamber of Commerce and Industry bookkeeping certification, Level 3",
       "image": "cert-boki.png",
       "link": null,
       "priority": null
@@ -81,11 +81,11 @@
       "priority": null
     },
     {
-      "title": "JDLA Deep Learning for GENERAL",
+      "title": "JDLA G Certification",
       "organization": "Japan Deep Learning Association",
       "date": "2020-03-14",
       "category": "certification",
-      "description": "Certification for foundational knowledge in deep learning",
+      "description": "Certification for foundational deep learning knowledge",
       "image": "cert-jdla.png",
       "link": null,
       "priority": null
@@ -95,7 +95,7 @@
       "organization": "IPA",
       "date": "2020-03-13",
       "category": "certification",
-      "description": "National IT literacy certification exam",
+      "description": "National certification for foundational IT literacy",
       "image": "cert-itpassport.png",
       "link": null,
       "priority": null
@@ -105,7 +105,7 @@
       "organization": "Mister Donut",
       "date": "2017-04",
       "category": "achievement",
-      "description": "Leveraged mobile sales know-how to achieve store's all-time record in merchandise sales.",
+      "description": "Applied mobile-sales know-how to help achieve the store's all-time record in merchandise sales.",
       "image": null,
       "link": null,
       "priority": 5

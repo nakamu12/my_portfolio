@@ -3,7 +3,7 @@
     "featured": {
       "title": "SoftBank Business Channel",
       "category": "youtube",
-      "description": "A video series explaining cutting-edge technologies by an AI engineer. Covering generative AI, machine learning, and data science in an accessible format for business applications.",
+      "description": "A video series where an AI engineer explains cutting-edge technologies, including generative AI, machine learning, and data science, in a business-friendly format.",
       "link": "https://www.youtube.com/playlist?list=PLuiKmtQJC8Im8VYeL4CeuX4VDap0ZahxO",
       "channelUrl": "https://www.youtube.com/@SoftBankBiz"
     },
@@ -13,7 +13,7 @@
         "category": "youtube",
         "source": "SoftBank",
         "thumbnail": "https://img.youtube.com/vi/7zVhl7wIC3M/hqdefault.jpg",
-        "description": "An interview series where active engineers candidly discuss SoftBank's engineering culture and work style.",
+        "description": "An interview series where practicing engineers candidly discuss SoftBank's engineering culture and ways of working.",
         "link": "https://www.youtube.com/watch?v=7zVhl7wIC3M&list=PLdWTmEF6jFdYNfb8YPgt35pH58zKQjFzT",
         "stats": { "views": "10K+", "duration": "15min" }
       },
@@ -37,7 +37,7 @@
         "title": "XR Beginner to Finalist — enXross HACKATHON Experience",
         "category": "press",
         "source": "enXross",
-        "description": "A feature article written about the journey from zero XR experience to hackathon finalist in 2 months.",
+        "description": "A feature article covering the journey from zero XR experience to becoming a hackathon finalist in two months.",
         "link": "https://note.com/enxross/n/n8faf0b017d92",
         "stats": {}
       }
@@ -49,7 +49,7 @@
         "title": "From Beginner to Finalist — 8th Wall x React in Practice",
         "category": "written",
         "source": "SoftBank BIZ",
-        "description": "Practical tips and best practices for WebAR application development. A systematic compilation of insights gained from real projects.",
+        "description": "Practical tips and best practices for WebAR development, based on lessons learned from real projects.",
         "link": "https://www.softbank.jp/biz/blog/cloud-technology/articles/202412/enxross-finalist-react-8thwall/",
         "stats": {}
       },
@@ -57,7 +57,7 @@
         "title": "What is o3? Latest AI Technology Explained Simply",
         "category": "written",
         "source": "SoftBank BIZ",
-        "description": "An accessible explanation of OpenAI's latest model o3, covering its features and applications. Also covers the differences between o3-mini and deep research.",
+        "description": "An accessible explanation of OpenAI's o3 model, including its key capabilities, use cases, and differences from o3-mini and Deep Research.",
         "link": "https://www.softbank.jp/biz/blog/business/articles/202503/o3/",
         "stats": {}
       }
@@ -67,17 +67,17 @@
       {
         "name": "note",
         "description": "Technical articles and knowledge sharing",
-        "link": "https://note.com/nakamura_r/"
+        "link": "https://note.com/nakamur1215"
       },
       {
         "name": "Zenn",
         "description": "Practical programming tips",
-        "link": "https://zenn.dev/nakamura_r"
+        "link": "https://zenn.dev/nakamur"
       },
       {
         "name": "Qiita",
         "description": "Programming knowledge sharing",
-        "link": "https://qiita.com/nakamura_r"
+        "link": "https://qiita.com/NakamuR"
       }
     ]
   },
