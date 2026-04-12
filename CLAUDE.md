@@ -4,11 +4,10 @@ This file provides guidance to Claude Code when working with this repository.
 
 ## Project Overview
 
-Portfolio website for a Japanese AI & Robotics engineer, rebuilt as v2 using modern frameworks.
-- **v1**: Vanilla HTML/CSS/JS (frozen at tag `v1.0.0`)
-- **v2**: Astro + React + Tailwind CSS + Motion (active development in `v2/` directory)
+Portfolio website for a Japanese AI & Robotics engineer, built with modern frameworks.
+Legacy v1 (vanilla HTML/CSS/JS) has been removed; the repository root is now the Astro project.
 
-## Tech Stack (v2)
+## Tech Stack
 
 | Layer | Choice |
 |---|---|
@@ -31,7 +30,7 @@ Portfolio website for a Japanese AI & Robotics engineer, rebuilt as v2 using mod
 Components are organized by section with shared utilities:
 
 ```
-v2/src/
+src/
 ├── components/
 │   ├── ui/              ← shadcn/ui primitives
 │   ├── common/          ← Shared components (SectionHeading, Badge, etc.)
@@ -81,7 +80,7 @@ Full spec: `.local/brand-design-system.md`
 
 ## Development
 
-### Commands (run from `v2/` directory)
+### Commands
 
 ```bash
 bun run dev          # Start dev server
@@ -95,8 +94,8 @@ bun run format:check # Prettier check
 
 ### Branch Strategy
 
-- `main` — production (v1 currently, v2 after migration)
-- `develop/v2` — v2 development base
+- `main` — production
+- `develop/v2` — development base
 - `feature/*` — individual section implementations (worktree-based)
 
 ### i18n
@@ -109,4 +108,3 @@ bun run format:check # Prettier check
 
 - `.local/` — Internal documents, specs (gitignored)
 - `CLAUDE.md` — This file (gitignored, local only)
-- v1 files at repository root will be removed after v2 migration
