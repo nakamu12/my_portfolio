@@ -12,8 +12,15 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <section id="hero" class="relative flex min-h-screen items-center justify-center overflow-hidden">
-  <!-- Fluid Animation Background -->
-  <div class="absolute inset-0 z-0">
+  <!-- Fluid Animation Background
+       mask-image fades the canvas alpha to 0 over the bottom ~30% of Hero,
+       so the fluid visually dissolves into the page background and blends
+       seamlessly into the About section below instead of ending on a hard
+       horizontal line. -->
+  <div
+    class="absolute inset-0 z-0"
+    style="mask-image: linear-gradient(to bottom, black 0%, black 68%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 0%, black 68%, transparent 100%);"
+  >
     <FluidBackground client:load className="h-full w-full" />
   </div>
 

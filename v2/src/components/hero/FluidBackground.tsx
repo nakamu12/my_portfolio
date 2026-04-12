@@ -65,6 +65,16 @@ export default function FluidBackground({ className = '' }: FluidBackgroundProps
     return () => {
       observer.disconnect();
       simulation.stop();
+
+      // Explicitly release the WebGL context so Chrome doesn't accumulate
+      // stale contexts across reloads/HMR and hit its per-browser limit
+      // (typically 16), which would cause a black screen.
+      const canvas = canvasRef.current?.querySelector('canvas');
+      if (canvas) {
+        const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+        gl?.getExtension('WEBGL_lose_context')?.loseContext();
+      }
+      simulationRef.current = null;
     };
   }, []);
 
