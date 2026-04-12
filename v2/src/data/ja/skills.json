@@ -34,7 +34,10 @@
       "skills": [
         { "name": "Apache Spark", "icon": "apachespark" },
         { "name": "PySpark", "icon": "pyspark" },
-        { "name": "Treasure Data", "icon": "https://www.treasuredata.co.jp/wp-content/uploads/2024/05/cropped-cropped-td-favicon-270x270-1-192x192.png" }
+        {
+          "name": "Treasure Data",
+          "icon": "https://www.treasuredata.co.jp/wp-content/uploads/2024/05/cropped-cropped-td-favicon-270x270-1-192x192.png"
+        }
       ]
     },
     {

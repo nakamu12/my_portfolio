@@ -45,7 +45,7 @@ export default function ThemeLangControls({
       label: langLabel,
       title: langLabel,
       icon: (
-        <span className="text-[10px] font-semibold leading-none tracking-wide">
+        <span className="text-[10px] leading-none font-semibold tracking-wide">
           <span className={cn(isJapanese ? 'opacity-100' : 'opacity-50')}>JP</span>
           <span className="px-0.5 opacity-50">/</span>
           <span className={cn(!isJapanese ? 'opacity-100' : 'opacity-50')}>EN</span>
