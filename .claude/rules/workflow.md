@@ -34,7 +34,7 @@ git worktree add worktree/feature-hero -b feature/hero develop/v2
 ### 作業
 
 ```bash
-cd worktree/feature-hero/v2
+cd worktree/feature-hero
 bun install   # 依存関係インストール（初回のみ）
 bun run dev   # 開発サーバー起動
 ```
@@ -77,5 +77,5 @@ feature/{section-name}
 ## 注意事項
 
 - `worktree/` ディレクトリは `.gitignore` に追加済み
-- 各ワークツリーの `v2/node_modules` は独立。初回 `bun install` が必要
+- 各ワークツリーの `node_modules` は独立。初回 `bun install` が必要
 - dev サーバーのポートが被らないよう注意（`--port` オプションで変更可能）

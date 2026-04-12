@@ -73,7 +73,6 @@
 ## Regenerating PNGs
 
 ```bash
-cd v2
 bun run -e "
 import { Resvg } from '@resvg/resvg-js';
 import { readFileSync, writeFileSync } from 'fs';

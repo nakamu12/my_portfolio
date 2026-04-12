@@ -161,23 +161,21 @@ src/i18n/
 ```
 my_portfolio/
 ├── .github/workflows/     ← CI + Deploy pipelines
-├── v1/                    ← Legacy (frozen at v1.0.0)
-├── v2/                    ← Active development
-│   ├── public/            ← Static assets (favicon, images, manifest)
-│   ├── src/
-│   │   ├── assets/        ← Processed assets (images, logo SVGs)
-│   │   ├── components/    ← UI components by section
-│   │   ├── data/          ← Content JSON (en/, ja/, social.json)
-│   │   ├── hooks/         ← React hooks (useLangSwitch, useThemeState)
-│   │   ├── i18n/          ← Translations and utils
-│   │   ├── layouts/       ← BaseLayout.astro
-│   │   ├── lib/           ← Utilities (cn, url validation, social icons)
-│   │   ├── pages/         ← File-based routing (/, /en/, /ja/)
-│   │   └── styles/        ← global.css (design tokens)
-│   ├── astro.config.mjs
-│   ├── tsconfig.json
-│   ├── eslint.config.mjs
-│   └── package.json
+├── public/                ← Static assets (favicon, images, manifest)
+├── src/
+│   ├── assets/            ← Processed assets (images, logo SVGs)
+│   ├── components/        ← UI components by section
+│   ├── data/              ← Content JSON (en/, ja/, social.json)
+│   ├── hooks/             ← React hooks (useLangSwitch, useThemeState)
+│   ├── i18n/              ← Translations and utils
+│   ├── layouts/           ← BaseLayout.astro
+│   ├── lib/               ← Utilities (cn, url validation, social icons)
+│   ├── pages/             ← File-based routing (/, /en/, /ja/)
+│   └── styles/            ← global.css (design tokens)
+├── astro.config.mjs
+├── tsconfig.json
+├── eslint.config.mjs
+├── package.json
 └── worktree/              ← Feature branch worktrees (gitignored)
 ```
 
@@ -193,7 +191,6 @@ my_portfolio/
 ### Setup
 
 ```bash
-cd v2
 bun install
 ```
 
@@ -218,7 +215,7 @@ bun install
 | Branch       | Purpose                                      |
 | ------------ | -------------------------------------------- |
 | `main`       | Production — triggers deploy to GitHub Pages |
-| `develop/v2` | Development base for v2                      |
+| `develop/v2` | Development base                             |
 | `feature/*`  | Individual features (worktree-based)         |
 
 ### Worktree-based Development
@@ -230,7 +227,7 @@ Each feature is developed in an isolated git worktree:
 git worktree add worktree/feature-hero -b feature/hero develop/v2
 
 # Work in it
-cd worktree/feature-hero/v2
+cd worktree/feature-hero
 bun install
 bun run dev -- --port 4322
 
@@ -258,7 +255,7 @@ Runs on PRs to `develop/v2` and `main`:
 
 Runs on push to `main`:
 
-1. Build Astro site from `v2/`
+1. Build Astro site
 2. Upload artifact
 3. Deploy to GitHub Pages
 
