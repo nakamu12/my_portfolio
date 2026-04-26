@@ -119,7 +119,7 @@
 /* ===========================
    Border Glow (hover only, cursor-tracked)
    A radial brand-gradient at (--glow-x, --glow-y) is mask-composited
-   into a 1px ring, so only the slice of border nearest the cursor lights
+   into a 2px ring, so only the slice of border nearest the cursor lights
    up. Position is updated by src/scripts/border-glow.ts.
    =========================== */
 @layer components {
@@ -129,7 +129,11 @@
     --glow-x: 50%;
     --glow-y: 50%;
     --glow-size: 260px;
-    transition: box-shadow 280ms ease;
+    /* Include box-shadow + color properties so call sites that compose
+       this with `transition-colors` keep both animations. */
+    transition-property: box-shadow, color, background-color, border-color;
+    transition-duration: 280ms;
+    transition-timing-function: ease;
   }
   .border-glow::before,
   .group-border-glow::before {
@@ -146,11 +150,15 @@
       rgba(182, 111, 255, 0.4) 55%,
       transparent 75%
     );
+    /* Firefox uses unprefixed `mask`; WebKit/Blink keep the -webkit- form */
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
     mask-composite: exclude;
+    -webkit-mask-composite: xor;
     /* Outward glow on the border ring itself */
     filter: drop-shadow(0 0 4px rgba(104, 109, 255, 0.55));
     opacity: 0;

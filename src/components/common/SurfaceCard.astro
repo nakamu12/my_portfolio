@@ -21,7 +21,11 @@ const {
   padding = 'md',
   tone = 'card',
   interactive = false,
-  glow = true,
+  // Default the hover glow only on cards that read as interactive surfaces:
+  // explicit `interactive`, anchor links, or `<article>` (used by card-grid
+  // items like ProjectCard). Plain `<div>` info cards must opt in with
+  // `glow={true}` so we don't suggest a click affordance that doesn't exist.
+  glow = interactive || as === 'a' || as === 'article',
   class: className = '',
 } = Astro.props;
 

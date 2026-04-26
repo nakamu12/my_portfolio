@@ -18,7 +18,7 @@ const t = await getTranslations(lang);
 
   <div class="grid gap-12 md:grid-cols-2">
     <!-- Availability -->
-    <SurfaceCard padding="lg" tone="background">
+    <SurfaceCard padding="lg" tone="background" glow>
       <div class="mb-4 flex items-center gap-3">
         <span class="relative flex h-3 w-3">
           <span
@@ -37,7 +37,7 @@ const t = await getTranslations(lang);
     </SurfaceCard>
 
     <!-- Social Links -->
-    <SurfaceCard padding="lg" tone="background">
+    <SurfaceCard padding="lg" tone="background" glow>
       <OverlineLabel text={t('contact.connect.label')} class="mb-6" />
       <div class="flex flex-col gap-4">
         {socialData.links.map((link) => <SocialLinkItem link={link} />)}
