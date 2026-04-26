@@ -117,25 +117,32 @@
 }
 
 /* ===========================
-   Border Glow (hover only)
-   Brand-gradient ring + soft halo, mask-composited so it
-   replaces the existing 1px border on hover only.
+   Border Glow (hover only, cursor-tracked)
+   A radial brand-gradient at (--glow-x, --glow-y) is mask-composited
+   into a 1px ring, so only the slice of border nearest the cursor lights
+   up. Position is updated by src/scripts/border-glow.ts.
    =========================== */
 @layer components {
-  .border-glow {
+  .border-glow,
+  .group-border-glow {
     position: relative;
+    --glow-x: 50%;
+    --glow-y: 50%;
+    --glow-size: 220px;
     transition: box-shadow 280ms ease;
   }
-  .border-glow::before {
+  .border-glow::before,
+  .group-border-glow::before {
     content: '';
     position: absolute;
     inset: 0;
     padding: 1px;
     border-radius: inherit;
-    background: linear-gradient(
-      135deg,
+    background: radial-gradient(
+      var(--glow-size) circle at var(--glow-x) var(--glow-y),
       var(--color-brand) 0%,
-      var(--color-brand-purple) 100%
+      var(--color-brand-purple) 35%,
+      transparent 70%
     );
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
@@ -143,7 +150,7 @@
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     opacity: 0;
-    transition: opacity 280ms ease;
+    transition: opacity 200ms ease;
     pointer-events: none;
     z-index: 1;
   }
@@ -157,38 +164,13 @@
   .border-glow:focus-visible,
   .group:hover .group-border-glow,
   .group:focus-visible .group-border-glow {
-    box-shadow: 0 8px 32px -8px rgba(104, 109, 255, 0.32);
+    box-shadow: 0 8px 32px -8px rgba(104, 109, 255, 0.22);
   }
   .dark .border-glow:hover,
   .dark .border-glow:focus-visible,
   .dark .group:hover .group-border-glow,
   .dark .group:focus-visible .group-border-glow {
-    box-shadow: 0 8px 32px -6px rgba(104, 109, 255, 0.42);
-  }
-  .group-border-glow {
-    position: relative;
-    transition: box-shadow 280ms ease;
-  }
-  .group-border-glow::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 1px;
-    border-radius: inherit;
-    background: linear-gradient(
-      135deg,
-      var(--color-brand) 0%,
-      var(--color-brand-purple) 100%
-    );
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 280ms ease;
-    pointer-events: none;
-    z-index: 1;
+    box-shadow: 0 8px 32px -6px rgba(104, 109, 255, 0.32);
   }
 
   @media (prefers-reduced-motion: reduce) {
