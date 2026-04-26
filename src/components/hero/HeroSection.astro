@@ -1,5 +1,6 @@
 ---
 import FluidBackground from './FluidBackground';
+import HandwrittenVision from './HandwrittenVision';
 import { getLangFromUrl, getTranslations } from '@/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
@@ -38,12 +39,8 @@ const visionLabel =
     </p>
 
     <!-- Vision -->
-    <h1 class="text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
-      <span
-        class="bg-gradient-to-r from-[#686dff] to-[#b66fff] bg-clip-text text-transparent drop-shadow-sm md:whitespace-nowrap"
-      >
-        {t('hero.vision')}
-      </span>
+    <h1 class="font-bold tracking-tight">
+      <HandwrittenVision client:load text={t('hero.vision')} className="md:whitespace-nowrap" />
     </h1>
 
     <!-- Name -->
