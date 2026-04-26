@@ -128,7 +128,7 @@
     position: relative;
     --glow-x: 50%;
     --glow-y: 50%;
-    --glow-size: 280px;
+    --glow-size: 260px;
     transition: box-shadow 280ms ease;
   }
   .border-glow::before,
@@ -136,13 +136,14 @@
     content: '';
     position: absolute;
     inset: 0;
-    padding: 1.5px;
+    padding: 2px;
     border-radius: inherit;
+    /* Light mode: vivid brand → purple, no white core (would vanish on white bg) */
     background: radial-gradient(
       var(--glow-size) circle at var(--glow-x) var(--glow-y),
-      #ffffff 0%,
-      var(--color-brand) 18%,
-      var(--color-brand-purple) 45%,
+      var(--color-brand) 0%,
+      var(--color-brand-purple) 30%,
+      rgba(182, 111, 255, 0.4) 55%,
       transparent 75%
     );
     -webkit-mask:
@@ -150,68 +151,60 @@
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
+    /* Outward glow on the border ring itself */
+    filter: drop-shadow(0 0 4px rgba(104, 109, 255, 0.55));
     opacity: 0;
     transition: opacity 200ms ease;
     pointer-events: none;
     z-index: 1;
   }
-  .border-glow::after,
-  .group-border-glow::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
+  /* Dark mode: white-hot core for maximum pop on dark background */
+  .dark .border-glow::before,
+  .dark .group-border-glow::before {
     background: radial-gradient(
-      calc(var(--glow-size) * 0.6) circle at var(--glow-x) var(--glow-y),
-      rgba(255, 255, 255, 0.18) 0%,
-      rgba(104, 109, 255, 0.12) 35%,
-      transparent 70%
+      var(--glow-size) circle at var(--glow-x) var(--glow-y),
+      #ffffff 0%,
+      var(--color-brand) 22%,
+      var(--color-brand-purple) 50%,
+      transparent 78%
     );
-    opacity: 0;
-    transition: opacity 200ms ease;
-    pointer-events: none;
-    z-index: 0;
+    filter: drop-shadow(0 0 6px rgba(104, 109, 255, 0.7));
   }
   .border-glow:hover::before,
   .border-glow:focus-visible::before,
-  .border-glow:hover::after,
-  .border-glow:focus-visible::after,
   .group:hover .group-border-glow::before,
-  .group:focus-visible .group-border-glow::before,
-  .group:hover .group-border-glow::after,
-  .group:focus-visible .group-border-glow::after {
+  .group:focus-visible .group-border-glow::before {
     opacity: 1;
   }
+  /* Light mode: stronger brand-tinted ring + bigger halo for visibility on white */
   .border-glow:hover,
   .border-glow:focus-visible,
   .group:hover .group-border-glow,
   .group:focus-visible .group-border-glow {
     box-shadow:
-      0 0 0 1px rgba(104, 109, 255, 0.18),
-      0 12px 48px -6px rgba(104, 109, 255, 0.45);
+      0 0 0 1px rgba(104, 109, 255, 0.4),
+      0 4px 16px -2px rgba(104, 109, 255, 0.35),
+      0 16px 56px -8px rgba(182, 111, 255, 0.4);
   }
   .dark .border-glow:hover,
   .dark .border-glow:focus-visible,
   .dark .group:hover .group-border-glow,
   .dark .group:focus-visible .group-border-glow {
     box-shadow:
-      0 0 0 1px rgba(104, 109, 255, 0.28),
-      0 12px 48px -4px rgba(104, 109, 255, 0.6);
+      0 0 0 1px rgba(104, 109, 255, 0.35),
+      0 4px 20px -2px rgba(104, 109, 255, 0.5),
+      0 16px 56px -4px rgba(182, 111, 255, 0.55);
   }
 
   @media (prefers-reduced-motion: reduce) {
     .border-glow,
     .border-glow::before,
-    .border-glow::after,
     .group-border-glow,
-    .group-border-glow::before,
-    .group-border-glow::after {
+    .group-border-glow::before {
       transition: none;
     }
     .border-glow::before,
-    .border-glow::after,
-    .group-border-glow::before,
-    .group-border-glow::after {
+    .group-border-glow::before {
       display: none;
     }
     .border-glow:hover,
