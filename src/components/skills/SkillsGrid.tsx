@@ -98,7 +98,7 @@ export default function SkillsGrid({ categories }: Props) {
                 <motion.div
                   key={skill.name}
                   variants={skillVariants}
-                  className="border-border bg-card flex items-center gap-2 rounded-lg border px-3 py-2 transition-colors hover:border-[#686dff]/40 hover:bg-[#686dff]/[0.04]"
+                  className="border-glow border-border bg-card flex items-center gap-2 rounded-lg border px-3 py-2 transition-colors hover:bg-[#686dff]/[0.04]"
                 >
                   {iconUrl ? (
                     <img
