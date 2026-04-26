@@ -8,6 +8,7 @@ interface Props {
   padding?: 'none' | 'sm' | 'md' | 'lg';
   tone?: 'card' | 'background' | 'muted';
   interactive?: boolean;
+  glow?: boolean;
   class?: string;
 }
 
@@ -20,6 +21,7 @@ const {
   padding = 'md',
   tone = 'card',
   interactive = false,
+  glow = true,
   class: className = '',
 } = Astro.props;
 
@@ -57,6 +59,7 @@ const linkProps =
     paddingClass[padding],
     toneClass[tone],
     interactive && 'transition-shadow hover:shadow-md',
+    glow && 'border-glow',
     className,
   ]}
 >

@@ -115,3 +115,102 @@
 .dark .hero-text {
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
+
+/* ===========================
+   Border Glow (hover only)
+   Brand-gradient ring + soft halo, mask-composited so it
+   replaces the existing 1px border on hover only.
+   =========================== */
+@layer components {
+  .border-glow {
+    position: relative;
+    transition: box-shadow 280ms ease;
+  }
+  .border-glow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      var(--color-brand) 0%,
+      var(--color-brand-purple) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 280ms ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .border-glow:hover::before,
+  .border-glow:focus-visible::before,
+  .group:hover .group-border-glow::before,
+  .group:focus-visible .group-border-glow::before {
+    opacity: 1;
+  }
+  .border-glow:hover,
+  .border-glow:focus-visible,
+  .group:hover .group-border-glow,
+  .group:focus-visible .group-border-glow {
+    box-shadow: 0 8px 32px -8px rgba(104, 109, 255, 0.32);
+  }
+  .dark .border-glow:hover,
+  .dark .border-glow:focus-visible,
+  .dark .group:hover .group-border-glow,
+  .dark .group:focus-visible .group-border-glow {
+    box-shadow: 0 8px 32px -6px rgba(104, 109, 255, 0.42);
+  }
+  .group-border-glow {
+    position: relative;
+    transition: box-shadow 280ms ease;
+  }
+  .group-border-glow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      var(--color-brand) 0%,
+      var(--color-brand-purple) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 280ms ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .border-glow,
+    .border-glow::before,
+    .group-border-glow,
+    .group-border-glow::before {
+      transition: none;
+    }
+    .border-glow::before,
+    .group-border-glow::before {
+      display: none;
+    }
+    .border-glow:hover,
+    .border-glow:focus-visible,
+    .dark .border-glow:hover,
+    .dark .border-glow:focus-visible,
+    .group:hover .group-border-glow,
+    .group:focus-visible .group-border-glow,
+    .dark .group:hover .group-border-glow,
+    .dark .group:focus-visible .group-border-glow {
+      box-shadow: none;
+    }
+  }
+}
