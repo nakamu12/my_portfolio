@@ -8,11 +8,9 @@
 // when the user has not requested reduced motion — on touch / a11y setups
 // the visual is disabled in CSS, so the JS work would be wasted.
 
-const canHover =
-  typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches;
+const canHover = typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches;
 const reducedMotion =
-  typeof window !== 'undefined' &&
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 if (canHover && !reducedMotion) {
   let pending: PointerEvent | null = null;
