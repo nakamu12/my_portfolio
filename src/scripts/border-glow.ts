@@ -2,41 +2,53 @@
 // Updates --glow-x / --glow-y CSS variables on `.border-glow` and
 // `.group-border-glow` elements as the pointer moves over them.
 //
-// Single document-level mousemove listener (event delegation), throttled
+// Single document-level pointermove listener (event delegation), throttled
 // with requestAnimationFrame so we touch the DOM at most once per frame.
+// The listener is only installed on devices that actually have hover and
+// when the user has not requested reduced motion — on touch / a11y setups
+// the visual is disabled in CSS, so the JS work would be wasted.
 
-let pending: PointerEvent | MouseEvent | null = null;
-let raf: number | null = null;
+const canHover = typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches;
+const reducedMotion =
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function setVars(el: HTMLElement, e: { clientX: number; clientY: number }): void {
-  const rect = el.getBoundingClientRect();
-  el.style.setProperty('--glow-x', `${e.clientX - rect.left}px`);
-  el.style.setProperty('--glow-y', `${e.clientY - rect.top}px`);
-}
+if (canHover && !reducedMotion) {
+  let pending: PointerEvent | null = null;
+  let raf: number | null = null;
 
-function flush(): void {
-  raf = null;
-  const e = pending;
-  pending = null;
-  if (!e) return;
-  const target = e.target;
-  if (!(target instanceof Element)) return;
-
-  const direct = target.closest<HTMLElement>('.border-glow');
-  if (direct) setVars(direct, e);
-
-  const group = target.closest<HTMLElement>('.group');
-  if (group) {
-    const inner = group.querySelector<HTMLElement>('.group-border-glow');
-    if (inner) setVars(inner, e);
+  function setVars(el: HTMLElement, e: PointerEvent): void {
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty('--glow-x', `${e.clientX - rect.left}px`);
+    el.style.setProperty('--glow-y', `${e.clientY - rect.top}px`);
   }
-}
 
-window.addEventListener(
-  'pointermove',
-  (e: PointerEvent) => {
-    pending = e;
-    if (raf === null) raf = requestAnimationFrame(flush);
-  },
-  { passive: true },
-);
+  function flush(): void {
+    raf = null;
+    const e = pending;
+    pending = null;
+    if (!e) return;
+    const target = e.target;
+    if (!(target instanceof Element)) return;
+
+    const direct = target.closest<HTMLElement>('.border-glow');
+    if (direct) setVars(direct, e);
+
+    const group = target.closest<HTMLElement>('.group');
+    if (group) {
+      const inner = group.querySelector<HTMLElement>('.group-border-glow');
+      if (inner) setVars(inner, e);
+    }
+  }
+
+  window.addEventListener(
+    'pointermove',
+    (e: PointerEvent) => {
+      // Skip touch / pen — they don't drive a real hover state, so the
+      // CSS spotlight isn't visible anyway.
+      if (e.pointerType !== 'mouse') return;
+      pending = e;
+      if (raf === null) raf = requestAnimationFrame(flush);
+    },
+    { passive: true },
+  );
+}
