@@ -299,7 +299,7 @@ function MediaCard({ item, labels }: { item: MediaItem; labels: Record<string, s
   );
 
   const cardClass =
-    'border-border bg-background group w-72 shrink-0 overflow-hidden rounded-xl border transition-all duration-200 hover:border-[#686dff]/40 hover:shadow-lg';
+    'border-glow border-border bg-background group w-72 shrink-0 overflow-hidden rounded-xl border transition-all duration-200';
 
   if (!safeLink) {
     return (

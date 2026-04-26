@@ -51,8 +51,8 @@ function ToolIcon({ tool }: { tool: Tool }) {
       {/* Icon */}
       <div
         className={cn(
-          'border-border bg-card relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border transition-all duration-200',
-          'group-hover:border-[#686dff]/50 group-hover:bg-[rgba(104,109,255,0.06)] group-hover:shadow-[0_8px_24px_rgba(104,109,255,0.18)]',
+          'group-border-glow border-border bg-card relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border transition-all duration-200',
+          'group-hover:bg-[rgba(104,109,255,0.06)]',
         )}
       >
         {imgError ? (
