@@ -21,7 +21,10 @@ const VISION_STYLE: CSSProperties = {
   lineHeight: 1.2,
 };
 
-const CAVEAT_FONT_URL = `${import.meta.env.BASE_URL}fonts/caveat.ttf`;
+const normalizedBaseUrl = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const CAVEAT_FONT_URL = `${normalizedBaseUrl}fonts/caveat.ttf`;
 const CAVEAT_BUNDLE = {
   ...caveat,
   fontUrl: CAVEAT_FONT_URL,
