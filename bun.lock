@@ -10,7 +10,6 @@
         "@fontsource-variable/geist": "^5.2.8",
         "@fontsource-variable/geist-mono": "^5.2.7",
         "@fontsource-variable/noto-sans-jp": "^5.2.10",
-        "@fontsource/yomogi": "^5.2.6",
         "@tailwindcss/vite": "^4.2.2",
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
@@ -214,8 +213,6 @@
     "@fontsource-variable/geist-mono": ["@fontsource-variable/geist-mono@5.2.7", "", {}, "sha512-ZKlZ5sjtalb2TwXKs400mAGDlt/+2ENLNySPx0wTz3bP3mWARCsUW+rpxzZc7e05d2qGch70pItt3K4qttbIYA=="],
 
     "@fontsource-variable/noto-sans-jp": ["@fontsource-variable/noto-sans-jp@5.2.10", "", {}, "sha512-m0XfZ38rZtCaGAuAQL0cBPQ6fc/RguYEOqw66zvuLOV9vNRUBf9MFqyoazTu2JVCRIcnkrxbwF29UUaHHgTKdg=="],
-
-    "@fontsource/yomogi": ["@fontsource/yomogi@5.2.7", "", {}, "sha512-FtbtAOqRJlsjSK/wlw/S+uOkJXGWVp9yq6/utDmR6YXvvmTMoZQ75/mWimOS87Scg7gWlP4HU9gAgDUup6dLWg=="],
 
     "@hono/node-server": ["@hono/node-server@1.19.13", "", { "peerDependencies": { "hono": "^4" } }, "sha512-TsQLe4i2gvoTtrHje625ngThGBySOgSK3Xo2XRYOdqGN1teR8+I7vchQC46uLJi8OF62YTYA3AhSpumtkhsaKQ=="],
 

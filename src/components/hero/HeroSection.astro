@@ -40,12 +40,7 @@ const visionLabel =
 
     <!-- Vision -->
     <h1 class="font-bold tracking-tight">
-      <HandwrittenVision
-        client:load
-        lang={lang}
-        text={t('hero.vision')}
-        className={lang === 'en' ? 'md:whitespace-nowrap' : undefined}
-      />
+      <HandwrittenVision client:load text={t('hero.vision')} className="md:whitespace-nowrap" />
     </h1>
 
     <!-- Name -->
