@@ -8,6 +8,7 @@ interface Props {
   padding?: 'none' | 'sm' | 'md' | 'lg';
   tone?: 'card' | 'background' | 'muted';
   interactive?: boolean;
+  glow?: boolean;
   class?: string;
 }
 
@@ -20,6 +21,11 @@ const {
   padding = 'md',
   tone = 'card',
   interactive = false,
+  // Default the hover glow only on cards that read as interactive surfaces:
+  // explicit `interactive`, anchor links, or `<article>` (used by card-grid
+  // items like ProjectCard). Plain `<div>` info cards must opt in with
+  // `glow={true}` so we don't suggest a click affordance that doesn't exist.
+  glow = interactive || as === 'a' || as === 'article',
   class: className = '',
 } = Astro.props;
 
@@ -57,6 +63,7 @@ const linkProps =
     paddingClass[padding],
     toneClass[tone],
     interactive && 'transition-shadow hover:shadow-md',
+    glow && 'border-glow',
     className,
   ]}
 >
