@@ -6,6 +6,7 @@
 @import '@fontsource-variable/geist';
 @import '@fontsource-variable/geist-mono';
 @import '@fontsource-variable/noto-sans-jp';
+@import '@fontsource/caveat';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -211,9 +212,13 @@
     .group-border-glow::before {
       transition: none;
     }
+    /* Keep a faint center-fixed glow visible so cards do not appear "dead"
+       when JS cursor tracking is suppressed under reduce-motion. */
     .border-glow::before,
     .group-border-glow::before {
-      display: none;
+      --glow-x: 50%;
+      --glow-y: 50%;
+      opacity: 0.35;
     }
     .border-glow:hover,
     .border-glow:focus-visible,
