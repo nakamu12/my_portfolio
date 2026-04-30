@@ -146,29 +146,29 @@ export default function BrandBeams({ className }: BrandBeamsProps) {
                 }
           }
         />
-        {/* Right beam — bright flow overlay (stroke-dasharray streaks) */}
-        <motion.path
-          d={rightBeamPath}
-          stroke="#ffffff"
-          strokeOpacity={0.9}
-          strokeWidth={3}
-          strokeLinecap="round"
-          fill="none"
-          filter="url(#brandBeamsGlow)"
-          pathLength={100}
-          strokeDasharray={FLOW_DASHARRAY}
-          initial={{ strokeDashoffset: 0 }}
-          animate={paused ? { strokeDashoffset: 0 } : { strokeDashoffset: -100 }}
-          transition={
-            paused
-              ? { duration: 0 }
-              : {
-                  duration: FLOW_DURATION,
-                  ease: 'linear',
-                  repeat: Infinity,
-                }
-          }
-        />
+        {/* Right beam — bright flow overlay (stroke-dasharray streaks).
+            Skipped under reduce-motion so a frozen dash isn't pinned at an
+            arbitrary point along the path. */}
+        {!paused && (
+          <motion.path
+            d={rightBeamPath}
+            stroke="#ffffff"
+            strokeOpacity={0.9}
+            strokeWidth={3}
+            strokeLinecap="round"
+            fill="none"
+            filter="url(#brandBeamsGlow)"
+            pathLength={100}
+            strokeDasharray={FLOW_DASHARRAY}
+            initial={{ strokeDashoffset: 0 }}
+            animate={{ strokeDashoffset: -100 }}
+            transition={{
+              duration: FLOW_DURATION,
+              ease: 'linear',
+              repeat: Infinity,
+            }}
+          />
+        )}
 
         {/* Left beam — desktop only */}
         {!isMobile && (
@@ -194,30 +194,29 @@ export default function BrandBeams({ className }: BrandBeamsProps) {
               }
             />
             {/* Left beam — bright flow overlay (phase-shifted from RIGHT by
-                half the flow period so the two beams never sync up) */}
-            <motion.path
-              d={LEFT_BEAM_D}
-              stroke="#ffffff"
-              strokeOpacity={0.9}
-              strokeWidth={3}
-              strokeLinecap="round"
-              fill="none"
-              filter="url(#brandBeamsGlow)"
-              pathLength={100}
-              strokeDasharray={FLOW_DASHARRAY}
-              initial={{ strokeDashoffset: 0 }}
-              animate={paused ? { strokeDashoffset: 0 } : { strokeDashoffset: -100 }}
-              transition={
-                paused
-                  ? { duration: 0 }
-                  : {
-                      duration: FLOW_DURATION,
-                      ease: 'linear',
-                      repeat: Infinity,
-                      delay: FLOW_DURATION / 2,
-                    }
-              }
-            />
+                half the flow period so the two beams never sync up).
+                Skipped under reduce-motion (see right-beam comment above). */}
+            {!paused && (
+              <motion.path
+                d={LEFT_BEAM_D}
+                stroke="#ffffff"
+                strokeOpacity={0.9}
+                strokeWidth={3}
+                strokeLinecap="round"
+                fill="none"
+                filter="url(#brandBeamsGlow)"
+                pathLength={100}
+                strokeDasharray={FLOW_DASHARRAY}
+                initial={{ strokeDashoffset: 0 }}
+                animate={{ strokeDashoffset: -100 }}
+                transition={{
+                  duration: FLOW_DURATION,
+                  ease: 'linear',
+                  repeat: Infinity,
+                  delay: FLOW_DURATION / 2,
+                }}
+              />
+            )}
           </>
         )}
       </motion.g>
