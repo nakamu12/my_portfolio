@@ -24,4 +24,14 @@ export default tseslint.config(
   {
     ignores: ['dist/', '.astro/', 'node_modules/'],
   },
+  {
+    // scripts/ are Node.js utility scripts, not bundled application code
+    files: ['scripts/**/*.mjs', 'scripts/**/*.js'],
+    languageOptions: {
+      globals: {
+        console: 'readonly',
+        process: 'readonly',
+      },
+    },
+  },
 );
