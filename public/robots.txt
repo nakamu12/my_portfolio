@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nakamu12.github.io/my_portfolio/sitemap-index.xml
